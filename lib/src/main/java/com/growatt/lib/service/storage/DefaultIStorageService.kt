@@ -1,0 +1,54 @@
+package com.growatt.lib.service.storage
+
+import android.content.Context
+import android.content.Context.MODE_PRIVATE
+import android.content.SharedPreferences
+
+class DefaultIStorageService(context: Context) : IStorageService {
+
+    private val storage: SharedPreferences = context.getSharedPreferences("growatt", MODE_PRIVATE)
+
+    override fun put(key: String, value: String?) {
+        storage.edit().putString(key, value).apply()
+    }
+
+    override fun put(key: String, value: Boolean) {
+        storage.edit().putBoolean(key, value).apply()
+    }
+
+    override fun put(key: String, value: Long) {
+        storage.edit().putLong(key, value).apply()
+    }
+
+    override fun put(key: String, value: Int) {
+        storage.edit().putInt(key, value).apply()
+    }
+
+    override fun put(key: String, value: Float) {
+        storage.edit().putFloat(key, value).apply()
+    }
+
+    override fun getString(key: String, defValue: String): String? {
+        return storage.getString(key, "")
+    }
+
+    override fun getBoolean(key: String, defValue: Boolean): Boolean {
+        return storage.getBoolean(key, defValue)
+    }
+
+    override fun getLong(key: String, defValue: Long): Long {
+        return storage.getLong(key, defValue)
+    }
+
+    override fun getInt(key: String, defValue: Int): Int {
+        return storage.getInt(key, defValue)
+    }
+
+    override fun getFloat(key: String, defValue: Float): Float {
+        return storage.getFloat(key, defValue)
+    }
+
+    override fun clear() {
+        storage.edit().clear().apply()
+    }
+}
