@@ -4,7 +4,7 @@ import android.content.Context
 import android.content.pm.PackageInfo
 import com.growatt.lib.LibApplication
 
-class DeviceService(private val context: Context) : IDeviceService {
+class DefaultDeviceService(private val context: Context) : IDeviceService {
 
     companion object {
         val APP_LANGUAGE = "app_language"
@@ -54,11 +54,13 @@ class DeviceService(private val context: Context) : IDeviceService {
     }
 
     override fun getAppLanguage(): Language {
-        return Language.SIMPLIFIED_CHINESE
+        val code = LibApplication.instance().storageService()
+            .getInt(APP_LANGUAGE, Language.SYSTEM_DEFAULT.code)
+        return Language.fromCode(code)
     }
 
     override fun setAppLanguage(language: Language) {
-
+        LibApplication.instance().storageService().put(APP_LANGUAGE, language.code)
     }
 
     override fun screenDensity(): Float {

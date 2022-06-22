@@ -1,4 +1,4 @@
-package com.growatt.lib
+package com.growatt.lib.base
 
 import androidx.fragment.app.Fragment
 import kotlinx.coroutines.CoroutineScope

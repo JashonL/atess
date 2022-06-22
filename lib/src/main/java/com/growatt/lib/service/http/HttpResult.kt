@@ -1,7 +1,6 @@
 package com.growatt.lib.service.http
 
-class HttpResult<T> {
-    var code = 0
-    var data: T? = null
-    var error: String? = null
-}
+/**
+ * 网络响应基本字段
+ */
+data class HttpResult<T>(var status_code: String? = "0", var msg: String? = "", var data: T?)

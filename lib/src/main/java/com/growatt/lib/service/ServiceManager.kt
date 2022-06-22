@@ -1,5 +1,6 @@
 package com.growatt.lib.service
 
+import com.growatt.lib.service.device.IDeviceService
 import com.growatt.lib.service.http.IHttpService
 import com.growatt.lib.service.storage.IStorageService
 
@@ -33,6 +34,8 @@ class ServiceManager private constructor() {
         fun apiService(): IHttpService
 
         fun storageService(): IStorageService
+
+        fun deviceService(): IDeviceService
 
     }
 }

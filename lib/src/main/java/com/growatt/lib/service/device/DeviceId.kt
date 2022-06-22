@@ -51,7 +51,7 @@ internal class DeviceId private constructor() {
         }
     }
 
-    private lateinit var id: String
+    private var id: String = ""
 
     fun id(): String {
         return id

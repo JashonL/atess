@@ -24,5 +24,4 @@ abstract class HttpCallback<R> : IHttpCallback {
 
     override fun onFailure(error: String?) {
     }
-
 }

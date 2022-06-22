@@ -1,12 +1,14 @@
-package com.growatt.atess
+package com.growatt.atess.application
 
 import android.os.Process
 import com.growatt.lib.LibApplication
 import com.growatt.lib.service.ServiceManager
 import com.growatt.lib.service.ServiceType
+import com.growatt.lib.service.device.DefaultDeviceService
+import com.growatt.lib.service.device.IDeviceService
 import com.growatt.lib.service.http.IHttpService
 import com.growatt.lib.service.http.okhttp.OkhttpService
-import com.growatt.lib.service.storage.DefaultIStorageService
+import com.growatt.lib.service.storage.DefaultStorageService
 import com.growatt.lib.service.storage.IStorageService
 import com.growatt.lib.util.Util
 
@@ -29,11 +31,13 @@ class MainApplication : LibApplication() {
             return
         }
         registerService()
+        Foreground.init(this)
     }
 
     private fun registerService() {
         ServiceManager.instance().registerService(ServiceType.HTTP, OkhttpService())
-        ServiceManager.instance().registerService(ServiceType.STORAGE, DefaultIStorageService(this))
+        ServiceManager.instance().registerService(ServiceType.STORAGE, DefaultStorageService(this))
+        ServiceManager.instance().registerService(ServiceType.DEVICE, DefaultDeviceService(this))
     }
 
     override fun apiService(): IHttpService {
@@ -41,7 +45,11 @@ class MainApplication : LibApplication() {
     }
 
     override fun storageService(): IStorageService {
-        return ServiceManager.instance().getService(ServiceType.STORAGE) as DefaultIStorageService
+        return ServiceManager.instance().getService(ServiceType.STORAGE) as DefaultStorageService
+    }
+
+    override fun deviceService(): IDeviceService {
+        return ServiceManager.instance().getService(ServiceType.DEVICE) as IDeviceService
     }
 
 }

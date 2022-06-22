@@ -68,7 +68,7 @@ android {
 android.applicationVariants.all { variant ->
     if (variant.buildType.name.contains("release")) {
         variant.outputs.all {
-            outputFileName = "app_${variant.buildType.name}_${versionName}_${packageTime()}.apk"
+            outputFileName = "app_${variant.buildType.name}_v${versionName}_${packageTime()}.apk"
         }
         // 打包完成之后，将apk复制到指定目录
         def outputFilePath = "./release/apk"

@@ -4,7 +4,7 @@ import android.content.Context
 import android.content.Context.MODE_PRIVATE
 import android.content.SharedPreferences
 
-class DefaultIStorageService(context: Context) : IStorageService {
+class DefaultStorageService(context: Context) : IStorageService {
 
     private val storage: SharedPreferences = context.getSharedPreferences("growatt", MODE_PRIVATE)
 

@@ -2,7 +2,7 @@ package com.growatt.atess
 
 import android.os.Bundle
 import com.growatt.atess.databinding.ActivityMainBinding
-import com.growatt.lib.BaseActivity
+import com.growatt.lib.base.BaseActivity
 
 class MainActivity : BaseActivity() {
 

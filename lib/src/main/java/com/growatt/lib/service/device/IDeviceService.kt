@@ -1,6 +1,8 @@
 package com.growatt.lib.service.device
 
-interface IDeviceService {
+import com.growatt.lib.service.Service
+
+interface IDeviceService : Service {
 
     /**
      * 获取app版本名称（版本号）
