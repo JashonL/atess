@@ -36,6 +36,7 @@ dependencies {
     //注意Android官方库版本不能升级，升级后compileSdk得提升到31，就需要对Android12进行适配
     api dependency.androidxCoreKtx
     api dependency.androidxAppcompat
+    api dependency.material
     api dependency.androidxConstraintlayout
 
     api dependency.androidxViewmodelKtx

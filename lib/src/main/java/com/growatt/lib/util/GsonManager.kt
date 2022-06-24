@@ -16,6 +16,7 @@ object GsonManager {
         try {
             result = gson.fromJson(json, clazz)
         } catch (e: Exception) {
+
         }
         return result
     }
@@ -25,6 +26,7 @@ object GsonManager {
         try {
             result = gson.fromJson(json, type)
         } catch (e: Exception) {
+
         }
         return result
     }

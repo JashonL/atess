@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">Enerview</string>
+    <string name="user_agreement_and_privacy_policy">用户协议及隐私政策</string>
+    <string name="privacy_dialog_content">Enerview旨在保护您的数据隐私与安全的基础上，帮助您高效管理电站。请仔细阅读并充分理解一下条款后再点击同意。</string>
+    <string name="click_agree">点击同意即代表您已阅读并同意%s&amp;%s。</string>
+    <string name="user_agreement">《用户协议》</string>
+    <string name="privacy_policy">《隐私政策》</string>
+    <string name="disagree">不同意</string>
+    <string name="agree">同意</string>
+    <string name="cancel">取消</string>
+    <string name="confirm">确认</string>
+    <string name="privacy_dialog_tip">不同意协议无法提供服务哦~</string>
 </resources>

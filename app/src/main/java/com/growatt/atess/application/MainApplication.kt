@@ -1,6 +1,8 @@
 package com.growatt.atess.application
 
 import android.os.Process
+import com.growatt.atess.launch.fragment.UserAgreementDialog
+import com.growatt.atess.launch.monitor.UserAgreementMonitor
 import com.growatt.lib.LibApplication
 import com.growatt.lib.service.ServiceManager
 import com.growatt.lib.service.ServiceType
@@ -23,6 +25,14 @@ class MainApplication : LibApplication() {
         super.onCreate()
         instance = this
         init()
+        if (!isAgree()) {
+            UserAgreementMonitor.watch { isAgree, monitor ->
+                if (isAgree) {
+                    // TODO: 2022/6/24 进行初始化，类似第三方库隐私政策相关的初始化
+                }
+                monitor.unWatch()
+            }
+        }
     }
 
     private fun init() {
@@ -50,6 +60,13 @@ class MainApplication : LibApplication() {
 
     override fun deviceService(): IDeviceService {
         return ServiceManager.instance().getService(ServiceType.DEVICE) as IDeviceService
+    }
+
+    /**
+     * 是否同意隐私政策
+     */
+    fun isAgree(): Boolean {
+        return storageService().getBoolean(UserAgreementDialog.KEY_IS_AGREE_AGREEMENT, false)
     }
 
 }

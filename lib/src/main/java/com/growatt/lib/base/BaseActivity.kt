@@ -5,12 +5,17 @@ import android.os.Build
 import android.os.LocaleList
 import androidx.appcompat.app.AppCompatActivity
 import com.growatt.lib.LibApplication
+import com.growatt.lib.service.ServiceManager
+import com.growatt.lib.service.device.IDeviceService
 import com.growatt.lib.service.device.Language
+import com.growatt.lib.service.http.IHttpService
+import com.growatt.lib.service.storage.IStorageService
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.cancel
 
-abstract class BaseActivity : AppCompatActivity(), CoroutineScope by MainScope() {
+abstract class BaseActivity : AppCompatActivity(), CoroutineScope by MainScope(),
+    ServiceManager.ServiceInterface {
 
     /**
      * 多语言初始化
@@ -29,6 +34,18 @@ abstract class BaseActivity : AppCompatActivity(), CoroutineScope by MainScope()
                 setLocale(appLanguage.locale)
             }
         }?.let { createConfigurationContext(it) })
+    }
+
+    override fun apiService(): IHttpService {
+        return LibApplication.instance().apiService()
+    }
+
+    override fun storageService(): IStorageService {
+        return LibApplication.instance().storageService()
+    }
+
+    override fun deviceService(): IDeviceService {
+        return LibApplication.instance().deviceService()
     }
 
     override fun onDestroy() {
