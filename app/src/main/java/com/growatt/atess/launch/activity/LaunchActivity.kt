@@ -8,6 +8,7 @@ import com.growatt.atess.databinding.ActivityLaunchBinding
 import com.growatt.atess.launch.fragment.UserAgreementDialog
 import com.growatt.atess.launch.monitor.UserAgreementMonitor
 import com.growatt.lib.base.BaseActivity
+import com.growatt.lib.view.statusbar.StatusBarCompat
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.suspendCancellableCoroutine
@@ -20,6 +21,9 @@ class LaunchActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityLaunchBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        StatusBarCompat.translucentStatusBar(this, true)
+        StatusBarCompat.setWindowLightStatusBar(this, true)
 
         lifecycleScope.launch {
             if (fetchIsAgreeResult()) {

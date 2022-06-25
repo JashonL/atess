@@ -4,7 +4,7 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.View
 import com.growatt.lib.util.ViewUtil
-import com.growatt.lib.util.statusbar.StatusBarCompat
+import com.growatt.lib.view.statusbar.StatusBarCompat
 
 class StatusBarHeightView @JvmOverloads constructor(
     context: Context,
@@ -15,7 +15,7 @@ class StatusBarHeightView @JvmOverloads constructor(
     init {
         ViewUtil.getActivityFromContext(context)?.also {
             StatusBarCompat.translucentStatusBar(it, true)
-            StatusBarCompat.changeToLightStatusBar(it)
+            StatusBarCompat.setWindowLightStatusBar(it, true)
         }
     }
 
