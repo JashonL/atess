@@ -1,11 +1,13 @@
 package com.growatt.atess.application
 
 import android.os.Process
+import com.growatt.atess.service.account.DefaultAccountService
 import com.growatt.atess.ui.launch.fragment.UserAgreementDialog
 import com.growatt.atess.ui.launch.monitor.UserAgreementMonitor
 import com.growatt.lib.LibApplication
 import com.growatt.lib.service.ServiceManager
 import com.growatt.lib.service.ServiceType
+import com.growatt.lib.service.account.IAccountService
 import com.growatt.lib.service.device.DefaultDeviceService
 import com.growatt.lib.service.device.IDeviceService
 import com.growatt.lib.service.http.IHttpService
@@ -46,8 +48,10 @@ class MainApplication : LibApplication() {
 
     private fun registerService() {
         ServiceManager.instance().registerService(ServiceType.HTTP, OkhttpService())
-        ServiceManager.instance().registerService(ServiceType.STORAGE, DefaultStorageService(this))
+        ServiceManager.instance()
+            .registerService(ServiceType.STORAGE, DefaultStorageService(this))
         ServiceManager.instance().registerService(ServiceType.DEVICE, DefaultDeviceService(this))
+        ServiceManager.instance().registerService(ServiceType.ACCOUNT, DefaultAccountService())
     }
 
     override fun apiService(): IHttpService {
@@ -60,6 +64,10 @@ class MainApplication : LibApplication() {
 
     override fun deviceService(): IDeviceService {
         return ServiceManager.instance().getService(ServiceType.DEVICE) as IDeviceService
+    }
+
+    override fun accountService(): IAccountService {
+        return ServiceManager.instance().getService(ServiceType.ACCOUNT) as IAccountService
     }
 
     /**

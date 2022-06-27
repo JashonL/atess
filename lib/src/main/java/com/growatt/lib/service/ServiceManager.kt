@@ -1,12 +1,13 @@
 package com.growatt.lib.service
 
+import com.growatt.lib.service.account.IAccountService
 import com.growatt.lib.service.device.IDeviceService
 import com.growatt.lib.service.http.IHttpService
 import com.growatt.lib.service.storage.IStorageService
 
 /**
  * 服务管理类
- * 隔离层:网络加载库、简单的key、value存储
+ * 隔离层:网络加载库、简单的key-value存储、设备信息、账号信息
  */
 class ServiceManager private constructor() {
 
@@ -36,6 +37,8 @@ class ServiceManager private constructor() {
         fun storageService(): IStorageService
 
         fun deviceService(): IDeviceService
+
+        fun accountService(): IAccountService
 
     }
 }

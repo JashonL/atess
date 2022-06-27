@@ -2,11 +2,15 @@ package com.growatt.lib.service.storage
 
 import android.content.Context
 import android.content.Context.MODE_PRIVATE
-import android.content.SharedPreferences
 
-class DefaultStorageService(context: Context) : IStorageService {
+/**
+ * 默认的本地存储服务
+ */
+class DefaultStorageService(context: Context, name: String = "growatt_atess") : IStorageService {
 
-    private val storage: SharedPreferences = context.getSharedPreferences("growatt", MODE_PRIVATE)
+    private val storage by lazy(LazyThreadSafetyMode.NONE) {
+        context.getSharedPreferences(name, MODE_PRIVATE)
+    }
 
     override fun put(key: String, value: String?) {
         storage.edit().putString(key, value).apply()

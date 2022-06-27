@@ -6,6 +6,7 @@ import android.os.LocaleList
 import androidx.appcompat.app.AppCompatActivity
 import com.growatt.lib.LibApplication
 import com.growatt.lib.service.ServiceManager
+import com.growatt.lib.service.account.IAccountService
 import com.growatt.lib.service.device.IDeviceService
 import com.growatt.lib.service.device.Language
 import com.growatt.lib.service.http.IHttpService
@@ -46,6 +47,10 @@ abstract class BaseActivity : AppCompatActivity(), CoroutineScope by MainScope()
 
     override fun deviceService(): IDeviceService {
         return LibApplication.instance().deviceService()
+    }
+
+    override fun accountService(): IAccountService {
+        return LibApplication.instance().accountService()
     }
 
     override fun onDestroy() {
