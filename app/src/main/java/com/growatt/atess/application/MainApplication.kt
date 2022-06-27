@@ -1,8 +1,8 @@
 package com.growatt.atess.application
 
 import android.os.Process
-import com.growatt.atess.launch.fragment.UserAgreementDialog
-import com.growatt.atess.launch.monitor.UserAgreementMonitor
+import com.growatt.atess.ui.launch.fragment.UserAgreementDialog
+import com.growatt.atess.ui.launch.monitor.UserAgreementMonitor
 import com.growatt.lib.LibApplication
 import com.growatt.lib.service.ServiceManager
 import com.growatt.lib.service.ServiceType

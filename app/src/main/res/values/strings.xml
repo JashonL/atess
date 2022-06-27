@@ -10,4 +10,13 @@
     <string name="cancel">取消</string>
     <string name="confirm">确认</string>
     <string name="privacy_dialog_tip">不同意协议无法提供服务哦~</string>
+    <string name="info_space">体验馆>></string>
+    <string name="username">用户名</string>
+    <string name="password">密码</string>
+    <string name="please_input_username">请输入用户名</string>
+    <string name="please_input_password">请输入密码</string>
+    <string name="agree_company_user_agreement">同意本公司各项%s&amp;%s</string>
+    <string name="forget_password">找回密码</string>
+    <string name="register">注册</string>
+    <string name="login">登录</string>
 </resources>

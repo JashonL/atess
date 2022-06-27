@@ -1,4 +1,4 @@
-package com.growatt.atess.launch.fragment
+package com.growatt.atess.ui.launch.fragment
 
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
@@ -18,7 +18,7 @@ import androidx.fragment.app.FragmentManager
 import com.growatt.atess.R
 import com.growatt.atess.application.MainApplication
 import com.growatt.atess.databinding.DialogUserAgreementBinding
-import com.growatt.atess.launch.monitor.UserAgreementMonitor
+import com.growatt.atess.ui.launch.monitor.UserAgreementMonitor
 import com.growatt.lib.util.ToastUtil
 import com.growatt.lib.util.ViewUtil
 import com.growatt.lib.util.gone
@@ -73,6 +73,7 @@ class UserAgreementDialog : DialogFragment(), View.OnClickListener {
 
     private fun initView() {
         binding.tvSpan.run {
+            highlightColor = resources.getColor(android.R.color.transparent)
             movementMethod = LinkMovementMethod.getInstance()
             text = getTvSpan()
         }

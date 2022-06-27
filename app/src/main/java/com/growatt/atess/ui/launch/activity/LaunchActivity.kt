@@ -1,12 +1,12 @@
-package com.growatt.atess.launch.activity
+package com.growatt.atess.ui.launch.activity
 
 import android.os.Bundle
 import androidx.lifecycle.lifecycleScope
-import com.growatt.atess.MainActivity
 import com.growatt.atess.application.MainApplication
 import com.growatt.atess.databinding.ActivityLaunchBinding
-import com.growatt.atess.launch.fragment.UserAgreementDialog
-import com.growatt.atess.launch.monitor.UserAgreementMonitor
+import com.growatt.atess.ui.launch.fragment.UserAgreementDialog
+import com.growatt.atess.ui.launch.monitor.UserAgreementMonitor
+import com.growatt.atess.ui.mine.activity.LoginActivity
 import com.growatt.lib.base.BaseActivity
 import com.growatt.lib.view.statusbar.StatusBarCompat
 import kotlinx.coroutines.delay
@@ -51,7 +51,7 @@ class LaunchActivity : BaseActivity() {
 
     private suspend fun enterApp() {
         delay(2000)
-        MainActivity.start(this@LaunchActivity)
+        LoginActivity.start(this@LaunchActivity)
         finish()
     }
 
