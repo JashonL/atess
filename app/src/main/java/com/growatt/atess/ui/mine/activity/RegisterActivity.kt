@@ -106,10 +106,8 @@ class RegisterActivity : BaseActivity(), View.OnClickListener {
     override fun onClick(v: View?) {
         when {
             v === binding.ivBack -> finish()
-            v === binding.tvSelectArea -> {}
-            v === binding.ivSelect -> {
-                updateSelectView(!isAgree)
-            }
+            v === binding.tvSelectArea -> SelectAreaActivity.start(this)
+            v === binding.ivSelect -> updateSelectView(!isAgree)
             v === binding.btFinish -> {
                 VerifyCodeDialog.showDialog(supportFragmentManager)
             }

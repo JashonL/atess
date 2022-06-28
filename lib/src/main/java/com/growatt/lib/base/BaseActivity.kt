@@ -1,22 +1,27 @@
 package com.growatt.lib.base
 
+import android.app.ProgressDialog
 import android.content.Context
 import android.os.Build
 import android.os.LocaleList
 import androidx.appcompat.app.AppCompatActivity
 import com.growatt.lib.LibApplication
+import com.growatt.lib.R
 import com.growatt.lib.service.ServiceManager
 import com.growatt.lib.service.account.IAccountService
 import com.growatt.lib.service.device.IDeviceService
 import com.growatt.lib.service.device.Language
 import com.growatt.lib.service.http.IHttpService
 import com.growatt.lib.service.storage.IStorageService
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.MainScope
-import kotlinx.coroutines.cancel
 
-abstract class BaseActivity : AppCompatActivity(), CoroutineScope by MainScope(),
-    ServiceManager.ServiceInterface {
+abstract class BaseActivity : AppCompatActivity(), ServiceManager.ServiceInterface, ViewHelper {
+
+    private val progressDialog by lazy(LazyThreadSafetyMode.NONE) {
+        ProgressDialog(this).apply {
+            setCanceledOnTouchOutside(false)
+            setMessage(getString(R.string.loading))
+        }
+    }
 
     /**
      * 多语言初始化
@@ -53,10 +58,16 @@ abstract class BaseActivity : AppCompatActivity(), CoroutineScope by MainScope()
         return LibApplication.instance().accountService()
     }
 
-    override fun onDestroy() {
-        //取消协程，和生命周期绑定
-        cancel()
-        super.onDestroy()
+    override fun showDialog() {
+        if (!progressDialog.isShowing) {
+            progressDialog.show()
+        }
+    }
+
+    override fun dismissDialog() {
+        if (progressDialog.isShowing) {
+            progressDialog.dismiss()
+        }
     }
 
 }
