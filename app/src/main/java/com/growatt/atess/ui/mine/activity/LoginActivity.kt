@@ -173,7 +173,7 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
 
             }
             v === binding.tvRegister -> {
-
+                RegisterActivity.start(this)
             }
         }
     }

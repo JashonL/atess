@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/text_white"
     android:orientation="vertical"
     tools:context=".ui.mine.activity.LoginActivity">
 
@@ -82,7 +83,6 @@
                 android:id="@+id/iv_clear"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
                 android:padding="4dp"
                 android:src="@drawable/ic_clear" />
 
@@ -135,7 +135,6 @@
                 android:id="@+id/iv_eye"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
                 android:padding="4dp"
                 android:src="@drawable/ic_eye_close" />
 

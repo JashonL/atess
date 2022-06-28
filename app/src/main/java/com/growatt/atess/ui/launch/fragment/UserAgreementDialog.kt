@@ -1,7 +1,5 @@
 package com.growatt.atess.ui.launch.fragment
 
-import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.text.Spannable
 import android.text.SpannableString
@@ -12,22 +10,20 @@ import android.text.style.ForegroundColorSpan
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.WindowManager
-import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentManager
 import com.growatt.atess.R
 import com.growatt.atess.application.MainApplication
 import com.growatt.atess.databinding.DialogUserAgreementBinding
 import com.growatt.atess.ui.launch.monitor.UserAgreementMonitor
+import com.growatt.lib.base.BaseDialogFragment
 import com.growatt.lib.util.ToastUtil
-import com.growatt.lib.util.ViewUtil
 import com.growatt.lib.util.gone
 import com.growatt.lib.util.visible
 
 /**
  * 用户隐私协议弹框
  */
-class UserAgreementDialog : DialogFragment(), View.OnClickListener {
+class UserAgreementDialog : BaseDialogFragment(), View.OnClickListener {
 
     companion object {
 
@@ -64,7 +60,7 @@ class UserAgreementDialog : DialogFragment(), View.OnClickListener {
             binding.disagreeOrConfirm.text = getString(R.string.confirm)
             binding.agreeOrCancel.text = getString(R.string.cancel)
         } else {
-            binding.title.text = getString(R.string.privacy_dialog_tip)
+            binding.title.text = getString(R.string.user_agreement_and_privacy_policy)
             binding.llContent.visible()
             binding.disagreeOrConfirm.text = getString(R.string.disagree)
             binding.agreeOrCancel.text = getString(R.string.agree)
@@ -79,17 +75,6 @@ class UserAgreementDialog : DialogFragment(), View.OnClickListener {
         }
         binding.disagreeOrConfirm.setOnClickListener(this)
         binding.agreeOrCancel.setOnClickListener(this)
-    }
-
-    override fun onStart() {
-        super.onStart()
-        //设置左右边距
-        requireDialog().window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-        val width = MainApplication.instance().deviceService().getDeviceWidth() - ViewUtil.dp2px(
-            requireContext(),
-            14f * 2
-        )
-        requireDialog().window?.setLayout(width, WindowManager.LayoutParams.WRAP_CONTENT)
     }
 
     private fun getTvSpan(): SpannableString {
