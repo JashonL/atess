@@ -2,6 +2,7 @@ package com.growatt.atess.application
 
 import android.os.Process
 import com.growatt.atess.service.account.DefaultAccountService
+import com.growatt.atess.service.http.OkhttpService
 import com.growatt.atess.ui.launch.fragment.UserAgreementDialog
 import com.growatt.atess.ui.launch.monitor.UserAgreementMonitor
 import com.growatt.lib.LibApplication
@@ -11,7 +12,6 @@ import com.growatt.lib.service.account.IAccountService
 import com.growatt.lib.service.device.DefaultDeviceService
 import com.growatt.lib.service.device.IDeviceService
 import com.growatt.lib.service.http.IHttpService
-import com.growatt.lib.service.http.okhttp.OkhttpService
 import com.growatt.lib.service.storage.DefaultStorageService
 import com.growatt.lib.service.storage.IStorageService
 import com.growatt.lib.util.Util

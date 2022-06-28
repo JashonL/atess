@@ -11,11 +11,13 @@ object ToastUtil {
         toast?.get()?.cancel()
     }
 
-    fun show(content: String) {
-        cancelExist()
-        val showToast = Toast.makeText(LibApplication.instance(), content, Toast.LENGTH_SHORT)
-        showToast.show()
-        toast = WeakReference(showToast)
+    fun show(content: String?) {
+        content?.let {
+            cancelExist()
+            val showToast = Toast.makeText(LibApplication.instance(), content, Toast.LENGTH_SHORT)
+            showToast.show()
+            toast = WeakReference(showToast)
+        }
     }
 
 }

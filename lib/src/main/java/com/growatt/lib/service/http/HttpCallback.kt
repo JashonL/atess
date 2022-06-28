@@ -15,7 +15,7 @@ abstract class HttpCallback<R> : IHttpCallback {
         }
     }
 
-    abstract fun success(result: R?)
+    abstract fun success(result: R)
 
     private fun getType(): Type {
         val parameterizedType = javaClass.genericSuperclass as ParameterizedType

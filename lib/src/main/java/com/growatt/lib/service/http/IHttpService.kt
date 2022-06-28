@@ -1,5 +1,6 @@
 package com.growatt.lib.service.http
 
+import com.growatt.lib.LibApplication
 import com.growatt.lib.service.Service
 import java.io.File
 
@@ -8,11 +9,12 @@ import java.io.File
  */
 abstract class IHttpService : Service {
 
-    private var host = ""
+    abstract fun host(): String
 
     protected fun generateHeads(): Map<String, String> {
         return hashMapOf<String, String>().apply {
             put("deviceType", "Android")
+            put("token", LibApplication.instance().accountService().token().orEmpty())
         }
     }
 
@@ -21,7 +23,7 @@ abstract class IHttpService : Service {
      * @param urlOrApi 完整请求路径或者接口
      */
     protected fun generateUrl(urlOrApi: String): String {
-        return if (urlOrApi.startsWith("http")) urlOrApi else host + urlOrApi
+        return if (urlOrApi.startsWith("http")) urlOrApi else host() + urlOrApi
     }
 
     /**

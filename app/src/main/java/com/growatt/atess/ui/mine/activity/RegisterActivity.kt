@@ -10,11 +10,15 @@ import android.text.method.LinkMovementMethod
 import android.text.style.ClickableSpan
 import android.text.style.ForegroundColorSpan
 import android.view.View
+import androidx.activity.viewModels
 import com.growatt.atess.R
 import com.growatt.atess.databinding.ActivityRegisterBinding
-import com.growatt.atess.ui.mine.fragment.VerifyCodeDialog
+import com.growatt.atess.ui.mine.viewmodel.RegisterViewModel
 import com.growatt.lib.base.BaseActivity
+import com.growatt.lib.util.ActivityBridge
 import com.growatt.lib.util.ToastUtil
+import com.growatt.lib.util.invisible
+import com.growatt.lib.util.visible
 
 /**
  * 注册页面
@@ -28,7 +32,8 @@ class RegisterActivity : BaseActivity(), View.OnClickListener {
     }
 
     private lateinit var binding: ActivityRegisterBinding
-    private var isAgree = false
+
+    private val viewModel: RegisterViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,11 +57,22 @@ class RegisterActivity : BaseActivity(), View.OnClickListener {
             text = getTvSpan()
         }
         updateSelectView(false)
+        updateRequiredView()
+    }
+
+    private fun updateRequiredView() {
+        if (viewModel.isChina()) {
+            binding.tvRequiredPhone.visible()
+            binding.tvRequiredEmail.invisible()
+        } else {
+            binding.tvRequiredPhone.invisible()
+            binding.tvRequiredEmail.visible()
+        }
     }
 
     private fun updateSelectView(isAgree: Boolean) {
         binding.ivSelect.setImageResource(if (isAgree) R.drawable.ic_select else R.drawable.ic_unselect)
-        this.isAgree = isAgree
+        viewModel.isAgree = isAgree
     }
 
     private fun getTvSpan(): SpannableString {
@@ -106,12 +122,37 @@ class RegisterActivity : BaseActivity(), View.OnClickListener {
     override fun onClick(v: View?) {
         when {
             v === binding.ivBack -> finish()
-            v === binding.tvSelectArea -> SelectAreaActivity.start(this)
-            v === binding.ivSelect -> updateSelectView(!isAgree)
+            v === binding.tvSelectArea -> selectArea()
+            v === binding.ivSelect -> updateSelectView(!viewModel.isAgree)
             v === binding.btFinish -> {
-                VerifyCodeDialog.showDialog(supportFragmentManager)
+                checkInputInfo()
             }
         }
+    }
+
+    private fun selectArea() {
+        ActivityBridge.startActivity(
+            this,
+            SelectAreaActivity.getIntent(this),
+            object : ActivityBridge.OnActivityForResult {
+                override fun onActivityForResult(
+                    context: Context?,
+                    resultCode: Int,
+                    data: Intent?
+                ) {
+                    if (resultCode == RESULT_OK && data?.hasExtra(SelectAreaActivity.KEY_AREA) == true) {
+                        viewModel.selectArea = data.getStringExtra(SelectAreaActivity.KEY_AREA)
+                        binding.tvSelectArea.text = viewModel.selectArea
+                    }
+                }
+            })
+    }
+
+    /**
+     * 检查输入信息是否合规
+     */
+    private fun checkInputInfo() {
+
     }
 
 }

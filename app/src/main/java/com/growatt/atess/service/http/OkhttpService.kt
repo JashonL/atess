@@ -1,6 +1,9 @@
-package com.growatt.lib.service.http.okhttp
+package com.growatt.atess.service.http
 
 import android.net.Uri
+import android.os.Handler
+import android.os.Looper
+import android.util.Log
 import com.growatt.lib.service.http.IHttpCallback
 import com.growatt.lib.service.http.IHttpService
 import com.growatt.lib.util.GsonManager
@@ -20,6 +23,7 @@ class OkhttpService : IHttpService() {
     companion object {
         val JSON = "application/json; charset=utf-8".toMediaType()
         val FILE = "application/octet-stream".toMediaType()
+        val TAG = "http_respone"
     }
 
     private val okHttpClient: OkHttpClient = OkHttpClient.Builder()
@@ -27,6 +31,11 @@ class OkhttpService : IHttpService() {
         .readTimeout(30, TimeUnit.SECONDS)
         .writeTimeout(30, TimeUnit.SECONDS)
         .build()
+    private val mainHandler = Handler(Looper.getMainLooper())
+
+    override fun host(): String {
+        return ApiPath.serverHostUrl
+    }
 
     override fun postForm(urlOrApi: String, params: Map<String, String>, callback: IHttpCallback) {
         val formBodyBuilder = FormBody.Builder()
@@ -100,15 +109,21 @@ class OkhttpService : IHttpService() {
         val call = okHttpClient.newCall(request)
         call.enqueue(object : Callback {
             override fun onFailure(call: Call, e: IOException) {
-                callback.onFailure(e.message)
+                mainHandler.post {
+                    callback.onFailure(e.message)
+                    Log.i(TAG, "onFailure: " + e.message)
+                }
             }
 
             override fun onResponse(call: Call, response: Response) {
                 val result = response.body?.string()
-                if (response.isSuccessful) {
-                    callback.onSuccess(result)
-                } else {
-                    callback.onFailure(result)
+                mainHandler.post {
+                    if (response.isSuccessful) {
+                        callback.onSuccess(result)
+                    } else {
+                        callback.onFailure(result)
+                    }
+                    Log.i(TAG, "onResponse: $result")
                 }
             }
         })
