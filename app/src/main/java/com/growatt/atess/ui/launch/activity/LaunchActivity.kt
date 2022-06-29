@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.lifecycle.lifecycleScope
 import com.growatt.atess.application.MainApplication
 import com.growatt.atess.databinding.ActivityLaunchBinding
+import com.growatt.atess.ui.home.HomeActivity
 import com.growatt.atess.ui.launch.fragment.UserAgreementDialog
 import com.growatt.atess.ui.launch.monitor.UserAgreementMonitor
 import com.growatt.atess.ui.mine.activity.LoginActivity
@@ -51,7 +52,11 @@ class LaunchActivity : BaseActivity() {
 
     private suspend fun enterApp() {
         delay(2000)
-        LoginActivity.start(this@LaunchActivity)
+        if (accountService().isLogin()) {
+            HomeActivity.start(this)
+        } else {
+            LoginActivity.start(this)
+        }
         finish()
     }
 

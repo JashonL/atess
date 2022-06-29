@@ -40,7 +40,7 @@ class SelectAreaViewModel : BaseViewModel() {
 
                     override fun onFailure(error: String?) {
                         super.onFailure(error)
-                        areaListLiveData.value = Pair(emptyArray(), error)
+                        areaListLiveData.value = Pair(emptyArray(), error ?: "")
                     }
                 })
         }

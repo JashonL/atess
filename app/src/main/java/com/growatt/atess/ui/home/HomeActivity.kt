@@ -1,24 +1,24 @@
-package com.growatt.atess
+package com.growatt.atess.ui.home
 
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import com.growatt.atess.databinding.ActivityMainBinding
+import com.growatt.atess.databinding.ActivityHomeBinding
 import com.growatt.lib.base.BaseActivity
 
-class MainActivity : BaseActivity() {
+class HomeActivity : BaseActivity() {
 
     companion object {
         fun start(context: Context) {
-            context.startActivity(Intent(context, MainActivity::class.java))
+            context.startActivity(Intent(context, HomeActivity::class.java))
         }
     }
 
-    private lateinit var binding: ActivityMainBinding
+    private lateinit var binding: ActivityHomeBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityMainBinding.inflate(layoutInflater)
+        binding = ActivityHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
     }
 

@@ -60,13 +60,13 @@ class RegisterViewModel : BaseViewModel() {
                         val remainingTime = (result.data ?: "0").toInt()
                         getVerifyCodeLiveData.value = Pair(remainingTime, null)
                     } else {
-                        getVerifyCodeLiveData.value = Pair(0, result.msg)
+                        getVerifyCodeLiveData.value = Pair(0, result.msg ?: "")
                     }
                 }
 
                 override fun onFailure(error: String?) {
                     super.onFailure(error)
-                    getVerifyCodeLiveData.value = Pair(0, error)
+                    getVerifyCodeLiveData.value = Pair(0, error ?: "")
                 }
             })
         }
@@ -87,13 +87,13 @@ class RegisterViewModel : BaseViewModel() {
                     if (result.isBusinessSuccess()) {
                         verifyCodeLiveData.value = null
                     } else {
-                        verifyCodeLiveData.value = result.msg
+                        verifyCodeLiveData.value = result.msg ?: ""
                     }
                 }
 
                 override fun onFailure(error: String?) {
                     super.onFailure(error)
-                    verifyCodeLiveData.value = error
+                    verifyCodeLiveData.value = error ?: ""
                 }
             })
         }
@@ -118,19 +118,19 @@ class RegisterViewModel : BaseViewModel() {
                     put("agentCode", agentCode)
                 }
             }
-            apiService().postForm(ApiPath.Mine.register, params, object :
+            apiService().postJson(ApiPath.Mine.register, params, object :
                 HttpCallback<HttpResult<String>>() {
                 override fun success(result: HttpResult<String>) {
                     if (result.isBusinessSuccess()) {
                         registerLiveData.value = null
                     } else {
-                        registerLiveData.value = result.msg
+                        registerLiveData.value = result.msg ?: ""
                     }
                 }
 
                 override fun onFailure(error: String?) {
                     super.onFailure(error)
-                    registerLiveData.value = error
+                    registerLiveData.value = error ?: ""
                 }
             })
         }

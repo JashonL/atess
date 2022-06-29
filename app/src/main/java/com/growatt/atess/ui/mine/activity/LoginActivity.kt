@@ -6,15 +6,20 @@ import android.os.Bundle
 import android.text.Spannable
 import android.text.SpannableString
 import android.text.TextPaint
+import android.text.TextUtils
 import android.text.method.HideReturnsTransformationMethod
 import android.text.method.LinkMovementMethod
 import android.text.method.PasswordTransformationMethod
 import android.text.style.ClickableSpan
 import android.text.style.ForegroundColorSpan
 import android.view.View
+import androidx.activity.viewModels
 import com.growatt.atess.R
 import com.growatt.atess.databinding.ActivityLoginBinding
+import com.growatt.atess.ui.home.HomeActivity
+import com.growatt.atess.ui.mine.viewmodel.LoginViewModel
 import com.growatt.lib.base.BaseActivity
+import com.growatt.lib.service.account.User
 import com.growatt.lib.util.ToastUtil
 import com.growatt.lib.util.setViewHeight
 
@@ -37,12 +42,34 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
     private var focusOnPassword = false
     private var isAgree = false
 
+    private val viewModel: LoginViewModel by viewModels()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        initData()
         initView()
         setListener()
+    }
+
+    private fun initData() {
+        viewModel.loginLiveData.observe(this) {
+            dismissDialog()
+            if (it.second == null) {
+                val user = it.first
+                loginSuccess(user)
+            } else {
+                ToastUtil.show(it.second)
+            }
+        }
+    }
+
+    private fun loginSuccess(user: User?) {
+        accountService().saveToken(user?.token)
+        accountService().saveUserInfo(user)
+        HomeActivity.start(this)
+        finish()
     }
 
     private fun setListener() {
@@ -60,6 +87,7 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
         binding.tvForgetPassword.setOnClickListener(this)
         binding.tvInfoSpace.setOnClickListener(this)
         binding.tvRegister.setOnClickListener(this)
+        binding.btLogin.setOnClickListener(this)
     }
 
     private fun initView() {
@@ -174,6 +202,27 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
             }
             v === binding.tvRegister -> {
                 RegisterActivity.start(this)
+            }
+            v === binding.btLogin -> {
+                checkInfo()
+            }
+        }
+    }
+
+    private fun checkInfo() {
+        val userName = binding.etUserName.text.toString().trim()
+        val password = binding.etPassword.text.toString().trim()
+        when {
+            TextUtils.isEmpty(userName) -> {
+                ToastUtil.show(getString(R.string.please_input_username))
+            }
+            TextUtils.isEmpty(password) -> {
+                ToastUtil.show(getString(R.string.password_cant_empty))
+            }
+            else -> {
+                //校验成功
+                showDialog()
+                viewModel.login(userName, password)
             }
         }
     }
