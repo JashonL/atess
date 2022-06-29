@@ -51,6 +51,7 @@
             android:layout_weight="1"
             android:hint="@string/verify_code"
             android:inputType="number"
+            android:maxLength="6"
             android:textColor="@color/text_black"
             android:textSize="@dimen/text_small" />
 

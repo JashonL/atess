@@ -30,5 +30,10 @@ object ApiPath {
          */
         val getCountryList = "ShineServer/ATSregister/getCountryList"
 
+        /**
+         * 校验验证码
+         */
+        val verifyCode = "ShineServer/ATSregister/validCode"
+
     }
 }

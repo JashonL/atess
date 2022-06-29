@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.text.Spannable
 import android.text.SpannableString
 import android.text.TextPaint
+import android.text.TextUtils
 import android.text.method.LinkMovementMethod
 import android.text.style.ClickableSpan
 import android.text.style.ForegroundColorSpan
@@ -13,6 +14,8 @@ import android.view.View
 import androidx.activity.viewModels
 import com.growatt.atess.R
 import com.growatt.atess.databinding.ActivityRegisterBinding
+import com.growatt.atess.ui.mine.fragment.RegisterAccountType
+import com.growatt.atess.ui.mine.fragment.VerifyCodeDialog
 import com.growatt.atess.ui.mine.viewmodel.RegisterViewModel
 import com.growatt.lib.base.BaseActivity
 import com.growatt.lib.util.ActivityBridge
@@ -39,8 +42,42 @@ class RegisterActivity : BaseActivity(), View.OnClickListener {
         super.onCreate(savedInstanceState)
         binding = ActivityRegisterBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        initData()
         initView()
         setListener()
+    }
+
+    private fun initData() {
+        viewModel.getVerifyCodeLiveData.observe(this) {
+            dismissDialog()
+            if (!VerifyCodeDialog.isShowing(supportFragmentManager)) {
+                if (it.second == null) {
+                    VerifyCodeDialog.showDialog(
+                        supportFragmentManager,
+                        it.first,
+                        if (viewModel.isChina()) RegisterAccountType.PHONE else RegisterAccountType.EMAIL
+                    ) {
+                        showDialog()
+                        val username = binding.etUsername.text.toString().trim()
+                        val password = binding.etPassword.text.toString().trim()
+                        val agentCode = binding.etInstallerNo.text.toString().trim()
+                        viewModel.register(username, password, agentCode)
+                    }
+                } else {
+                    ToastUtil.show(it.second)
+                }
+            }
+        }
+
+        viewModel.registerLiveData.observe(this) {
+            dismissDialog()
+            if (it == null) {
+                //注册成功，关闭页面返回登录页面
+                finish()
+            } else {
+                ToastUtil.show(it)
+            }
+        }
     }
 
     private fun setListener() {
@@ -141,8 +178,10 @@ class RegisterActivity : BaseActivity(), View.OnClickListener {
                     data: Intent?
                 ) {
                     if (resultCode == RESULT_OK && data?.hasExtra(SelectAreaActivity.KEY_AREA) == true) {
-                        viewModel.selectArea = data.getStringExtra(SelectAreaActivity.KEY_AREA)
+                        viewModel.selectArea =
+                            data.getStringExtra(SelectAreaActivity.KEY_AREA) ?: ""
                         binding.tvSelectArea.text = viewModel.selectArea
+                        updateRequiredView()
                     }
                 }
             })
@@ -153,6 +192,33 @@ class RegisterActivity : BaseActivity(), View.OnClickListener {
      */
     private fun checkInputInfo() {
 
+        val username = binding.etUsername.text.trim()
+        val password = binding.etPassword.text.trim()
+        val confirmPassword = binding.etConfirmPassword.text.trim()
+        val phone = binding.etPhone.text.trim()
+        val email = binding.etEmail.text.trim()
+
+        if (!viewModel.isAgree) {
+            ToastUtil.show(getString(R.string.please_check_agree_agreement))
+        } else if (TextUtils.isEmpty(username)) {
+            ToastUtil.show(getString(R.string.please_input_username))
+        } else if (TextUtils.isEmpty(viewModel.selectArea)) {
+            ToastUtil.show(getString(R.string.unselected_country))
+        } else if (TextUtils.isEmpty(password) || TextUtils.isEmpty(confirmPassword)) {
+            ToastUtil.show(getString(R.string.password_cant_empty))
+        } else if (password != confirmPassword) {
+            ToastUtil.show(getString(R.string.passwords_are_inconsistent))
+        } else if (viewModel.isChina() && TextUtils.isEmpty(phone)) {
+            ToastUtil.show(getString(R.string.no_phone_number))
+        } else if (!viewModel.isChina() && TextUtils.isEmpty(email)) {
+            ToastUtil.show(getString(R.string.no_email))
+        } else {
+            //校验成功
+            viewModel.phone = phone.toString()
+            viewModel.email = email.toString()
+            showDialog()
+            viewModel.fetchVerifyCode()
+        }
     }
 
 }

@@ -35,5 +35,12 @@
     <string name="sent_verify_code_format">已发送验证码到%s</string>
     <string name="send_verify_code">发送验证码</string>
     <string name="verify_code">验证码</string>
-    <string name="send_again_second_format">%ds后重新发送</string>
+    <string name="unselected_country">未选择国家</string>
+    <string name="user_name_cant_empty">用户名不能为空</string>
+    <string name="password_cant_empty">密码不能为空</string>
+    <string name="passwords_are_inconsistent">两次密码不一致</string>
+    <string name="no_phone_number">未填写电话号码</string>
+    <string name="no_email">未填写邮箱</string>
+    <string name="please_check_agree_agreement">请勾选同意协议</string>
+    <string name="second_after_send">%ds后重新发送</string>
 </resources>
