@@ -43,4 +43,8 @@
     <string name="no_email">未填写邮箱</string>
     <string name="please_check_agree_agreement">请勾选同意协议</string>
     <string name="second_after_send">%ds后重新发送</string>
+    <string name="synopsis">总览</string>
+    <string name="power_plant">电站</string>
+    <string name="service">服务</string>
+    <string name="mine">我的</string>
 </resources>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="50dp"
+    android:background="@color/color_white"
+    android:orientation="horizontal"
+    tools:context=".ui.home.view.HomeBottomView">
+
+    <com.growatt.atess.ui.home.view.HomeTabView
+        android:id="@+id/tab_synopsis"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        app:normalIcon="@drawable/ic_home_synopsis_normal"
+        app:selectIcon="@drawable/ic_home_synopsis_select"
+        app:text="@string/synopsis" />
+
+    <com.growatt.atess.ui.home.view.HomeTabView
+        android:id="@+id/tab_power_plant"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        app:normalIcon="@drawable/ic_home_power_plant_normal"
+        app:selectIcon="@drawable/ic_home_power_plant_select"
+        app:text="@string/power_plant" />
+
+    <com.growatt.atess.ui.home.view.HomeTabView
+        android:id="@+id/tab_service"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        app:normalIcon="@drawable/ic_home_service_normal"
+        app:selectIcon="@drawable/ic_home_service_select"
+        app:text="@string/service" />
+
+    <com.growatt.atess.ui.home.view.HomeTabView
+        android:id="@+id/tab_mine"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        app:normalIcon="@drawable/ic_home_mine_normal"
+        app:selectIcon="@drawable/ic_home_mine_select"
+        app:text="@string/mine" />
+
+</LinearLayout>
