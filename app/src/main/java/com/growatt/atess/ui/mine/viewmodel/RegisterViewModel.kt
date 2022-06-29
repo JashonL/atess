@@ -48,7 +48,7 @@ class RegisterViewModel : BaseViewModel() {
     fun fetchVerifyCode(areaCode: String = "86") {
         viewModelScope.launch {
             val params = hashMapOf<String, String>().apply {
-                put("findbackStr", getRequirePhoneOrEmail())
+                put("phoneOrEmailStr", getRequirePhoneOrEmail())
                 if (isChina()) {
                     put("areaCode", areaCode)
                 }

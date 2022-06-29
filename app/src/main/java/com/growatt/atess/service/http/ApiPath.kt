@@ -23,7 +23,7 @@ object ApiPath {
         /**
          * 通过邮箱或手机号发送验证码
          */
-        val getVerifyCode = "ShineServer/ATSregister/findbackPWD"
+        val getVerifyCode = "ShineServer/ATSregister/sendValidCode"
 
         /**
          * 获取国家列表
