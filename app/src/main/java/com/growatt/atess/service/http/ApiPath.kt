@@ -35,5 +35,9 @@ object ApiPath {
          */
         val verifyCode = "ShineServer/ATSregister/validCode"
 
+        /**
+         * 获取用户头像
+         */
+        val getUserAvatar = "ShineServer/ATSSetting/getUserIcon"
     }
 }

@@ -36,8 +36,7 @@ class RegisterViewModel : BaseViewModel() {
 
 
     fun getRequirePhoneOrEmail(): String {
-        val require = if (isChina()) phone else email
-        return require
+        return if (isChina()) phone else email
     }
 
     /**

@@ -48,7 +48,7 @@ class VerifyCodeDialog : BaseDialogFragment(), View.OnClickListener {
 
     private var type: Int = RegisterAccountType.PHONE
     private var remainingTime = 0
-    private val viewModel by lazy {
+    private val viewModel by lazy(LazyThreadSafetyMode.NONE) {
         ViewModelProvider(requireActivity()).get(RegisterViewModel::class.java)
     }
 

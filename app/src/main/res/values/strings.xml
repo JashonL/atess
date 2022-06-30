@@ -27,7 +27,7 @@
     <string name="please_input_email">请输入邮箱</string>
     <string name="please_input_installer_no">请输入安装商编号</string>
     <string name="confirm_password">确认密码</string>
-    <string name="phone">电话</string>
+    <string name="phone">手机号</string>
     <string name="email">邮箱</string>
     <string name="finish">完成</string>
     <string name="installer_no">安装商编号</string>
@@ -39,7 +39,7 @@
     <string name="user_name_cant_empty">用户名不能为空</string>
     <string name="password_cant_empty">密码不能为空</string>
     <string name="passwords_are_inconsistent">两次密码不一致</string>
-    <string name="no_phone_number">未填写电话号码</string>
+    <string name="no_phone_number">未填写手机号码</string>
     <string name="no_email">未填写邮箱</string>
     <string name="please_check_agree_agreement">请勾选同意协议</string>
     <string name="second_after_send">%ds后重新发送</string>
@@ -47,4 +47,15 @@
     <string name="power_plant">电站</string>
     <string name="service">服务</string>
     <string name="mine">我的</string>
+    <string name="i">我</string>
+    <string name="setting">设置</string>
+    <string name="about">关于</string>
+    <string name="message_center">消息中心</string>
+    <string name="save">保存</string>
+    <string name="personal_avatar">个人头像</string>
+    <string name="language">语言</string>
+    <string name="modify_password">修改密码</string>
+    <string name="cancel_account">注销账号</string>
+    <string name="system_language">系统语言</string>
+    <string name="logout_current_account">退出当前账号</string>
 </resources>

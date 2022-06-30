@@ -10,10 +10,12 @@ abstract class BaseAccountService : IAccountService {
     companion object {
         private const val KEY_TOKEN = "key_token"
         private const val KEY_USER = "key_user"
+        private const val KEY_USER_AVATAR = "key_user_avatar"
     }
 
     private var token: String? = null
     private var user: User? = null
+    private var userAvatar: String? = null
     private val listeners = mutableSetOf<IAccountService.AccountListener>()
 
     private val userStorage by lazy {
@@ -22,6 +24,7 @@ abstract class BaseAccountService : IAccountService {
 
     init {
         token = userStorage.getString(KEY_TOKEN, "")
+        userAvatar = userStorage.getString(KEY_USER_AVATAR, "")
         userStorage.getString(KEY_USER, "")?.let {
             user = GsonManager.fromJson(it, User::class.java)
         }
@@ -33,12 +36,26 @@ abstract class BaseAccountService : IAccountService {
 
     override fun saveToken(token: String?) {
         userStorage.put(KEY_TOKEN, token)
+        this.token = token
+    }
+
+    override fun user(): User? {
+        return user
     }
 
     override fun saveUserInfo(user: User?) {
         userStorage.put(KEY_USER, GsonManager.toJson(user))
         this.user = user
         dispatchAccountChanged()
+    }
+
+    override fun userAvatar(): String? {
+        return userAvatar
+    }
+
+    override fun saveUserAvatar(userAvatar: String?) {
+        userStorage.put(KEY_USER, userAvatar)
+        this.userAvatar = userAvatar
     }
 
     override fun logout() {

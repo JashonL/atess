@@ -9,6 +9,9 @@ import androidx.annotation.IntDef
 import com.growatt.atess.R
 import com.growatt.atess.databinding.HomeBottomViewBinding
 
+/**
+ * 自定义组合View-首页底部布局
+ */
 class HomeBottomView @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,

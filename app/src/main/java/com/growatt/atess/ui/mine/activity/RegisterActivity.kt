@@ -81,7 +81,6 @@ class RegisterActivity : BaseActivity(), View.OnClickListener {
     }
 
     private fun setListener() {
-        binding.ivBack.setOnClickListener(this)
         binding.tvSelectArea.setOnClickListener(this)
         binding.ivSelect.setOnClickListener(this)
         binding.btFinish.setOnClickListener(this)
@@ -158,7 +157,6 @@ class RegisterActivity : BaseActivity(), View.OnClickListener {
 
     override fun onClick(v: View?) {
         when {
-            v === binding.ivBack -> finish()
             v === binding.tvSelectArea -> selectArea()
             v === binding.ivSelect -> updateSelectView(!viewModel.isAgree)
             v === binding.btFinish -> {

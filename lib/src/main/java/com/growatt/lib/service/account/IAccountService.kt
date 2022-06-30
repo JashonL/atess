@@ -12,7 +12,13 @@ interface IAccountService : Service {
 
     fun saveToken(token: String?)
 
+    fun user(): User?
+
     fun saveUserInfo(user: User?)
+
+    fun saveUserAvatar(userAvatar: String?)
+
+    fun userAvatar(): String?
 
     fun login(context: Context)
 

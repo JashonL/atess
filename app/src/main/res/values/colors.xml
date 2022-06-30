@@ -21,4 +21,5 @@
     <color name="color_red_80">#CCE2001A</color>
     <color name="color_white">@android:color/white</color>
     <color name="color_bbbbbb">#FFBBBBBB</color>
+    <color name="color_e34d59">#FFE34D59</color>
 </resources>

@@ -19,7 +19,7 @@ import com.growatt.lib.util.ToastUtil
 /**
  * 选择国家/地区页面
  */
-class SelectAreaActivity : BaseActivity(), View.OnClickListener {
+class SelectAreaActivity : BaseActivity() {
 
     companion object {
 
@@ -52,12 +52,8 @@ class SelectAreaActivity : BaseActivity(), View.OnClickListener {
         setContentView(binding.root)
         initData()
         initView()
-        setListener()
     }
 
-    private fun setListener() {
-        binding.ivBack.setOnClickListener(this)
-    }
 
     private fun initView() {
         binding.rvList.adapter = Adapter()
@@ -74,14 +70,6 @@ class SelectAreaActivity : BaseActivity(), View.OnClickListener {
         }
         showDialog()
         viewModel.fetchAreaList()
-    }
-
-    override fun onClick(v: View?) {
-        when {
-            v === binding.ivBack -> {
-                finish()
-            }
-        }
     }
 
     inner class Adapter(var countryList: MutableList<String> = mutableListOf()) :

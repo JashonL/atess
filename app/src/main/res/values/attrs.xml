@@ -8,4 +8,19 @@
         <attr name="textNormalColor" format="reference|color" />
         <attr name="textSelectColor" format="reference|color" />
     </declare-styleable>
+
+    <declare-styleable name="SettingItemView">
+        <attr name="leftIcon" format="reference" />
+        <attr name="showLeftIcon" format="boolean" />
+        <attr name="showRightIcon" format="boolean" />
+        <attr name="showSubName" format="boolean" />
+        <attr name="showRedPoint" format="boolean" />
+        <attr name="textSubNameColor" format="reference|color" />
+        <attr name="itemName" format="string" />
+    </declare-styleable>
+    <declare-styleable name="TitleBarLayout">
+        <attr name="titleText" format="string" />
+        <attr name="showLeftBackIcon" format="boolean" />
+        <attr name="showRightButton" format="boolean" />
+    </declare-styleable>
 </resources>

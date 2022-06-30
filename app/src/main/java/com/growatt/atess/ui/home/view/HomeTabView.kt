@@ -8,6 +8,9 @@ import android.widget.LinearLayout
 import com.growatt.atess.R
 import com.growatt.atess.databinding.HomeTabViewBinding
 
+/**
+ * 自定义组合View-首页底部Tab
+ */
 class HomeTabView @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
