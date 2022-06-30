@@ -191,12 +191,12 @@
         android:layout_marginEnd="36dp">
 
         <TextView
-            android:id="@+id/tv_forget_password"
+            android:id="@+id/tv_find_back_password"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingTop="10dp"
             android:paddingBottom="10dp"
-            android:text="@string/forget_password"
+            android:text="@string/find_back_password"
             android:textColor="@color/text_gray_99"
             android:textSize="@dimen/text_small" />
 

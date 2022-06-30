@@ -11,7 +11,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.growatt.atess.R
 import com.growatt.atess.databinding.DialogVerifyCodeBinding
-import com.growatt.atess.ui.mine.viewmodel.RegisterViewModel
+import com.growatt.atess.ui.mine.viewmodel.VerifyCodeViewModel
 import com.growatt.lib.base.BaseDialogFragment
 import com.growatt.lib.util.ToastUtil
 import com.growatt.lib.util.setViewHeight
@@ -28,12 +28,13 @@ class VerifyCodeDialog : BaseDialogFragment(), View.OnClickListener {
         val FRAGMENT_TAG = VerifyCodeDialog::class.java.name
 
         fun showDialog(
-            fm: FragmentManager, remainingTime: Int,
+            fm: FragmentManager, remainingTime: Int, phoneOrEmail: String,
             @RegisterAccountType type: Int = RegisterAccountType.PHONE, onVerifySuccess: () -> Unit
         ) {
             val dialog = VerifyCodeDialog()
             dialog.type = type
             dialog.remainingTime = remainingTime
+            dialog.phoneOrEmail = phoneOrEmail
             dialog.onVerifySuccess = onVerifySuccess
             dialog.show(fm, FRAGMENT_TAG)
         }
@@ -47,9 +48,10 @@ class VerifyCodeDialog : BaseDialogFragment(), View.OnClickListener {
     private lateinit var onVerifySuccess: () -> Unit
 
     private var type: Int = RegisterAccountType.PHONE
+    private lateinit var phoneOrEmail: String
     private var remainingTime = 0
     private val viewModel by lazy(LazyThreadSafetyMode.NONE) {
-        ViewModelProvider(requireActivity()).get(RegisterViewModel::class.java)
+        ViewModelProvider(requireActivity()).get(VerifyCodeViewModel::class.java)
     }
 
     override fun onCreateView(
@@ -112,7 +114,7 @@ class VerifyCodeDialog : BaseDialogFragment(), View.OnClickListener {
             getString(if (type == RegisterAccountType.PHONE) R.string.phone else R.string.email)
         binding.title.text = getString(R.string.verify_format, typeName)
         binding.tvSentVerifyCodeTip.text = getString(R.string.sent_verify_code_format, typeName)
-        binding.tvPhoneOrEmail.text = viewModel.getRequirePhoneOrEmail()
+        binding.tvPhoneOrEmail.text = phoneOrEmail
         updateFocusView(false)
         updateCountDown(remainingTime)
     }
@@ -143,7 +145,7 @@ class VerifyCodeDialog : BaseDialogFragment(), View.OnClickListener {
             R.id.bt_confirm -> verifyCode()
             R.id.tv_send_verify_code -> {
                 showDialog()
-                viewModel.fetchVerifyCode()
+                viewModel.fetchVerifyCode(phoneOrEmail, type)
             }
         }
     }
@@ -152,7 +154,8 @@ class VerifyCodeDialog : BaseDialogFragment(), View.OnClickListener {
         val verifyCode = binding.etVerifyCode.text.toString().trim()
         if (!TextUtils.isEmpty(verifyCode) && verifyCode.length == 6) {
             showDialog()
-            viewModel.verifyCode(verifyCode)
+            viewModel.verifyCode(phoneOrEmail, verifyCode)
+
         }
     }
 }
@@ -165,7 +168,14 @@ class VerifyCodeDialog : BaseDialogFragment(), View.OnClickListener {
  */
 annotation class RegisterAccountType {
     companion object {
+        /**
+         * 电话
+         */
         const val PHONE = 0
+
+        /**
+         * 邮箱
+         */
         const val EMAIL = 1
     }
 }

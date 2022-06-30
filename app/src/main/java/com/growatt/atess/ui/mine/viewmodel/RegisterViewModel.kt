@@ -4,6 +4,7 @@ import android.text.TextUtils
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.growatt.atess.service.http.ApiPath
+import com.growatt.atess.ui.mine.fragment.RegisterAccountType
 import com.growatt.lib.base.BaseViewModel
 import com.growatt.lib.service.http.HttpCallback
 import com.growatt.lib.service.http.HttpResult
@@ -15,8 +16,6 @@ import kotlinx.coroutines.launch
  */
 class RegisterViewModel : BaseViewModel() {
 
-    val getVerifyCodeLiveData = MutableLiveData<Pair<Int, String?>>()
-    val verifyCodeLiveData = MutableLiveData<String>()
     val registerLiveData = MutableLiveData<String>()
 
     /**
@@ -34,68 +33,12 @@ class RegisterViewModel : BaseViewModel() {
         return "中国" == selectArea || "China" == selectArea
     }
 
-
     fun getRequirePhoneOrEmail(): String {
         return if (isChina()) phone else email
     }
 
-    /**
-     * 获取验证码
-     * @param findbackStr 手机号或者邮箱
-     * @param areaCode    手机的时候需要填写
-     */
-    fun fetchVerifyCode(areaCode: String = "86") {
-        viewModelScope.launch {
-            val params = hashMapOf<String, String>().apply {
-                put("phoneOrEmailStr", getRequirePhoneOrEmail())
-                if (isChina()) {
-                    put("areaCode", areaCode)
-                }
-            }
-            apiService().httpGet(ApiPath.Mine.getVerifyCode, params, object :
-                HttpCallback<HttpResult<String>>() {
-                override fun success(result: HttpResult<String>) {
-                    if (result.isBusinessSuccess()) {
-                        val remainingTime = (result.data ?: "0").toInt()
-                        getVerifyCodeLiveData.value = Pair(remainingTime, null)
-                    } else {
-                        getVerifyCodeLiveData.value = Pair(0, result.msg ?: "")
-                    }
-                }
-
-                override fun onFailure(error: String?) {
-                    super.onFailure(error)
-                    getVerifyCodeLiveData.value = Pair(0, error ?: "")
-                }
-            })
-        }
-    }
-
-    /**
-     * 校验验证码
-     */
-    fun verifyCode(verifyCode: String) {
-        viewModelScope.launch {
-            val params = hashMapOf<String, String>().apply {
-                put("findbackStr", getRequirePhoneOrEmail())
-                put("code", verifyCode)
-            }
-            apiService().httpGet(ApiPath.Mine.verifyCode, params, object :
-                HttpCallback<HttpResult<String>>() {
-                override fun success(result: HttpResult<String>) {
-                    if (result.isBusinessSuccess()) {
-                        verifyCodeLiveData.value = null
-                    } else {
-                        verifyCodeLiveData.value = result.msg ?: ""
-                    }
-                }
-
-                override fun onFailure(error: String?) {
-                    super.onFailure(error)
-                    verifyCodeLiveData.value = error ?: ""
-                }
-            })
-        }
+    fun getRegisterAccountType(): Int {
+        return if (isChina()) RegisterAccountType.PHONE else RegisterAccountType.EMAIL
     }
 
     /**

@@ -18,7 +18,6 @@
     <string name="please_input_username">请输入用户名</string>
     <string name="please_input_password">请输入密码</string>
     <string name="agree_company_user_agreement">同意本公司各项%s&amp;%s</string>
-    <string name="forget_password">找回密码</string>
     <string name="register">注册</string>
     <string name="login">登录</string>
     <string name="country_or_area">国家/地区</string>
@@ -37,6 +36,7 @@
     <string name="sent_verify_code_format">已发送验证码到%s</string>
     <string name="send_verify_code">发送验证码</string>
     <string name="verify_code">验证码</string>
+    <string name="please_verify_code">请输入验证码</string>
     <string name="unselected_country">未选择国家</string>
     <string name="user_name_cant_empty">用户名不能为空</string>
     <string name="password_cant_empty">密码不能为空</string>
@@ -62,4 +62,9 @@
     <string name="logout_current_account">退出当前账号</string>
     <string name="version_name_format">版本号：%s</string>
     <string name="company_website">公司官网</string>
+    <string name="sms_find_back">短信找回</string>
+    <string name="email_find_back">邮箱找回</string>
+    <string name="find_back_password">找回密码</string>
+    <string name="please_fill_in_info">请填写以下信息</string>
+    <string name="next_step">下一步</string>
 </resources>

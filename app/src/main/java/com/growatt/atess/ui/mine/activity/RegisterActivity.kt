@@ -14,9 +14,9 @@ import android.view.View
 import androidx.activity.viewModels
 import com.growatt.atess.R
 import com.growatt.atess.databinding.ActivityRegisterBinding
-import com.growatt.atess.ui.mine.fragment.RegisterAccountType
 import com.growatt.atess.ui.mine.fragment.VerifyCodeDialog
 import com.growatt.atess.ui.mine.viewmodel.RegisterViewModel
+import com.growatt.atess.ui.mine.viewmodel.VerifyCodeViewModel
 import com.growatt.lib.base.BaseActivity
 import com.growatt.lib.util.ActivityBridge
 import com.growatt.lib.util.ToastUtil
@@ -37,6 +37,7 @@ class RegisterActivity : BaseActivity(), View.OnClickListener {
     private lateinit var binding: ActivityRegisterBinding
 
     private val viewModel: RegisterViewModel by viewModels()
+    private val verifyCodeViewModel: VerifyCodeViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,14 +49,15 @@ class RegisterActivity : BaseActivity(), View.OnClickListener {
     }
 
     private fun initData() {
-        viewModel.getVerifyCodeLiveData.observe(this) {
+        verifyCodeViewModel.getVerifyCodeLiveData.observe(this) {
             dismissDialog()
             if (!VerifyCodeDialog.isShowing(supportFragmentManager)) {
                 if (it.second == null) {
                     VerifyCodeDialog.showDialog(
                         supportFragmentManager,
                         it.first,
-                        if (viewModel.isChina()) RegisterAccountType.PHONE else RegisterAccountType.EMAIL
+                        viewModel.getRequirePhoneOrEmail(),
+                        viewModel.getRegisterAccountType()
                     ) {
                         showDialog()
                         val username = binding.etUsername.text.toString().trim()
@@ -215,7 +217,10 @@ class RegisterActivity : BaseActivity(), View.OnClickListener {
             viewModel.phone = phone.toString()
             viewModel.email = email.toString()
             showDialog()
-            viewModel.fetchVerifyCode()
+            verifyCodeViewModel.fetchVerifyCode(
+                viewModel.getRequirePhoneOrEmail(),
+                viewModel.getRegisterAccountType()
+            )
         }
     }
 

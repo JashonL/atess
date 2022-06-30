@@ -23,5 +23,7 @@
         <attr name="titleText" format="string" />
         <attr name="showLeftBackIcon" format="boolean" />
         <attr name="showRightButton" format="boolean" />
+        <attr name="showRightText" format="boolean" />
+        <attr name="rightText" format="string" />
     </declare-styleable>
 </resources>

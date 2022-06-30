@@ -90,7 +90,7 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
         }
         binding.ivClear.setOnClickListener(this)
         binding.ivSelect.setOnClickListener(this)
-        binding.tvForgetPassword.setOnClickListener(this)
+        binding.tvFindBackPassword.setOnClickListener(this)
         binding.tvInfoSpace.setOnClickListener(this)
         binding.tvRegister.setOnClickListener(this)
         binding.btLogin.setOnClickListener(this)
@@ -203,8 +203,8 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
             v === binding.tvInfoSpace -> {
 
             }
-            v === binding.tvForgetPassword -> {
-
+            v === binding.tvFindBackPassword -> {
+                FindBackPasswordActivity.start(this)
             }
             v === binding.tvRegister -> {
                 RegisterActivity.start(this)
