@@ -8,6 +8,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.growatt.atess.R
 import com.growatt.atess.databinding.FragmentHomeMineBinding
+import com.growatt.atess.ui.mine.activity.AboutActivity
 import com.growatt.atess.ui.mine.activity.SettingActivity
 import com.growatt.atess.ui.mine.viewmodel.SettingViewModel
 
@@ -62,7 +63,7 @@ class HomeMineFragment : HomeBaseFragment(), View.OnClickListener {
     override fun onClick(v: View?) {
         when {
             v === binding.itemSetting -> SettingActivity.start(context)
-            v === binding.itemAbout -> {}
+            v === binding.itemAbout -> AboutActivity.start(context)
         }
     }
 

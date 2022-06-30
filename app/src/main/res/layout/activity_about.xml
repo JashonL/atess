@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    tools:context=".ui.mine.activity.AboutActivity">
+
+    <com.growatt.lib.view.StatusBarHeightView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/color_white" />
+
+    <com.growatt.atess.view.TitleBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:titleText="@string/about" />
+
+    <ImageView
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginTop="40dp"
+        android:src="@mipmap/ic_launcher" />
+
+    <TextView
+        android:id="@+id/tv_version"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="@string/version_name_format"
+        android:textColor="@color/text_black"
+        android:textSize="@dimen/text_medium"
+        android:textStyle="bold" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="38dp"
+        android:background="@color/color_white"
+        android:divider="@drawable/line_divider"
+        android:orientation="vertical"
+        android:showDividers="middle">
+
+        <com.growatt.atess.ui.mine.view.SettingItemView
+            android:id="@+id/item_user_agreement"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            app:itemName="@string/user_agreement_2" />
+
+        <com.growatt.atess.ui.mine.view.SettingItemView
+            android:id="@+id/item_privacy_policy"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            app:itemName="@string/privacy_policy_2" />
+
+        <com.growatt.atess.ui.mine.view.SettingItemView
+            android:id="@+id/item_phone"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            app:itemName="@string/phone"
+            app:showSubName="true"
+            app:subName="+86 755 2998 8492" />
+
+        <com.growatt.atess.ui.mine.view.SettingItemView
+            android:id="@+id/item_company_website"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            app:itemName="@string/company_website"
+            app:showSubName="true"
+            app:subName="www.atesspower.com" />
+
+    </LinearLayout>
+
+</LinearLayout>

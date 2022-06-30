@@ -29,6 +29,7 @@ class SettingItemView @JvmOverloads constructor(
     private var showRedPoint: Boolean = false
     private var textSubNameColor: Int = resources.getColor(R.color.text_gray_66)
     private var itemName: String?
+    private var subName: String?
 
     init {
         val view = LayoutInflater.from(context).inflate(R.layout.setting_item_view, this)
@@ -47,6 +48,7 @@ class SettingItemView @JvmOverloads constructor(
                 textSubNameColor =
                     getColor(R.styleable.SettingItemView_textSubNameColor, textSubNameColor)
                 itemName = getString(R.styleable.SettingItemView_itemName).toString()
+                subName = getString(R.styleable.SettingItemView_subName) ?: ""
             } finally {
                 recycle()
             }
@@ -78,9 +80,14 @@ class SettingItemView @JvmOverloads constructor(
         }
         binding.tvItemSubName.setTextColor(textSubNameColor)
         binding.tvItemName.text = itemName
+        setSubName(subName)
     }
 
     fun setSubName(subName: String?) {
-        binding.tvItemSubName.text = subName
+        binding.tvItemSubName.text = subName ?: ""
+    }
+
+    fun getSubName(): String {
+        return binding.tvItemSubName.text.toString()
     }
 }

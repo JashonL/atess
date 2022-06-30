@@ -4,7 +4,9 @@
     <string name="privacy_dialog_content">Enerview旨在保护您的数据隐私与安全的基础上，帮助您高效管理电站。请仔细阅读并充分理解一下条款后再点击同意。</string>
     <string name="click_agree">点击同意即代表您已阅读并同意%s&amp;%s。</string>
     <string name="user_agreement">《用户协议》</string>
+    <string name="user_agreement_2">用户协议</string>
     <string name="privacy_policy">《隐私政策》</string>
+    <string name="privacy_policy_2">隐私政策</string>
     <string name="disagree">不同意</string>
     <string name="agree">同意</string>
     <string name="cancel">取消</string>
@@ -58,4 +60,6 @@
     <string name="cancel_account">注销账号</string>
     <string name="system_language">系统语言</string>
     <string name="logout_current_account">退出当前账号</string>
+    <string name="version_name_format">版本号：%s</string>
+    <string name="company_website">公司官网</string>
 </resources>

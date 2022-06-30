@@ -17,6 +17,7 @@
         <attr name="showRedPoint" format="boolean" />
         <attr name="textSubNameColor" format="reference|color" />
         <attr name="itemName" format="string" />
+        <attr name="subName" format="string" />
     </declare-styleable>
     <declare-styleable name="TitleBarLayout">
         <attr name="titleText" format="string" />
