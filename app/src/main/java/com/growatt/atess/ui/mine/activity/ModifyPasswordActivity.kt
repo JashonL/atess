@@ -9,43 +9,41 @@ import android.text.method.PasswordTransformationMethod
 import android.view.View
 import androidx.activity.viewModels
 import com.growatt.atess.R
-import com.growatt.atess.databinding.ActivityModifyPasswordByPhoneOrEmailBinding
-import com.growatt.atess.ui.mine.viewmodel.FindBackPasswordViewModel
+import com.growatt.atess.databinding.ActivityModifyPasswordBinding
+import com.growatt.atess.ui.mine.viewmodel.SettingViewModel
 import com.growatt.lib.base.BaseActivity
 import com.growatt.lib.util.ToastUtil
 import com.growatt.lib.util.setViewHeight
 
 /**
- * 找回密码-修改密码页面
+ * 设置-修改密码页面
  */
-class ModifyPasswordByPhoneOrEmailActivity : BaseActivity(), View.OnClickListener {
+class ModifyPasswordActivity : BaseActivity(), View.OnClickListener {
 
     companion object {
 
-        private const val KEY_PHONE_OR_EMAIL = "key_phone_or_email"
-
-        fun start(context: Context?, phoneOrEmail: String) {
-            val intent = Intent(context, ModifyPasswordByPhoneOrEmailActivity::class.java)
-            intent.putExtra(KEY_PHONE_OR_EMAIL, phoneOrEmail)
+        fun start(context: Context?) {
+            val intent = Intent(context, ModifyPasswordActivity::class.java)
             context?.startActivity(intent)
         }
 
     }
 
-    private lateinit var binding: ActivityModifyPasswordByPhoneOrEmailBinding
+    private lateinit var binding: ActivityModifyPasswordBinding
 
     //是否显示密码
+    private var isShowOldPassword = false
     private var isShowPassword = false
     private var isShowConfirmPassword = false
+    private var focusOnOldPassword = false
     private var focusOnConfirmPassword = false
     private var focusOnPassword = false
-    private var phoneOrEmail: String? = null
 
-    private val viewModel: FindBackPasswordViewModel by viewModels()
+    private val viewModel: SettingViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityModifyPasswordByPhoneOrEmailBinding.inflate(layoutInflater)
+        binding = ActivityModifyPasswordBinding.inflate(layoutInflater)
         setContentView(binding.root)
         initData()
         initView()
@@ -53,7 +51,6 @@ class ModifyPasswordByPhoneOrEmailActivity : BaseActivity(), View.OnClickListene
     }
 
     private fun initData() {
-        phoneOrEmail = intent.getStringExtra(KEY_PHONE_OR_EMAIL)
         viewModel.modifyPasswordLiveData.observe(this) {
             dismissDialog()
             if (it == null) {
@@ -65,8 +62,13 @@ class ModifyPasswordByPhoneOrEmailActivity : BaseActivity(), View.OnClickListene
     }
 
     private fun setListener() {
+        binding.ivOldPasswordEye.setOnClickListener(this)
         binding.ivPasswordEye.setOnClickListener(this)
         binding.ivConfirmPasswordEye.setOnClickListener(this)
+        binding.etOldPassword.setOnFocusChangeListener { v, hasFocus ->
+            focusOnOldPassword = hasFocus
+            updateFocusView()
+        }
         binding.etPassword.setOnFocusChangeListener { v, hasFocus ->
             focusOnPassword = hasFocus
             updateFocusView()
@@ -76,19 +78,21 @@ class ModifyPasswordByPhoneOrEmailActivity : BaseActivity(), View.OnClickListene
             updateFocusView()
         }
         binding.title.setOnRightButtonClickListener {
+            val oldPassword = binding.etOldPassword.text.toString().trim()
             val password = binding.etPassword.text.toString().trim()
             val confirmPassword = binding.etConfirmPassword.text.trim()
-            if (TextUtils.isEmpty(password) || TextUtils.isEmpty(confirmPassword)) {
+            if (TextUtils.isEmpty(oldPassword) || TextUtils.isEmpty(password) || TextUtils.isEmpty(
+                    confirmPassword
+                )
+            ) {
                 ToastUtil.show(getString(R.string.password_cant_empty))
-            } else if (password.length < 6 || confirmPassword.length < 6) {
+            } else if (oldPassword.length < 6 || password.length < 6 || confirmPassword.length < 6) {
                 ToastUtil.show(getString(R.string.password_cannot_be_less_than_6_digits))
             } else if (password != confirmPassword) {
                 ToastUtil.show(getString(R.string.passwords_are_inconsistent))
             } else {
-                phoneOrEmail?.let {
-                    showDialog()
-                    viewModel.modifyPassword(it, password)
-                }
+                showDialog()
+                viewModel.modifyPassword(oldPassword, password)
             }
         }
     }
@@ -99,6 +103,15 @@ class ModifyPasswordByPhoneOrEmailActivity : BaseActivity(), View.OnClickListene
     }
 
     private fun updateFocusView() {
+        if (focusOnOldPassword) {
+            binding.etOldPassword.setSelection(binding.etOldPassword.length())
+            binding.viewOldPasswordLine.setBackgroundResource(R.color.colorAccent)
+            binding.viewOldPasswordLine.setViewHeight(2f)
+        } else {
+            binding.viewOldPasswordLine.setBackgroundResource(R.color.color_line)
+            binding.viewOldPasswordLine.setViewHeight(1f)
+        }
+
         if (focusOnPassword) {
             binding.etPassword.setSelection(binding.etPassword.length())
             binding.viewPasswordLine.setBackgroundResource(R.color.colorAccent)
@@ -119,6 +132,16 @@ class ModifyPasswordByPhoneOrEmailActivity : BaseActivity(), View.OnClickListene
     }
 
     private fun updatePasswordView() {
+        if (isShowOldPassword) {
+            binding.ivOldPasswordEye.setImageResource(R.drawable.ic_eye_open)
+            binding.etOldPassword.transformationMethod =
+                HideReturnsTransformationMethod.getInstance()
+        } else {
+            binding.ivOldPasswordEye.setImageResource(R.drawable.ic_eye_close)
+            binding.etOldPassword.transformationMethod = PasswordTransformationMethod.getInstance()
+        }
+        binding.etOldPassword.setSelection(binding.etOldPassword.length())
+
         if (isShowPassword) {
             binding.ivPasswordEye.setImageResource(R.drawable.ic_eye_open)
             binding.etPassword.transformationMethod = HideReturnsTransformationMethod.getInstance()
@@ -142,6 +165,10 @@ class ModifyPasswordByPhoneOrEmailActivity : BaseActivity(), View.OnClickListene
 
     override fun onClick(v: View?) {
         when {
+            v === binding.ivOldPasswordEye -> {
+                isShowOldPassword = !isShowOldPassword
+                updatePasswordView()
+            }
             v === binding.ivPasswordEye -> {
                 isShowPassword = !isShowPassword
                 updatePasswordView()

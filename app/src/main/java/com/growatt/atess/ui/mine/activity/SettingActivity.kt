@@ -82,7 +82,7 @@ class SettingActivity : BaseActivity(), View.OnClickListener {
             v === binding.itemCancelAccount -> {}
             v === binding.itemInstallerNo -> {}
             v === binding.itemLanguage -> {}
-            v === binding.itemModifyPassword -> {}
+            v === binding.itemModifyPassword -> ModifyPasswordActivity.start(this)
             v === binding.itemPhone -> {}
             v === binding.btLogout -> {
                 showDialog()

@@ -45,5 +45,10 @@ object ApiPath {
          */
         const val MODIFY_PASSWORD_BY_PHONE_OR_EMAIL =
             "ShineServer/ATSregister/changePasswordByPhoneOrEmail"
+
+        /**
+         * 设置-修改密码
+         */
+        const val MODIFY_PASSWORD = "ShineServer/ATSSetting/changePWD"
     }
 }

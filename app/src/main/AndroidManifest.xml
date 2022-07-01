@@ -62,6 +62,11 @@
             android:name=".ui.mine.activity.ModifyPasswordByPhoneOrEmailActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".ui.mine.activity.ModifyPasswordActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>
