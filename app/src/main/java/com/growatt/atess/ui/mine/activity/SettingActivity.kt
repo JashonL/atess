@@ -11,12 +11,14 @@ import com.growatt.atess.databinding.ActivitySettingBinding
 import com.growatt.atess.ui.mine.fragment.RegisterAccountType
 import com.growatt.atess.ui.mine.viewmodel.SettingViewModel
 import com.growatt.lib.base.BaseActivity
+import com.growatt.lib.service.account.IAccountService
 import com.growatt.lib.util.ToastUtil
 
 /**
  * 设置页面
  */
-class SettingActivity : BaseActivity(), View.OnClickListener {
+class SettingActivity : BaseActivity(), View.OnClickListener,
+    IAccountService.OnUserProfileChangeListener {
 
     companion object {
 
@@ -40,7 +42,6 @@ class SettingActivity : BaseActivity(), View.OnClickListener {
 
     private fun setListener() {
         binding.ivAvatar.setOnClickListener(this)
-        binding.itemUserName.setOnClickListener(this)
         binding.itemEmail.setOnClickListener(this)
         binding.itemCancelAccount.setOnClickListener(this)
         binding.itemInstallerNo.setOnClickListener(this)
@@ -48,10 +49,15 @@ class SettingActivity : BaseActivity(), View.OnClickListener {
         binding.itemModifyPassword.setOnClickListener(this)
         binding.itemPhone.setOnClickListener(this)
         binding.btLogout.setOnClickListener(this)
+
+        accountService().addUserProfileChangeListener(this)
     }
 
-
     private fun initView() {
+        refreshUserProfile()
+    }
+
+    private fun refreshUserProfile() {
         Glide.with(this).load(accountService().userAvatar())
             .placeholder(R.drawable.ic_default_avatar)
             .into(binding.ivAvatar)
@@ -78,7 +84,6 @@ class SettingActivity : BaseActivity(), View.OnClickListener {
     override fun onClick(v: View?) {
         when {
             v === binding.ivAvatar -> {}
-            v === binding.itemUserName -> {}
             v === binding.itemEmail -> {
                 ChangePhoneOrEmailActivity.start(
                     this,
@@ -86,7 +91,7 @@ class SettingActivity : BaseActivity(), View.OnClickListener {
                 )
             }
             v === binding.itemCancelAccount -> {}
-            v === binding.itemInstallerNo -> {}
+            v === binding.itemInstallerNo -> ModifyInstallerNoActivity.start(this)
             v === binding.itemLanguage -> {}
             v === binding.itemModifyPassword -> ModifyPasswordActivity.start(this)
             v === binding.itemPhone -> {
@@ -100,5 +105,14 @@ class SettingActivity : BaseActivity(), View.OnClickListener {
                 viewModel.logout()
             }
         }
+    }
+
+    override fun onUserProfileChange(account: IAccountService) {
+        refreshUserProfile()
+    }
+
+    override fun onDestroy() {
+        accountService().removeUserProfileChangeListener(this)
+        super.onDestroy()
     }
 }

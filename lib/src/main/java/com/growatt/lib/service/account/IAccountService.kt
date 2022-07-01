@@ -30,13 +30,34 @@ interface IAccountService : Service {
 
     fun isLogin(): Boolean
 
-    fun addListener(listener: AccountListener)
+    fun addAccountListener(accountListener: AccountListener)
 
-    fun removeListener(listener: AccountListener)
+    fun removeAccountListener(accountListener: AccountListener)
 
     fun dispatchAccountChanged()
 
+    fun addUserProfileChangeListener(userProfileChangeListener: OnUserProfileChangeListener)
+
+    fun removeUserProfileChangeListener(userProfileChangeListener: OnUserProfileChangeListener)
+
+    fun dispatchUserProfileChanged()
+
+    /**
+     * 登录状态修改后触发
+     */
     interface AccountListener {
         fun onAccountChange(account: IAccountService)
     }
+
+    /**
+     * 用户信息修改后触发
+     * 1.修改手机号
+     * 2.修改头像
+     * 3.修改安装商编号
+     * 4.修改邮箱
+     */
+    interface OnUserProfileChangeListener {
+        fun onUserProfileChange(account: IAccountService)
+    }
+
 }

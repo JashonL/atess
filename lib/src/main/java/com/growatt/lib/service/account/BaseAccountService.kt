@@ -16,7 +16,9 @@ abstract class BaseAccountService : IAccountService {
     private var token: String? = null
     private var user: User? = null
     private var userAvatar: String? = null
-    private val listeners = mutableSetOf<IAccountService.AccountListener>()
+    private val accountListeners = mutableSetOf<IAccountService.AccountListener>()
+    private val userProfileChangeListeners =
+        mutableSetOf<IAccountService.OnUserProfileChangeListener>()
 
     private val userStorage by lazy {
         DefaultStorageService(LibApplication.instance(), "account")
@@ -46,7 +48,7 @@ abstract class BaseAccountService : IAccountService {
     override fun saveUserInfo(user: User?) {
         userStorage.put(KEY_USER, GsonManager.toJson(user))
         this.user = user
-        dispatchAccountChanged()
+        dispatchUserProfileChanged()
     }
 
     override fun userAvatar(): String? {
@@ -65,12 +67,6 @@ abstract class BaseAccountService : IAccountService {
         dispatchAccountChanged()
     }
 
-    override fun dispatchAccountChanged() {
-        for (listener in listeners) {
-            listener.onAccountChange(this)
-        }
-    }
-
     override fun id(): String? {
         return user?.id
     }
@@ -79,12 +75,32 @@ abstract class BaseAccountService : IAccountService {
         return !TextUtils.isEmpty(token)
     }
 
-    override fun addListener(listener: IAccountService.AccountListener) {
-        listeners.add(listener)
+    override fun addAccountListener(accountListener: IAccountService.AccountListener) {
+        accountListeners.add(accountListener)
     }
 
-    override fun removeListener(listener: IAccountService.AccountListener) {
-        listeners.remove(listener)
+    override fun removeAccountListener(accountListener: IAccountService.AccountListener) {
+        accountListeners.remove(accountListener)
+    }
+
+    override fun dispatchAccountChanged() {
+        for (listener in accountListeners) {
+            listener.onAccountChange(this)
+        }
+    }
+
+    override fun addUserProfileChangeListener(userProfileChangeListener: IAccountService.OnUserProfileChangeListener) {
+        userProfileChangeListeners.add(userProfileChangeListener)
+    }
+
+    override fun removeUserProfileChangeListener(userProfileChangeListener: IAccountService.OnUserProfileChangeListener) {
+        userProfileChangeListeners.remove(userProfileChangeListener)
+    }
+
+    override fun dispatchUserProfileChanged() {
+        for (listener in userProfileChangeListeners) {
+            listener.onUserProfileChange(this)
+        }
     }
 
 }

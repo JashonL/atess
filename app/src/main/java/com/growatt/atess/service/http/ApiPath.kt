@@ -61,5 +61,10 @@ object ApiPath {
          */
         const val CHANGE_PHONE = "ShineServer/ATSSetting/updatePhoneNum"
 
+        /**
+         * 修改安装商编号
+         */
+        const val MODIFY_INSTALLER_NO = "ShineServer/ATSSetting/updateAgentCode"
+
     }
 }

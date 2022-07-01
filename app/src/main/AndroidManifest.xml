@@ -72,6 +72,11 @@
             android:name=".ui.mine.activity.ChangePhoneOrEmailActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".ui.mine.activity.ModifyInstallerNoActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

@@ -19,6 +19,7 @@ class SettingViewModel : BaseViewModel() {
     val logoutLiveData = MutableLiveData<String?>()
     val modifyPasswordLiveData = MutableLiveData<String?>()
     val changePhoneOrEmailLiveData = MutableLiveData<String?>()
+    val modifyInstallerNoLiveData = MutableLiveData<String?>()
 
     /**
      * 获取头像
@@ -128,6 +129,33 @@ class SettingViewModel : BaseViewModel() {
                     override fun onFailure(error: String?) {
                         super.onFailure(error)
                         changePhoneOrEmailLiveData.value = error ?: ""
+                    }
+                })
+        }
+    }
+
+    /**
+     * 设置-修改安装商编号
+     */
+    fun modifyInstallerNo(installerNo: String) {
+        val params = hashMapOf<String, String>().apply {
+            put("agentCode", installerNo)
+        }
+        viewModelScope.launch {
+            apiService().postForm(
+                ApiPath.Mine.MODIFY_INSTALLER_NO, params,
+                object : HttpCallback<HttpResult<String>>() {
+                    override fun success(result: HttpResult<String>) {
+                        if (result.isBusinessSuccess()) {
+                            modifyInstallerNoLiveData.value = null
+                        } else {
+                            modifyInstallerNoLiveData.value = result.msg ?: ""
+                        }
+                    }
+
+                    override fun onFailure(error: String?) {
+                        super.onFailure(error)
+                        modifyInstallerNoLiveData.value = error ?: ""
                     }
                 })
         }
