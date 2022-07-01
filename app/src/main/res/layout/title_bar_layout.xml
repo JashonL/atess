@@ -34,8 +34,8 @@
         android:layout_height="28dp"
         android:layout_alignParentEnd="true"
         android:layout_centerVertical="true"
-        android:text="@string/save"
-        android:textSize="@dimen/text_medium" />
+        android:textSize="@dimen/text_medium"
+        tools:text="@string/save" />
 
     <TextView
         android:id="@+id/tv_right_text"

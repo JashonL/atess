@@ -31,7 +31,7 @@ class VerifyCodeViewModel : BaseViewModel() {
                     put("areaCode", "86")
                 }
             }
-            apiService().httpGet(ApiPath.Mine.getVerifyCode, params, object :
+            apiService().httpGet(ApiPath.Mine.GET_VERIFY_CODE, params, object :
                 HttpCallback<HttpResult<String>>() {
                 override fun success(result: HttpResult<String>) {
                     if (result.isBusinessSuccess()) {
@@ -59,7 +59,7 @@ class VerifyCodeViewModel : BaseViewModel() {
                 put("findbackStr", phoneOrEmailStr)
                 put("code", verifyCode)
             }
-            apiService().httpGet(ApiPath.Mine.verifyCode, params, object :
+            apiService().httpGet(ApiPath.Mine.VERIFY_CODE, params, object :
                 HttpCallback<HttpResult<String>>() {
                 override fun success(result: HttpResult<String>) {
                     if (result.isBusinessSuccess()) {

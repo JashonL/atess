@@ -41,6 +41,7 @@
     <string name="user_name_cant_empty">用户名不能为空</string>
     <string name="password_cant_empty">密码不能为空</string>
     <string name="passwords_are_inconsistent">两次密码不一致</string>
+    <string name="password_cannot_be_less_than_6_digits">密码不能少于6位数</string>
     <string name="no_phone_number">未填写手机号码</string>
     <string name="no_email">未填写邮箱</string>
     <string name="please_check_agree_agreement">请勾选同意协议</string>
@@ -67,4 +68,6 @@
     <string name="find_back_password">找回密码</string>
     <string name="please_fill_in_info">请填写以下信息</string>
     <string name="next_step">下一步</string>
+    <string name="new_password">新密码</string>
+    <string name="confirm_new_password">确认新密码</string>
 </resources>

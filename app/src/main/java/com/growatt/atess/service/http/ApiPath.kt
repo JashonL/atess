@@ -2,42 +2,48 @@ package com.growatt.atess.service.http
 
 object ApiPath {
 
-    val serverHostUrl = "http://20.60.5.236:8089/"
+    const val SERVER_HOST = "http://20.60.5.236:8089/"
 
     object Mine {
         /**
          * 登录
          */
-        val login = "ShineServer/ATSLogin"
+        const val LOGIN = "ShineServer/ATSLogin"
 
         /**
          * 登出
          */
-        val logout = "ShineServer/ATSLogout"
+        const val LOGOUT = "ShineServer/ATSLogout"
 
         /**
          * 注册
          */
-        val register = "ShineServer/ATSregister/reHome"
+        const val REGISTER = "ShineServer/ATSregister/reHome"
 
         /**
          * 通过邮箱或手机号发送验证码
          */
-        val getVerifyCode = "ShineServer/ATSregister/sendValidCode"
+        const val GET_VERIFY_CODE = "ShineServer/ATSregister/sendValidCode"
 
         /**
          * 获取国家列表
          */
-        val getCountryList = "ShineServer/ATSregister/getCountryList"
+        const val GET_COUNTRY_LIST = "ShineServer/ATSregister/getCountryList"
 
         /**
          * 校验验证码
          */
-        val verifyCode = "ShineServer/ATSregister/validCode"
+        const val VERIFY_CODE = "ShineServer/ATSregister/validCode"
 
         /**
          * 获取用户头像
          */
-        val getUserAvatar = "ShineServer/ATSSetting/getUserIcon"
+        const val GET_USER_AVATAR = "ShineServer/ATSSetting/getUserIcon"
+
+        /**
+         * 找回密码-修改密码
+         */
+        const val MODIFY_PASSWORD_BY_PHONE_OR_EMAIL =
+            "ShineServer/ATSregister/changePasswordByPhoneOrEmail"
     }
 }

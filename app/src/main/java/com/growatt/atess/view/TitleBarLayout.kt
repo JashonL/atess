@@ -27,6 +27,7 @@ class TitleBarLayout @JvmOverloads constructor(
     private var showRightText: Boolean = false
     private var titleText: String = ""
     private var rightText: String = ""
+    private var rightButtonText: String = ""
     private var leftIconClickListener: ((View?) -> Unit)? = null
     private var rightButtonClickListener: ((View?) -> Unit)? = null
     private var rightTextClickListener: ((View?) -> Unit)? = null
@@ -48,6 +49,7 @@ class TitleBarLayout @JvmOverloads constructor(
                     getBoolean(R.styleable.TitleBarLayout_showRightText, showRightText)
                 titleText = getString(R.styleable.TitleBarLayout_titleText) ?: ""
                 rightText = getString(R.styleable.TitleBarLayout_rightText) ?: ""
+                rightButtonText = getString(R.styleable.TitleBarLayout_rightButtonText) ?: ""
             } finally {
                 recycle()
             }
@@ -59,6 +61,7 @@ class TitleBarLayout @JvmOverloads constructor(
         binding.tvTitle.text = titleText
         if (showRightButton) {
             binding.btRight.visible()
+            binding.btRight.text = rightButtonText
         } else {
             binding.btRight.gone()
         }

@@ -225,6 +225,9 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
             TextUtils.isEmpty(password) -> {
                 ToastUtil.show(getString(R.string.password_cant_empty))
             }
+            !isAgree -> {
+                ToastUtil.show(getString(R.string.please_check_agree_agreement))
+            }
             else -> {
                 //校验成功
                 showDialog()

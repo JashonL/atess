@@ -76,6 +76,8 @@
                 android:layout_weight="1"
                 android:hint="@string/please_input_username"
                 android:inputType="text"
+                android:paddingTop="4dp"
+                android:paddingBottom="4dp"
                 android:textColor="@color/text_black"
                 android:textSize="@dimen/text_small" />
 
@@ -126,6 +128,8 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:paddingTop="4dp"
+                android:paddingBottom="4dp"
                 android:hint="@string/please_input_password"
                 android:inputType="textPassword"
                 android:textColor="@color/text_black"

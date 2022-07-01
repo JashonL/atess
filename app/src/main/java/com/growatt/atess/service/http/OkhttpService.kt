@@ -34,7 +34,7 @@ class OkhttpService : IHttpService() {
     private val mainHandler = Handler(Looper.getMainLooper())
 
     override fun host(): String {
-        return ApiPath.serverHostUrl
+        return ApiPath.SERVER_HOST
     }
 
     override fun postForm(urlOrApi: String, params: Map<String, String>, callback: IHttpCallback) {

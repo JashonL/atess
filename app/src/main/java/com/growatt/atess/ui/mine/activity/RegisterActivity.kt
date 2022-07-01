@@ -206,6 +206,8 @@ class RegisterActivity : BaseActivity(), View.OnClickListener {
             ToastUtil.show(getString(R.string.unselected_country))
         } else if (TextUtils.isEmpty(password) || TextUtils.isEmpty(confirmPassword)) {
             ToastUtil.show(getString(R.string.password_cant_empty))
+        } else if (password.length < 6 || confirmPassword.length < 6) {
+            ToastUtil.show(getString(R.string.password_cannot_be_less_than_6_digits))
         } else if (password != confirmPassword) {
             ToastUtil.show(getString(R.string.passwords_are_inconsistent))
         } else if (viewModel.isChina() && TextUtils.isEmpty(phone)) {

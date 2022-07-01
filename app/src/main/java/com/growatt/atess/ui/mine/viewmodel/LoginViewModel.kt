@@ -26,7 +26,7 @@ class LoginViewModel : BaseViewModel() {
                 put("userName", userName)
                 put("password", MD5Util.md5(password) ?: "")
             }
-            apiService().postForm(ApiPath.Mine.login, params, object :
+            apiService().postForm(ApiPath.Mine.LOGIN, params, object :
                 HttpCallback<HttpResult<User>>() {
                 override fun success(result: HttpResult<User>) {
                     val user = result.data

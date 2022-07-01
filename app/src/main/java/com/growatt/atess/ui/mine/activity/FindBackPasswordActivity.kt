@@ -62,7 +62,9 @@ class FindBackPasswordActivity : BaseActivity(), View.OnClickListener {
         verifyCodeViewModel.verifyCodeLiveData.observe(this) {
             dismissDialog()
             if (it == null) {
-
+                val phoneOrEmail = binding.etPhoneOrEmail.text.toString().trim()
+                ModifyPasswordByPhoneOrEmailActivity.start(this, phoneOrEmail)
+                finish()
             } else {
                 ToastUtil.show(it)
             }
@@ -70,6 +72,8 @@ class FindBackPasswordActivity : BaseActivity(), View.OnClickListener {
     }
 
     private fun setListener() {
+        binding.tvSendVerifyCode.setOnClickListener(this)
+        binding.btNextStep.setOnClickListener(this)
         binding.title.setOnRightTextClickListener {
             if (registerAccountType == RegisterAccountType.PHONE) {
                 refreshView(RegisterAccountType.EMAIL)
@@ -90,7 +94,6 @@ class FindBackPasswordActivity : BaseActivity(), View.OnClickListener {
     private fun initView() {
         refreshView(RegisterAccountType.PHONE)
         updateFocusView()
-        binding.tvSendVerifyCode.setOnClickListener(this)
     }
 
     private fun updateFocusView() {

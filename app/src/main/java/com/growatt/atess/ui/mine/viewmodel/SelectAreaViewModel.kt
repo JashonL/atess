@@ -22,7 +22,7 @@ class SelectAreaViewModel : BaseViewModel() {
     fun fetchAreaList() {
         viewModelScope.launch {
             apiService().httpGet(
-                ApiPath.Mine.getCountryList,
+                ApiPath.Mine.GET_COUNTRY_LIST,
                 object : HttpCallback<HttpResult<Array<String>>>() {
                     override fun success(result: HttpResult<Array<String>>) {
                         if (result.isBusinessSuccess()) {

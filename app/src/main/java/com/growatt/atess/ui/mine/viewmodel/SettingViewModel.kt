@@ -22,7 +22,7 @@ class SettingViewModel : BaseViewModel() {
     fun fetchUserAvatar() {
         viewModelScope.launch {
             apiService().httpGet(
-                ApiPath.Mine.getUserAvatar,
+                ApiPath.Mine.GET_USER_AVATAR,
                 object : HttpCallback<HttpResult<String>>() {
                     override fun success(result: HttpResult<String>) {
                         if (result.isBusinessSuccess()) {
@@ -47,7 +47,7 @@ class SettingViewModel : BaseViewModel() {
     fun logout() {
         viewModelScope.launch {
             apiService().httpGet(
-                ApiPath.Mine.logout,
+                ApiPath.Mine.LOGOUT,
                 object : HttpCallback<HttpResult<String>>() {
                     override fun success(result: HttpResult<String>) {
                         if (result.isBusinessSuccess()) {

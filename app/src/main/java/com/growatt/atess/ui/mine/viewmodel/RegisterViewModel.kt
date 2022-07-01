@@ -60,7 +60,7 @@ class RegisterViewModel : BaseViewModel() {
                     put("agentCode", agentCode)
                 }
             }
-            apiService().postJson(ApiPath.Mine.register, params, object :
+            apiService().postJson(ApiPath.Mine.REGISTER, params, object :
                 HttpCallback<HttpResult<String>>() {
                 override fun success(result: HttpResult<String>) {
                     if (result.isBusinessSuccess()) {
