@@ -47,7 +47,7 @@ class SettingItemView @JvmOverloads constructor(
                 showRedPoint = getBoolean(R.styleable.SettingItemView_showRedPoint, false)
                 textSubNameColor =
                     getColor(R.styleable.SettingItemView_textSubNameColor, textSubNameColor)
-                itemName = getString(R.styleable.SettingItemView_itemName).toString()
+                itemName = getString(R.styleable.SettingItemView_itemName) ?: ""
                 subName = getString(R.styleable.SettingItemView_subName) ?: ""
             } finally {
                 recycle()
@@ -84,7 +84,10 @@ class SettingItemView @JvmOverloads constructor(
     }
 
     fun setSubName(subName: String?) {
-        binding.tvItemSubName.text = subName ?: ""
+        if (showSubName) {
+            this.subName = subName
+            binding.tvItemSubName.text = subName ?: ""
+        }
     }
 
     fun getSubName(): String {

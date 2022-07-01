@@ -25,9 +25,9 @@ class TitleBarLayout @JvmOverloads constructor(
     private var showLeftBackIcon: Boolean = true
     private var showRightButton: Boolean = false
     private var showRightText: Boolean = false
-    private var titleText: String = ""
-    private var rightText: String = ""
-    private var rightButtonText: String = ""
+    private var titleText: String? = null
+    private var rightText: String? = null
+    private var rightButtonText: String? = null
     private var leftIconClickListener: ((View?) -> Unit)? = null
     private var rightButtonClickListener: ((View?) -> Unit)? = null
     private var rightTextClickListener: ((View?) -> Unit)? = null
@@ -113,8 +113,14 @@ class TitleBarLayout @JvmOverloads constructor(
 
     fun setRightText(rightText: String?) {
         if (showRightText) {
-            binding.tvRightText.text = rightText
+            this.rightText = rightText
+            binding.tvRightText.text = rightText ?: ""
         }
+    }
+
+    fun setTitleText(titleText: String?) {
+        this.titleText = titleText
+        binding.tvTitle.text = titleText ?: ""
     }
 
 }

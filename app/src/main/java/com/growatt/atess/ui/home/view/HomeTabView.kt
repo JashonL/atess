@@ -24,7 +24,7 @@ class HomeTabView @JvmOverloads constructor(
     private var textNormalColor: Int = resources.getColor(R.color.text_gray_99)
     private var textSelectColor: Int = resources.getColor(R.color.text_black)
     private var isSelect: Boolean = false
-    private var text: String = ""
+    private var text: String? = ""
 
     init {
         val view = LayoutInflater.from(context).inflate(R.layout.home_tab_view, this)
@@ -40,7 +40,7 @@ class HomeTabView @JvmOverloads constructor(
                 textNormalColor = getColor(R.styleable.HomeTabView_textNormalColor, textNormalColor)
                 textSelectColor = getColor(R.styleable.HomeTabView_textSelectColor, textSelectColor)
                 isSelect = getBoolean(R.styleable.HomeTabView_isSelected, false)
-                text = getString(R.styleable.HomeTabView_text).toString()
+                text = getString(R.styleable.HomeTabView_text) ?: ""
             } finally {
                 recycle()
             }

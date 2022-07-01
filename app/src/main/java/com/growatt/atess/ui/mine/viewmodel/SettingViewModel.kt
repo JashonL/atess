@@ -3,6 +3,7 @@ package com.growatt.atess.ui.mine.viewmodel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.growatt.atess.service.http.ApiPath
+import com.growatt.atess.ui.mine.fragment.RegisterAccountType
 import com.growatt.lib.base.BaseViewModel
 import com.growatt.lib.service.http.HttpCallback
 import com.growatt.lib.service.http.HttpResult
@@ -17,6 +18,7 @@ class SettingViewModel : BaseViewModel() {
     val userAvatarLiveData = MutableLiveData<Pair<String?, String?>>()
     val logoutLiveData = MutableLiveData<String?>()
     val modifyPasswordLiveData = MutableLiveData<String?>()
+    val changePhoneOrEmailLiveData = MutableLiveData<String?>()
 
     /**
      * 获取头像
@@ -68,7 +70,7 @@ class SettingViewModel : BaseViewModel() {
     }
 
     /**
-     * 找回密码-修改密码
+     * 设置-修改密码
      */
     fun modifyPassword(oldPassword: String, newPassword: String) {
         val params = hashMapOf<String, String>().apply {
@@ -91,6 +93,41 @@ class SettingViewModel : BaseViewModel() {
                     override fun onFailure(error: String?) {
                         super.onFailure(error)
                         modifyPasswordLiveData.value = error ?: ""
+                    }
+                })
+        }
+    }
+
+    /**
+     * 设置-修改邮箱或者手机号
+     */
+    fun changePhoneOrEmail(phoneOrEmail: String, @RegisterAccountType registerAccountType: Int) {
+        val params = hashMapOf<String, String>().apply {
+            if (registerAccountType == RegisterAccountType.PHONE) {
+                put("Email", phoneOrEmail)
+            } else {
+                put("OldPWD", phoneOrEmail)
+            }
+        }
+
+        val requestApi =
+            if (registerAccountType == RegisterAccountType.PHONE) ApiPath.Mine.CHANGE_PHONE else ApiPath.Mine.CHANGE_EMAIL
+
+        viewModelScope.launch {
+            apiService().postForm(
+                requestApi, params,
+                object : HttpCallback<HttpResult<String>>() {
+                    override fun success(result: HttpResult<String>) {
+                        if (result.isBusinessSuccess()) {
+                            changePhoneOrEmailLiveData.value = null
+                        } else {
+                            changePhoneOrEmailLiveData.value = result.msg ?: ""
+                        }
+                    }
+
+                    override fun onFailure(error: String?) {
+                        super.onFailure(error)
+                        changePhoneOrEmailLiveData.value = error ?: ""
                     }
                 })
         }

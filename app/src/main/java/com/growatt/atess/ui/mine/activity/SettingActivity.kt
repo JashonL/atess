@@ -8,6 +8,7 @@ import androidx.activity.viewModels
 import com.bumptech.glide.Glide
 import com.growatt.atess.R
 import com.growatt.atess.databinding.ActivitySettingBinding
+import com.growatt.atess.ui.mine.fragment.RegisterAccountType
 import com.growatt.atess.ui.mine.viewmodel.SettingViewModel
 import com.growatt.lib.base.BaseActivity
 import com.growatt.lib.util.ToastUtil
@@ -78,12 +79,22 @@ class SettingActivity : BaseActivity(), View.OnClickListener {
         when {
             v === binding.ivAvatar -> {}
             v === binding.itemUserName -> {}
-            v === binding.itemEmail -> {}
+            v === binding.itemEmail -> {
+                ChangePhoneOrEmailActivity.start(
+                    this,
+                    RegisterAccountType.EMAIL
+                )
+            }
             v === binding.itemCancelAccount -> {}
             v === binding.itemInstallerNo -> {}
             v === binding.itemLanguage -> {}
             v === binding.itemModifyPassword -> ModifyPasswordActivity.start(this)
-            v === binding.itemPhone -> {}
+            v === binding.itemPhone -> {
+                ChangePhoneOrEmailActivity.start(
+                    this,
+                    RegisterAccountType.PHONE
+                )
+            }
             v === binding.btLogout -> {
                 showDialog()
                 viewModel.logout()

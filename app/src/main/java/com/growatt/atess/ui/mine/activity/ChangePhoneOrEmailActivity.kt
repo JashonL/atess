@@ -9,8 +9,9 @@ import android.view.View
 import androidx.activity.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.growatt.atess.R
-import com.growatt.atess.databinding.ActivityFindBackPasswordBinding
+import com.growatt.atess.databinding.ActivityChangePhoneOrEmailBinding
 import com.growatt.atess.ui.mine.fragment.RegisterAccountType
+import com.growatt.atess.ui.mine.viewmodel.SettingViewModel
 import com.growatt.atess.ui.mine.viewmodel.VerifyCodeViewModel
 import com.growatt.lib.base.BaseActivity
 import com.growatt.lib.util.ToastUtil
@@ -19,30 +20,36 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 /**
- * 找回密码页面
- * 1.国内使用手机号找回密码
- * 2.国外使用邮箱找回密码
+ * 设置-修改手机或者邮箱
  */
-class FindBackPasswordActivity : BaseActivity(), View.OnClickListener {
+class ChangePhoneOrEmailActivity : BaseActivity(), View.OnClickListener {
 
     companion object {
-        fun start(context: Context?) {
-            context?.startActivity(Intent(context, FindBackPasswordActivity::class.java))
+
+        const val KEY_REGISTER_ACCOUNT_TYPE = "key_register_account_type"
+
+        fun start(context: Context?, @RegisterAccountType registerAccountType: Int) {
+            val intent = Intent(context, ChangePhoneOrEmailActivity::class.java)
+            intent.putExtra(KEY_REGISTER_ACCOUNT_TYPE, registerAccountType)
+            context?.startActivity(intent)
         }
     }
 
-    private lateinit var binding: ActivityFindBackPasswordBinding
+    private lateinit var binding: ActivityChangePhoneOrEmailBinding
 
     private val verifyCodeViewModel: VerifyCodeViewModel by viewModels()
 
+    private val settingViewModel: SettingViewModel by viewModels()
+
     private var registerAccountType: Int = RegisterAccountType.PHONE
 
-    private var focusOnPhone = false
+    private var focusOnPhoneOrEmail = false
+
     private var focusOnVerifyCode = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityFindBackPasswordBinding.inflate(layoutInflater)
+        binding = ActivityChangePhoneOrEmailBinding.inflate(layoutInflater)
         setContentView(binding.root)
         initData()
         initView()
@@ -62,27 +69,39 @@ class FindBackPasswordActivity : BaseActivity(), View.OnClickListener {
         verifyCodeViewModel.verifyCodeLiveData.observe(this) {
             dismissDialog()
             if (it == null) {
+                save()
+            } else {
+                ToastUtil.show(it)
+            }
+        }
+
+        settingViewModel.changePhoneOrEmailLiveData.observe(this) {
+            dismissDialog()
+            if (it == null) {
                 val phoneOrEmail = binding.etPhoneOrEmail.text.toString().trim()
-                ModifyPasswordByPhoneOrEmailActivity.start(this, phoneOrEmail)
+                if (registerAccountType == RegisterAccountType.PHONE) {
+                    accountService().user()?.phoneNum = phoneOrEmail
+                } else {
+                    accountService().user()?.email = phoneOrEmail
+                }
+                accountService().saveUserInfo(accountService().user())
                 finish()
             } else {
                 ToastUtil.show(it)
             }
         }
+
+        registerAccountType =
+            intent.getIntExtra(KEY_REGISTER_ACCOUNT_TYPE, RegisterAccountType.PHONE)
     }
 
     private fun setListener() {
         binding.tvSendVerifyCode.setOnClickListener(this)
-        binding.btNextStep.setOnClickListener(this)
-        binding.title.setOnRightTextClickListener {
-            if (registerAccountType == RegisterAccountType.PHONE) {
-                refreshView(RegisterAccountType.EMAIL)
-            } else {
-                refreshView(RegisterAccountType.PHONE)
-            }
+        binding.title.setOnRightButtonClickListener {
+            verifyCode()
         }
         binding.etPhoneOrEmail.setOnFocusChangeListener { v, hasFocus ->
-            focusOnPhone = hasFocus
+            focusOnPhoneOrEmail = hasFocus
             updateFocusView()
         }
         binding.etVerifyCode.setOnFocusChangeListener { v, hasFocus ->
@@ -91,13 +110,19 @@ class FindBackPasswordActivity : BaseActivity(), View.OnClickListener {
         }
     }
 
+    private fun save() {
+        val phoneOrEmail = binding.etPhoneOrEmail.text.toString().trim()
+        showDialog()
+        settingViewModel.changePhoneOrEmail(phoneOrEmail, registerAccountType)
+    }
+
     private fun initView() {
-        refreshView(RegisterAccountType.PHONE)
+        showPhoneOrEmailView(registerAccountType)
         updateFocusView()
     }
 
     private fun updateFocusView() {
-        if (focusOnPhone) {
+        if (focusOnPhoneOrEmail) {
             binding.etPhoneOrEmail.setSelection(binding.etPhoneOrEmail.length())
             binding.viewPhoneOrEmailLine.setBackgroundResource(R.color.colorAccent)
             binding.viewPhoneOrEmailLine.setViewHeight(2f)
@@ -117,17 +142,14 @@ class FindBackPasswordActivity : BaseActivity(), View.OnClickListener {
 
     }
 
-    private fun refreshView(@RegisterAccountType registerAccountType: Int) {
-        this.registerAccountType = registerAccountType
-        binding.etPhoneOrEmail.text.clear()
-        binding.etVerifyCode.text.clear()
+    private fun showPhoneOrEmailView(@RegisterAccountType registerAccountType: Int) {
         if (registerAccountType == RegisterAccountType.PHONE) {
             binding.etPhoneOrEmail.setHint(R.string.please_input_phone)
-            binding.title.setRightText(getString(R.string.email_find_back))
+            binding.title.setTitleText(getString(R.string.change_phone))
             binding.etPhoneOrEmail.inputType = InputType.TYPE_CLASS_PHONE
         } else {
             binding.etPhoneOrEmail.setHint(R.string.please_input_email)
-            binding.title.setRightText(getString(R.string.sms_find_back))
+            binding.title.setTitleText(getString(R.string.change_email))
             binding.etPhoneOrEmail.inputType = InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS
         }
     }
@@ -135,7 +157,6 @@ class FindBackPasswordActivity : BaseActivity(), View.OnClickListener {
     override fun onClick(v: View?) {
         when {
             v === binding.tvSendVerifyCode -> requestSendVerifyCode()
-            v === binding.btNextStep -> verifyCode()
         }
     }
 
