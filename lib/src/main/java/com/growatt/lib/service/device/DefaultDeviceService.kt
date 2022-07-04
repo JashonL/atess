@@ -55,7 +55,7 @@ class DefaultDeviceService(private val context: Context) : IDeviceService {
 
     override fun getAppLanguage(): Language {
         val code = LibApplication.instance().storageService()
-            .getInt(APP_LANGUAGE, Language.SYSTEM_DEFAULT.code)
+            .getInt(APP_LANGUAGE, Language.FOLLOW_SYSTEM.code)
         return Language.fromCode(code)
     }
 

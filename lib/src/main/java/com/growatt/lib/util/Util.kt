@@ -6,6 +6,7 @@ import android.content.Intent
 import android.os.Process
 import kotlin.system.exitProcess
 
+
 object Util {
 
     fun getProcessNameByPID(context: Context, pid: Int): String? {
@@ -24,5 +25,12 @@ object Util {
         context.startActivity(intent)
         Process.killProcess(Process.myPid())
         exitProcess(0)
+    }
+
+    fun backToDesktop(context: Context?) {
+        val intent = Intent(Intent.ACTION_MAIN)
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+        intent.addCategory(Intent.CATEGORY_HOME)
+        context?.startActivity(intent)
     }
 }

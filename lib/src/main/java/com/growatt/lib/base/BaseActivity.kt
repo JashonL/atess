@@ -28,7 +28,7 @@ abstract class BaseActivity : AppCompatActivity(), ServiceManager.ServiceInterfa
      */
     override fun attachBaseContext(newBase: Context?) {
         val appLanguage = LibApplication.instance().deviceService().getAppLanguage()
-        if (appLanguage == Language.SYSTEM_DEFAULT) {
+        if (appLanguage == Language.FOLLOW_SYSTEM) {
             super.attachBaseContext(newBase)
             return
         }
@@ -39,7 +39,7 @@ abstract class BaseActivity : AppCompatActivity(), ServiceManager.ServiceInterfa
             } else {
                 setLocale(appLanguage.locale)
             }
-        }?.let { createConfigurationContext(it) })
+        }?.let { newBase.createConfigurationContext(it) })
     }
 
     override fun apiService(): IHttpService {

@@ -1,5 +1,6 @@
 <resources>
-    <string name="app_name">Enerview</string>
+    <!--    APP名，不需要翻译-->
+    <string name="app_name" translatable="false">Enerview</string>
     <string name="user_agreement_and_privacy_policy">用户协议及隐私政策</string>
     <string name="privacy_dialog_content">Enerview旨在保护您的数据隐私与安全的基础上，帮助您高效管理电站。请仔细阅读并充分理解一下条款后再点击同意。</string>
     <string name="click_agree">点击同意即代表您已阅读并同意%s&amp;%s。</string>
@@ -77,4 +78,5 @@
     <string name="cancel_account_tip">注销后，你将无法使用当前帐号，包括账号的数据也将被清除，无法找回。</string>
     <string name="notice_for_account_cancellation_foramt">注销前请详细阅读%s</string>
     <string name="notice_for_account_cancellation">《注销账号须知》</string>
+    <string name="follow_system">跟随系统</string>
 </resources>

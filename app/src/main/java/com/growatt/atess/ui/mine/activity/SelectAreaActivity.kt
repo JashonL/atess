@@ -32,15 +32,6 @@ class SelectAreaActivity : BaseActivity() {
         fun getIntent(context: Context?): Intent {
             return Intent(context, SelectAreaActivity::class.java)
         }
-
-        fun create(context: Context, parent: ViewGroup): CountryViewHolder {
-            val binding =
-                CountryViewHolderBinding.inflate(LayoutInflater.from(context), parent, false)
-            val viewHolder = CountryViewHolder(binding.root)
-            viewHolder.binding = binding
-            viewHolder.binding.root.setOnClickListener(viewHolder)
-            return viewHolder
-        }
     }
 
     private lateinit var binding: ActivitySelectAreaBinding
