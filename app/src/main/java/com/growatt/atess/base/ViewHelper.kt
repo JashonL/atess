@@ -1,4 +1,4 @@
-package com.growatt.lib.base
+package com.growatt.atess.base
 
 interface ViewHelper {
 

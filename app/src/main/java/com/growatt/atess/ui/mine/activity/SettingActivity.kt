@@ -7,10 +7,10 @@ import android.view.View
 import androidx.activity.viewModels
 import com.bumptech.glide.Glide
 import com.growatt.atess.R
+import com.growatt.atess.base.BaseActivity
 import com.growatt.atess.databinding.ActivitySettingBinding
 import com.growatt.atess.ui.mine.fragment.RegisterAccountType
 import com.growatt.atess.ui.mine.viewmodel.SettingViewModel
-import com.growatt.lib.base.BaseActivity
 import com.growatt.lib.service.account.IAccountService
 import com.growatt.lib.util.ToastUtil
 

@@ -14,12 +14,12 @@ import android.view.View
 import androidx.activity.viewModels
 import com.growatt.atess.BuildConfig
 import com.growatt.atess.R
+import com.growatt.atess.base.BaseActivity
 import com.growatt.atess.databinding.ActivityRegisterBinding
 import com.growatt.atess.ui.common.WebActivity
 import com.growatt.atess.ui.mine.fragment.VerifyCodeDialog
 import com.growatt.atess.ui.mine.viewmodel.RegisterViewModel
 import com.growatt.atess.ui.mine.viewmodel.VerifyCodeViewModel
-import com.growatt.lib.base.BaseActivity
 import com.growatt.lib.util.ActivityBridge
 import com.growatt.lib.util.ToastUtil
 import com.growatt.lib.util.invisible

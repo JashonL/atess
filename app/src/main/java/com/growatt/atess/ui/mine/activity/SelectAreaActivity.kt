@@ -9,11 +9,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.activity.viewModels
 import androidx.recyclerview.widget.RecyclerView
+import com.growatt.atess.base.BaseActivity
+import com.growatt.atess.base.BaseViewHolder
 import com.growatt.atess.databinding.ActivitySelectAreaBinding
 import com.growatt.atess.databinding.CountryViewHolderBinding
 import com.growatt.atess.ui.mine.viewmodel.SelectAreaViewModel
-import com.growatt.lib.base.BaseActivity
-import com.growatt.lib.base.BaseViewHolder
 import com.growatt.lib.util.ToastUtil
 
 /**

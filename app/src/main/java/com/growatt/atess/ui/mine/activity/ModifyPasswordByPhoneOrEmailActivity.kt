@@ -9,9 +9,9 @@ import android.text.method.PasswordTransformationMethod
 import android.view.View
 import androidx.activity.viewModels
 import com.growatt.atess.R
+import com.growatt.atess.base.BaseActivity
 import com.growatt.atess.databinding.ActivityModifyPasswordByPhoneOrEmailBinding
 import com.growatt.atess.ui.mine.viewmodel.FindBackPasswordViewModel
-import com.growatt.lib.base.BaseActivity
 import com.growatt.lib.util.ToastUtil
 import com.growatt.lib.util.setViewHeight
 

@@ -10,11 +10,11 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.RecyclerView
 import com.growatt.atess.R
 import com.growatt.atess.application.MainApplication
+import com.growatt.atess.base.BaseActivity
+import com.growatt.atess.base.BaseViewHolder
+import com.growatt.atess.base.OnItemClickListener
 import com.growatt.atess.databinding.ActivitySelectLanguageBinding
 import com.growatt.atess.databinding.LanguageViewHolderBinding
-import com.growatt.lib.base.BaseActivity
-import com.growatt.lib.base.BaseViewHolder
-import com.growatt.lib.base.OnItemClickListener
 import com.growatt.lib.service.device.Language
 import com.growatt.lib.util.Util
 import kotlinx.coroutines.delay
@@ -87,8 +87,7 @@ class SelectLanguageActivity : BaseActivity() {
         private var selectPosition = 0
 
         init {
-            val language = MainApplication.instance().deviceService()
-                .getAppLanguage()
+            val language = deviceService().getAppLanguage()
             for (position in supportLanguageList.indices) {
                 if (supportLanguageList[position].second == language) {
                     selectPosition = position
@@ -126,6 +125,7 @@ class SelectLanguageActivity : BaseActivity() {
         fun getSelectLanguage(): Language {
             return supportLanguageList[selectPosition].second
         }
+
     }
 
     class LanguageViewHolder(
@@ -168,4 +168,5 @@ class SelectLanguageActivity : BaseActivity() {
         }
 
     }
+
 }

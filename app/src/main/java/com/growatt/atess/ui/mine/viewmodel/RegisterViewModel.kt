@@ -3,9 +3,9 @@ package com.growatt.atess.ui.mine.viewmodel
 import android.text.TextUtils
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.growatt.atess.base.BaseViewModel
 import com.growatt.atess.service.http.ApiPath
 import com.growatt.atess.ui.mine.fragment.RegisterAccountType
-import com.growatt.lib.base.BaseViewModel
 import com.growatt.lib.service.http.HttpCallback
 import com.growatt.lib.service.http.HttpResult
 import com.growatt.lib.util.MD5Util

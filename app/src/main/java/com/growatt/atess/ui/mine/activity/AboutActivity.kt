@@ -7,9 +7,9 @@ import android.os.Bundle
 import android.view.View
 import com.growatt.atess.BuildConfig
 import com.growatt.atess.R
+import com.growatt.atess.base.BaseActivity
 import com.growatt.atess.databinding.ActivityAboutBinding
 import com.growatt.atess.ui.common.WebActivity
-import com.growatt.lib.base.BaseActivity
 
 /**
  * 关于页面

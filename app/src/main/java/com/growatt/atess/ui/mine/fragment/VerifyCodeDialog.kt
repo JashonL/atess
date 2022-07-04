@@ -10,9 +10,9 @@ import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.growatt.atess.R
+import com.growatt.atess.base.BaseDialogFragment
 import com.growatt.atess.databinding.DialogVerifyCodeBinding
 import com.growatt.atess.ui.mine.viewmodel.VerifyCodeViewModel
-import com.growatt.lib.base.BaseDialogFragment
 import com.growatt.lib.util.ToastUtil
 import com.growatt.lib.util.setViewHeight
 import kotlinx.coroutines.delay

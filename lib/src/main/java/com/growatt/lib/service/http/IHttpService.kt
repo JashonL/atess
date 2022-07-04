@@ -27,6 +27,13 @@ abstract class IHttpService : Service {
     }
 
     /**
+     * post请求方法，无参
+     */
+    fun post(urlOrApi: String, callback: IHttpCallback) {
+        postForm(urlOrApi, hashMapOf(), callback)
+    }
+
+    /**
      * post表单
      */
     abstract fun postForm(urlOrApi: String, params: Map<String, String>, callback: IHttpCallback)

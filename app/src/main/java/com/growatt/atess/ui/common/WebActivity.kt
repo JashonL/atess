@@ -8,8 +8,8 @@ import android.text.TextUtils
 import android.webkit.WebChromeClient
 import android.webkit.WebView
 import android.webkit.WebViewClient
+import com.growatt.atess.base.BaseActivity
 import com.growatt.atess.databinding.ActivityWebBinding
-import com.growatt.lib.base.BaseActivity
 import com.growatt.lib.util.gone
 import com.growatt.lib.util.visible
 

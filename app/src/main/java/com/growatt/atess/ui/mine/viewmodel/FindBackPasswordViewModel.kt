@@ -2,8 +2,8 @@ package com.growatt.atess.ui.mine.viewmodel
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.growatt.atess.base.BaseViewModel
 import com.growatt.atess.service.http.ApiPath
-import com.growatt.lib.base.BaseViewModel
 import com.growatt.lib.service.http.HttpCallback
 import com.growatt.lib.service.http.HttpResult
 import com.growatt.lib.util.MD5Util
@@ -26,7 +26,7 @@ class FindBackPasswordViewModel : BaseViewModel() {
         }
 
         viewModelScope.launch {
-            apiService().httpGet(
+            apiService().postForm(
                 ApiPath.Mine.MODIFY_PASSWORD_BY_PHONE_OR_EMAIL, params,
                 object : HttpCallback<HttpResult<String>>() {
                     override fun success(result: HttpResult<String>) {

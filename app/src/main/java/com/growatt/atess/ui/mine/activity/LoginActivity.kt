@@ -16,11 +16,11 @@ import android.view.View
 import androidx.activity.viewModels
 import com.growatt.atess.BuildConfig
 import com.growatt.atess.R
+import com.growatt.atess.base.BaseActivity
 import com.growatt.atess.databinding.ActivityLoginBinding
 import com.growatt.atess.ui.common.WebActivity
 import com.growatt.atess.ui.home.HomeActivity
 import com.growatt.atess.ui.mine.viewmodel.LoginViewModel
-import com.growatt.lib.base.BaseActivity
 import com.growatt.lib.service.account.User
 import com.growatt.lib.util.ToastUtil
 import com.growatt.lib.util.setViewHeight

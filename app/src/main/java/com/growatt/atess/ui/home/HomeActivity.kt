@@ -4,10 +4,10 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import com.growatt.atess.R
+import com.growatt.atess.base.BaseActivity
 import com.growatt.atess.databinding.ActivityHomeBinding
 import com.growatt.atess.ui.home.fragment.*
 import com.growatt.atess.ui.home.view.HomeTab
-import com.growatt.lib.base.BaseActivity
 
 class HomeActivity : BaseActivity() {
 

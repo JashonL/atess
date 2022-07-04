@@ -2,8 +2,8 @@ package com.growatt.atess.ui.mine.viewmodel
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.growatt.atess.base.BaseViewModel
 import com.growatt.atess.service.http.ApiPath
-import com.growatt.lib.base.BaseViewModel
 import com.growatt.lib.service.http.HttpCallback
 import com.growatt.lib.service.http.HttpResult
 import kotlinx.coroutines.launch
@@ -21,7 +21,7 @@ class SelectAreaViewModel : BaseViewModel() {
      */
     fun fetchAreaList() {
         viewModelScope.launch {
-            apiService().httpGet(
+            apiService().post(
                 ApiPath.Mine.GET_COUNTRY_LIST,
                 object : HttpCallback<HttpResult<Array<String>>>() {
                     override fun success(result: HttpResult<Array<String>>) {

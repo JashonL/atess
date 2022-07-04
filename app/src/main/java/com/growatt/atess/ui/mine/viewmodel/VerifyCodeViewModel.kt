@@ -2,9 +2,9 @@ package com.growatt.atess.ui.mine.viewmodel
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.growatt.atess.base.BaseViewModel
 import com.growatt.atess.service.http.ApiPath
 import com.growatt.atess.ui.mine.fragment.RegisterAccountType
-import com.growatt.lib.base.BaseViewModel
 import com.growatt.lib.service.http.HttpCallback
 import com.growatt.lib.service.http.HttpResult
 import kotlinx.coroutines.launch
@@ -31,7 +31,7 @@ class VerifyCodeViewModel : BaseViewModel() {
                     put("areaCode", "86")
                 }
             }
-            apiService().httpGet(ApiPath.Mine.GET_VERIFY_CODE, params, object :
+            apiService().postForm(ApiPath.Mine.GET_VERIFY_CODE, params, object :
                 HttpCallback<HttpResult<String>>() {
                 override fun success(result: HttpResult<String>) {
                     if (result.isBusinessSuccess()) {
@@ -59,7 +59,7 @@ class VerifyCodeViewModel : BaseViewModel() {
                 put("findbackStr", phoneOrEmailStr)
                 put("code", verifyCode)
             }
-            apiService().httpGet(ApiPath.Mine.VERIFY_CODE, params, object :
+            apiService().postForm(ApiPath.Mine.VERIFY_CODE, params, object :
                 HttpCallback<HttpResult<String>>() {
                 override fun success(result: HttpResult<String>) {
                     if (result.isBusinessSuccess()) {

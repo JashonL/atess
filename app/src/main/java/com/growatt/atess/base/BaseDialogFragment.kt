@@ -1,4 +1,4 @@
-package com.growatt.lib.base
+package com.growatt.atess.base
 
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
