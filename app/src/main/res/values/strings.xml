@@ -72,4 +72,5 @@
     <string name="confirm_new_password">确认新密码</string>
     <string name="change_phone">更换手机号</string>
     <string name="change_email">更换邮箱</string>
+    <string name="web">网页</string>
 </resources>

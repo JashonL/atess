@@ -5,8 +5,10 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.view.View
+import com.growatt.atess.BuildConfig
 import com.growatt.atess.R
 import com.growatt.atess.databinding.ActivityAboutBinding
+import com.growatt.atess.ui.common.WebActivity
 import com.growatt.lib.base.BaseActivity
 
 /**
@@ -42,14 +44,19 @@ class AboutActivity : BaseActivity(), View.OnClickListener {
     private fun initView() {
         binding.tvVersion.text =
             getString(R.string.version_name_format, deviceService().getAppVersionName())
+        binding.itemCompanyWebsite.setSubName(BuildConfig.companyWebsite)
+        binding.itemPhone.setSubName(BuildConfig.companyPhone)
     }
 
     override fun onClick(v: View?) {
         when {
-            v === binding.itemUserAgreement -> {}
-            v === binding.itemPrivacyPolicy -> {}
+            v === binding.itemUserAgreement -> WebActivity.start(this, BuildConfig.userAgreementUrl)
+            v === binding.itemPrivacyPolicy -> WebActivity.start(this, BuildConfig.privacyPolicyUrl)
             v === binding.itemPhone -> dialPhoneNumber(binding.itemPhone.getSubName())
-            v === binding.itemCompanyWebsite -> {}
+            v === binding.itemCompanyWebsite -> WebActivity.start(
+                this,
+                "https://" + BuildConfig.companyWebsite
+            )
         }
     }
 

@@ -10,6 +10,7 @@ plugins {
 def dependency = rootProject.ext.dependency
 def versions = rootProject.ext.versions
 def publish = rootProject.ext.publish
+def odm = rootProject.ext.odm
 
 static def packageTime() {
     return new SimpleDateFormat("yyyy-MM-dd").format(new Date())
@@ -24,6 +25,11 @@ android {
         targetSdk versions.targetSdkVersion
         versionCode publish.versionCode
         versionName publish.versionName
+
+        buildConfigField("String", "userAgreementUrl", "\"${odm.userAgreementUrl}\"")
+        buildConfigField("String", "privacyPolicyUrl", "\"${odm.privacyPolicyUrl}\"")
+        buildConfigField("String", "companyWebsite", "\"${odm.companyWebsite}\"")
+        buildConfigField("String", "companyPhone", "\"${odm.companyPhone}\"")
     }
 
     viewBinding {

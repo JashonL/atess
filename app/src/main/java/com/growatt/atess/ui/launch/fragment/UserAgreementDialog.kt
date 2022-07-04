@@ -11,12 +11,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.FragmentManager
+import com.growatt.atess.BuildConfig
 import com.growatt.atess.R
 import com.growatt.atess.application.MainApplication
 import com.growatt.atess.databinding.DialogUserAgreementBinding
+import com.growatt.atess.ui.common.WebActivity
 import com.growatt.atess.ui.launch.monitor.UserAgreementMonitor
 import com.growatt.lib.base.BaseDialogFragment
-import com.growatt.lib.util.ToastUtil
 import com.growatt.lib.util.gone
 import com.growatt.lib.util.visible
 
@@ -84,11 +85,11 @@ class UserAgreementDialog : BaseDialogFragment(), View.OnClickListener {
         return SpannableString(content).apply {
             addColorSpan(this, userAgreement)
             addClickSpan(this, userAgreement) {
-                ToastUtil.show("点击了用户协议")
+                WebActivity.start(requireActivity(), BuildConfig.userAgreementUrl)
             }
             addColorSpan(this, privacyPolicy)
             addClickSpan(this, privacyPolicy) {
-                ToastUtil.show("点击了隐私条款")
+                WebActivity.start(requireActivity(), BuildConfig.privacyPolicyUrl)
             }
         }
     }

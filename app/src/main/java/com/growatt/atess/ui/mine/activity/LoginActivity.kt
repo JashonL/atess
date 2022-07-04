@@ -14,8 +14,10 @@ import android.text.style.ClickableSpan
 import android.text.style.ForegroundColorSpan
 import android.view.View
 import androidx.activity.viewModels
+import com.growatt.atess.BuildConfig
 import com.growatt.atess.R
 import com.growatt.atess.databinding.ActivityLoginBinding
+import com.growatt.atess.ui.common.WebActivity
 import com.growatt.atess.ui.home.HomeActivity
 import com.growatt.atess.ui.mine.viewmodel.LoginViewModel
 import com.growatt.lib.base.BaseActivity
@@ -114,11 +116,11 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
         return SpannableString(content).apply {
             addColorSpan(this, userAgreement)
             addClickSpan(this, userAgreement) {
-                ToastUtil.show("点击了用户协议")
+                WebActivity.start(this@LoginActivity, BuildConfig.userAgreementUrl)
             }
             addColorSpan(this, privacyPolicy)
             addClickSpan(this, privacyPolicy) {
-                ToastUtil.show("点击了隐私条款")
+                WebActivity.start(this@LoginActivity, BuildConfig.privacyPolicyUrl)
             }
         }
     }

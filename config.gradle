@@ -7,6 +7,18 @@ ext {
             applicationId: "com.growatt.atess"
     ]
 
+    //ODM定制属性
+    odm = [
+            //用户协议
+            userAgreementUrl: "https://www.baidu.com/",
+            //隐私条款
+            privacyPolicyUrl: "https://www.baidu.com/",
+            //公司官网
+            companyWebsite  : "www.atesspower.com",
+            //公司手机号
+            companyPhone    : "+86 755 2998 8492",
+    ]
+
 
     versions = [
             compileSdkVersion: 30,

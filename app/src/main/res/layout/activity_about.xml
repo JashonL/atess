@@ -60,16 +60,14 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             app:itemName="@string/phone"
-            app:showSubName="true"
-            app:subName="+86 755 2998 8492" />
+            app:showSubName="true" />
 
         <com.growatt.atess.ui.mine.view.SettingItemView
             android:id="@+id/item_company_website"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             app:itemName="@string/company_website"
-            app:showSubName="true"
-            app:subName="www.atesspower.com" />
+            app:showSubName="true" />
 
     </LinearLayout>
 
