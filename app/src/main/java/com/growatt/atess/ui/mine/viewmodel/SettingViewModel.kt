@@ -20,6 +20,7 @@ class SettingViewModel : BaseViewModel() {
     val modifyPasswordLiveData = MutableLiveData<String?>()
     val changePhoneOrEmailLiveData = MutableLiveData<String?>()
     val modifyInstallerNoLiveData = MutableLiveData<String?>()
+    val cancelAccountLiveData = MutableLiveData<String?>()
 
     /**
      * 获取头像
@@ -156,6 +157,30 @@ class SettingViewModel : BaseViewModel() {
                     override fun onFailure(error: String?) {
                         super.onFailure(error)
                         modifyInstallerNoLiveData.value = error ?: ""
+                    }
+                })
+        }
+    }
+
+    /**
+     * 设置-注销账号
+     */
+    fun cancelAccount() {
+        viewModelScope.launch {
+            apiService().httpGet(
+                ApiPath.Mine.CANCEL_ACCOUNT,
+                object : HttpCallback<HttpResult<String>>() {
+                    override fun success(result: HttpResult<String>) {
+                        if (result.isBusinessSuccess()) {
+                            cancelAccountLiveData.value = null
+                        } else {
+                            cancelAccountLiveData.value = result.msg ?: ""
+                        }
+                    }
+
+                    override fun onFailure(error: String?) {
+                        super.onFailure(error)
+                        cancelAccountLiveData.value = error ?: ""
                     }
                 })
         }

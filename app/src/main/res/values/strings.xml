@@ -73,4 +73,8 @@
     <string name="change_phone">更换手机号</string>
     <string name="change_email">更换邮箱</string>
     <string name="web">网页</string>
+    <string name="now_cancel">立即注销</string>
+    <string name="cancel_account_tip">注销后，你将无法使用当前帐号，包括账号的数据也将被清除，无法找回。</string>
+    <string name="notice_for_account_cancellation_foramt">注销前请详细阅读%s</string>
+    <string name="notice_for_account_cancellation">《注销账号须知》</string>
 </resources>

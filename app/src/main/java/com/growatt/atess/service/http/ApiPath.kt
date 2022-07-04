@@ -66,5 +66,10 @@ object ApiPath {
          */
         const val MODIFY_INSTALLER_NO = "ShineServer/ATSSetting/updateAgentCode"
 
+        /**
+         * 注销账号
+         */
+        const val CANCEL_ACCOUNT = "ShineServer/ATSSetting/eraseUser"
+
     }
 }

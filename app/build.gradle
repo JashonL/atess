@@ -30,6 +30,7 @@ android {
         buildConfigField("String", "privacyPolicyUrl", "\"${odm.privacyPolicyUrl}\"")
         buildConfigField("String", "companyWebsite", "\"${odm.companyWebsite}\"")
         buildConfigField("String", "companyPhone", "\"${odm.companyPhone}\"")
+        buildConfigField("String", "noticeForCancelAccountUrl", "\"${odm.noticeForCancelAccountUrl}\"")
     }
 
     viewBinding {

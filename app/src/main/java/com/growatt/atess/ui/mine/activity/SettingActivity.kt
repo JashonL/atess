@@ -90,7 +90,7 @@ class SettingActivity : BaseActivity(), View.OnClickListener,
                     RegisterAccountType.EMAIL
                 )
             }
-            v === binding.itemCancelAccount -> {}
+            v === binding.itemCancelAccount -> CancelAccountActivity.start(this)
             v === binding.itemInstallerNo -> ModifyInstallerNoActivity.start(this)
             v === binding.itemLanguage -> {}
             v === binding.itemModifyPassword -> ModifyPasswordActivity.start(this)
