@@ -4,8 +4,10 @@ import android.app.ActivityManager
 import android.content.Context
 import android.content.Intent
 import android.location.LocationManager
+import android.net.Uri
 import android.os.Process
 import com.growatt.lib.LibApplication
+import java.io.File
 import kotlin.system.exitProcess
 
 
@@ -58,6 +60,17 @@ object Util {
             gps || network
         } catch (e: Exception) {
             false
+        }
+    }
+
+    /**
+     * 将图片添加到手机相册
+     */
+    fun galleryAddPic(currentPhotoPath: String) {
+        Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE).also { mediaScanIntent ->
+            val f = File(currentPhotoPath)
+            mediaScanIntent.data = Uri.fromFile(f)
+            LibApplication.instance().sendBroadcast(mediaScanIntent)
         }
     }
 }

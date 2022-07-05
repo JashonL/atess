@@ -1,19 +1,33 @@
 package com.growatt.atess.ui.mine.activity
 
+import android.Manifest
 import android.content.Context
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
+import android.os.Environment
+import android.provider.MediaStore
 import android.view.View
 import androidx.activity.viewModels
+import androidx.core.content.FileProvider
 import com.bumptech.glide.Glide
+import com.growatt.atess.BuildConfig
 import com.growatt.atess.R
 import com.growatt.atess.base.BaseActivity
+import com.growatt.atess.component.image.crop.CropShape
+import com.growatt.atess.component.image.crop.ImageCrop
 import com.growatt.atess.databinding.ActivitySettingBinding
 import com.growatt.atess.ui.common.fragment.OptionsDialog
+import com.growatt.atess.ui.common.fragment.RequestPermissionHub
 import com.growatt.atess.ui.mine.fragment.RegisterAccountType
 import com.growatt.atess.ui.mine.viewmodel.SettingViewModel
 import com.growatt.lib.service.account.IAccountService
+import com.growatt.lib.util.ActivityBridge
 import com.growatt.lib.util.ToastUtil
+import com.growatt.lib.util.Util
+import java.io.File
+import java.text.SimpleDateFormat
+import java.util.*
 
 /**
  * 设置页面
@@ -31,6 +45,8 @@ class SettingActivity : BaseActivity(), View.OnClickListener,
 
     private lateinit var binding: ActivitySettingBinding
     private val viewModel: SettingViewModel by viewModels()
+
+    private var takePictureFile: File? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -84,18 +100,7 @@ class SettingActivity : BaseActivity(), View.OnClickListener,
 
     override fun onClick(v: View?) {
         when {
-            v === binding.ivAvatar -> {
-                val takeAPicture = getString(R.string.take_a_picture)
-                val fromTheAlbum = getString(R.string.from_the_album)
-                val options =
-                    arrayOf(takeAPicture, fromTheAlbum)
-                OptionsDialog.show(supportFragmentManager, options) {
-                    when (options[it]) {
-                        takeAPicture -> ToastUtil.show(takeAPicture)
-                        fromTheAlbum -> ToastUtil.show(fromTheAlbum)
-                    }
-                }
-            }
+            v === binding.ivAvatar -> getPicture()
             v === binding.itemEmail -> {
                 ChangePhoneOrEmailActivity.start(
                     this,
@@ -115,6 +120,95 @@ class SettingActivity : BaseActivity(), View.OnClickListener,
             v === binding.btLogout -> {
                 showDialog()
                 viewModel.logout()
+            }
+        }
+    }
+
+    private fun getPicture() {
+        val takeAPicture = getString(R.string.take_a_picture)
+        val fromTheAlbum = getString(R.string.from_the_album)
+        val options =
+            arrayOf(takeAPicture, fromTheAlbum)
+        OptionsDialog.show(supportFragmentManager, options) {
+            when (options[it]) {
+                takeAPicture -> takeAPicture()
+                fromTheAlbum -> RequestPermissionHub.requestPermission(
+                    supportFragmentManager,
+                    arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                ) { isGranted ->
+                    if (isGranted) {
+
+                    }
+                }
+            }
+        }
+    }
+
+    private fun takeAPicture() {
+        RequestPermissionHub.requestPermission(
+            supportFragmentManager,
+            arrayOf(Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+        ) { isGranted ->
+            if (isGranted) {
+                ActivityBridge.startActivity(
+                    this,
+                    Intent(MediaStore.ACTION_IMAGE_CAPTURE).apply {
+                        takePictureFile = createImageFile()?.apply {
+                            putExtra(
+                                MediaStore.EXTRA_OUTPUT,
+                                FileProvider.getUriForFile(
+                                    this@SettingActivity,
+                                    BuildConfig.APPLICATION_ID + ".fileProvider",
+                                    this
+                                )
+                            )
+                        }
+                    },
+                    object :
+                        ActivityBridge.OnActivityForResult {
+                        override fun onActivityForResult(
+                            context: Context?,
+                            resultCode: Int,
+                            data: Intent?
+                        ) {
+                            if (resultCode == RESULT_OK) {
+                                takePictureFile?.also {
+                                    Util.galleryAddPic(it.absolutePath)
+                                    ImageCrop.activity(Uri.fromFile(it))
+                                        .setCropShape(CropShape.CIRCLE)
+                                        .start(this@SettingActivity)
+                                }
+                            }
+                        }
+                    })
+            }
+        }
+    }
+
+    /**
+     * 创建一个文件来接收相机拍照返回来的照片,时间戳命名
+     */
+    private fun createImageFile(): File? {
+        val timeStamp: String = SimpleDateFormat("yyyyMMdd_HHmmss").format(Date())
+        val storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES)
+        if (storageDir != null) {
+            return File.createTempFile(
+                "JPEG_${timeStamp}_",
+                ".jpg",
+                storageDir
+            )
+        }
+        return null
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (resultCode == RESULT_OK) {
+            //剪裁图片回调
+            if (requestCode == ImageCrop.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
+                Glide.with(this).load(ImageCrop.getActivityResult(data).uri)
+                    .placeholder(R.drawable.ic_default_avatar)
+                    .into(binding.ivAvatar)
             }
         }
     }

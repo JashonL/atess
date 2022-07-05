@@ -17,7 +17,7 @@
         <activity
             android:name=".ui.launch.activity.LaunchActivity"
             android:exported="true"
-            android:screenOrientation="portrait">
+            android:screenOrientation="nosensor">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -28,75 +28,92 @@
         <activity
             android:name=".ui.mine.activity.LoginActivity"
             android:exported="false"
-            android:screenOrientation="portrait">
+            android:screenOrientation="nosensor">
 
         </activity>
 
         <activity
             android:name=".ui.mine.activity.RegisterActivity"
             android:exported="false"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="nosensor" />
 
         <activity
             android:name=".ui.mine.activity.SelectAreaActivity"
             android:exported="false"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="nosensor" />
 
         <activity
             android:name=".ui.home.HomeActivity"
             android:exported="false"
             android:launchMode="singleTask"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="nosensor" />
 
         <activity
             android:name=".ui.mine.activity.SettingActivity"
             android:exported="false"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="nosensor" />
 
         <activity
             android:name=".ui.mine.activity.AboutActivity"
             android:exported="false"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="nosensor" />
 
         <activity
             android:name=".ui.mine.activity.FindBackPasswordActivity"
             android:exported="false"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="nosensor" />
 
         <activity
             android:name=".ui.mine.activity.ModifyPasswordByPhoneOrEmailActivity"
             android:exported="false"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="nosensor" />
 
         <activity
             android:name=".ui.mine.activity.ModifyPasswordActivity"
             android:exported="false"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="nosensor" />
 
         <activity
             android:name=".ui.mine.activity.ChangePhoneOrEmailActivity"
             android:exported="false"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="nosensor" />
 
         <activity
             android:name=".ui.mine.activity.ModifyInstallerNoActivity"
             android:exported="false"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="nosensor" />
 
         <activity
             android:name=".ui.common.activity.WebActivity"
             android:exported="false"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="nosensor" />
 
         <activity
             android:name=".ui.mine.activity.CancelAccountActivity"
             android:exported="false"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="nosensor" />
 
         <activity
             android:name=".ui.mine.activity.SelectLanguageActivity"
             android:exported="false"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="nosensor" />
+
+        <activity
+            android:name=".component.image.crop.CropImageActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:label="@string/crop_image_activity_title"
+            android:screenOrientation="nosensor"
+            android:windowSoftInputMode="stateAlwaysHidden" />
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.fileProvider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
     </application>
 
 </manifest>

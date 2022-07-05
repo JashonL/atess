@@ -21,18 +21,27 @@ class RequestPermissionHub : Fragment() {
         /**
          * 是有拥有对应的权限
          */
-        fun hashPermission(context: Context, permission: String): Boolean {
-            return ActivityCompat.checkSelfPermission(context, permission) ==
-                    PackageManager.PERMISSION_GRANTED
+        fun hashPermission(context: Context, permissions: Array<String>): Boolean {
+            for (permission in permissions) {
+                if (ActivityCompat.checkSelfPermission(
+                        context,
+                        permission
+                    ) == PackageManager.PERMISSION_DENIED
+                ) {
+                    return false
+                }
+            }
+            return true
+
         }
 
         fun requestPermission(
-            permission: String,
             fragmentManager: FragmentManager,
-            callback: ((permission: String, isGranted: Boolean) -> Unit)? = null
+            permissions: Array<String>,
+            callback: ((isGranted: Boolean) -> Unit)? = null
         ) {
             val requestPermissionHub = RequestPermissionHub()
-            requestPermissionHub.permission = permission
+            requestPermissionHub.permissions = permissions
             requestPermissionHub.callback = callback
             fragmentManager.beginTransaction()
                 .add(requestPermissionHub, RequestPermissionHub::class.java.name)
@@ -41,26 +50,23 @@ class RequestPermissionHub : Fragment() {
 
     }
 
-    private lateinit var permission: String
+    private lateinit var permissions: Array<String>
 
     /**
      * @param permission 权限名
      * @param isGranted true已授权，false未授权
      */
-    private var callback: ((permission: String, isGranted: Boolean) -> Unit)? = null
+    private var callback: ((isGranted: Boolean) -> Unit)? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        if (hashPermission(requireContext(), permission)) {
-            callback?.invoke(permission, true)
+        if (hashPermission(requireContext(), permissions)) {
+            callback?.invoke(true)
             detach()
             return
         }
 
-        ActivityCompat.requestPermissions(
-            requireActivity(), arrayOf(permission),
-            PERMISSION_REQUEST_CODE
-        )
+        requestPermissions(permissions, PERMISSION_REQUEST_CODE)
     }
 
     override fun onRequestPermissionsResult(
@@ -69,10 +75,14 @@ class RequestPermissionHub : Fragment() {
         grantResults: IntArray
     ) {
         if (requestCode == PERMISSION_REQUEST_CODE) {
-            callback?.invoke(permission, grantResults[0] == PackageManager.PERMISSION_GRANTED)
-            if (grantResults[0] == PackageManager.PERMISSION_DENIED) {
-                ToastUtil.show(getString(R.string.please_to_app_setting_open_permission))
+            for (result in grantResults) {
+                if (result == PackageManager.PERMISSION_DENIED) {
+                    ToastUtil.show(getString(R.string.please_to_app_setting_open_permission))
+                    callback?.invoke(false)
+                    return
+                }
             }
+            callback?.invoke(true)
             detach()
         } else {
             super.onRequestPermissionsResult(requestCode, permissions, grantResults)

@@ -86,4 +86,12 @@
     <string name="take_a_picture">拍照</string>
     <string name="from_the_album">从相册选取</string>
     <string name="please_select">请选择</string>
+
+    <!-- image crop-->
+    <string name="crop_image_activity_title"></string>
+    <string name="crop_image_menu_rotate_left">Rotate counter clockwise</string>
+    <string name="crop_image_menu_rotate_right">Rotate</string>
+    <string name="crop_image_menu_crop">裁剪</string>
+    <string name="pick_image_intent_chooser_title">Select source</string>
+    <string name="cannot_modify_phone_num">暂不支持修改</string>
 </resources>
