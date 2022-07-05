@@ -76,7 +76,6 @@ class OkhttpService : IHttpService() {
             multipartBodyBuilder.addFormDataPart(param.key, param.value)
         }
         multipartBodyBuilder.addFormDataPart("file", file.name, requestBody)
-
         val requestBuilder = Request.Builder()
         for (head in generateHeads()) {
             requestBuilder.addHeader(head.key, head.value)

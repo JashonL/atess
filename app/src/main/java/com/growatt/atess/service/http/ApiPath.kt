@@ -71,5 +71,10 @@ object ApiPath {
          */
         const val CANCEL_ACCOUNT = "ShineServer/ATSSetting/eraseUser"
 
+        /**
+         * 上传用户头像
+         */
+        const val UPLOAD_USER_ICON = "ShineServer/ATSSetting/uploadUserIcon"
+
     }
 }

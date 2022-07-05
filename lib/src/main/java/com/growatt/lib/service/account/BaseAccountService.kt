@@ -56,8 +56,9 @@ abstract class BaseAccountService : IAccountService {
     }
 
     override fun saveUserAvatar(userAvatar: String?) {
-        userStorage.put(KEY_USER, userAvatar)
+        userStorage.put(KEY_USER_AVATAR, userAvatar)
         this.userAvatar = userAvatar
+        dispatchUserProfileChanged()
     }
 
     override fun logout() {

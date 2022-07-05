@@ -11,6 +11,8 @@ import android.view.View
 import androidx.activity.viewModels
 import androidx.core.content.FileProvider
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.bitmap.CircleCrop
+import com.bumptech.glide.request.RequestOptions
 import com.growatt.atess.BuildConfig
 import com.growatt.atess.R
 import com.growatt.atess.base.BaseActivity
@@ -28,6 +30,7 @@ import com.growatt.lib.util.Util
 import java.io.File
 import java.text.SimpleDateFormat
 import java.util.*
+
 
 /**
  * 设置页面
@@ -76,6 +79,7 @@ class SettingActivity : BaseActivity(), View.OnClickListener,
 
     private fun refreshUserProfile() {
         Glide.with(this).load(accountService().userAvatar())
+            .apply(RequestOptions.bitmapTransform(CircleCrop()))
             .placeholder(R.drawable.ic_default_avatar)
             .into(binding.ivAvatar)
         binding.itemUserName.setSubName(accountService().user()?.userName)
@@ -96,11 +100,20 @@ class SettingActivity : BaseActivity(), View.OnClickListener,
                 ToastUtil.show(it)
             }
         }
+        viewModel.uploadUserAvatarLiveData.observe(this) {
+            dismissDialog()
+            if (it.second == null) {
+                accountService().saveUserAvatar(it.first)
+                refreshUserProfile()
+            } else {
+                ToastUtil.show(it.second)
+            }
+        }
     }
 
     override fun onClick(v: View?) {
         when {
-            v === binding.ivAvatar -> getPicture()
+            v === binding.ivAvatar -> selectPictureMode()
             v === binding.itemEmail -> {
                 ChangePhoneOrEmailActivity.start(
                     this,
@@ -124,7 +137,7 @@ class SettingActivity : BaseActivity(), View.OnClickListener,
         }
     }
 
-    private fun getPicture() {
+    private fun selectPictureMode() {
         val takeAPicture = getString(R.string.take_a_picture)
         val fromTheAlbum = getString(R.string.from_the_album)
         val options =
@@ -132,14 +145,35 @@ class SettingActivity : BaseActivity(), View.OnClickListener,
         OptionsDialog.show(supportFragmentManager, options) {
             when (options[it]) {
                 takeAPicture -> takeAPicture()
-                fromTheAlbum -> RequestPermissionHub.requestPermission(
-                    supportFragmentManager,
-                    arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                ) { isGranted ->
-                    if (isGranted) {
+                fromTheAlbum -> fromTheAlbum()
+            }
+        }
+    }
 
-                    }
-                }
+    private fun fromTheAlbum() {
+        RequestPermissionHub.requestPermission(
+            supportFragmentManager,
+            arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+        ) { isGranted ->
+            if (isGranted) {
+                ActivityBridge.startActivity(
+                    this,
+                    Intent(Intent.ACTION_PICK).apply {
+                        type = "image/*"
+                        data = MediaStore.Images.Media.EXTERNAL_CONTENT_URI
+                    },
+                    object :
+                        ActivityBridge.OnActivityForResult {
+                        override fun onActivityForResult(
+                            context: Context?,
+                            resultCode: Int,
+                            data: Intent?
+                        ) {
+                            if (resultCode == RESULT_OK) {
+                                cropImage(data?.data)
+                            }
+                        }
+                    })
             }
         }
     }
@@ -174,14 +208,20 @@ class SettingActivity : BaseActivity(), View.OnClickListener,
                             if (resultCode == RESULT_OK) {
                                 takePictureFile?.also {
                                     Util.galleryAddPic(it.absolutePath)
-                                    ImageCrop.activity(Uri.fromFile(it))
-                                        .setCropShape(CropShape.CIRCLE)
-                                        .start(this@SettingActivity)
+                                    cropImage(Uri.fromFile(it))
                                 }
                             }
                         }
                     })
             }
+        }
+    }
+
+    private fun cropImage(imageUri: Uri?) {
+        imageUri?.also {
+            ImageCrop.activity(it)
+                .setCropShape(CropShape.CIRCLE)
+                .start(this@SettingActivity)
         }
     }
 
@@ -206,9 +246,10 @@ class SettingActivity : BaseActivity(), View.OnClickListener,
         if (resultCode == RESULT_OK) {
             //剪裁图片回调
             if (requestCode == ImageCrop.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
-                Glide.with(this).load(ImageCrop.getActivityResult(data).uri)
-                    .placeholder(R.drawable.ic_default_avatar)
-                    .into(binding.ivAvatar)
+                ImageCrop.getActivityResult(data).uri?.path?.also {
+                    showDialog()
+                    viewModel.uploadUserAvatar(it)
+                }
             }
         }
     }

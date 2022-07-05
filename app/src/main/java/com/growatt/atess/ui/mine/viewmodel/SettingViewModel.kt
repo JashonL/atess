@@ -9,6 +9,7 @@ import com.growatt.lib.service.http.HttpCallback
 import com.growatt.lib.service.http.HttpResult
 import com.growatt.lib.util.MD5Util
 import kotlinx.coroutines.launch
+import java.io.File
 
 /**
  * 选择国家/地区
@@ -21,6 +22,8 @@ class SettingViewModel : BaseViewModel() {
     val changePhoneOrEmailLiveData = MutableLiveData<String?>()
     val modifyInstallerNoLiveData = MutableLiveData<String?>()
     val cancelAccountLiveData = MutableLiveData<String?>()
+
+    val uploadUserAvatarLiveData = MutableLiveData<Pair<String?, String?>>()
 
     /**
      * 获取头像
@@ -185,6 +188,30 @@ class SettingViewModel : BaseViewModel() {
                     override fun onFailure(error: String?) {
                         super.onFailure(error)
                         cancelAccountLiveData.value = error ?: ""
+                    }
+                })
+        }
+    }
+
+    /**
+     * 设置-上传用户头像
+     */
+    fun uploadUserAvatar(filePath: String) {
+        viewModelScope.launch {
+            apiService().postFile(
+                ApiPath.Mine.UPLOAD_USER_ICON, hashMapOf(), File(filePath),
+                object : HttpCallback<HttpResult<String>>() {
+                    override fun success(result: HttpResult<String>) {
+                        if (result.isBusinessSuccess()) {
+                            uploadUserAvatarLiveData.value = Pair(result.data, null)
+                        } else {
+                            uploadUserAvatarLiveData.value = Pair(null, result.msg ?: "")
+                        }
+                    }
+
+                    override fun onFailure(error: String?) {
+                        super.onFailure(error)
+                        uploadUserAvatarLiveData.value = Pair(null, error ?: "")
                     }
                 })
         }

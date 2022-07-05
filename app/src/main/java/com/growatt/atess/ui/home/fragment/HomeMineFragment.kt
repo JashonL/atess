@@ -6,16 +6,20 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.bitmap.CircleCrop
+import com.bumptech.glide.request.RequestOptions
 import com.growatt.atess.R
 import com.growatt.atess.databinding.FragmentHomeMineBinding
 import com.growatt.atess.ui.mine.activity.AboutActivity
 import com.growatt.atess.ui.mine.activity.SettingActivity
 import com.growatt.atess.ui.mine.viewmodel.SettingViewModel
+import com.growatt.lib.service.account.IAccountService
 
 /**
  * 首页-我的
  */
-class HomeMineFragment : HomeBaseFragment(), View.OnClickListener {
+class HomeMineFragment : HomeBaseFragment(), View.OnClickListener,
+    IAccountService.OnUserProfileChangeListener {
 
     private lateinit var binding: FragmentHomeMineBinding
     private val viewModel by lazy(LazyThreadSafetyMode.NONE) {
@@ -36,9 +40,8 @@ class HomeMineFragment : HomeBaseFragment(), View.OnClickListener {
 
     private fun initData() {
         viewModel.userAvatarLiveData.observe(viewLifecycleOwner) {
-            if (it == null) {
-                accountService().saveUserAvatar(it)
-                showUserAvatar(it)
+            if (it.second == null) {
+                accountService().saveUserAvatar(it.first)
             }
         }
         viewModel.fetchUserAvatar()
@@ -46,13 +49,16 @@ class HomeMineFragment : HomeBaseFragment(), View.OnClickListener {
 
     private fun showUserAvatar(userAvatar: String?) {
         Glide.with(this).load(userAvatar)
+            .apply(RequestOptions.bitmapTransform(CircleCrop()))
             .placeholder(R.drawable.ic_default_avatar)
+            .load(accountService().userAvatar())
             .into(binding.ivAvatar)
     }
 
     private fun setListener() {
         binding.itemSetting.setOnClickListener(this)
         binding.itemAbout.setOnClickListener(this)
+        accountService().addUserProfileChangeListener(this)
     }
 
     private fun initView() {
@@ -65,6 +71,15 @@ class HomeMineFragment : HomeBaseFragment(), View.OnClickListener {
             v === binding.itemSetting -> SettingActivity.start(context)
             v === binding.itemAbout -> AboutActivity.start(context)
         }
+    }
+
+    override fun onUserProfileChange(account: IAccountService) {
+        showUserAvatar(account.userAvatar())
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        accountService().removeUserProfileChangeListener(this)
     }
 
 }
