@@ -9,6 +9,7 @@ import com.bumptech.glide.Glide
 import com.growatt.atess.R
 import com.growatt.atess.base.BaseActivity
 import com.growatt.atess.databinding.ActivitySettingBinding
+import com.growatt.atess.ui.common.fragment.OptionsDialog
 import com.growatt.atess.ui.mine.fragment.RegisterAccountType
 import com.growatt.atess.ui.mine.viewmodel.SettingViewModel
 import com.growatt.lib.service.account.IAccountService
@@ -83,7 +84,18 @@ class SettingActivity : BaseActivity(), View.OnClickListener,
 
     override fun onClick(v: View?) {
         when {
-            v === binding.ivAvatar -> {}
+            v === binding.ivAvatar -> {
+                val takeAPicture = getString(R.string.take_a_picture)
+                val fromTheAlbum = getString(R.string.from_the_album)
+                val options =
+                    arrayOf(takeAPicture, fromTheAlbum)
+                OptionsDialog.show(supportFragmentManager, options) {
+                    when (options[it]) {
+                        takeAPicture -> ToastUtil.show(takeAPicture)
+                        fromTheAlbum -> ToastUtil.show(fromTheAlbum)
+                    }
+                }
+            }
             v === binding.itemEmail -> {
                 ChangePhoneOrEmailActivity.start(
                     this,
