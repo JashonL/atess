@@ -19,6 +19,7 @@
         <item name="android:textViewStyle">@style/AppTextViewStyle</item>
         <item name="editTextStyle">@style/AppEditTextStyle</item>
         <item name="android:buttonStyle">@style/AppButtonStyle</item>
+        <item name="alertDialogTheme">@style/AppCompatAlertDialogStyle</item>
     </style>
 
     <style name="AppTextViewStyle" parent="Widget.AppCompat.TextView">
@@ -40,6 +41,10 @@
         <item name="android:background">@drawable/button_red_background</item>
         <item name="android:textColor">@color/text_white</item>
 
+    </style>
+
+    <style name="AppCompatAlertDialogStyle" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="colorAccent">@color/colorAccent</item>
     </style>
 
 </resources>

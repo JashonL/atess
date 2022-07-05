@@ -86,12 +86,14 @@
     <string name="take_a_picture">拍照</string>
     <string name="from_the_album">从相册选取</string>
     <string name="please_select">请选择</string>
+    <string name="to_set">去设置</string>
+    <string name="app_want_to_visit_format">"%s"想访问您的%s</string>
+    <string name="storage_photo_album">存储（相册）</string>
+    <string name="camera">相机</string>
+    <string name="photo_album">相册</string>
+    <string name="to_app_set_permission_format">您未允许%s获得你的%s权限，您可在应用设置中开启</string>
 
     <!-- image crop-->
-    <string name="crop_image_activity_title"></string>
-    <string name="crop_image_menu_rotate_left">Rotate counter clockwise</string>
-    <string name="crop_image_menu_rotate_right">Rotate</string>
     <string name="crop_image_menu_crop">裁剪</string>
     <string name="pick_image_intent_chooser_title">Select source</string>
-    <string name="cannot_modify_phone_num">暂不支持修改</string>
 </resources>

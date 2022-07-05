@@ -101,7 +101,6 @@
         <activity
             android:name=".component.image.crop.CropImageActivity"
             android:configChanges="orientation|keyboardHidden"
-            android:label="@string/crop_image_activity_title"
             android:screenOrientation="nosensor"
             android:windowSoftInputMode="stateAlwaysHidden" />
 

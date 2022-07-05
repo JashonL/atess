@@ -1,13 +1,16 @@
 package com.growatt.atess.ui.common.fragment
 
+import android.Manifest
 import android.content.Context
+import android.content.Intent
 import android.content.pm.PackageManager
+import android.net.Uri
 import android.os.Bundle
+import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import com.growatt.atess.R
-import com.growatt.lib.util.ToastUtil
 
 /**
  * 权限请求工具
@@ -17,6 +20,7 @@ class RequestPermissionHub : Fragment() {
     companion object {
 
         const val PERMISSION_REQUEST_CODE = 4896
+        const val APP_SETTING_REQUEST_CODE = 4851
 
         /**
          * 是有拥有对应的权限
@@ -75,10 +79,10 @@ class RequestPermissionHub : Fragment() {
         grantResults: IntArray
     ) {
         if (requestCode == PERMISSION_REQUEST_CODE) {
-            for (result in grantResults) {
-                if (result == PackageManager.PERMISSION_DENIED) {
-                    ToastUtil.show(getString(R.string.please_to_app_setting_open_permission))
+            for (index in grantResults.indices) {
+                if (grantResults[index] == PackageManager.PERMISSION_DENIED) {
                     callback?.invoke(false)
+                    showOpenAppSettingDialog(permissions[index])
                     return
                 }
             }
@@ -87,6 +91,60 @@ class RequestPermissionHub : Fragment() {
         } else {
             super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         }
+    }
+
+    private fun showOpenAppSettingDialog(permission: String) {
+        var title = ""
+        var messagge = ""
+        val appName = getString(R.string.app_name)
+        when (permission) {
+            Manifest.permission.CAMERA -> {
+                title = getString(
+                    R.string.app_want_to_visit_format,
+                    appName,
+                    getString(R.string.camera)
+                )
+                messagge = getString(
+                    R.string.to_app_set_permission_format,
+                    appName,
+                    getString(R.string.camera)
+                )
+            }
+            Manifest.permission.WRITE_EXTERNAL_STORAGE -> {
+                title = getString(
+                    R.string.app_want_to_visit_format,
+                    appName,
+                    getString(R.string.photo_album)
+                )
+                messagge = getString(
+                    R.string.to_app_set_permission_format,
+                    appName,
+                    getString(R.string.storage_photo_album)
+                )
+            }
+        }
+
+        AlertDialog.Builder(requireContext())
+            .setTitle(title)
+            .setMessage(messagge)
+            .setNegativeButton(R.string.cancel, null)
+            .setPositiveButton(
+                R.string.to_set
+            ) { _, _ -> openAppSetting() }
+            .show()
+    }
+
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        detach()
+    }
+
+    fun openAppSetting() {
+        startActivityForResult(Intent().also {
+            it.action = "android.settings.APPLICATION_DETAILS_SETTINGS"
+            it.data = Uri.fromParts("package", requireContext().packageName, null)
+        }, APP_SETTING_REQUEST_CODE)
     }
 
     private fun detach() {

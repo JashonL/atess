@@ -73,4 +73,5 @@ object Util {
             LibApplication.instance().sendBroadcast(mediaScanIntent)
         }
     }
+
 }
