@@ -63,7 +63,8 @@ class FindBackPasswordActivity : BaseActivity(), View.OnClickListener {
             dismissDialog()
             if (it == null) {
                 val phoneOrEmail = binding.etPhoneOrEmail.text.toString().trim()
-                ModifyPasswordByPhoneOrEmailActivity.start(this, phoneOrEmail)
+                val verifyCode = binding.etVerifyCode.text.toString().trim()
+                ModifyPasswordByPhoneOrEmailActivity.start(this, phoneOrEmail, verifyCode)
                 finish()
             } else {
                 ToastUtil.show(it)

@@ -21,7 +21,7 @@ class SelectAreaViewModel : BaseViewModel() {
      */
     fun fetchAreaList() {
         viewModelScope.launch {
-            apiService().post(
+            apiService().httpGet(
                 ApiPath.Mine.GET_COUNTRY_LIST,
                 object : HttpCallback<HttpResult<Array<String>>>() {
                     override fun success(result: HttpResult<Array<String>>) {

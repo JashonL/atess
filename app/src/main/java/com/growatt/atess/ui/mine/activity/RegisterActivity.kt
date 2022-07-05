@@ -51,13 +51,13 @@ class RegisterActivity : BaseActivity(), View.OnClickListener {
     }
 
     private fun initData() {
-        verifyCodeViewModel.getVerifyCodeLiveData.observe(this) {
+        verifyCodeViewModel.getVerifyCodeLiveData.observe(this) { result ->
             dismissDialog()
             if (!VerifyCodeDialog.isShowing(supportFragmentManager)) {
-                if (it.second == null) {
+                if (result.second == null) {
                     VerifyCodeDialog.showDialog(
                         supportFragmentManager,
-                        it.first,
+                        result.first,
                         viewModel.getRequirePhoneOrEmail(),
                         viewModel.getRegisterAccountType()
                     ) {
@@ -65,10 +65,10 @@ class RegisterActivity : BaseActivity(), View.OnClickListener {
                         val username = binding.etUsername.text.toString().trim()
                         val password = binding.etPassword.text.toString().trim()
                         val agentCode = binding.etInstallerNo.text.toString().trim()
-                        viewModel.register(username, password, agentCode)
+                        viewModel.register(username, password, agentCode, it)
                     }
                 } else {
-                    ToastUtil.show(it.second)
+                    ToastUtil.show(result.second)
                 }
             }
         }

@@ -28,8 +28,11 @@ class VerifyCodeDialog : BaseDialogFragment(), View.OnClickListener {
         val FRAGMENT_TAG = VerifyCodeDialog::class.java.name
 
         fun showDialog(
-            fm: FragmentManager, remainingTime: Int, phoneOrEmail: String,
-            @RegisterAccountType type: Int = RegisterAccountType.PHONE, onVerifySuccess: () -> Unit
+            fm: FragmentManager,
+            remainingTime: Int,
+            phoneOrEmail: String,
+            @RegisterAccountType type: Int = RegisterAccountType.PHONE,
+            onVerifySuccess: (verifyCode: String) -> Unit
         ) {
             val dialog = VerifyCodeDialog()
             dialog.type = type
@@ -45,7 +48,7 @@ class VerifyCodeDialog : BaseDialogFragment(), View.OnClickListener {
     }
 
     private lateinit var binding: DialogVerifyCodeBinding
-    private lateinit var onVerifySuccess: () -> Unit
+    private lateinit var onVerifySuccess: (verifyCode: String) -> Unit
 
     private var type: Int = RegisterAccountType.PHONE
     private lateinit var phoneOrEmail: String
@@ -81,10 +84,12 @@ class VerifyCodeDialog : BaseDialogFragment(), View.OnClickListener {
         viewModel.verifyCodeLiveData.observe(this) {
             dismissDialog()
             if (it == null) {
-                onVerifySuccess.invoke()
+                val verifyCode = binding.etVerifyCode.text.toString().trim()
+                onVerifySuccess.invoke(verifyCode)
             } else {
                 ToastUtil.show(it)
             }
+            dismissAllowingStateLoss()
         }
     }
 

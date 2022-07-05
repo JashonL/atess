@@ -44,7 +44,7 @@ class RegisterViewModel : BaseViewModel() {
     /**
      * 注册
      */
-    fun register(userName: String, password: String, agentCode: String) {
+    fun register(userName: String, password: String, agentCode: String, verifyCode: String) {
         viewModelScope.launch {
             val params = hashMapOf<String, String>().apply {
                 put("country", selectArea)
@@ -58,6 +58,9 @@ class RegisterViewModel : BaseViewModel() {
                 }
                 if (!TextUtils.isEmpty(agentCode)) {
                     put("agentCode", agentCode)
+                }
+                if (!TextUtils.isEmpty(verifyCode)) {
+                    put("validCOde", verifyCode)
                 }
             }
             apiService().postJson(ApiPath.Mine.REGISTER, params, object :

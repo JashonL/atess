@@ -15,7 +15,7 @@
         android:theme="@style/Theme.App"
         android:usesCleartextTraffic="true">
         <activity
-            android:name="com.growatt.atess.ui.launch.activity.LaunchActivity"
+            android:name=".ui.launch.activity.LaunchActivity"
             android:exported="true"
             android:screenOrientation="portrait">
             <intent-filter>

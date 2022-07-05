@@ -112,8 +112,9 @@ class ChangePhoneOrEmailActivity : BaseActivity(), View.OnClickListener {
 
     private fun save() {
         val phoneOrEmail = binding.etPhoneOrEmail.text.toString().trim()
+        val verifyCode = binding.etVerifyCode.text.toString().trim()
         showDialog()
-        settingViewModel.changePhoneOrEmail(phoneOrEmail, registerAccountType)
+        settingViewModel.changePhoneOrEmail(phoneOrEmail, registerAccountType, verifyCode)
     }
 
     private fun initView() {

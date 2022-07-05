@@ -23,10 +23,12 @@ class ModifyPasswordByPhoneOrEmailActivity : BaseActivity(), View.OnClickListene
     companion object {
 
         private const val KEY_PHONE_OR_EMAIL = "key_phone_or_email"
+        private const val KEY_VERIFY_CODE = "key_verify_code"
 
-        fun start(context: Context?, phoneOrEmail: String) {
+        fun start(context: Context?, phoneOrEmail: String, verifyCode: String) {
             val intent = Intent(context, ModifyPasswordByPhoneOrEmailActivity::class.java)
             intent.putExtra(KEY_PHONE_OR_EMAIL, phoneOrEmail)
+            intent.putExtra(KEY_VERIFY_CODE, verifyCode)
             context?.startActivity(intent)
         }
 
@@ -40,6 +42,7 @@ class ModifyPasswordByPhoneOrEmailActivity : BaseActivity(), View.OnClickListene
     private var focusOnConfirmPassword = false
     private var focusOnPassword = false
     private var phoneOrEmail: String? = null
+    private var verifyCode: String? = null
 
     private val viewModel: FindBackPasswordViewModel by viewModels()
 
@@ -54,6 +57,7 @@ class ModifyPasswordByPhoneOrEmailActivity : BaseActivity(), View.OnClickListene
 
     private fun initData() {
         phoneOrEmail = intent.getStringExtra(KEY_PHONE_OR_EMAIL)
+        verifyCode = intent.getStringExtra(KEY_VERIFY_CODE)
         viewModel.modifyPasswordLiveData.observe(this) {
             dismissDialog()
             if (it == null) {
@@ -87,7 +91,7 @@ class ModifyPasswordByPhoneOrEmailActivity : BaseActivity(), View.OnClickListene
             } else {
                 phoneOrEmail?.let {
                     showDialog()
-                    viewModel.modifyPassword(it, password)
+                    viewModel.modifyPassword(it, password, verifyCode)
                 }
             }
         }

@@ -19,14 +19,15 @@ class FindBackPasswordViewModel : BaseViewModel() {
     /**
      * 找回密码-修改密码
      */
-    fun modifyPassword(phoneOrEmail: String, password: String) {
+    fun modifyPassword(phoneOrEmail: String, password: String, verifyCode: String?) {
         val params = hashMapOf<String, String>().apply {
             put("findStr", phoneOrEmail)
             put("password", MD5Util.md5(password) ?: "")
+            put("validCode", verifyCode ?: "")
         }
 
         viewModelScope.launch {
-            apiService().postForm(
+            apiService().httpGet(
                 ApiPath.Mine.MODIFY_PASSWORD_BY_PHONE_OR_EMAIL, params,
                 object : HttpCallback<HttpResult<String>>() {
                     override fun success(result: HttpResult<String>) {

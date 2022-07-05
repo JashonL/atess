@@ -103,7 +103,11 @@ class SettingViewModel : BaseViewModel() {
     /**
      * 设置-修改邮箱或者手机号
      */
-    fun changePhoneOrEmail(phoneOrEmail: String, @RegisterAccountType registerAccountType: Int) {
+    fun changePhoneOrEmail(
+        phoneOrEmail: String,
+        @RegisterAccountType registerAccountType: Int,
+        verifyCode: String
+    ) {
         val params = hashMapOf<String, String>().apply {
             if (registerAccountType == RegisterAccountType.PHONE) {
                 put("Email", phoneOrEmail)
