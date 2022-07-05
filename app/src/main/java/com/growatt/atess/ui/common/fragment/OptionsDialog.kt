@@ -41,6 +41,10 @@ class OptionsDialog : BottomSheetDialogFragment() {
         binding = DialogOptionsBinding.inflate(layoutInflater, null, false)
         initView()
         dialog.setContentView(binding.root)
+
+
+        //设置dialog背景透明
+        (binding.root.parent as? View)?.setBackgroundColor(resources.getColor(android.R.color.transparent))
         return dialog
     }
 
@@ -57,15 +61,9 @@ class OptionsDialog : BottomSheetDialogFragment() {
         val textView = TextView(requireContext())
         textView.layoutParams = LinearLayout.LayoutParams(
             LinearLayout.LayoutParams.MATCH_PARENT,
-            LinearLayout.LayoutParams.WRAP_CONTENT
+            ViewUtil.dp2px(requireContext(), 46f)
         )
         textView.gravity = Gravity.CENTER
-        textView.setPadding(
-            0,
-            ViewUtil.dp2px(requireContext(), 10f),
-            0,
-            ViewUtil.dp2px(requireContext(), 10f)
-        )
         textView.setTextColor(resources.getColor(R.color.text_black))
         textView.textSize = 14f
         textView.text = options[position]
