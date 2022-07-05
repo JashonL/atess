@@ -4,7 +4,7 @@ ext {
     publish = [
             versionCode  : 1,
             versionName  : "1.0.0",
-            applicationId: "com.growatt.atess"
+            applicationId: "com.atess.energy"
     ]
 
     //ODM定制属性
