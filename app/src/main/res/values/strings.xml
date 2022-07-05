@@ -79,4 +79,8 @@
     <string name="notice_for_account_cancellation_foramt">注销前请详细阅读%s</string>
     <string name="notice_for_account_cancellation">《注销账号须知》</string>
     <string name="follow_system">跟随系统</string>
+    <string name="tip">提示</string>
+    <string name="please_to_app_setting_open_permission">请到应用设置中打开权限</string>
+    <string name="need_to_open_location_service">需要打开定位服务</string>
+    <string name="please_to_setting_page_location_service">请到设置页面打开定位服务</string>
 </resources>

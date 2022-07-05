@@ -18,7 +18,7 @@ import com.growatt.atess.BuildConfig
 import com.growatt.atess.R
 import com.growatt.atess.base.BaseActivity
 import com.growatt.atess.databinding.ActivityLoginBinding
-import com.growatt.atess.ui.common.WebActivity
+import com.growatt.atess.ui.common.activity.WebActivity
 import com.growatt.atess.ui.home.HomeActivity
 import com.growatt.atess.ui.mine.viewmodel.LoginViewModel
 import com.growatt.lib.service.account.User

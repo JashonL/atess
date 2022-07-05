@@ -16,7 +16,7 @@ import com.growatt.atess.BuildConfig
 import com.growatt.atess.R
 import com.growatt.atess.base.BaseActivity
 import com.growatt.atess.databinding.ActivityCancelAccountBinding
-import com.growatt.atess.ui.common.WebActivity
+import com.growatt.atess.ui.common.activity.WebActivity
 import com.growatt.atess.ui.mine.viewmodel.SettingViewModel
 import com.growatt.lib.util.ToastUtil
 import com.growatt.lib.util.gone

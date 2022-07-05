@@ -16,7 +16,7 @@ import com.growatt.atess.R
 import com.growatt.atess.application.MainApplication
 import com.growatt.atess.base.BaseDialogFragment
 import com.growatt.atess.databinding.DialogUserAgreementBinding
-import com.growatt.atess.ui.common.WebActivity
+import com.growatt.atess.ui.common.activity.WebActivity
 import com.growatt.atess.ui.launch.monitor.UserAgreementMonitor
 import com.growatt.lib.util.gone
 import com.growatt.lib.util.visible

@@ -9,7 +9,7 @@ import com.growatt.atess.BuildConfig
 import com.growatt.atess.R
 import com.growatt.atess.base.BaseActivity
 import com.growatt.atess.databinding.ActivityAboutBinding
-import com.growatt.atess.ui.common.WebActivity
+import com.growatt.atess.ui.common.activity.WebActivity
 
 /**
  * 关于页面

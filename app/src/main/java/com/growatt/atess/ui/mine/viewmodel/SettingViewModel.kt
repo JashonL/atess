@@ -82,7 +82,7 @@ class SettingViewModel : BaseViewModel() {
 
         viewModelScope.launch {
             apiService().postForm(
-                ApiPath.Mine.MODIFY_PASSWORD_BY_PHONE_OR_EMAIL, params,
+                ApiPath.Mine.MODIFY_PASSWORD, params,
                 object : HttpCallback<HttpResult<String>>() {
                     override fun success(result: HttpResult<String>) {
                         if (result.isBusinessSuccess()) {

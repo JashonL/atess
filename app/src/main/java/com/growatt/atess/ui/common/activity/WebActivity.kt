@@ -1,4 +1,4 @@
-package com.growatt.atess.ui.common
+package com.growatt.atess.ui.common.activity
 
 import android.content.Context
 import android.content.Intent
