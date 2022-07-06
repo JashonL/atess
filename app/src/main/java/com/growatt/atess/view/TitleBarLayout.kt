@@ -25,12 +25,14 @@ class TitleBarLayout @JvmOverloads constructor(
     private var showLeftBackIcon: Boolean = true
     private var showRightButton: Boolean = false
     private var showRightText: Boolean = false
+    private var showRightImage: Boolean = false
     private var titleText: String? = null
     private var rightText: String? = null
     private var rightButtonText: String? = null
     private var leftIconClickListener: ((View?) -> Unit)? = null
     private var rightButtonClickListener: ((View?) -> Unit)? = null
     private var rightTextClickListener: ((View?) -> Unit)? = null
+    private var rightImageClickListener: ((View?) -> Unit)? = null
 
     init {
         val view = LayoutInflater.from(context).inflate(R.layout.title_bar_layout, this)
@@ -47,6 +49,8 @@ class TitleBarLayout @JvmOverloads constructor(
                     getBoolean(R.styleable.TitleBarLayout_showRightButton, showRightButton)
                 showRightText =
                     getBoolean(R.styleable.TitleBarLayout_showRightText, showRightText)
+                showRightImage =
+                    getBoolean(R.styleable.TitleBarLayout_showRightImage, showRightImage)
                 titleText = getString(R.styleable.TitleBarLayout_titleText) ?: ""
                 rightText = getString(R.styleable.TitleBarLayout_rightText) ?: ""
                 rightButtonText = getString(R.styleable.TitleBarLayout_rightButtonText) ?: ""
@@ -76,16 +80,22 @@ class TitleBarLayout @JvmOverloads constructor(
         } else {
             binding.tvRightText.gone()
         }
+        if (showRightImage) {
+            binding.ivRight.visible()
+        } else {
+            binding.ivRight.gone()
+        }
         binding.ivBack.setOnClickListener(this)
         binding.btRight.setOnClickListener(this)
         binding.tvRightText.setOnClickListener(this)
+        binding.ivRight.setOnClickListener(this)
     }
 
     override fun onClick(v: View?) {
         when {
             v === binding.ivBack -> {
                 if (leftIconClickListener == null) {
-                    (context as? Activity)?.finish()
+                    (context as? Activity)?.onBackPressed()
                 } else {
                     leftIconClickListener?.invoke(v)
                 }
@@ -95,6 +105,9 @@ class TitleBarLayout @JvmOverloads constructor(
             }
             v === binding.tvRightText -> {
                 rightTextClickListener?.invoke(v)
+            }
+            v === binding.ivRight -> {
+                rightImageClickListener?.invoke(v)
             }
         }
     }
@@ -109,6 +122,10 @@ class TitleBarLayout @JvmOverloads constructor(
 
     fun setOnRightTextClickListener(rightTextClickListener: (v: View?) -> Unit) {
         this.rightTextClickListener = rightTextClickListener
+    }
+
+    fun setOnRightImageClickListener(rightImageClickListener: (v: View?) -> Unit) {
+        this.rightImageClickListener = rightImageClickListener
     }
 
     fun setRightText(rightText: String?) {

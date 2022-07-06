@@ -87,4 +87,11 @@ class WebActivity : BaseActivity() {
         }
     }
 
+    override fun onBackPressed() {
+        if (binding.web.canGoBack()) {
+            binding.web.goBack()
+            return
+        }
+        super.onBackPressed()
+    }
 }

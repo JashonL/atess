@@ -107,6 +107,9 @@
     <string name="today_power">今日发电</string>
     <string name="total_power">累计发电</string>
 
+    <string name="service_manual">使用手册</string>
+    <string name="installation_video">安装视频</string>
+
     <!-- image crop-->
     <string name="crop_image_menu_crop">裁剪</string>
     <string name="pick_image_intent_chooser_title">Select source</string>

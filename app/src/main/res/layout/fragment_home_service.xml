@@ -1,15 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".ui.home.fragment.HomeServiceFragment">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <com.growatt.atess.view.TitleBarLayout
+        android:id="@+id/title"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="@string/service" />
+        app:showLeftBackIcon="false"
+        app:titleText="@string/service" />
+
+    <com.growatt.atess.view.TabLayout
+        android:id="@+id/tab_layout"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@color/color_white"
+        android:orientation="horizontal">
+
+        <com.growatt.atess.view.Tab
+            android:id="@+id/tab_service_manual"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            app:tabText="@string/service_manual" />
+
+        <com.growatt.atess.view.Tab
+            android:id="@+id/tab_installation_video"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            app:tabText="@string/installation_video" />
+
+    </com.growatt.atess.view.TabLayout>
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/viewpager2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
 </LinearLayout>

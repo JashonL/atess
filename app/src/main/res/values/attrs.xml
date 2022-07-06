@@ -25,8 +25,13 @@
         <attr name="showLeftBackIcon" format="boolean" />
         <attr name="showRightButton" format="boolean" />
         <attr name="showRightText" format="boolean" />
+        <attr name="showRightImage" format="boolean" />
         <attr name="rightText" format="string" />
         <attr name="rightButtonText" format="string" />
+    </declare-styleable>
+
+    <declare-styleable name="Tab">
+        <attr name="tabText" format="string" />
     </declare-styleable>
 
     <declare-styleable name="CropImageView">

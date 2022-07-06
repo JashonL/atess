@@ -19,7 +19,13 @@ class HomeSynopsisFragment : HomeBaseFragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentHomeSynopsisBinding.inflate(inflater, container, false)
+        initView()
         return binding.root
+    }
+
+    private fun initView() {
+        binding.title.setOnRightImageClickListener {
+        }
     }
 
 }
