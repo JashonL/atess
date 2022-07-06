@@ -80,7 +80,7 @@ class ModifyPasswordActivity : BaseActivity(), View.OnClickListener {
         binding.title.setOnRightButtonClickListener {
             val oldPassword = binding.etOldPassword.text.toString().trim()
             val password = binding.etPassword.text.toString().trim()
-            val confirmPassword = binding.etConfirmPassword.text.trim()
+            val confirmPassword = binding.etConfirmPassword.text.toString().trim()
             if (TextUtils.isEmpty(oldPassword) || TextUtils.isEmpty(password) || TextUtils.isEmpty(
                     confirmPassword
                 )

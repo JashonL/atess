@@ -69,6 +69,7 @@
     <string name="find_back_password">找回密码</string>
     <string name="please_fill_in_info">请填写以下信息</string>
     <string name="next_step">下一步</string>
+    <string name="old_password">旧密码</string>
     <string name="new_password">新密码</string>
     <string name="confirm_new_password">确认新密码</string>
     <string name="change_phone">更换手机号</string>
