@@ -5,7 +5,7 @@
     <color name="colorPrimaryDark">#E2001A</color>
     <color name="colorAccent">#E2001A</color>
 
-    <color name="color_default_background">#FFF6F6F6</color>
+    <color name="color_default_background">#F6F6F6</color>
 
 
     <color name="text_black">#FF333333</color>
@@ -14,10 +14,10 @@
     <color name="text_gray_66">#FF666666</color>
     <color name="text_gray_99">#FF999999</color>
     <color name="text_gray_bb">#FFBBBBBB</color>
+    <color name="text_red">@color/colorAccent</color>
 
 
     <color name="color_line">#0D000000</color>
-    <color name="color_red">#E2001A</color>
     <color name="color_red_80">#CCE2001A</color>
     <color name="color_white">@android:color/white</color>
     <color name="color_bbbbbb">#FFBBBBBB</color>

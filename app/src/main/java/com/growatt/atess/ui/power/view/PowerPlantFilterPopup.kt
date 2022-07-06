@@ -78,7 +78,7 @@ class PowerPlantFilterPopup(
                         context.resources.getDimension(R.dimen.text_small)
                     )
                     if (selectedFilterModel == filter) {
-                        it.setTextColor(context.resources.getColor(R.color.color_red))
+                        it.setTextColor(context.resources.getColor(R.color.text_red))
                     } else {
                         it.setTextColor(context.resources.getColor(R.color.text_gray_99))
                     }

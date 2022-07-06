@@ -159,7 +159,7 @@ class SelectLanguageActivity : BaseActivity() {
 
         fun bindData(language: String?, isSelect: Boolean) {
             if (isSelect) {
-                binding.tvLanguage.setTextColor(MainApplication.instance().resources.getColor(R.color.colorAccent))
+                binding.tvLanguage.setTextColor(MainApplication.instance().resources.getColor(R.color.text_red))
             } else {
                 binding.tvLanguage.setTextColor(MainApplication.instance().resources.getColor(R.color.text_black))
             }

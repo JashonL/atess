@@ -16,7 +16,7 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="24dp"
         android:text="@string/user_agreement_and_privacy_policy"
-        android:textSize="@dimen/text_large"
+        android:textSize="@dimen/text_subtitle"
         android:textStyle="bold" />
 
     <LinearLayout

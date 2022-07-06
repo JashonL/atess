@@ -126,7 +126,7 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
     }
 
     private fun addColorSpan(spannable: SpannableString, colorSpanContent: String) {
-        val span = ForegroundColorSpan(resources.getColor(R.color.colorAccent))
+        val span = ForegroundColorSpan(resources.getColor(R.color.text_red))
         val startPosition = spannable.toString().indexOf(colorSpanContent)
         val endPosition = startPosition + colorSpanContent.length
         spannable.setSpan(span, startPosition, endPosition, Spannable.SPAN_INCLUSIVE_EXCLUSIVE)

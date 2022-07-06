@@ -37,7 +37,7 @@
         android:background="@drawable/red_point_background"
         android:gravity="center"
         android:textColor="@color/text_white"
-        android:textSize="@dimen/text_very_small"
+        android:textSize="10sp"
         tools:text="16" />
 
     <TextView

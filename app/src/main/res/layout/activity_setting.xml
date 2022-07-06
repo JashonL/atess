@@ -39,7 +39,7 @@
             android:layout_centerVertical="true"
             android:text="@string/personal_avatar"
             android:textColor="@color/text_black"
-            android:textSize="@dimen/text_large"
+            android:textSize="@dimen/text_subtitle"
             android:textStyle="bold" />
 
     </RelativeLayout>

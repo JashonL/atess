@@ -18,6 +18,6 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
         android:text="@string/app_name"
-        android:textSize="@dimen/text_title_large" />
+        android:textSize="24sp" />
 
 </LinearLayout>

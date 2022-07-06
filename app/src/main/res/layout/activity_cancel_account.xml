@@ -44,7 +44,7 @@
             android:layout_height="wrap_content"
             android:text="@string/cancel_account"
             android:textColor="@color/text_gray_bb"
-            android:textSize="@dimen/text_11" />
+            android:textSize="@dimen/text_tab" />
 
         <TextView
             android:id="@+id/tv_user_name"

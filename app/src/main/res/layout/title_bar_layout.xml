@@ -18,7 +18,7 @@
         android:gravity="center"
         android:maxLength="10"
         android:textColor="@color/text_black"
-        android:textSize="@dimen/text_very_large"
+        android:textSize="@dimen/text_title"
         android:textStyle="bold" />
 
     <ImageView
