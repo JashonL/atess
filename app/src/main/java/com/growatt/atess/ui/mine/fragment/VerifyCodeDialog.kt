@@ -125,7 +125,7 @@ class VerifyCodeDialog : BaseDialogFragment(), View.OnClickListener {
     }
 
     private fun updateCountDown(remainingTime: Int) {
-        lifecycleScope.launch {
+        viewLifecycleOwner.lifecycleScope.launch {
             if (remainingTime > 0) {
                 binding.tvSendVerifyCode.isEnabled = false
                 for (i in remainingTime downTo 0) {
