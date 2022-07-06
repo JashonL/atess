@@ -17,9 +17,11 @@
 
 
     <color name="color_line">#0D000000</color>
-    <color name="color_red">#FFE2001A</color>
+    <color name="color_red">#E2001A</color>
     <color name="color_red_80">#CCE2001A</color>
     <color name="color_white">@android:color/white</color>
     <color name="color_bbbbbb">#FFBBBBBB</color>
     <color name="color_e34d59">#FFE34D59</color>
+    <color name="color_05000000">#05000000</color>
+    <color name="color_33000000">#33000000</color>
 </resources>

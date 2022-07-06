@@ -140,7 +140,7 @@ class RequestPermissionHub : Fragment() {
         detach()
     }
 
-    fun openAppSetting() {
+    private fun openAppSetting() {
         startActivityForResult(Intent().also {
             it.action = "android.settings.APPLICATION_DETAILS_SETTINGS"
             it.data = Uri.fromParts("package", requireContext().packageName, null)
