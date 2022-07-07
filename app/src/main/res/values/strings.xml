@@ -48,7 +48,7 @@
     <string name="please_check_agree_agreement">请勾选同意协议</string>
     <string name="second_after_send">%ds后重新发送</string>
     <string name="synopsis">总览</string>
-    <string name="power_plant">电站</string>
+    <string name="plant">电站</string>
     <string name="service">服务</string>
     <string name="mine">我的</string>
     <string name="i">我</string>
@@ -94,12 +94,12 @@
     <string name="photo_album">相册</string>
     <string name="to_app_set_permission_format">您未允许%s获得你的%s权限，您可在应用设置中开启</string>
     <string name="install_date">安装日期</string>
-    <string name="please_input_power_plant_or_sn">请输入电站名称或电站设备中的序列号</string>
+    <string name="please_input_plant_or_sn">请输入电站名称或电站设备中的序列号</string>
     <string name="all_format">全部(%d)</string>
     <string name="online_format">在线(%d)</string>
     <string name="offline_format">离线(%d)</string>
     <string name="trouble_format">故障(%d)</string>
-    <string name="add_power_plant">添加电站</string>
+    <string name="add_plant">添加电站</string>
 
     <string name="device_count">设备数量</string>
     <string name="total_component_power">组件总功率</string>
@@ -109,6 +109,25 @@
 
     <string name="service_manual">使用手册</string>
     <string name="installation_video">安装视频</string>
+
+    <string name="plant_name">电站名称</string>
+    <string name="plant_address">电站地址</string>
+    <string name="map_for_choosing">地图选点</string>
+    <string name="auto_fetch">自动获取</string>
+    <string name="please_input_plant_name">请填写电站名称</string>
+    <string name="please_select_install_date">请选择安装日期</string>
+    <string name="please_select_country_or_area_2">请选择国家/地区</string>
+    <string name="please_select_city">请选择城市</string>
+    <string name="please_input_detail_address">请输入详细地址</string>
+    <string name="timezone">时区</string>
+    <string name="please_select_timezone">请选择时区</string>
+    <string name="please_input_total_component_power">请输入组件总功率</string>
+    <string name="plant_type">电站类型</string>
+    <string name="commercial_plant">商用电站</string>
+    <string name="capital_gains">资金收益</string>
+    <string name="please_input_the_feedin_tariff">请输入1kWh的上网电价</string>
+    <string name="plant_image">电站图片</string>
+    <string name="please_upload_plant_image">请上传电站图片</string>
 
     <!-- image crop-->
     <string name="crop_image_menu_crop">裁剪</string>

@@ -101,8 +101,14 @@
         <activity
             android:name=".component.image.crop.CropImageActivity"
             android:configChanges="orientation|keyboardHidden"
+            android:exported="false"
             android:screenOrientation="nosensor"
             android:windowSoftInputMode="stateAlwaysHidden" />
+
+        <activity
+            android:name=".ui.plant.activity.AddPlantActivity"
+            android:exported="false"
+            android:screenOrientation="nosensor" />
 
         <provider
             android:name="androidx.core.content.FileProvider"

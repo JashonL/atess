@@ -5,14 +5,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".ui.home.fragment.HomePowerPlantFragment">
+    tools:context=".ui.home.fragment.HomePlantFragment">
 
     <com.growatt.atess.view.TitleBarLayout
         android:id="@+id/title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:showLeftBackIcon="false"
-        app:titleText="@string/power_plant" />
+        app:titleText="@string/plant" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -49,7 +49,7 @@
             android:drawablePadding="2dp"
             android:ellipsize="end"
             android:gravity="center_vertical"
-            android:hint="@string/please_input_power_plant_or_sn"
+            android:hint="@string/please_input_plant_or_sn"
             android:maxLines="1"
             android:paddingStart="6dp"
             android:paddingEnd="6dp"
@@ -62,7 +62,7 @@
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/fragment_plant_list"
-        android:name="com.growatt.atess.ui.power.fragment.PowerPlantListFragment"
+        android:name="com.growatt.atess.ui.plant.fragment.PlantListFragment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 

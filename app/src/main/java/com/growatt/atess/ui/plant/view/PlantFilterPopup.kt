@@ -1,4 +1,4 @@
-package com.growatt.atess.ui.power.view
+package com.growatt.atess.ui.plant.view
 
 import android.content.Context
 import android.util.TypedValue
@@ -8,18 +8,18 @@ import android.widget.LinearLayout
 import android.widget.PopupWindow
 import android.widget.TextView
 import com.growatt.atess.R
-import com.growatt.atess.model.power.PowerPlantFilterModel
+import com.growatt.atess.model.plant.PlantFilterModel
 import com.growatt.lib.util.ViewUtil
 
 /**
  * 电站筛选过滤器
  */
-class PowerPlantFilterPopup(
+class PlantFilterPopup(
     private val context: Context,
     private val widthInt: Int,
     private val heightInt: Int,
-    private val selectedFilterModel: PowerPlantFilterModel,
-    private val callback: (selectFilterModel: PowerPlantFilterModel) -> Unit
+    private val selectedFilterModel: PlantFilterModel,
+    private val callback: (selectFilterModel: PlantFilterModel) -> Unit
 ) : PopupWindow() {
 
     companion object {
@@ -29,17 +29,17 @@ class PowerPlantFilterPopup(
             anchorView: View,
             widthInt: Int,
             heightInt: Int,
-            selectedFilterModel: PowerPlantFilterModel,
-            callback: (selectFilterModel: PowerPlantFilterModel) -> Unit
+            selectedFilterModel: PlantFilterModel,
+            callback: (selectFilterModel: PlantFilterModel) -> Unit
         ) {
             val popup =
-                PowerPlantFilterPopup(context, widthInt, heightInt, selectedFilterModel, callback)
+                PlantFilterPopup(context, widthInt, heightInt, selectedFilterModel, callback)
             popup.init()
             popup.showAsDropDown(anchorView)
         }
     }
 
-    private val filterModels = PowerPlantFilterModel.createFilters()
+    private val filterModels = PlantFilterModel.createFilters()
 
     private fun init() {
         width = LinearLayout.LayoutParams.MATCH_PARENT

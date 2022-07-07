@@ -18,13 +18,13 @@
         app:text="@string/synopsis" />
 
     <com.growatt.atess.ui.home.view.HomeTabView
-        android:id="@+id/tab_power_plant"
+        android:id="@+id/tab_plant"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        app:normalIcon="@drawable/ic_home_power_plant_normal"
-        app:selectIcon="@drawable/ic_home_power_plant_select"
-        app:text="@string/power_plant" />
+        app:normalIcon="@drawable/ic_home_plant_normal"
+        app:selectIcon="@drawable/ic_home_plant_select"
+        app:text="@string/plant" />
 
     <com.growatt.atess.ui.home.view.HomeTabView
         android:id="@+id/tab_service"

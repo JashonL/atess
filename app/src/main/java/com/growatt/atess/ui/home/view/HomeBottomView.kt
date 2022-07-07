@@ -34,14 +34,14 @@ class HomeBottomView @JvmOverloads constructor(
 
     private fun setListener() {
         binding.tabSynopsis.setOnClickListener(this)
-        binding.tabPowerPlant.setOnClickListener(this)
+        binding.tabPlant.setOnClickListener(this)
         binding.tabService.setOnClickListener(this)
         binding.tabMine.setOnClickListener(this)
     }
 
     private fun updateView() {
         binding.tabSynopsis.setSelect(selectHomeTab == HomeTab.SYNOPSIS)
-        binding.tabPowerPlant.setSelect(selectHomeTab == HomeTab.POWER_PLANT)
+        binding.tabPlant.setSelect(selectHomeTab == HomeTab.PLANT)
         binding.tabService.setSelect(selectHomeTab == HomeTab.SERVICE)
         binding.tabMine.setSelect(selectHomeTab == HomeTab.MINE)
     }
@@ -58,7 +58,7 @@ class HomeBottomView @JvmOverloads constructor(
     override fun onClick(v: View?) {
         when {
             v === binding.tabSynopsis -> setSelectPosition(HomeTab.SYNOPSIS)
-            v === binding.tabPowerPlant -> setSelectPosition(HomeTab.POWER_PLANT)
+            v === binding.tabPlant -> setSelectPosition(HomeTab.PLANT)
             v === binding.tabService -> setSelectPosition(HomeTab.SERVICE)
             v === binding.tabMine -> setSelectPosition(HomeTab.MINE)
         }
@@ -69,13 +69,13 @@ class HomeBottomView @JvmOverloads constructor(
     }
 }
 
-@IntDef(HomeTab.SYNOPSIS, HomeTab.POWER_PLANT, HomeTab.SERVICE, HomeTab.MINE)
+@IntDef(HomeTab.SYNOPSIS, HomeTab.PLANT, HomeTab.SERVICE, HomeTab.MINE)
 @Retention(AnnotationRetention.SOURCE)
 @Target(AnnotationTarget.VALUE_PARAMETER, AnnotationTarget.FIELD)
 annotation class HomeTab {
     companion object {
         const val SYNOPSIS = 0
-        const val POWER_PLANT = 1
+        const val PLANT = 1
         const val SERVICE = 2
         const val MINE = 3
     }

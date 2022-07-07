@@ -4,25 +4,25 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.growatt.atess.databinding.FragmentHomePowerPlantBinding
-import com.growatt.atess.model.power.PowerPlantFilterModel
-import com.growatt.atess.ui.power.view.PowerPlantFilterPopup
+import com.growatt.atess.databinding.FragmentHomePlantBinding
+import com.growatt.atess.model.plant.PlantFilterModel
+import com.growatt.atess.ui.plant.view.PlantFilterPopup
 
 /**
  * 首页-电站
  */
-class HomePowerPlantFragment : HomeBaseFragment(), View.OnClickListener {
+class HomePlantFragment : HomeBaseFragment(), View.OnClickListener {
 
-    private lateinit var binding: FragmentHomePowerPlantBinding
-    private var selectedFilterModer: PowerPlantFilterModel =
-        PowerPlantFilterModel.getDefaultFilter()
+    private lateinit var binding: FragmentHomePlantBinding
+    private var selectedFilterModer: PlantFilterModel =
+        PlantFilterModel.getDefaultFilter()
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentHomePowerPlantBinding.inflate(inflater, container, false)
+        binding = FragmentHomePlantBinding.inflate(inflater, container, false)
         initView()
         setListener()
         return binding.root
@@ -43,7 +43,7 @@ class HomePowerPlantFragment : HomeBaseFragment(), View.OnClickListener {
                 val parent = v.parent as View
                 val width = v.width
                 val height = deviceService().getDeviceHeight() - parent.bottom
-                PowerPlantFilterPopup.show(
+                PlantFilterPopup.show(
                     requireContext(),
                     parent,
                     width,

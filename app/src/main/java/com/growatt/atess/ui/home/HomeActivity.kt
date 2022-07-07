@@ -29,7 +29,7 @@ class HomeActivity : BaseActivity() {
     private val homeFragments by lazy(LazyThreadSafetyMode.NONE) {
         mutableMapOf(
             Pair(HomeTab.SYNOPSIS, HomeSynopsisFragment()),
-            Pair(HomeTab.POWER_PLANT, HomePowerPlantFragment()),
+            Pair(HomeTab.PLANT, HomePlantFragment()),
             Pair(HomeTab.SERVICE, HomeServiceFragment()),
             Pair(HomeTab.MINE, HomeMineFragment()),
         )
