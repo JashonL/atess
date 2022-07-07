@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.IntDef
 import androidx.fragment.app.FragmentManager
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import com.growatt.atess.R
 import com.growatt.atess.base.BaseDialogFragment
@@ -53,9 +53,7 @@ class VerifyCodeDialog : BaseDialogFragment(), View.OnClickListener {
     private var type: Int = RegisterAccountType.PHONE
     private lateinit var phoneOrEmail: String
     private var remainingTime = 0
-    private val viewModel by lazy(LazyThreadSafetyMode.NONE) {
-        ViewModelProvider(requireActivity()).get(VerifyCodeViewModel::class.java)
-    }
+    private val viewModel: VerifyCodeViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,

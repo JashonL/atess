@@ -55,6 +55,7 @@ dependencies {
     api dependency.kotlinxCoroutinesAndroid
     api dependency.androidxLocalbroadcastmanager
     api dependency.activityKtx
+    api dependency.fragmentKtx
     api dependency.androidxRecyclerView
     api dependency.androidxViewPager2
     api dependency.MPAndroidChart

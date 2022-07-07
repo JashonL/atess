@@ -100,6 +100,7 @@
     <string name="offline_format">离线(%d)</string>
     <string name="trouble_format">故障(%d)</string>
     <string name="add_plant">添加电站</string>
+    <string name="edit_plant">编辑电站</string>
 
     <string name="device_count">设备数量</string>
     <string name="total_component_power">组件总功率</string>
@@ -128,6 +129,7 @@
     <string name="please_input_the_feedin_tariff">请输入1kWh的上网电价</string>
     <string name="plant_image">电站图片</string>
     <string name="please_upload_plant_image">请上传电站图片</string>
+    <string name="total_component_power_2">组件总功率(W)</string>
 
     <!-- image crop-->
     <string name="crop_image_menu_crop">裁剪</string>

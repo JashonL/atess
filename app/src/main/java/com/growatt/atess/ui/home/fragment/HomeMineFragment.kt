@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.activityViewModels
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CircleCrop
 import com.bumptech.glide.request.RequestOptions
@@ -22,9 +22,7 @@ class HomeMineFragment : HomeBaseFragment(), View.OnClickListener,
     IAccountService.OnUserProfileChangeListener {
 
     private lateinit var binding: FragmentHomeMineBinding
-    private val viewModel by lazy(LazyThreadSafetyMode.NONE) {
-        ViewModelProvider(requireActivity()).get(SettingViewModel::class.java)
-    }
+    private val viewModel: SettingViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,

@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/color_white"
+    android:divider="@drawable/line_divider"
+    android:orientation="vertical"
+    android:showDividers="middle"
+    tools:context=".ui.plant.fragment.AddPlant2Fragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/color_white"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="6dp"
+            android:text="*"
+            android:textColor="@color/text_red"
+            android:textSize="@dimen/text_medium" />
+
+        <TextView
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:text="@string/timezone"
+            android:textColor="@color/text_black"
+            android:textSize="@dimen/text_medium"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tv_timezone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:hint="@string/please_select_timezone"
+            android:paddingTop="16dp"
+            android:paddingBottom="16dp"
+            android:textColor="@color/text_black"
+            android:textSize="@dimen/text_medium"
+            app:drawableEndCompat="@drawable/ic_right" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/color_white"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="6dp"
+            android:text="*"
+            android:textColor="@color/text_red"
+            android:textSize="@dimen/text_medium" />
+
+        <TextView
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:text="@string/total_component_power_2"
+            android:textColor="@color/text_black"
+            android:textSize="@dimen/text_medium"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/et_total_component_power"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:hint="@string/please_input_total_component_power"
+            android:inputType="number"
+            android:paddingTop="16dp"
+            android:paddingBottom="16dp"
+            android:textColor="@color/text_black"
+            android:textSize="@dimen/text_medium" />
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:id="@+id/ll_plant_type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingStart="16dp"
+            android:paddingTop="6dp"
+            android:paddingBottom="6dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="6dp"
+                android:text="*"
+                android:textColor="@color/text_red"
+                android:textSize="@dimen/text_medium"
+                android:visibility="invisible" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/plant_type"
+                android:textColor="@color/text_black"
+                android:textSize="@dimen/text_medium"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/ll_plant_type"
+            android:layout_marginBottom="12dp"
+            android:layout_toRightOf="@id/ll_plant_type"
+            android:drawablePadding="6dp"
+            android:text="@string/commercial_plant"
+            android:textColor="@color/text_black"
+            android:textSize="@dimen/text_small"
+            app:drawableStartCompat="@drawable/ic_select" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/color_white"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="6dp"
+            android:text="*"
+            android:textColor="@color/text_red"
+            android:textSize="@dimen/text_medium" />
+
+        <TextView
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:text="@string/capital_gains"
+            android:textColor="@color/text_black"
+            android:textSize="@dimen/text_medium"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/et_electrovalence"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_weight="1"
+            android:hint="@string/please_input_the_feedin_tariff"
+            android:inputType="numberDecimal"
+            android:paddingTop="16dp"
+            android:paddingBottom="16dp"
+            android:textColor="@color/text_black"
+            android:textSize="@dimen/text_medium" />
+
+        <TextView
+            android:id="@+id/tv_currency"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/gray_background_corner_2"
+            android:drawablePadding="6dp"
+            android:paddingStart="8dp"
+            android:paddingTop="4dp"
+            android:paddingEnd="8dp"
+            android:paddingBottom="4dp"
+            android:textColor="@color/text_gray_66"
+            android:textSize="@dimen/text_small"
+            app:drawableEndCompat="@drawable/ic_down"
+            tools:text="RMB" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/color_white"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="6dp"
+            android:text="*"
+            android:textColor="@color/text_red"
+            android:textSize="@dimen/text_medium" />
+
+        <TextView
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="30dp"
+            android:text="@string/plant_image"
+            android:textColor="@color/text_black"
+            android:textSize="@dimen/text_medium"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/iv_plant_image"
+            android:layout_width="74dp"
+            android:layout_height="74dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            tools:src="@mipmap/ic_launcher" />
+
+        <TextView
+            android:id="@+id/tv_upload_plant_image"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint="@string/please_upload_plant_image"
+            android:paddingTop="16dp"
+            android:paddingBottom="16dp"
+            android:textColor="@color/text_black"
+            android:textSize="@dimen/text_medium"
+            app:drawableEndCompat="@drawable/ic_plant_image_add" />
+
+    </LinearLayout>
+
+</LinearLayout>
+
