@@ -67,7 +67,8 @@ class AddPlantActivity : BaseActivity(), View.OnClickListener {
     override fun onClick(v: View?) {
         when {
             v === binding.btNextStep -> {
-
+                addPlant1Fragment.saveEditTextString()
+                addPlant2Fragment.saveEditTextString()
             }
         }
     }

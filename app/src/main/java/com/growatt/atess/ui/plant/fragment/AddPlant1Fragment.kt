@@ -8,6 +8,9 @@ import androidx.fragment.app.activityViewModels
 import com.growatt.atess.base.BaseFragment
 import com.growatt.atess.databinding.FragmentAddPlant1Binding
 import com.growatt.atess.ui.plant.viewmodel.AddPlantViewModel
+import com.growatt.lib.view.dialog.DatePickerFragment
+import com.growatt.lib.view.dialog.OnDateSetListener
+import java.util.*
 
 class AddPlant1Fragment : BaseFragment(), View.OnClickListener {
 
@@ -34,13 +37,13 @@ class AddPlant1Fragment : BaseFragment(), View.OnClickListener {
     }
 
     private fun initView() {
-
+        binding.tvInstallDate.text = viewModel.getDateString()
     }
 
     override fun onClick(v: View?) {
         when {
             v === binding.tvInstallDate -> {
-
+                selectDate()
             }
             v === binding.tvMapForChoosing -> {
 
@@ -56,4 +59,22 @@ class AddPlant1Fragment : BaseFragment(), View.OnClickListener {
             }
         }
     }
+
+    private fun selectDate() {
+        DatePickerFragment.show(childFragmentManager, object : OnDateSetListener {
+            override fun onDateSet(date: Date) {
+                viewModel.date = date
+                binding.tvInstallDate.text = viewModel.getDateString()
+            }
+        })
+    }
+
+    /**
+     * 保存输入框的内容
+     */
+    fun saveEditTextString() {
+        viewModel.plantName = binding.etPlantName.text.toString().trim()
+    }
+
+
 }

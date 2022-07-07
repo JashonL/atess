@@ -52,4 +52,10 @@ class AddPlant2Fragment : BaseFragment(), View.OnClickListener {
             }
         }
     }
+
+    /**
+     * 保存输入框的内容
+     */
+    fun saveEditTextString() {
+    }
 }
