@@ -2,10 +2,12 @@ package com.growatt.atess.base
 
 import androidx.fragment.app.Fragment
 import com.growatt.atess.application.MainApplication
+import com.growatt.lib.LibApplication
 import com.growatt.lib.service.ServiceManager
 import com.growatt.lib.service.account.IAccountService
 import com.growatt.lib.service.device.IDeviceService
 import com.growatt.lib.service.http.IHttpService
+import com.growatt.lib.service.location.ILocationService
 import com.growatt.lib.service.storage.IStorageService
 
 abstract class BaseFragment : Fragment(), ViewHelper, ServiceManager.ServiceInterface {
@@ -24,6 +26,10 @@ abstract class BaseFragment : Fragment(), ViewHelper, ServiceManager.ServiceInte
 
     override fun accountService(): IAccountService {
         return MainApplication.instance().accountService()
+    }
+
+    override fun locationService(): ILocationService {
+        return LibApplication.instance().locationService()
     }
 
     override fun showDialog() {

@@ -9,6 +9,7 @@ import com.growatt.lib.service.ServiceManager
 import com.growatt.lib.service.account.IAccountService
 import com.growatt.lib.service.device.IDeviceService
 import com.growatt.lib.service.http.IHttpService
+import com.growatt.lib.service.location.ILocationService
 import com.growatt.lib.service.storage.IStorageService
 import com.growatt.lib.util.ViewUtil
 
@@ -42,6 +43,10 @@ open class BaseDialogFragment : DialogFragment(), ServiceManager.ServiceInterfac
 
     override fun accountService(): IAccountService {
         return LibApplication.instance().accountService()
+    }
+
+    override fun locationService(): ILocationService {
+        return LibApplication.instance().locationService()
     }
 
     override fun showDialog() {

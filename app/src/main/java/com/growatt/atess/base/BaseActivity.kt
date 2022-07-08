@@ -12,6 +12,7 @@ import com.growatt.lib.service.account.IAccountService
 import com.growatt.lib.service.device.IDeviceService
 import com.growatt.lib.service.device.Language
 import com.growatt.lib.service.http.IHttpService
+import com.growatt.lib.service.location.ILocationService
 import com.growatt.lib.service.storage.IStorageService
 
 abstract class BaseActivity : AppCompatActivity(), ServiceManager.ServiceInterface, ViewHelper {
@@ -56,6 +57,10 @@ abstract class BaseActivity : AppCompatActivity(), ServiceManager.ServiceInterfa
 
     override fun accountService(): IAccountService {
         return LibApplication.instance().accountService()
+    }
+
+    override fun locationService(): ILocationService {
+        return LibApplication.instance().locationService()
     }
 
     override fun showDialog() {

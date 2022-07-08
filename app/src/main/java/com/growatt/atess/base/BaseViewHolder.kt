@@ -7,6 +7,7 @@ import com.growatt.lib.service.ServiceManager
 import com.growatt.lib.service.account.IAccountService
 import com.growatt.lib.service.device.IDeviceService
 import com.growatt.lib.service.http.IHttpService
+import com.growatt.lib.service.location.ILocationService
 import com.growatt.lib.service.storage.IStorageService
 
 open class BaseViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView), ViewHelper,
@@ -36,6 +37,9 @@ open class BaseViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView), V
         return MainApplication.instance().accountService()
     }
 
+    override fun locationService(): ILocationService {
+        return MainApplication.instance().locationService()
+    }
 }
 
 interface OnItemClickListener {

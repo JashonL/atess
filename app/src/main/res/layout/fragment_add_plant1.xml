@@ -168,7 +168,7 @@
                     android:text="@string/map_for_choosing"
                     android:textColor="@color/text_gray_99"
                     android:textSize="@dimen/text_small"
-                    app:drawableStartCompat="@drawable/ic_map_gray" />
+                    app:drawableLeftCompat="@drawable/ic_map_gray" />
 
                 <TextView
                     android:id="@+id/tv_auto_fetch"
@@ -184,7 +184,7 @@
                     android:text="@string/auto_fetch"
                     android:textColor="@color/text_gray_99"
                     android:textSize="@dimen/text_small"
-                    app:drawableStartCompat="@drawable/ic_auto_fetch_gray" />
+                    app:drawableLeftCompat="@drawable/ic_auto_fetch_gray" />
 
             </LinearLayout>
 
@@ -284,10 +284,13 @@
                 android:id="@+id/et_detail_address"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:gravity="top"
                 android:hint="@string/please_input_detail_address"
-                android:inputType="text"
+                android:inputType="textMultiLine"
                 android:paddingTop="16dp"
                 android:paddingBottom="16dp"
+                android:scrollHorizontally="false"
+                android:singleLine="false"
                 android:textColor="@color/text_black"
                 android:textSize="@dimen/text_medium"
                 app:drawableEndCompat="@drawable/ic_input" />

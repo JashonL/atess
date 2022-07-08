@@ -92,6 +92,7 @@
     <string name="storage_photo_album">存储（相册）</string>
     <string name="camera">相机</string>
     <string name="photo_album">相册</string>
+    <string name="location">位置</string>
     <string name="to_app_set_permission_format">您未允许%s获得你的%s权限，您可在应用设置中开启</string>
     <string name="install_date">安装日期</string>
     <string name="please_input_plant_or_sn">请输入电站名称或电站设备中的序列号</string>

@@ -9,3 +9,4 @@ dependencyResolutionManagement {
 rootProject.name = "atess"
 include ':app'
 include ':lib'
+include ':thirdsdk:amap'

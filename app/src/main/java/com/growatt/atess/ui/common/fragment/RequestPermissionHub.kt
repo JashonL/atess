@@ -122,6 +122,18 @@ class RequestPermissionHub : Fragment() {
                     getString(R.string.storage_photo_album)
                 )
             }
+            Manifest.permission.ACCESS_FINE_LOCATION -> {
+                title = getString(
+                    R.string.app_want_to_visit_format,
+                    appName,
+                    getString(R.string.location)
+                )
+                messagge = getString(
+                    R.string.to_app_set_permission_format,
+                    appName,
+                    getString(R.string.location)
+                )
+            }
         }
 
         AlertDialog.Builder(requireContext())

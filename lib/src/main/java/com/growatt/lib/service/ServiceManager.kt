@@ -3,6 +3,7 @@ package com.growatt.lib.service
 import com.growatt.lib.service.account.IAccountService
 import com.growatt.lib.service.device.IDeviceService
 import com.growatt.lib.service.http.IHttpService
+import com.growatt.lib.service.location.ILocationService
 import com.growatt.lib.service.storage.IStorageService
 
 /**
@@ -39,6 +40,8 @@ class ServiceManager private constructor() {
         fun deviceService(): IDeviceService
 
         fun accountService(): IAccountService
+
+        fun locationService(): ILocationService
 
     }
 }
