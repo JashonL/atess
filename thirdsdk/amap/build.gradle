@@ -14,10 +14,6 @@ android {
         versionName "1.0.0"
 
         manifestPlaceholders = [amapKey: rootProject.ext.odm.amapKey]
-
-        ndk {
-            abiFilters "armeabi-v7a", "arm64-v8a"
-        }
     }
 
     buildTypes {
