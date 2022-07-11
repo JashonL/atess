@@ -87,6 +87,7 @@
     <string name="take_a_picture">拍照</string>
     <string name="from_the_album">从相册选取</string>
     <string name="please_select">请选择</string>
+    <string name="select_unit">选择单位</string>
     <string name="to_set">去设置</string>
     <string name="app_want_to_visit_format">"%s"想访问您的%s</string>
     <string name="storage_photo_album">存储（相册）</string>

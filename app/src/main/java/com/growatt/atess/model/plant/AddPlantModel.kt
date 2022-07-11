@@ -29,13 +29,13 @@ class AddPlantModel {
     var plant_lng: Double? = null
 
     //总功率
-    var nominalPower: Double? = null
+    var nominalPower: String? = null
 
     //时区
-    var plantTimeZone: Int? = null
+    var plantTimeZone: String? = null
 
     //收益公式
-    var formulaMoney: Double? = null
+    var formulaMoney: String? = null
 
     //货币单位
     var formulaMoneyUnitId: String? = null

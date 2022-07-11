@@ -77,4 +77,16 @@ object ApiPath {
         const val UPLOAD_USER_ICON = "ShineServer/ATSSetting/uploadUserIcon"
 
     }
+
+    object Plant {
+        /**
+         * 时区列表
+         */
+        const val GET_TIME_ZONE_LIST = "ShineServer/ATSregister/getTimeZoneList"
+
+        /**
+         * 货币列表
+         */
+        const val CURRENCY_LIST = "ShineServer/ATSregister/moneyUnitList"
+    }
 }
