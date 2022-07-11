@@ -1,19 +1,22 @@
 package com.growatt.lib.service.location
 
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
 
-data class LocationInfo(
+@Parcelize
+data class LocationInfo @JvmOverloads constructor(
     //纬度
-    val latitude: Double,
+    val latitude: Double? = null,
     //经度
-    val longitude: Double,
+    val longitude: Double? = null,
     //地址描述
-    val address: String,
+    val address: String? = "",
     //国家
-    val country: String,
+    val country: String? = "",
     //省
-    val province: String,
+    val province: String? = "",
     //城市
-    val city: String,
+    val city: String? = "",
     //城市编码
-    val cityCode: String,
-)
+    val cityCode: String? = "",
+) : Parcelable

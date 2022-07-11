@@ -16,7 +16,7 @@ import com.growatt.lib.service.location.OnLocationListener
  */
 class AmapLocationService : ILocationService, AMapLocationListener {
 
-    private lateinit var locationClient: AMapLocationClient
+    private var locationClient: AMapLocationClient? = null
 
     private val listeners = mutableSetOf<OnLocationListener>()
 
@@ -25,9 +25,15 @@ class AmapLocationService : ILocationService, AMapLocationListener {
     }
 
     override fun init(application: Application) {
-        locationClient = AMapLocationClient(application)
-        locationClient.setLocationListener(this)
-        locationClient.setLocationOption(AMapLocationClientOption().also {
+        //高德开发文档提示需要try catch
+        try {
+            locationClient = AMapLocationClient(application)
+        } catch (e: Exception) {
+
+        }
+
+        locationClient?.setLocationListener(this)
+        locationClient?.setLocationOption(AMapLocationClientOption().also {
             //高精度定位模式：会同时使用网络定位和GPS定位，优先返回最高精度的定位结果，以及对应的地址描述信息。
             it.locationMode = AMapLocationClientOption.AMapLocationMode.Hight_Accuracy
             //获取一次定位结果
@@ -41,13 +47,13 @@ class AmapLocationService : ILocationService, AMapLocationListener {
 
     override fun requestLocation() {
         //暂停上次的定位
-        locationClient.stopLocation()
+        locationClient?.stopLocation()
         //重新开启定位功能
-        locationClient.startLocation()
+        locationClient?.startLocation()
     }
 
     override fun stopLocation() {
-        locationClient.stopLocation()
+        locationClient?.stopLocation()
     }
 
     override fun addLocationListener(listener: OnLocationListener) {

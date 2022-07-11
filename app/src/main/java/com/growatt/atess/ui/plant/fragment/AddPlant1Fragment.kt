@@ -1,6 +1,9 @@
 package com.growatt.atess.ui.plant.fragment
 
 import android.Manifest
+import android.app.Activity
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,11 +13,13 @@ import androidx.lifecycle.lifecycleScope
 import com.growatt.atess.R
 import com.growatt.atess.base.BaseFragment
 import com.growatt.atess.databinding.FragmentAddPlant1Binding
+import com.growatt.atess.ui.common.activity.AMapActivity
 import com.growatt.atess.ui.common.fragment.RequestPermissionHub
 import com.growatt.atess.ui.common.fragment.SystemLocationDisableTipDialog
 import com.growatt.atess.ui.plant.viewmodel.AddPlantViewModel
 import com.growatt.lib.service.location.LocationInfo
 import com.growatt.lib.service.location.OnLocationListener
+import com.growatt.lib.util.ActivityBridge
 import com.growatt.lib.util.ToastUtil
 import com.growatt.lib.util.Util
 import com.growatt.lib.view.dialog.DatePickerFragment
@@ -23,6 +28,11 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.suspendCancellableCoroutine
 import java.util.*
 
+/**
+ * 电站名称
+ * 安装日期
+ * 电站地址
+ */
 class AddPlant1Fragment : BaseFragment(), View.OnClickListener, OnLocationListener {
 
     private lateinit var binding: FragmentAddPlant1Binding
@@ -58,10 +68,38 @@ class AddPlant1Fragment : BaseFragment(), View.OnClickListener, OnLocationListen
             }
             v === binding.tvMapForChoosing -> {
                 fetchPlantAddressModeViewChange(v)
+                requestLocationPermission {
+                    ActivityBridge.startActivity(
+                        requireActivity(),
+                        AMapActivity.getIntent(requireContext()),
+                        object : ActivityBridge.OnActivityForResult {
+                            override fun onActivityForResult(
+                                context: Context?,
+                                resultCode: Int,
+                                data: Intent?
+                            ) {
+                                if (resultCode == Activity.RESULT_OK && data != null && data.hasExtra(
+                                        AMapActivity.KEY_SELECT_ADDRESS
+                                    )
+                                ) {
+                                    val locationInfo =
+                                        data.getParcelableExtra<LocationInfo>(AMapActivity.KEY_SELECT_ADDRESS)
+                                    viewModel.addPlantModel.country = locationInfo?.country
+                                    viewModel.addPlantModel.city = locationInfo?.city
+                                    viewModel.addPlantModel.plantAddress = locationInfo?.address
+                                    refreshLocationView()
+                                }
+                            }
+                        })
+                }
             }
             v === binding.tvAutoFetch -> {
                 fetchPlantAddressModeViewChange(v)
-                fetchLocation()
+                requestLocationPermission {
+                    showDialog()
+                    locationService().addLocationListener(this@AddPlant1Fragment)
+                    locationService().requestLocation()
+                }
             }
             v === binding.tvSelectArea -> {
 
@@ -97,7 +135,10 @@ class AddPlant1Fragment : BaseFragment(), View.OnClickListener, OnLocationListen
         )
     }
 
-    private fun fetchLocation() {
+    /**
+     * 请求定位权限
+     */
+    private fun requestLocationPermission(onSuccess: () -> Unit) {
         viewLifecycleOwner.lifecycleScope.launch {
             if (isSystemLocationEnable()) {
                 RequestPermissionHub.requestPermission(
@@ -105,9 +146,7 @@ class AddPlant1Fragment : BaseFragment(), View.OnClickListener, OnLocationListen
                     arrayOf(Manifest.permission.ACCESS_FINE_LOCATION)
                 ) {
                     if (it) {
-                        showDialog()
-                        locationService().addLocationListener(this@AddPlant1Fragment)
-                        locationService().requestLocation()
+                        onSuccess.invoke()
                     }
                 }
             }
