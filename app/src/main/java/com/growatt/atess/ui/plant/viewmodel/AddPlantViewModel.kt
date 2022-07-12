@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.growatt.atess.base.BaseViewModel
 import com.growatt.atess.model.plant.AddPlantModel
 import com.growatt.atess.model.plant.GeneralItemModel
+import com.growatt.atess.model.plant.TimeZone
 import com.growatt.atess.service.http.ApiPath
 import com.growatt.lib.service.http.HttpCallback
 import com.growatt.lib.service.http.HttpResult
@@ -19,35 +20,30 @@ class AddPlantViewModel : BaseViewModel() {
 
     val addPlantModel = AddPlantModel()
 
-    val timeZoneListLiveData = MutableLiveData<Pair<Array<GeneralItemModel>, String?>>()
+    val timeZoneLiveData = MutableLiveData<Pair<TimeZone?, String?>>()
 
     val currencyListLiveData = MutableLiveData<Pair<Array<GeneralItemModel>, String?>>()
 
     /**
      * 获取时区列表
      */
-    fun fetchTimeZoneList() {
+    fun fetchTimeZoneList(country: String) {
         viewModelScope.launch {
-            apiService().post(
-                ApiPath.Plant.GET_TIME_ZONE_LIST,
-                object : HttpCallback<HttpResult<Array<String>>>() {
-                    override fun success(result: HttpResult<Array<String>>) {
+            apiService().postForm(
+                ApiPath.Plant.GET_TIMEZONE_BY_COUNTRY,
+                hashMapOf(Pair("country", country)),
+                object : HttpCallback<HttpResult<TimeZone>>() {
+                    override fun success(result: HttpResult<TimeZone>) {
                         if (result.isBusinessSuccess()) {
-                            val timeZoneList = result.data
-                            if (timeZoneList == null) {
-                                timeZoneListLiveData.value = Pair(emptyArray(), null)
-                            } else {
-                                timeZoneListLiveData.value =
-                                    Pair(GeneralItemModel.convert(timeZoneList), null)
-                            }
+                            timeZoneLiveData.value = Pair(result.data, null)
                         } else {
-                            timeZoneListLiveData.value = Pair(emptyArray(), result.msg ?: "")
+                            timeZoneLiveData.value = Pair(null, result.msg ?: "")
                         }
                     }
 
                     override fun onFailure(error: String?) {
                         super.onFailure(error)
-                        timeZoneListLiveData.value = Pair(emptyArray(), error ?: "")
+                        timeZoneLiveData.value = Pair(null, error ?: "")
                     }
                 })
         }

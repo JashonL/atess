@@ -57,10 +57,13 @@ class AddPlant2Fragment : BaseFragment(), View.OnClickListener {
     }
 
     private fun initData() {
-        viewModel.timeZoneListLiveData.observe(viewLifecycleOwner) {
+        viewModel.timeZoneLiveData.observe(viewLifecycleOwner) {
             dismissDialog()
             if (it.second == null) {
-                selectTimeZone(it.first)
+                viewModel.addPlantModel.formulaMoneyUnitId = it.first?.monetaryUnit
+                binding.tvCurrency.text = it.first?.monetaryUnit
+                viewModel.addPlantModel.plantTimeZone = it.first?.timezoneList?.get(0)
+                binding.tvTimezone.text = viewModel.addPlantModel.plantTimeZone
             } else {
                 ToastUtil.show(it.second)
             }
@@ -103,13 +106,8 @@ class AddPlant2Fragment : BaseFragment(), View.OnClickListener {
     override fun onClick(v: View?) {
         when {
             v === binding.tvTimezone -> {
-                val timeZones = viewModel.timeZoneListLiveData.value?.first
-                if (timeZones.isNullOrEmpty()) {
-                    showDialog()
-                    viewModel.fetchTimeZoneList()
-                } else {
-                    selectTimeZone(timeZones)
-                }
+                val timeZone = viewModel.timeZoneLiveData.value?.first
+                selectTimeZone(timeZone?.getGeneralItem())
             }
             v === binding.tvCurrency -> {
                 val currencyList = viewModel.currencyListLiveData.value?.first
@@ -141,7 +139,10 @@ class AddPlant2Fragment : BaseFragment(), View.OnClickListener {
         binding.tvCurrency.text = viewModel.addPlantModel.formulaMoneyUnitId
     }
 
-    private fun selectTimeZone(timeZones: Array<GeneralItemModel>) {
+    private fun selectTimeZone(timeZones: Array<GeneralItemModel>?) {
+        if (timeZones.isNullOrEmpty()) {
+            return
+        }
         PickerDialog.show(childFragmentManager, timeZones) {
             viewModel.addPlantModel.plantTimeZone = timeZones[it].name
             binding.tvTimezone.text = viewModel.addPlantModel.plantTimeZone

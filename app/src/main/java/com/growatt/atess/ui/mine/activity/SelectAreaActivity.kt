@@ -45,7 +45,6 @@ class SelectAreaActivity : BaseActivity() {
         initView()
     }
 
-
     private fun initView() {
         binding.rvList.adapter = Adapter()
     }

@@ -117,6 +117,7 @@ class SettingViewModel : BaseViewModel() {
             } else {
                 put("OldPWD", phoneOrEmail)
             }
+            put("validCode", verifyCode)
         }
 
         val requestApi =

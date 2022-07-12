@@ -60,7 +60,7 @@ class RegisterViewModel : BaseViewModel() {
                     put("agentCode", agentCode)
                 }
                 if (!TextUtils.isEmpty(verifyCode)) {
-                    put("validCOde", verifyCode)
+                    put("validCode", verifyCode)
                 }
             }
             apiService().postJson(ApiPath.Mine.REGISTER, params, object :

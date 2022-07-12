@@ -80,13 +80,13 @@ object ApiPath {
 
     object Plant {
         /**
-         * 时区列表
-         */
-        const val GET_TIME_ZONE_LIST = "ShineServer/ATSregister/getTimeZoneList"
-
-        /**
          * 货币列表
          */
         const val CURRENCY_LIST = "ShineServer/ATSregister/moneyUnitList"
+
+        /**
+         * 根据国家来获取时区列表
+         */
+        const val GET_TIMEZONE_BY_COUNTRY = "ShineServer/ATSregister/getTimezoneByCountry"
     }
 }

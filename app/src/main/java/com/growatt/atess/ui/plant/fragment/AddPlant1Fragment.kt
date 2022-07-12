@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import com.growatt.atess.R
@@ -16,6 +17,7 @@ import com.growatt.atess.databinding.FragmentAddPlant1Binding
 import com.growatt.atess.ui.common.activity.AMapActivity
 import com.growatt.atess.ui.common.fragment.RequestPermissionHub
 import com.growatt.atess.ui.common.fragment.SystemLocationDisableTipDialog
+import com.growatt.atess.ui.mine.activity.SelectAreaActivity
 import com.growatt.atess.ui.plant.viewmodel.AddPlantViewModel
 import com.growatt.lib.service.location.LocationInfo
 import com.growatt.lib.service.location.OnLocationListener
@@ -84,7 +86,6 @@ class AddPlant1Fragment : BaseFragment(), View.OnClickListener, OnLocationListen
                                 ) {
                                     val locationInfo =
                                         data.getParcelableExtra<LocationInfo>(AMapActivity.KEY_SELECT_ADDRESS)
-                                    viewModel.addPlantModel.country = locationInfo?.country
                                     viewModel.addPlantModel.city = locationInfo?.city
                                     viewModel.addPlantModel.plantAddress = locationInfo?.address
                                     refreshLocationView()
@@ -102,12 +103,36 @@ class AddPlant1Fragment : BaseFragment(), View.OnClickListener, OnLocationListen
                 }
             }
             v === binding.tvSelectArea -> {
-
+                selectArea()
             }
             v === binding.tvSelectCity -> {
 
             }
         }
+    }
+
+    private fun selectArea() {
+        ActivityBridge.startActivity(
+            requireActivity(),
+            SelectAreaActivity.getIntent(requireContext()),
+            object : ActivityBridge.OnActivityForResult {
+                override fun onActivityForResult(
+                    context: Context?,
+                    resultCode: Int,
+                    data: Intent?
+                ) {
+                    if (resultCode == AppCompatActivity.RESULT_OK && data?.hasExtra(
+                            SelectAreaActivity.KEY_AREA
+                        ) == true
+                    ) {
+                        viewModel.addPlantModel.country =
+                            data.getStringExtra(SelectAreaActivity.KEY_AREA) ?: ""
+                        binding.tvSelectArea.text = viewModel.addPlantModel.country
+                        showDialog()
+                        viewModel.fetchTimeZoneList(viewModel.addPlantModel.country ?: "")
+                    }
+                }
+            })
     }
 
     private fun fetchPlantAddressModeViewChange(v: View) {
@@ -192,7 +217,6 @@ class AddPlant1Fragment : BaseFragment(), View.OnClickListener, OnLocationListen
 
     override fun locationSuccess(locationInfo: LocationInfo) {
         dismissDialog()
-        viewModel.addPlantModel.country = locationInfo.country
         viewModel.addPlantModel.city = locationInfo.city
         viewModel.addPlantModel.plantAddress = locationInfo.address
         refreshLocationView()
