@@ -50,37 +50,9 @@
         android:layout_height="1dp"
         android:background="@color/color_line" />
 
-
     <NumberPicker
         android:id="@+id/np_picker"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
-
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:visibility="gone">
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginTop="40dp"
-            android:background="@color/color_line" />
-
-        <androidx.viewpager2.widget.ViewPager2
-            android:id="@+id/vp_pickers"
-            android:layout_width="match_parent"
-            android:layout_height="120dp"
-            android:orientation="vertical" />
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_gravity="bottom"
-            android:layout_marginBottom="40dp"
-            android:background="@color/color_line" />
-
-    </FrameLayout>
-
 
 </LinearLayout>

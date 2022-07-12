@@ -58,7 +58,7 @@ class AddPlantViewModel : BaseViewModel() {
      */
     fun fetchCurrencyList() {
         viewModelScope.launch {
-            apiService().post(
+            apiService().httpGet(
                 ApiPath.Plant.CURRENCY_LIST,
                 object : HttpCallback<HttpResult<Array<String>>>() {
                     override fun success(result: HttpResult<Array<String>>) {

@@ -3,6 +3,7 @@ package com.growatt.lib.util
 import android.app.Activity
 import android.content.Context
 import android.content.ContextWrapper
+import android.widget.NumberPicker
 
 object ViewUtil {
 
@@ -38,5 +39,20 @@ object ViewUtil {
         }
         val scale = context.resources.displayMetrics.density
         return (pxValue / scale + 0.5f).toInt()
+    }
+
+    /**
+     * 解决NumberPicker初始化不显示文案问题
+     * https://issuetracker.google.com/issues/36952035?pli=1
+     */
+    fun fixNumberPicker(numberPicker: NumberPicker) {
+        try {
+            val method =
+                numberPicker::class.java.getDeclaredMethod("changeValueByOne", Boolean::class.java)
+            method.isAccessible = true
+            method.invoke(numberPicker, true)
+        } catch (e: Exception) {
+        }
+
     }
 }

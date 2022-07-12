@@ -7,6 +7,7 @@ import androidx.fragment.app.FragmentManager
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.growatt.atess.databinding.DialogPickerBinding
+import com.growatt.lib.util.ViewUtil
 
 /**
  * 选择器dialog
@@ -52,6 +53,7 @@ class PickerDialog : BottomSheetDialogFragment(), View.OnClickListener {
             value = 0
             setFormatter { index -> options[index].itemName() }
         }
+        ViewUtil.fixNumberPicker(binding.npPicker)
     }
 
     override fun onClick(v: View?) {
