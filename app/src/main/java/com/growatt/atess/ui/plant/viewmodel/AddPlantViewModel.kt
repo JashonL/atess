@@ -28,7 +28,7 @@ class AddPlantViewModel : BaseViewModel() {
      */
     fun fetchTimeZoneList() {
         viewModelScope.launch {
-            apiService().httpGet(
+            apiService().post(
                 ApiPath.Plant.GET_TIME_ZONE_LIST,
                 object : HttpCallback<HttpResult<Array<String>>>() {
                     override fun success(result: HttpResult<Array<String>>) {
@@ -58,7 +58,7 @@ class AddPlantViewModel : BaseViewModel() {
      */
     fun fetchCurrencyList() {
         viewModelScope.launch {
-            apiService().httpGet(
+            apiService().post(
                 ApiPath.Plant.CURRENCY_LIST,
                 object : HttpCallback<HttpResult<Array<String>>>() {
                     override fun success(result: HttpResult<Array<String>>) {
