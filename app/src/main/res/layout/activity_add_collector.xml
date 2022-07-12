@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    tools:context=".ui.plant.activity.AddCollectorActivity">
+
+    <com.growatt.lib.view.StatusBarHeightView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/color_white" />
+
+    <com.growatt.atess.view.TitleBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:titleText="@string/add_collector" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:text="@string/input_collector_sn_and_check_code"
+        android:textColor="@color/text_gray_99"
+        android:textSize="@dimen/text_13" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="86dp"
+                android:layout_height="45dp"
+                android:src="@drawable/ic_serial_number" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="@string/serial_number"
+                android:textColor="@color/text_gray_99"
+                android:textSize="@dimen/text_10" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_marginStart="45dp"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="62dp"
+                android:layout_height="34dp"
+                android:src="@drawable/ic_serial_number" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="@string/check_code"
+                android:textColor="@color/text_gray_99"
+                android:textSize="@dimen/text_10" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="38dp"
+        android:background="@color/color_white"
+        android:divider="@drawable/line_divider"
+        android:orientation="vertical"
+        android:showDividers="middle">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/color_white"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="6dp"
+                android:text="*"
+                android:textColor="@color/text_red"
+                android:textSize="@dimen/text_medium" />
+
+            <TextView
+                android:layout_width="90dp"
+                android:layout_height="wrap_content"
+                android:text="@string/serial_number_sn"
+                android:textColor="@color/text_black"
+                android:textSize="@dimen/text_medium"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/et_collector_sn"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:layout_weight="1"
+                android:hint="@string/please_input_collector_sn"
+                android:inputType="text"
+                android:paddingTop="16dp"
+                android:paddingBottom="16dp"
+                android:textColor="@color/text_black"
+                android:textSize="@dimen/text_medium" />
+
+            <ImageView
+                android:id="@+id/iv_scan"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:padding="2dp"
+                android:src="@drawable/ic_scan" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/color_white"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="6dp"
+                android:text="*"
+                android:textColor="@color/text_red"
+                android:textSize="@dimen/text_medium" />
+
+            <TextView
+                android:layout_width="90dp"
+                android:layout_height="wrap_content"
+                android:text="@string/check_code_sn"
+                android:textColor="@color/text_black"
+                android:textSize="@dimen/text_medium"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/et_check_code"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:layout_weight="1"
+                android:hint="@string/please_input_collector_check_code"
+                android:inputType="text"
+                android:paddingTop="16dp"
+                android:paddingBottom="16dp"
+                android:textColor="@color/text_black"
+                android:textSize="@dimen/text_medium" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/bt_finish"
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="36dp"
+        android:text="@string/finish"
+        android:textSize="@dimen/text_medium" />
+
+</LinearLayout>

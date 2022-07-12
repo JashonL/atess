@@ -88,5 +88,10 @@ object ApiPath {
          * 根据国家来获取时区列表
          */
         const val GET_TIMEZONE_BY_COUNTRY = "ShineServer/ATSregister/getTimezoneByCountry"
+
+        /**
+         * 添加采集器
+         */
+        const val ADD_COLLECTOR = "ShineServer/ATSplant/addDevice"
     }
 }

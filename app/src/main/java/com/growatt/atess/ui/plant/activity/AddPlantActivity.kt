@@ -69,6 +69,8 @@ class AddPlantActivity : BaseActivity(), View.OnClickListener {
             v === binding.btNextStep -> {
                 addPlant1Fragment.saveEditTextString()
                 addPlant2Fragment.saveEditTextString()
+
+                AddCollectorActivity.start(this, "")
             }
         }
     }

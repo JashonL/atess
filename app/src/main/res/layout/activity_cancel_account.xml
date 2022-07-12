@@ -94,7 +94,7 @@
         <Button
             android:id="@+id/bt_cancel"
             android:layout_width="match_parent"
-            android:layout_height="43dp"
+            android:layout_height="44dp"
             android:text="@string/now_cancel"
             android:textSize="@dimen/text_medium" />
 

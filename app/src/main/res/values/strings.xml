@@ -132,6 +132,16 @@
     <string name="plant_image">电站图片</string>
     <string name="please_upload_plant_image">请上传电站图片</string>
     <string name="total_component_power_2">组件总功率(W)</string>
+    <string name="add_collector">添加采集器</string>
+    <string name="serial_number">序列号</string>
+    <string name="check_code">校验码</string>
+    <string name="serial_number_sn">序列号(SN)</string>
+    <string name="check_code_sn">校验码(SN)</string>
+    <string name="please_input_collector_sn">请输入采集器序列号</string>
+    <string name="please_input_collector_check_code">请输入采集器校验码</string>
+    <string name="input_collector_sn_and_check_code">输入采集器序列号与校验码</string>
+    <string name="serial_number_not_null">序列号不能为空</string>
+    <string name="check_code_not_null">校验码不能为空</string>
 
     <!-- image crop-->
     <string name="crop_image_menu_crop">裁剪</string>

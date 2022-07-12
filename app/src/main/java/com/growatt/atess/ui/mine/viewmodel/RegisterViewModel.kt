@@ -16,7 +16,7 @@ import kotlinx.coroutines.launch
  */
 class RegisterViewModel : BaseViewModel() {
 
-    val registerLiveData = MutableLiveData<String>()
+    val registerLiveData = MutableLiveData<String?>()
 
     /**
      * 是否同意隐私政策

@@ -112,6 +112,11 @@
             android:exported="false"
             android:screenOrientation="nosensor" />
 
+        <activity
+            android:name=".ui.plant.activity.AddCollectorActivity"
+            android:exported="false"
+            android:screenOrientation="nosensor" />
+
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="${applicationId}.fileProvider"
