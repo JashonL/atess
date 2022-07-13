@@ -142,6 +142,7 @@
     <string name="input_collector_sn_and_check_code">输入采集器序列号与校验码</string>
     <string name="serial_number_not_null">序列号不能为空</string>
     <string name="check_code_not_null">校验码不能为空</string>
+    <string name="scan">扫一扫</string>
 
     <!-- image crop-->
     <string name="crop_image_menu_crop">裁剪</string>

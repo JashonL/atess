@@ -101,4 +101,5 @@ android.applicationVariants.all { variant ->
 dependencies {
     implementation project(path: ':lib')
     implementation project(path: ':thirdsdk:amap')
+    implementation project(path: ':thirdsdk:scan')
 }

@@ -1,5 +1,6 @@
 package com.growatt.atess.ui.plant.activity
 
+import android.Manifest
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -8,9 +9,12 @@ import androidx.activity.viewModels
 import com.growatt.atess.R
 import com.growatt.atess.base.BaseActivity
 import com.growatt.atess.databinding.ActivityAddCollectorBinding
+import com.growatt.atess.ui.common.activity.ScanActivity
+import com.growatt.atess.ui.common.fragment.RequestPermissionHub
 import com.growatt.atess.ui.home.HomeActivity
 import com.growatt.atess.ui.home.view.HomeTab
 import com.growatt.atess.ui.plant.viewmodel.AddCollectorViewModel
+import com.growatt.lib.util.ActivityBridge
 import com.growatt.lib.util.ToastUtil
 
 /**
@@ -38,7 +42,6 @@ class AddCollectorActivity : BaseActivity(), View.OnClickListener {
         binding = ActivityAddCollectorBinding.inflate(layoutInflater)
         setContentView(binding.root)
         initData()
-        initView()
         setListener()
     }
 
@@ -53,6 +56,14 @@ class AddCollectorActivity : BaseActivity(), View.OnClickListener {
                 ToastUtil.show(it)
             }
         }
+        viewModel.getCheckCodeLiveData.observe(this) {
+            dismissDialog()
+            if (it.second == null) {
+                binding.etCheckCode.setText(it.first)
+            } else {
+                ToastUtil.show(it.second)
+            }
+        }
     }
 
     private fun setListener() {
@@ -60,13 +71,18 @@ class AddCollectorActivity : BaseActivity(), View.OnClickListener {
         binding.btFinish.setOnClickListener(this)
     }
 
-    private fun initView() {
-
-    }
-
     override fun onClick(v: View?) {
         when {
-            v === binding.ivScan -> {}
+            v === binding.ivScan -> {
+                RequestPermissionHub.requestPermission(
+                    supportFragmentManager,
+                    arrayOf(Manifest.permission.CAMERA)
+                ) {
+                    if (it) {
+                        scan()
+                    }
+                }
+            }
             v === binding.btFinish -> {
                 val collectorSN = binding.etCollectorSn.text.trim().toString()
                 val checkCode = binding.etCheckCode.text.trim().toString()
@@ -83,7 +99,26 @@ class AddCollectorActivity : BaseActivity(), View.OnClickListener {
                     }
                 }
             }
-
         }
+    }
+
+    private fun scan() {
+        ActivityBridge.startActivity(
+            this,
+            ScanActivity.getIntent(this),
+            object : ActivityBridge.OnActivityForResult {
+                override fun onActivityForResult(
+                    context: Context?,
+                    resultCode: Int,
+                    data: Intent?
+                ) {
+                    if (resultCode == RESULT_OK && data?.hasExtra(ScanActivity.KEY_CODE_TEXT) == true) {
+                        val collectionSN = data.getStringExtra(ScanActivity.KEY_CODE_TEXT)
+                        binding.etCollectorSn.setText(collectionSN)
+                        showDialog()
+                        viewModel.getCheckCode(collectionSN!!)
+                    }
+                }
+            })
     }
 }
