@@ -2,7 +2,8 @@ package com.growatt.atess.service.http
 
 object ApiPath {
 
-    const val SERVER_HOST = "http://20.60.5.236:8089/"
+    const val SERVER_HOST = "http://20.60.5.236:8089/"//开发本地服务器
+//    const val SERVER_HOST = "http://47.243.120.111/"//测试服务器
 
     object Mine {
         /**

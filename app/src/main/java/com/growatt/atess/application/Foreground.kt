@@ -26,6 +26,9 @@ class Foreground private constructor() : Application.ActivityLifecycleCallbacks 
     private val listeners = mutableSetOf<Listener>()
 
     fun getTopActivity(): Activity? {
+        if (activityList.isEmpty()) {
+            return null
+        }
         return activityList.peek()
     }
 
