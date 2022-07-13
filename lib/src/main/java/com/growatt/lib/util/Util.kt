@@ -6,10 +6,11 @@ import android.content.Intent
 import android.location.LocationManager
 import android.net.Uri
 import android.os.Process
+import android.text.TextUtils
 import com.growatt.lib.LibApplication
+import org.json.JSONObject
 import java.io.File
 import kotlin.system.exitProcess
-
 
 object Util {
 
@@ -71,6 +72,23 @@ object Util {
             val f = File(currentPhotoPath)
             mediaScanIntent.data = Uri.fromFile(f)
             LibApplication.instance().sendBroadcast(mediaScanIntent)
+        }
+    }
+
+    /**
+     * 通过key去获取json中的value
+     * @param json json字符串
+     * @param key key
+     */
+    fun getValueForJsonKey(json: String?, key: String?): String? {
+        if (TextUtils.isEmpty(json) || TextUtils.isEmpty(key)) {
+            return null
+        }
+        return try {
+            val jsonObject = JSONObject(json!!)
+            jsonObject.getString(key!!)
+        } catch (e: Exception) {
+            null
         }
     }
 }

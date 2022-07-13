@@ -8,73 +8,73 @@ object ApiPath {
         /**
          * 登录
          */
-        const val LOGIN = "ShineServer/ATSLogin"
+        const val LOGIN = "ATSLogin"
 
         /**
          * 登出
          */
-        const val LOGOUT = "ShineServer/ATSLogout"
+        const val LOGOUT = "ATSLogout"
 
         /**
          * 注册
          */
-        const val REGISTER = "ShineServer/ATSregister/reHome"
+        const val REGISTER = "ATSregister/reHome"
 
         /**
          * 通过邮箱或手机号发送验证码
          */
-        const val GET_VERIFY_CODE = "ShineServer/ATSregister/sendValidCode"
+        const val GET_VERIFY_CODE = "ATSregister/sendValidCode"
 
         /**
          * 获取国家列表
          */
-        const val GET_COUNTRY_LIST = "ShineServer/ATSregister/getCountryList"
+        const val GET_COUNTRY_LIST = "ATSregister/getCountryList"
 
         /**
          * 校验验证码
          */
-        const val VERIFY_CODE = "ShineServer/ATSregister/validCode"
+        const val VERIFY_CODE = "ATSregister/validCode"
 
         /**
          * 获取用户头像
          */
-        const val GET_USER_AVATAR = "ShineServer/ATSSetting/getUserIcon"
+        const val GET_USER_AVATAR = "ATSSetting/getUserIcon"
 
         /**
          * 找回密码-修改密码
          */
         const val MODIFY_PASSWORD_BY_PHONE_OR_EMAIL =
-            "ShineServer/ATSregister/changePasswordByPhoneOrEmail"
+            "ATSregister/changePasswordByPhoneOrEmail"
 
         /**
          * 设置-修改密码
          */
-        const val MODIFY_PASSWORD = "ShineServer/ATSSetting/changePWD"
+        const val MODIFY_PASSWORD = "ATSSetting/changePWD"
 
         /**
          * 更换邮箱
          */
-        const val CHANGE_EMAIL = "ShineServer/ATSSetting/updateEmail"
+        const val CHANGE_EMAIL = "ATSSetting/updateEmail"
 
         /**
          * 更换手机号
          */
-        const val CHANGE_PHONE = "ShineServer/ATSSetting/updatePhoneNum"
+        const val CHANGE_PHONE = "ATSSetting/updatePhoneNum"
 
         /**
          * 修改安装商编号
          */
-        const val MODIFY_INSTALLER_NO = "ShineServer/ATSSetting/updateAgentCode"
+        const val MODIFY_INSTALLER_NO = "ATSSetting/updateAgentCode"
 
         /**
          * 注销账号
          */
-        const val CANCEL_ACCOUNT = "ShineServer/ATSSetting/eraseUser"
+        const val CANCEL_ACCOUNT = "ATSSetting/eraseUser"
 
         /**
          * 上传用户头像
          */
-        const val UPLOAD_USER_ICON = "ShineServer/ATSSetting/uploadUserIcon"
+        const val UPLOAD_USER_ICON = "ATSSetting/uploadUserIcon"
 
     }
 
@@ -82,16 +82,26 @@ object ApiPath {
         /**
          * 货币列表
          */
-        const val CURRENCY_LIST = "ShineServer/ATSregister/moneyUnitList"
+        const val CURRENCY_LIST = "ATSregister/moneyUnitList"
 
         /**
          * 根据国家来获取时区列表
          */
-        const val GET_TIMEZONE_BY_COUNTRY = "ShineServer/ATSregister/getTimezoneByCountry"
+        const val GET_TIMEZONE_BY_COUNTRY = "ATSregister/getTimezoneByCountry"
+
+        /**
+         * 城市列表
+         */
+        const val GET_CITY_LIST = "ATSregister/getProvAndCityList"
 
         /**
          * 添加采集器
          */
-        const val ADD_COLLECTOR = "ShineServer/ATSplant/addDevice"
+        const val ADD_COLLECTOR = "ATSplant/addDevice"
+
+        /**
+         * 添加电站
+         */
+        const val ADD_PLANT = "ATSplant/addPlant"
     }
 }

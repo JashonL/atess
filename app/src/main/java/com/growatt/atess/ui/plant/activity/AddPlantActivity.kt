@@ -3,14 +3,23 @@ package com.growatt.atess.ui.plant.activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.text.TextUtils
 import android.view.View
 import androidx.activity.viewModels
+import androidx.lifecycle.lifecycleScope
 import com.growatt.atess.R
 import com.growatt.atess.base.BaseActivity
+import com.growatt.atess.component.image.crop.BitmapUtils
 import com.growatt.atess.databinding.ActivityAddPlantBinding
+import com.growatt.atess.model.plant.AddPlantModel
 import com.growatt.atess.ui.plant.fragment.AddPlant1Fragment
 import com.growatt.atess.ui.plant.fragment.AddPlant2Fragment
 import com.growatt.atess.ui.plant.viewmodel.AddPlantViewModel
+import com.growatt.atess.util.AppUtil
+import com.growatt.lib.util.ToastUtil
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
+import kotlinx.coroutines.launch
 
 /**
  * 添加电站页面
@@ -44,7 +53,15 @@ class AddPlantActivity : BaseActivity(), View.OnClickListener {
     }
 
     private fun initData() {
-
+        viewModel.addPlantLiveData.observe(this) {
+            dismissDialog()
+            if (it.second == null) {
+                AddCollectorActivity.start(this, it.first)
+                finish()
+            } else {
+                ToastUtil.show(it.second)
+            }
+        }
     }
 
     private fun setListener() {
@@ -69,9 +86,63 @@ class AddPlantActivity : BaseActivity(), View.OnClickListener {
             v === binding.btNextStep -> {
                 addPlant1Fragment.saveEditTextString()
                 addPlant2Fragment.saveEditTextString()
-
-                AddCollectorActivity.start(this, "")
+                checkInput()
             }
         }
     }
+
+    private fun checkInput() {
+        val addPlantModel = viewModel.addPlantModel
+        when {
+            TextUtils.isEmpty(addPlantModel.plantName) -> {
+                ToastUtil.show(getString(R.string.please_input_plant_name))
+            }
+            addPlantModel.installDate == null -> {
+                ToastUtil.show(getString(R.string.please_select_install_date))
+            }
+            TextUtils.isEmpty(addPlantModel.country) -> {
+                ToastUtil.show(getString(R.string.please_select_country_or_area_2))
+            }
+            TextUtils.isEmpty(addPlantModel.city) -> {
+                ToastUtil.show(getString(R.string.please_select_city))
+            }
+            TextUtils.isEmpty(addPlantModel.plantTimeZone) -> {
+                ToastUtil.show(getString(R.string.please_select_timezone))
+            }
+            TextUtils.isEmpty(addPlantModel.formulaMoneyUnitId) -> {
+            }
+            else -> {
+                requestAddPlant(addPlantModel)
+            }
+        }
+    }
+
+    private fun requestAddPlant(addPlantModel: AddPlantModel) {
+        showDialog()
+        if (TextUtils.isEmpty(addPlantModel.plantFileCompress) && addPlantModel.plantFile != null
+        ) {
+            //执行图片压缩，压缩完成后上传到服务端
+            lifecycleScope.launch {
+                val async = async(Dispatchers.IO) {
+                    val bitmapSampled: BitmapUtils.BitmapSampled =
+                        BitmapUtils.decodeSampledBitmap(
+                            this@AddPlantActivity,
+                            addPlantModel.plantFile,
+                            640,
+                            640
+                        )
+                    val compressImagePath = AppUtil.saveBitmapToDisk(
+                        this@AddPlantActivity,
+                        bitmapSampled.bitmap
+                    )
+                    compressImagePath
+                }
+                addPlantModel.plantFileCompress = async.await()
+                viewModel.addPlant()
+            }
+        } else {
+            viewModel.addPlant()
+        }
+    }
+
 }

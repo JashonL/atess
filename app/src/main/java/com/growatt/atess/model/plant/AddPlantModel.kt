@@ -1,5 +1,6 @@
 package com.growatt.atess.model.plant
 
+import android.net.Uri
 import com.growatt.lib.util.DateUtils
 import java.util.*
 
@@ -9,6 +10,9 @@ import java.util.*
 class AddPlantModel {
     //电站名
     var plantName: String? = null
+
+    //电站ID
+    var plantID: String? = null
 
     //安装日期
     var installDate: Date? = null
@@ -29,7 +33,7 @@ class AddPlantModel {
     var plant_lng: Double? = null
 
     //总功率
-    var nominalPower: String? = null
+    var totalPower: String? = null
 
     //时区
     var plantTimeZone: String? = null
@@ -41,8 +45,10 @@ class AddPlantModel {
     var formulaMoneyUnitId: String? = null
 
     //电站图片
-    var plantFile: String? = null
+    var plantFile: Uri? = null
 
+    //压缩后的电站图片
+    var plantFileCompress: String? = null
 
     fun getDateString(): String {
         if (installDate == null) {
@@ -50,5 +56,4 @@ class AddPlantModel {
         }
         return DateUtils.yyyy_MM_dd_format(installDate!!)
     }
-
 }

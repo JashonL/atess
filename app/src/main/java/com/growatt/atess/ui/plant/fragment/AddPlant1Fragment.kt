@@ -14,7 +14,9 @@ import androidx.lifecycle.lifecycleScope
 import com.growatt.atess.R
 import com.growatt.atess.base.BaseFragment
 import com.growatt.atess.databinding.FragmentAddPlant1Binding
+import com.growatt.atess.model.plant.ProvinceModel
 import com.growatt.atess.ui.common.activity.AMapActivity
+import com.growatt.atess.ui.common.fragment.PickerDialog
 import com.growatt.atess.ui.common.fragment.RequestPermissionHub
 import com.growatt.atess.ui.common.fragment.SystemLocationDisableTipDialog
 import com.growatt.atess.ui.mine.activity.SelectAreaActivity
@@ -46,9 +48,42 @@ class AddPlant1Fragment : BaseFragment(), View.OnClickListener, OnLocationListen
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentAddPlant1Binding.inflate(inflater, container, false)
+        initData()
         initView()
         setListener()
         return binding.root
+    }
+
+    private fun initData() {
+        viewModel.cityListLiveData.observe(viewLifecycleOwner) {
+            dismissDialog()
+            if (it.second == null) {
+                showProvinceList(it.first)
+            } else {
+                ToastUtil.show(it.second)
+            }
+        }
+    }
+
+    private fun showProvinceList(provinceList: Array<ProvinceModel>) {
+        if (provinceList.size == 1) {
+            val cityList = provinceList[0].citys
+            PickerDialog.show(childFragmentManager, cityList) {
+                viewModel.addPlantModel.city = cityList[it].city
+                refreshSelectCityView()
+            }
+        } else {
+            PickerDialog.show(childFragmentManager, provinceList) { provinceIndex ->
+                val cityList = provinceList[provinceIndex].citys
+                PickerDialog.show(
+                    childFragmentManager,
+                    cityList
+                ) { cityIndex ->
+                    viewModel.addPlantModel.city = cityList[cityIndex].city
+                    refreshSelectCityView()
+                }
+            }
+        }
     }
 
     private fun setListener() {
@@ -60,7 +95,7 @@ class AddPlant1Fragment : BaseFragment(), View.OnClickListener, OnLocationListen
     }
 
     private fun initView() {
-        binding.tvInstallDate.text = viewModel.addPlantModel.getDateString()
+        refreshInstallerDateView()
     }
 
     override fun onClick(v: View?) {
@@ -106,7 +141,21 @@ class AddPlant1Fragment : BaseFragment(), View.OnClickListener, OnLocationListen
                 selectArea()
             }
             v === binding.tvSelectCity -> {
+                selectCity()
+            }
+        }
+    }
 
+    private fun selectCity() {
+        if (viewModel.addPlantModel.country.isNullOrEmpty()) {
+            ToastUtil.show(getString(R.string.please_select_country_or_area_2))
+        } else {
+            val provinceList = viewModel.cityListLiveData.value?.first
+            if (provinceList.isNullOrEmpty()) {
+                showDialog()
+                viewModel.fetchCityList(viewModel.addPlantModel.country!!)
+            } else {
+                showProvinceList(provinceList)
             }
         }
     }
@@ -127,7 +176,7 @@ class AddPlant1Fragment : BaseFragment(), View.OnClickListener, OnLocationListen
                     ) {
                         viewModel.addPlantModel.country =
                             data.getStringExtra(SelectAreaActivity.KEY_AREA) ?: ""
-                        binding.tvSelectArea.text = viewModel.addPlantModel.country
+                        refreshSelectAreaView()
                         showDialog()
                         viewModel.fetchTimeZoneList(viewModel.addPlantModel.country ?: "")
                     }
@@ -196,7 +245,7 @@ class AddPlant1Fragment : BaseFragment(), View.OnClickListener, OnLocationListen
         DatePickerFragment.show(childFragmentManager, object : OnDateSetListener {
             override fun onDateSet(date: Date) {
                 viewModel.addPlantModel.installDate = date
-                binding.tvInstallDate.text = viewModel.addPlantModel.getDateString()
+                refreshInstallerDateView()
             }
         })
     }
@@ -206,13 +255,32 @@ class AddPlant1Fragment : BaseFragment(), View.OnClickListener, OnLocationListen
      */
     fun saveEditTextString() {
         viewModel.addPlantModel.plantName = binding.etPlantName.text.toString().trim()
+        viewModel.addPlantModel.plantAddress = binding.etDetailAddress.text.toString().trim()
     }
 
     private fun refreshLocationView() {
-        binding.tvSelectArea.text = viewModel.addPlantModel.country
+        refreshSelectCityView()
+        refreshDetailAddressView()
+    }
+
+    private fun refreshSelectCityView() {
         binding.tvSelectCity.text = viewModel.addPlantModel.city
+    }
+
+    /**
+     * 刷新国家或者地区
+     */
+    private fun refreshSelectAreaView() {
+        binding.tvSelectArea.text = viewModel.addPlantModel.country
+    }
+
+    private fun refreshDetailAddressView() {
         binding.etDetailAddress.setText(viewModel.addPlantModel.plantAddress)
         binding.etDetailAddress.setSelection(binding.etDetailAddress.length())
+    }
+
+    private fun refreshInstallerDateView() {
+        binding.tvInstallDate.text = viewModel.addPlantModel.getDateString()
     }
 
     override fun locationSuccess(locationInfo: LocationInfo) {

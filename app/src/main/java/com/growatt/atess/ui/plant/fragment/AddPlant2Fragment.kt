@@ -3,6 +3,7 @@ package com.growatt.atess.ui.plant.fragment
 import android.Manifest
 import android.content.Context
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
 import android.view.LayoutInflater
@@ -68,7 +69,6 @@ class AddPlant2Fragment : BaseFragment(), View.OnClickListener {
                 ToastUtil.show(it.second)
             }
         }
-
         viewModel.currencyListLiveData.observe(viewLifecycleOwner) {
             dismissDialog()
             if (it.second == null) {
@@ -182,7 +182,7 @@ class AddPlant2Fragment : BaseFragment(), View.OnClickListener {
                             data: Intent?
                         ) {
                             if (resultCode == AppCompatActivity.RESULT_OK && data != null) {
-                                setPlantImage(data.dataString)
+                                setPlantImage(data.data)
                             }
                         }
                     })
@@ -193,8 +193,10 @@ class AddPlant2Fragment : BaseFragment(), View.OnClickListener {
     /**
      * 设置圆角与CenterCrop，需要在代码中进行设置，还需要注意顺序
      */
-    private fun setPlantImage(file: String?) {
+    private fun setPlantImage(file: Uri?) {
+        //设置选中的电站图片，同时清空已压缩图片字段
         viewModel.addPlantModel.plantFile = file
+        viewModel.addPlantModel.plantFileCompress = null
         Glide.with(this).load(file)
             .apply(
                 RequestOptions().transform(
@@ -231,7 +233,7 @@ class AddPlant2Fragment : BaseFragment(), View.OnClickListener {
                     if (resultCode == AppCompatActivity.RESULT_OK) {
                         takePictureFile?.also {
                             Util.galleryAddPic(it.absolutePath)
-                            setPlantImage(it.absolutePath)
+                            setPlantImage(AppUtil.fileToUri(requireActivity(), it))
                         }
                     }
                 }
@@ -242,7 +244,7 @@ class AddPlant2Fragment : BaseFragment(), View.OnClickListener {
      * 保存输入框的内容
      */
     fun saveEditTextString() {
-        viewModel.addPlantModel.nominalPower = binding.etTotalComponentPower.text.toString().trim()
+        viewModel.addPlantModel.totalPower = binding.etTotalComponentPower.text.toString().trim()
         viewModel.addPlantModel.formulaMoney = binding.etElectrovalence.text.toString().trim()
     }
 

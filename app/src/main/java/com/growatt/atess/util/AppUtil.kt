@@ -3,8 +3,10 @@ package com.growatt.atess.util
 import android.content.Context
 import android.graphics.Bitmap
 import android.net.Uri
+import android.os.Build
 import android.os.Environment
 import androidx.annotation.WorkerThread
+import androidx.core.content.FileProvider
 import com.growatt.atess.application.MainApplication
 import com.growatt.atess.component.image.crop.BitmapUtils
 import com.growatt.lib.util.DateUtils
@@ -83,5 +85,12 @@ object AppUtil {
 
     fun generateUUID(): String {
         return UUID.randomUUID().toString()
+    }
+
+    fun fileToUri(context: Context, file: File): Uri {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            return FileProvider.getUriForFile(context, context.packageName + ".fileProvider", file)
+        }
+        return Uri.fromFile(file)
     }
 }
