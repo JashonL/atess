@@ -3,14 +3,15 @@ package com.growatt.atess.service.http
 import android.net.Uri
 import android.os.Handler
 import android.os.Looper
-import android.util.Log
 import com.growatt.lib.service.http.IHttpCallback
 import com.growatt.lib.service.http.IHttpService
 import com.growatt.lib.util.GsonManager
+import com.growatt.lib.util.LogUtil
 import okhttp3.*
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.RequestBody.Companion.asRequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
+import okhttp3.logging.HttpLoggingInterceptor
 import java.io.File
 import java.io.IOException
 import java.util.concurrent.TimeUnit
@@ -23,13 +24,18 @@ class OkhttpService : IHttpService() {
     companion object {
         val JSON = "application/json; charset=utf-8".toMediaType()
         val FILE = "application/octet-stream".toMediaType()
-        val TAG = "http_respone"
+        const val TAG = "http_respone"
     }
 
     private val okHttpClient: OkHttpClient = OkHttpClient.Builder()
         .connectTimeout(30, TimeUnit.SECONDS)
         .readTimeout(30, TimeUnit.SECONDS)
         .writeTimeout(30, TimeUnit.SECONDS)
+        .addNetworkInterceptor(HttpLoggingInterceptor {
+            LogUtil.i(TAG, it)
+        }.also {
+            it.setLevel(HttpLoggingInterceptor.Level.BODY)
+        })
         .build()
     private val mainHandler = Handler(Looper.getMainLooper())
 
@@ -110,7 +116,6 @@ class OkhttpService : IHttpService() {
             override fun onFailure(call: Call, e: IOException) {
                 mainHandler.post {
                     callback.onFailure(e.message)
-                    Log.i(TAG, "onFailure: " + e.message)
                 }
             }
 
@@ -122,7 +127,6 @@ class OkhttpService : IHttpService() {
                     } else {
                         callback.onFailure(result)
                     }
-                    Log.i(TAG, "onResponse: $result")
                 }
             }
         })

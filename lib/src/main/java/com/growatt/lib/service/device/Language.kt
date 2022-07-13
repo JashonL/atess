@@ -90,7 +90,7 @@ enum class Language(val code: Int, val languageName: String, val locale: Locale?
         /**
          * 获取系统默认的语言
          */
-        fun getLocale(): Locale {
+        fun getSystemDefaultLocale(): Locale {
             return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) Resources.getSystem().configuration.locales[0] else Locale.getDefault()
         }
     }
