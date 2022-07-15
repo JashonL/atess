@@ -3,24 +3,24 @@ package com.growatt.atess.model.plant
 import com.growatt.atess.R
 import com.growatt.atess.application.MainApplication
 
-data class PlantFilterModel(val filterName: String, val code: Int) {
+data class PlantFilterModel(val filterName: String, val filterType: Int) {
 
     companion object {
 
         fun createFilters(): Array<PlantFilterModel> {
             return arrayOf(
                 PlantFilterModel(
-                    MainApplication.instance().getString(R.string.install_date), 0
+                    MainApplication.instance().getString(R.string.install_date), 1
                 ), PlantFilterModel(
-                    MainApplication.instance().getString(R.string.device_count), 1
+                    MainApplication.instance().getString(R.string.device_count), 2
                 ), PlantFilterModel(
-                    MainApplication.instance().getString(R.string.total_component_power), 2
+                    MainApplication.instance().getString(R.string.total_component_power), 3
                 ), PlantFilterModel(
-                    MainApplication.instance().getString(R.string.current_power), 3
+                    MainApplication.instance().getString(R.string.current_power), 4
                 ), PlantFilterModel(
-                    MainApplication.instance().getString(R.string.today_power), 4
+                    MainApplication.instance().getString(R.string.today_power), 5
                 ), PlantFilterModel(
-                    MainApplication.instance().getString(R.string.total_power), 5
+                    MainApplication.instance().getString(R.string.total_power), 6
                 )
             )
         }
@@ -35,7 +35,7 @@ data class PlantFilterModel(val filterName: String, val code: Int) {
 
     override fun equals(other: Any?): Boolean {
         if (other is PlantFilterModel) {
-            if (other.code == code) {
+            if (other.filterType == filterType) {
                 return true
             }
         }
@@ -44,7 +44,7 @@ data class PlantFilterModel(val filterName: String, val code: Int) {
 
     override fun hashCode(): Int {
         var result = filterName.hashCode()
-        result = 31 * result + code
+        result = 31 * result + filterType
         return result
     }
 

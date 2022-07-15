@@ -21,20 +21,15 @@ class PlantListViewModel : BaseViewModel() {
     val getPlantStatusNumLiveData = MutableLiveData<Pair<PlantStatusNumModel, String?>>()
 
     /**
-     * 排序规则
-     */
-    var orderRule: Int = 1
-
-    /**
      * 获取电站列表
      */
-    fun getPlantList(plantStatus: Int, order: Int = 1) {
+    fun getPlantList(plantStatus: Int, orderType: Int = 1) {
         viewModelScope.launch {
             val params = hashMapOf<String, String>().apply {
                 if (plantStatus != PlantModel.PLANT_STATUS_ALL) {
                     put("plantStatus", plantStatus.toString())
                 }
-                put("order", order.toString())
+                put("order", orderType.toString())
             }
             apiService().postForm(
                 ApiPath.Plant.GET_PLANT_LIST,

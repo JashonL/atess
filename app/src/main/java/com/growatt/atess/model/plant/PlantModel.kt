@@ -34,7 +34,7 @@ data class PlantModel(
         /**
          * 类型-在线
          */
-        const val PLANT_STATUS_INLINE = 2
+        const val PLANT_STATUS_ONLINE = 2
     }
 
     fun getETodayText(): String {

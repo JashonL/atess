@@ -4,8 +4,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.activityViewModels
 import com.growatt.atess.databinding.FragmentHomePlantBinding
 import com.growatt.atess.model.plant.PlantFilterModel
+import com.growatt.atess.ui.home.viewmodel.PlantFilterViewModel
 import com.growatt.atess.ui.plant.view.PlantFilterPopup
 
 /**
@@ -16,6 +18,7 @@ class HomePlantFragment : HomeBaseFragment(), View.OnClickListener {
     private lateinit var binding: FragmentHomePlantBinding
     private var selectedFilterModer: PlantFilterModel =
         PlantFilterModel.getDefaultFilter()
+    private val filterViewModel: PlantFilterViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -23,9 +26,14 @@ class HomePlantFragment : HomeBaseFragment(), View.OnClickListener {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentHomePlantBinding.inflate(inflater, container, false)
+        initData()
         initView()
         setListener()
         return binding.root
+    }
+
+    private fun initData() {
+        filterViewModel.setFilterType(PlantFilterModel.getDefaultFilter().filterType)
     }
 
     private fun setListener() {
@@ -51,6 +59,7 @@ class HomePlantFragment : HomeBaseFragment(), View.OnClickListener {
                     selectedFilterModer
                 ) {
                     selectedFilterModer = it
+                    filterViewModel.setFilterType(it.filterType)
                     binding.tvFilter.text = it.filterName
                 }
             }

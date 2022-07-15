@@ -7,6 +7,7 @@ import android.text.style.ForegroundColorSpan
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -23,10 +24,14 @@ import com.growatt.atess.base.OnItemClickListener
 import com.growatt.atess.databinding.FragmentPlantListBinding
 import com.growatt.atess.databinding.PlantViewHolderBinding
 import com.growatt.atess.model.plant.PlantModel
+import com.growatt.atess.ui.home.viewmodel.PlantFilterViewModel
+import com.growatt.atess.ui.plant.activity.AddPlantActivity
 import com.growatt.atess.ui.plant.monitor.PlantMonitor
 import com.growatt.atess.ui.plant.viewmodel.PlantListViewModel
 import com.growatt.lib.util.ToastUtil
 import com.growatt.lib.util.ViewUtil
+import com.growatt.lib.util.gone
+import com.growatt.lib.util.visible
 import com.growatt.lib.view.DividerItemDecoration
 
 /**
@@ -40,6 +45,7 @@ class PlantListFragment(
 
     private lateinit var binding: FragmentPlantListBinding
     private val viewModel: PlantListViewModel by viewModels()
+    private val filterViewModel: PlantFilterViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -57,6 +63,9 @@ class PlantListFragment(
         binding.srfRefresh.setOnRefreshListener {
             refresh()
         }
+        binding.ivAddPlant.setOnClickListener {
+            AddPlantActivity.start(requireContext())
+        }
     }
 
     private fun initData() {
@@ -64,6 +73,7 @@ class PlantListFragment(
             binding.srfRefresh.finishRefresh()
             if (it.second == null) {
                 (binding.rvPlant.adapter as Adapter).refresh(it.first)
+                refreshEmptyView(it.first)
             } else {
                 ToastUtil.show(it.second)
             }
@@ -73,14 +83,34 @@ class PlantListFragment(
                 listener.onPlantStatusNumChange(it.first)
             }
         }
+        filterViewModel.getPlantFilterLiveData.observe(viewLifecycleOwner) {
+            binding.srfRefresh.autoRefresh()
+        }
         PlantMonitor.watch(viewLifecycleOwner.lifecycle) {
             binding.srfRefresh.autoRefresh()
         }
-        binding.srfRefresh.autoRefresh()
+    }
+
+    private fun refreshEmptyView(plantModels: Array<PlantModel>?) {
+        if (plantModels.isNullOrEmpty()) {
+            binding.llEmpty.visible()
+            if (plantStatus == PlantModel.PLANT_STATUS_ALL) {
+                binding.ivAddPlant.visible()
+                binding.tvEmptyText.text = getString(R.string.add_plant)
+            } else {
+                binding.ivAddPlant.gone()
+                binding.tvEmptyText.text =
+                    getString(R.string.nothing_plant_format, getPlantStatusText())
+            }
+        } else {
+            binding.llEmpty.gone()
+        }
     }
 
     private fun refresh() {
-        viewModel.getPlantList(plantStatus, viewModel.orderRule)
+        filterViewModel.getPlantFilterLiveData.value?.let {
+            viewModel.getPlantList(plantStatus, it)
+        }
     }
 
     private fun initView() {
@@ -96,6 +126,15 @@ class PlantListFragment(
         binding.rvPlant.setHasFixedSize(true)
 
 
+    }
+
+    private fun getPlantStatusText(): String {
+        return when (plantStatus) {
+            PlantModel.PLANT_STATUS_OFFLINE -> getString(R.string.offline)
+            PlantModel.PLANT_STATUS_ONLINE -> getString(R.string.online)
+            PlantModel.PLANT_STATUS_TROUBLE -> getString(R.string.trouble)
+            else -> getString(R.string.all)
+        }
     }
 
     /**
@@ -164,7 +203,7 @@ class PlantListFragment(
             binding.tvCity.text = plantModel.city
             binding.tvPlantName.text = plantModel.plantName
             when (plantModel.hasDeviceOnLine) {
-                PlantModel.PLANT_STATUS_INLINE -> {
+                PlantModel.PLANT_STATUS_ONLINE -> {
                     binding.tvPlantStatus.text = getString(R.string.online)
                     binding.tvPlantStatus.background =
                         ViewUtil.createShape(getColor(R.color.color_3FAE29), 8)

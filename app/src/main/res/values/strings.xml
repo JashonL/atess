@@ -148,6 +148,7 @@
     <string name="online_format">在线(%d)</string>
     <string name="offline_format">离线(%d)</string>
     <string name="trouble_format">故障(%d)</string>
+    <string name="nothing_plant_format">无%s电站</string>
 
     <!-- image crop-->
     <string name="crop_image_menu_crop">裁剪</string>

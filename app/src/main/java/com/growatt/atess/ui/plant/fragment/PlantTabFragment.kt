@@ -63,7 +63,7 @@ class PlantTabFragment : BaseFragment(), OnPlantStatusNumChangeListener {
 
         private val fragments = arrayOf(
             PlantListFragment(PlantModel.PLANT_STATUS_ALL, this@PlantTabFragment),
-            PlantListFragment(PlantModel.PLANT_STATUS_INLINE, this@PlantTabFragment),
+            PlantListFragment(PlantModel.PLANT_STATUS_ONLINE, this@PlantTabFragment),
             PlantListFragment(PlantModel.PLANT_STATUS_OFFLINE, this@PlantTabFragment),
             PlantListFragment(PlantModel.PLANT_STATUS_TROUBLE, this@PlantTabFragment)
         )
