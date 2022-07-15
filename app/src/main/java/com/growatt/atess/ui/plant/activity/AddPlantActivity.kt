@@ -14,6 +14,7 @@ import com.growatt.atess.databinding.ActivityAddPlantBinding
 import com.growatt.atess.model.plant.AddPlantModel
 import com.growatt.atess.ui.plant.fragment.AddPlant1Fragment
 import com.growatt.atess.ui.plant.fragment.AddPlant2Fragment
+import com.growatt.atess.ui.plant.monitor.PlantMonitor
 import com.growatt.atess.ui.plant.viewmodel.AddPlantViewModel
 import com.growatt.atess.util.AppUtil
 import com.growatt.lib.util.ToastUtil
@@ -57,6 +58,7 @@ class AddPlantActivity : BaseActivity(), View.OnClickListener {
             dismissDialog()
             if (it.second == null) {
                 AddCollectorActivity.start(this, it.first)
+                PlantMonitor.notifyPlant()
                 finish()
             } else {
                 ToastUtil.show(it.second)

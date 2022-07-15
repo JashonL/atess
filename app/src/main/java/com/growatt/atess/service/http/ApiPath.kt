@@ -2,8 +2,8 @@ package com.growatt.atess.service.http
 
 object ApiPath {
 
-//    const val SERVER_HOST = "http://20.60.5.236:8089/"//开发本地服务器
-const val SERVER_HOST = "http://47.243.120.111/"//测试服务器
+    const val SERVER_HOST = "http://20.60.5.236:8089/"//开发本地服务器
+//const val SERVER_HOST = "http://47.243.120.111/"//测试服务器
 
     object Mine {
         /**
@@ -109,5 +109,10 @@ const val SERVER_HOST = "http://47.243.120.111/"//测试服务器
          * 通过采集器序列号获取校验码
          */
         const val GET_CHECK_CODE = "ATSplant/getValidCodeBySN"
+
+        /**
+         * 获取电站列表
+         */
+        const val GET_PLANT_LIST = "ATSplant/getAllPlantList"
     }
 }

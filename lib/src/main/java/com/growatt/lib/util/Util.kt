@@ -10,6 +10,7 @@ import android.text.TextUtils
 import com.growatt.lib.LibApplication
 import org.json.JSONObject
 import java.io.File
+import java.math.BigDecimal
 import kotlin.system.exitProcess
 
 object Util {
@@ -90,5 +91,16 @@ object Util {
         } catch (e: Exception) {
             null
         }
+    }
+
+
+    /**
+     * Double转为字符串，四舍五入
+     */
+    fun getDoubleText(value: Double?): String {
+        if (value == null) {
+            return "0.0"
+        }
+        return BigDecimal(value).setScale(1, BigDecimal.ROUND_HALF_UP).toDouble().toString()
     }
 }

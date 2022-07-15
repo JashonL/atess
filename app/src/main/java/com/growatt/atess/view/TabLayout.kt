@@ -68,7 +68,6 @@ class TabLayout @JvmOverloads constructor(
         listeners.remove(listener)
     }
 
-
     override fun addView(child: View?) {
         if (child !is Tab) {
             throw IllegalArgumentException("Only Tab instances can be added to TabLayout")
@@ -99,6 +98,9 @@ class TabLayout @JvmOverloads constructor(
         })
     }
 
+    fun setTabText(tabText: String, position: Int) {
+        (getChildAt(position) as Tab).setTabText(tabText)
+    }
 }
 
 interface OnTabSelectedListener {

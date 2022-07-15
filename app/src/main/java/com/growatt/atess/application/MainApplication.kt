@@ -2,6 +2,7 @@ package com.growatt.atess.application
 
 import android.os.Process
 import com.amap.api.location.AMapLocationClient
+import com.growatt.atess.R
 import com.growatt.atess.service.account.DefaultAccountService
 import com.growatt.atess.service.http.OkhttpService
 import com.growatt.atess.service.location.AmapLocationService
@@ -18,12 +19,23 @@ import com.growatt.lib.service.location.ILocationService
 import com.growatt.lib.service.storage.DefaultStorageService
 import com.growatt.lib.service.storage.IStorageService
 import com.growatt.lib.util.Util
+import com.scwang.smart.refresh.header.MaterialHeader
+import com.scwang.smart.refresh.layout.SmartRefreshLayout
+import com.scwang.smart.refresh.layout.listener.DefaultRefreshHeaderCreator
+
 
 class MainApplication : LibApplication() {
 
     companion object {
         private lateinit var instance: MainApplication
         fun instance() = instance
+    }
+
+    init {
+        SmartRefreshLayout.setDefaultRefreshHeaderCreator(DefaultRefreshHeaderCreator { context, layout ->
+            layout.setPrimaryColorsId(R.color.colorAccent, android.R.color.white) //全局设置主题颜色
+            MaterialHeader(context)
+        })
     }
 
     override fun onCreate() {

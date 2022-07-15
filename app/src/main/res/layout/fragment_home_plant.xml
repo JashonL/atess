@@ -61,9 +61,9 @@
     </LinearLayout>
 
     <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/fragment_plant_list"
-        android:name="com.growatt.atess.ui.plant.fragment.PlantListFragment"
+        android:id="@+id/fragment_plant_tab"
+        android:name="com.growatt.atess.ui.plant.fragment.PlantTabFragment"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="match_parent" />
 
 </LinearLayout>

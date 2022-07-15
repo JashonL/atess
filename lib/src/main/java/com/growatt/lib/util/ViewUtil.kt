@@ -3,7 +3,11 @@ package com.growatt.lib.util
 import android.app.Activity
 import android.content.Context
 import android.content.ContextWrapper
+import android.graphics.drawable.Drawable
+import android.graphics.drawable.GradientDrawable
 import android.widget.NumberPicker
+import androidx.annotation.ColorInt
+import com.growatt.lib.LibApplication
 
 object ViewUtil {
 
@@ -53,6 +57,42 @@ object ViewUtil {
             method.invoke(numberPicker, true)
         } catch (e: Exception) {
         }
+    }
 
+    /**
+     * 创建一个shape对象
+     */
+    fun createShape(@ColorInt color: Int, cornerDp: Int): Drawable {
+        return GradientDrawable().also {
+            it.setColor(color)
+            it.cornerRadius = dp2px(LibApplication.instance(), cornerDp.toFloat()).toFloat()
+        }
+    }
+
+    /**
+     * 创建一个shape对象
+     * @param radii new float[] { r0, r0, r1, r1, r2, r2, r3,r3 }
+     * 设置图片四个角圆形半径：1、2两个参数表示左上角，3、4表示右上角，5、6表示右下角，7、8表示左下角
+     */
+    fun createShape(
+        @ColorInt color: Int,
+        cornerLeftTopDp: Int,
+        cornerRightTopDp: Int,
+        cornerRightBottomDp: Int,
+        cornerLeftBottomDp: Int
+    ): Drawable {
+        return GradientDrawable().also {
+            it.setColor(color)
+            it.cornerRadii = floatArrayOf(
+                dp2px(LibApplication.instance(), cornerLeftTopDp.toFloat()).toFloat(),
+                dp2px(LibApplication.instance(), cornerLeftTopDp.toFloat()).toFloat(),
+                dp2px(LibApplication.instance(), cornerRightTopDp.toFloat()).toFloat(),
+                dp2px(LibApplication.instance(), cornerRightTopDp.toFloat()).toFloat(),
+                dp2px(LibApplication.instance(), cornerRightBottomDp.toFloat()).toFloat(),
+                dp2px(LibApplication.instance(), cornerRightBottomDp.toFloat()).toFloat(),
+                dp2px(LibApplication.instance(), cornerLeftBottomDp.toFloat()).toFloat(),
+                dp2px(LibApplication.instance(), cornerLeftBottomDp.toFloat()).toFloat()
+            )
+        }
     }
 }

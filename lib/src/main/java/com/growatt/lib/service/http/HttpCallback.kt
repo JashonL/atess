@@ -1,7 +1,8 @@
 package com.growatt.lib.service.http
 
-import com.growatt.lib.LibApplication
+import  com.growatt.lib.LibApplication
 import com.growatt.lib.util.GsonManager
+import org.json.JSONException
 import org.json.JSONObject
 import java.lang.reflect.ParameterizedType
 import java.lang.reflect.Type
@@ -10,11 +11,15 @@ abstract class HttpCallback<R> : IHttpCallback {
 
     override fun onSuccess(response: String?) {
         //统一处理登录失效的问题
-        response?.also {
-            val status_code = JSONObject(response).opt("status_code")?.toString()
-            if (status_code == "90001") {
-                LibApplication.instance().accountService().tokenExpired()
+        try {
+            response?.also {
+                val status_code = JSONObject(response).opt("status_code")?.toString()
+                if (status_code == "90001") {
+                    LibApplication.instance().accountService().tokenExpired()
+                    return
+                }
             }
+        } catch (e: JSONException) {
         }
 
         val result: R? = GsonManager.fromJsonType(response, getType())

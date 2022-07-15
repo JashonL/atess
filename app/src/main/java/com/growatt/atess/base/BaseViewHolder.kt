@@ -1,6 +1,8 @@
 package com.growatt.atess.base
 
 import android.view.View
+import androidx.annotation.ColorRes
+import androidx.annotation.StringRes
 import androidx.recyclerview.widget.RecyclerView
 import com.growatt.atess.application.MainApplication
 import com.growatt.lib.service.ServiceManager
@@ -10,8 +12,11 @@ import com.growatt.lib.service.http.IHttpService
 import com.growatt.lib.service.location.ILocationService
 import com.growatt.lib.service.storage.IStorageService
 
-open class BaseViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView), ViewHelper,
-    ServiceManager.ServiceInterface {
+open class BaseViewHolder(
+    itemView: View,
+    private val onItemClickListener: OnItemClickListener? = null
+) : RecyclerView.ViewHolder(itemView), ViewHelper,
+    ServiceManager.ServiceInterface, View.OnClickListener {
 
     override fun showDialog() {
         (itemView.context as? BaseActivity)?.showDialog()
@@ -40,6 +45,19 @@ open class BaseViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView), V
     override fun locationService(): ILocationService {
         return MainApplication.instance().locationService()
     }
+
+    override fun onClick(v: View?) {
+        onItemClickListener?.onItemClick(v, bindingAdapterPosition)
+    }
+
+    fun getColor(@ColorRes colorId: Int): Int {
+        return MainApplication.instance().resources.getColor(colorId)
+    }
+
+    fun getString(@StringRes stringId: Int): String {
+        return MainApplication.instance().getString(stringId)
+    }
+
 }
 
 interface OnItemClickListener {

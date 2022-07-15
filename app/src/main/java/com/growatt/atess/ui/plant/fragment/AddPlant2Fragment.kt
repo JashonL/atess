@@ -14,7 +14,6 @@ import androidx.core.content.FileProvider
 import androidx.fragment.app.activityViewModels
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
-import com.bumptech.glide.load.resource.bitmap.CircleCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
 import com.growatt.atess.BuildConfig
@@ -95,11 +94,7 @@ class AddPlant2Fragment : BaseFragment(), View.OnClickListener {
             binding.ivPlantImage.gone()
             binding.tvUploadPlantImage.visible()
         } else {
-            binding.ivPlantImage.visible()
-            binding.tvUploadPlantImage.gone()
-            Glide.with(this).load(viewModel.addPlantModel.plantFile)
-                .apply(RequestOptions.bitmapTransform(CircleCrop()))
-                .into(binding.ivPlantImage)
+            setPlantImage(viewModel.addPlantModel.plantFile)
         }
     }
 

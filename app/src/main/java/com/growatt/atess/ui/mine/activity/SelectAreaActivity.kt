@@ -11,6 +11,7 @@ import androidx.activity.viewModels
 import androidx.recyclerview.widget.RecyclerView
 import com.growatt.atess.base.BaseActivity
 import com.growatt.atess.base.BaseViewHolder
+import com.growatt.atess.base.OnItemClickListener
 import com.growatt.atess.databinding.ActivitySelectAreaBinding
 import com.growatt.atess.databinding.CountryViewHolderBinding
 import com.growatt.atess.ui.mine.viewmodel.SelectAreaViewModel
@@ -63,7 +64,7 @@ class SelectAreaActivity : BaseActivity() {
     }
 
     inner class Adapter(var countryList: MutableList<String> = mutableListOf()) :
-        RecyclerView.Adapter<CountryViewHolder>(), View.OnClickListener {
+        RecyclerView.Adapter<CountryViewHolder>(), OnItemClickListener {
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CountryViewHolder {
             return CountryViewHolder.create(parent, this)
@@ -84,7 +85,7 @@ class SelectAreaActivity : BaseActivity() {
             notifyDataSetChanged()
         }
 
-        override fun onClick(v: View?) {
+        override fun onItemClick(v: View?, position: Int) {
             val intent = Intent()
             if (v?.tag is String) {
                 intent.putExtra(KEY_AREA, v.tag as String)
@@ -97,15 +98,15 @@ class SelectAreaActivity : BaseActivity() {
 
     class CountryViewHolder(
         itemView: View,
-        private val onItemClickListener: View.OnClickListener? = null
+        onItemClickListener: OnItemClickListener? = null
     ) :
-        BaseViewHolder(itemView), View.OnClickListener {
+        BaseViewHolder(itemView, onItemClickListener) {
         lateinit var binding: CountryViewHolderBinding
 
         companion object {
             fun create(
                 parent: ViewGroup,
-                onItemClickListener: View.OnClickListener? = null
+                onItemClickListener: OnItemClickListener? = null
             ): CountryViewHolder {
                 val binding =
                     CountryViewHolderBinding.inflate(
@@ -113,20 +114,16 @@ class SelectAreaActivity : BaseActivity() {
                         parent,
                         false
                     )
-                val viewHolder = CountryViewHolder(binding.root, onItemClickListener)
-                viewHolder.binding = binding
-                viewHolder.binding.root.setOnClickListener(viewHolder)
-                return viewHolder
+                val holder = CountryViewHolder(binding.root, onItemClickListener)
+                holder.binding = binding
+                holder.binding.root.setOnClickListener(holder)
+                return holder
             }
         }
 
         fun bindData(area: String?) {
             binding.tvArea.text = area
             binding.root.tag = area
-        }
-
-        override fun onClick(v: View?) {
-            onItemClickListener?.onClick(v)
         }
 
     }
