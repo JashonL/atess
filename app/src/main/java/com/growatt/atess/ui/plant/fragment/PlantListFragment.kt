@@ -26,6 +26,7 @@ import com.growatt.atess.databinding.PlantViewHolderBinding
 import com.growatt.atess.model.plant.PlantModel
 import com.growatt.atess.ui.home.viewmodel.PlantFilterViewModel
 import com.growatt.atess.ui.plant.activity.AddPlantActivity
+import com.growatt.atess.ui.plant.activity.PlantInfoActivity
 import com.growatt.atess.ui.plant.monitor.PlantMonitor
 import com.growatt.atess.ui.plant.viewmodel.PlantListViewModel
 import com.growatt.lib.util.ToastUtil
@@ -152,7 +153,7 @@ class PlantListFragment(
         }
 
         override fun onItemClick(v: View?, position: Int) {
-
+            PlantInfoActivity.start(requireContext(), getItem(position).id)
         }
 
         fun refresh(plantModels: Array<PlantModel>?) {

@@ -1,5 +1,6 @@
 package com.growatt.lib.util
 
+import android.graphics.drawable.Drawable
 import android.view.View
 import android.widget.TextView
 
@@ -24,4 +25,19 @@ fun View.setViewHeight(dpFloat: Float) {
     val newLayoutParams = layoutParams
     newLayoutParams.height = ViewUtil.dp2px(context, dpFloat)
     layoutParams = newLayoutParams
+}
+
+/**
+ * 设置TextView左边Icon
+ */
+fun TextView.setDrawableStart(drawable: Drawable) {
+    setCompoundDrawablesWithIntrinsicBounds(drawable, null, null, null)
+}
+
+fun TextView.setDrawableEnd(drawable: Drawable) {
+    setCompoundDrawablesWithIntrinsicBounds(null, null, drawable, null)
+}
+
+fun TextView.setDrawableNull() {
+    setCompoundDrawablesWithIntrinsicBounds(null, null, null, null)
 }

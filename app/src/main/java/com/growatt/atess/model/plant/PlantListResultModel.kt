@@ -3,13 +3,16 @@ package com.growatt.atess.model.plant
 /**
  * 电站列表返回的数据模型
  */
-data class PlantResultModel(val plantList: Array<PlantModel>, val statusMap: PlantStatusNumModel) {
+data class PlantListResultModel(
+    val plantList: Array<PlantModel>,
+    val statusMap: PlantStatusNumModel
+) {
 
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (javaClass != other?.javaClass) return false
 
-        other as PlantResultModel
+        other as PlantListResultModel
 
         if (!plantList.contentEquals(other.plantList)) return false
         if (statusMap != other.statusMap) return false

@@ -150,6 +150,28 @@
     <string name="trouble_format">故障(%d)</string>
     <string name="nothing_plant_format">无%s电站</string>
 
+    <string name="daily_output">日发电量</string>
+    <string name="monthly_output">月发电量</string>
+    <string name="accumulative_output">累计电量</string>
+    <string name="energy_info">能源概况</string>
+    <string name="day">当日</string>
+    <string name="accumulative">累计</string>
+    <string name="photovoltaic_output">光伏产出</string>
+    <string name="diesel_engine_machine_output">柴油机电机产出</string>
+    <string name="battery_charge">电池充电</string>
+    <string name="battery_discharge">电池放电</string>
+    <string name="load_consumption">负载消耗</string>
+    <string name="feed_into_the_grid">馈入电网</string>
+    <string name="take_electricity_grid">电网取电</string>
+    <string name="grid_connected_inverter_output">并网逆变器产出</string>
+    <string name="device_type">设备类型</string>
+    <string name="device_sn">设备序列号</string>
+    <string name="input_power_format">输入功率:%skW</string>
+    <string name="output_power_format">输出功率:%skW</string>
+    <string name="load_power_format">负载功率:%skW</string>
+    <string name="discharge_power_format">放电功率:%skW</string>
+    <string name="current_power_format">当前功率:%skW</string>
+
     <!-- image crop-->
     <string name="crop_image_menu_crop">裁剪</string>
     <string name="pick_image_intent_chooser_title">Select source</string>

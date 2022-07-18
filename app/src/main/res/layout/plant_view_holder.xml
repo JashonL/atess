@@ -126,7 +126,7 @@
             <ImageView
                 android:layout_width="10dp"
                 android:layout_height="10dp"
-                android:src="@drawable/ic_installer_date" />
+                android:src="@drawable/ic_install_date" />
 
             <TextView
                 android:layout_width="120dp"

@@ -26,6 +26,7 @@
         <attr name="showRightButton" format="boolean" />
         <attr name="showRightText" format="boolean" />
         <attr name="showRightImage" format="boolean" />
+        <attr name="showFilterIcon" format="boolean" />
         <attr name="rightText" format="string" />
         <attr name="rightButtonText" format="string" />
     </declare-styleable>

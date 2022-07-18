@@ -3,8 +3,8 @@ package com.growatt.atess.ui.plant.viewmodel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.growatt.atess.base.BaseViewModel
+import com.growatt.atess.model.plant.PlantListResultModel
 import com.growatt.atess.model.plant.PlantModel
-import com.growatt.atess.model.plant.PlantResultModel
 import com.growatt.atess.model.plant.PlantStatusNumModel
 import com.growatt.atess.service.http.ApiPath
 import com.growatt.lib.service.http.HttpCallback
@@ -34,8 +34,8 @@ class PlantListViewModel : BaseViewModel() {
             apiService().postForm(
                 ApiPath.Plant.GET_PLANT_LIST,
                 params,
-                object : HttpCallback<HttpResult<PlantResultModel>>() {
-                    override fun success(result: HttpResult<PlantResultModel>) {
+                object : HttpCallback<HttpResult<PlantListResultModel>>() {
+                    override fun success(result: HttpResult<PlantListResultModel>) {
                         if (result.isBusinessSuccess()) {
                             getPlantListLiveData.value =
                                 Pair(result.data?.plantList ?: emptyArray(), null)

@@ -9,6 +9,8 @@ import android.widget.RelativeLayout
 import com.growatt.atess.R
 import com.growatt.atess.databinding.TitleBarLayoutBinding
 import com.growatt.lib.util.gone
+import com.growatt.lib.util.setDrawableEnd
+import com.growatt.lib.util.setDrawableNull
 import com.growatt.lib.util.visible
 
 /**
@@ -26,6 +28,7 @@ class TitleBarLayout @JvmOverloads constructor(
     private var showRightButton: Boolean = false
     private var showRightText: Boolean = false
     private var showRightImage: Boolean = false
+    private var showFilterIcon: Boolean = false
     private var titleText: String? = null
     private var rightText: String? = null
     private var rightButtonText: String? = null
@@ -51,6 +54,8 @@ class TitleBarLayout @JvmOverloads constructor(
                     getBoolean(R.styleable.TitleBarLayout_showRightText, showRightText)
                 showRightImage =
                     getBoolean(R.styleable.TitleBarLayout_showRightImage, showRightImage)
+                showFilterIcon =
+                    getBoolean(R.styleable.TitleBarLayout_showFilterIcon, showFilterIcon)
                 titleText = getString(R.styleable.TitleBarLayout_titleText) ?: ""
                 rightText = getString(R.styleable.TitleBarLayout_rightText) ?: ""
                 rightButtonText = getString(R.styleable.TitleBarLayout_rightButtonText) ?: ""
@@ -85,10 +90,24 @@ class TitleBarLayout @JvmOverloads constructor(
         } else {
             binding.ivRight.gone()
         }
+        showFilterIconView()
         binding.ivBack.setOnClickListener(this)
         binding.btRight.setOnClickListener(this)
         binding.tvRightText.setOnClickListener(this)
         binding.ivRight.setOnClickListener(this)
+    }
+
+    private fun showFilterIconView() {
+        if (showFilterIcon) {
+            binding.tvTitle.setDrawableEnd(resources.getDrawable(R.drawable.ic_down))
+        } else {
+            binding.tvTitle.setDrawableNull()
+        }
+    }
+
+    fun setFilterIconVisible(isVisible: Boolean) {
+        showFilterIcon = isVisible
+        showFilterIconView()
     }
 
     override fun onClick(v: View?) {

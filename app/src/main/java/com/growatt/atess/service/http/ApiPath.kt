@@ -114,5 +114,12 @@ object ApiPath {
          * 获取电站列表
          */
         const val GET_PLANT_LIST = "ATSplant/getAllPlantList"
+
+        /**
+         * 获取电站详情
+         */
+        const val GET_PLANT_INFO = "ATSplant/getUserCenterEnertyDataByPlantid"
+
+
     }
 }

@@ -1,7 +1,10 @@
 package com.growatt.atess.model.plant
 
+import android.os.Parcelable
 import com.growatt.lib.util.Util
+import kotlinx.parcelize.Parcelize
 
+@Parcelize
 data class PlantModel(
     val id: String?,//电站ID
     val plantName: String?,//电站名
@@ -13,7 +16,7 @@ data class PlantModel(
     val nominalPowerStr: String?,//组件总功率1130kWp
     val eToday: Double?,//今日发电量
     val eTotal: Double?//累计发电量
-) {
+) : Parcelable {
 
     companion object {
         /**

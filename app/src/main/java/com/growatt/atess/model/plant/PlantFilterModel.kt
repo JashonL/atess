@@ -27,7 +27,7 @@ data class PlantFilterModel(val filterName: String, val filterType: Int) {
 
         fun getDefaultFilter(): PlantFilterModel {
             return PlantFilterModel(
-                MainApplication.instance().getString(R.string.install_date), 0
+                MainApplication.instance().getString(R.string.install_date), 1
             )
         }
 

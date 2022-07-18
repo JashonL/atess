@@ -23,9 +23,7 @@ import com.growatt.atess.ui.mine.activity.SelectAreaActivity
 import com.growatt.atess.ui.plant.viewmodel.AddPlantViewModel
 import com.growatt.lib.service.location.LocationInfo
 import com.growatt.lib.service.location.OnLocationListener
-import com.growatt.lib.util.ActivityBridge
-import com.growatt.lib.util.ToastUtil
-import com.growatt.lib.util.Util
+import com.growatt.lib.util.*
 import com.growatt.lib.view.dialog.DatePickerFragment
 import com.growatt.lib.view.dialog.OnDateSetListener
 import kotlinx.coroutines.launch
@@ -191,22 +189,14 @@ class AddPlant1Fragment : BaseFragment(), View.OnClickListener, OnLocationListen
             )
         )
         binding.tvAutoFetch.setBackgroundResource(if (v === binding.tvAutoFetch) R.drawable.red_background_corner_20_stroke_1 else R.drawable.gray_background_corner_20_stroke_1)
-        binding.tvAutoFetch.setCompoundDrawablesWithIntrinsicBounds(
-            resources.getDrawable(
-                if (v === binding.tvAutoFetch) R.drawable.ic_auto_fetch else R.drawable.ic_auto_fetch_gray
-            ), null, null, null
-        )
+        binding.tvAutoFetch.setDrawableStart(resources.getDrawable(if (v === binding.tvAutoFetch) R.drawable.ic_auto_fetch else R.drawable.ic_auto_fetch_gray))
         binding.tvMapForChoosing.setTextColor(
             resources.getColor(
                 if (v === binding.tvMapForChoosing) R.color.text_red else R.color.text_gray_99
             )
         )
         binding.tvMapForChoosing.setBackgroundResource(if (v === binding.tvMapForChoosing) R.drawable.red_background_corner_20_stroke_1 else R.drawable.gray_background_corner_20_stroke_1)
-        binding.tvMapForChoosing.setCompoundDrawablesWithIntrinsicBounds(
-            resources.getDrawable(
-                if (v === binding.tvMapForChoosing) R.drawable.ic_map else R.drawable.ic_map_gray
-            ), null, null, null
-        )
+        binding.tvMapForChoosing.setDrawableEnd(resources.getDrawable(if (v === binding.tvMapForChoosing) R.drawable.ic_map else R.drawable.ic_map_gray))
     }
 
     /**
