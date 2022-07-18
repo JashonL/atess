@@ -7,7 +7,6 @@ import com.growatt.atess.service.http.ApiPath
 import com.growatt.lib.service.http.HttpCallback
 import com.growatt.lib.service.http.HttpResult
 import kotlinx.coroutines.launch
-import java.util.*
 
 /**
  * 选择国家/地区
@@ -30,7 +29,6 @@ class SelectAreaViewModel : BaseViewModel() {
                             if (countryList == null) {
                                 areaListLiveData.value = Pair(emptyArray(), null)
                             } else {
-                                Arrays.sort(countryList, String.CASE_INSENSITIVE_ORDER)
                                 areaListLiveData.value = Pair(countryList, null)
                             }
                         } else {
