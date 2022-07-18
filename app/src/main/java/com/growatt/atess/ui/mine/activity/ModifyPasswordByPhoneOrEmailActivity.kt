@@ -81,7 +81,7 @@ class ModifyPasswordByPhoneOrEmailActivity : BaseActivity(), View.OnClickListene
         }
         binding.title.setOnRightButtonClickListener {
             val password = binding.etPassword.text.toString().trim()
-            val confirmPassword = binding.etConfirmPassword.text.trim()
+            val confirmPassword = binding.etConfirmPassword.text.toString().trim()
             if (TextUtils.isEmpty(password) || TextUtils.isEmpty(confirmPassword)) {
                 ToastUtil.show(getString(R.string.password_cant_empty))
             } else if (password.length < 6 || confirmPassword.length < 6) {
