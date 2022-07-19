@@ -8,6 +8,7 @@ import java.util.*
  * 添加电站
  */
 class AddPlantModel {
+
     //电站名
     var plantName: String? = null
 
@@ -27,10 +28,10 @@ class AddPlantModel {
     var plantAddress: String? = null
 
     //纬度
-    var plant_lat: Double? = null
+    var plant_lat: String? = null
 
     //经度
-    var plant_lng: Double? = null
+    var plant_lng: String? = null
 
     //总功率
     var totalPower: String? = null
@@ -44,11 +45,14 @@ class AddPlantModel {
     //货币单位
     var formulaMoneyUnitId: String? = null
 
-    //电站图片
+    //电站图片(本地图片)
     var plantFile: Uri? = null
 
-    //压缩后的电站图片
+    //压缩后的电站图片（本地图片）
     var plantFileCompress: String? = null
+
+    //电站图片（服务器图片，修改电站信息的时候会使用到）
+    var plantFileService: String? = null
 
     fun getDateString(): String {
         if (installDate == null) {
@@ -56,4 +60,5 @@ class AddPlantModel {
         }
         return DateUtils.yyyy_MM_dd_format(installDate!!)
     }
+
 }

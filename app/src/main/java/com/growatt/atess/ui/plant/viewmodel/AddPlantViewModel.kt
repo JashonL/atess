@@ -1,5 +1,6 @@
 package com.growatt.atess.ui.plant.viewmodel
 
+import android.text.TextUtils
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.growatt.atess.base.BaseViewModel
@@ -20,11 +21,13 @@ class AddPlantViewModel : BaseViewModel() {
 
     var isEditMode: Boolean = false
 
-    val addPlantModel = AddPlantModel()
+    var addPlantModel = AddPlantModel()
 
     val timeZoneLiveData = MutableLiveData<Pair<TimeZone?, String?>>()
 
     val addPlantLiveData = MutableLiveData<Pair<String?, String?>>()
+
+    val editPlantLiveData = MutableLiveData<String?>()
 
     val cityListLiveData = MutableLiveData<Pair<Array<ProvinceModel>, String?>>()
 
@@ -143,7 +146,7 @@ class AddPlantViewModel : BaseViewModel() {
             apiService().postFile(
                 ApiPath.Plant.ADD_PLANT,
                 params,
-                File(addPlantModel.plantFileCompress!!),
+                if (TextUtils.isEmpty(addPlantModel.plantFileCompress)) null else File(addPlantModel.plantFileCompress!!),
                 object : HttpCallback<HttpResult<AddPlantModel>>() {
                     override fun success(result: HttpResult<AddPlantModel>) {
                         if (result.isBusinessSuccess()) {
@@ -156,6 +159,52 @@ class AddPlantViewModel : BaseViewModel() {
                     override fun onFailure(error: String?) {
                         super.onFailure(error)
                         addPlantLiveData.value = Pair(null, error ?: "")
+                    }
+                })
+        }
+    }
+
+    /**
+     * 修改电站
+     */
+    fun editPlant() {
+        viewModelScope.launch {
+            val params = hashMapOf<String, String>().apply {
+                put("ID", addPlantModel.plantID!!)
+                put("plantName", addPlantModel.plantName!!)
+                put("installDate", addPlantModel.getDateString())
+                put("country", addPlantModel.country!!)
+                put("city", addPlantModel.city!!)
+                addPlantModel.plantAddress?.also {
+                    put("plantAddress", it)
+                }
+                addPlantModel.plant_lat?.also {
+                    put("plant_lat", it.toString())
+                }
+                addPlantModel.plant_lng?.also {
+                    put("plant_lng", it.toString())
+                }
+                put("plantTimeZone", addPlantModel.plantTimeZone ?: "")
+                put("nominalPower", addPlantModel.totalPower!!)
+                put("formulaMoney", addPlantModel.formulaMoney ?: "0")
+                put("formulaMoneyUnitId", addPlantModel.formulaMoneyUnitId ?: "")
+            }
+            apiService().postFile(
+                ApiPath.Plant.UPDATE_PLANT,
+                params,
+                if (TextUtils.isEmpty(addPlantModel.plantFileCompress)) null else File(addPlantModel.plantFileCompress!!),
+                object : HttpCallback<HttpResult<AddPlantModel>>() {
+                    override fun success(result: HttpResult<AddPlantModel>) {
+                        if (result.isBusinessSuccess()) {
+                            editPlantLiveData.value = null
+                        } else {
+                            editPlantLiveData.value = result.msg ?: ""
+                        }
+                    }
+
+                    override fun onFailure(error: String?) {
+                        super.onFailure(error)
+                        editPlantLiveData.value = error ?: ""
                     }
                 })
         }

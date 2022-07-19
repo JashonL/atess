@@ -38,6 +38,7 @@ import java.util.*
 class AddPlant1Fragment : BaseFragment(), View.OnClickListener, OnLocationListener {
 
     private lateinit var binding: FragmentAddPlant1Binding
+
     private val viewModel: AddPlantViewModel by activityViewModels()
 
     override fun onCreateView(
@@ -93,7 +94,16 @@ class AddPlant1Fragment : BaseFragment(), View.OnClickListener, OnLocationListen
     }
 
     private fun initView() {
+        refreshPlantName()
         refreshInstallerDateView()
+        refreshSelectAreaView()
+        refreshLocationView()
+
+    }
+
+    private fun refreshPlantName() {
+        binding.etPlantName.setText(viewModel.addPlantModel.plantName)
+        binding.etPlantName.setSelection(viewModel.addPlantModel.plantName?.length ?: 0)
     }
 
     override fun onClick(v: View?) {

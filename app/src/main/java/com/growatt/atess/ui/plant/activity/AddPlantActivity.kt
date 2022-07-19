@@ -12,6 +12,7 @@ import com.growatt.atess.base.BaseActivity
 import com.growatt.atess.component.image.crop.BitmapUtils
 import com.growatt.atess.databinding.ActivityAddPlantBinding
 import com.growatt.atess.model.plant.AddPlantModel
+import com.growatt.atess.model.plant.PlantModel
 import com.growatt.atess.ui.plant.fragment.AddPlant1Fragment
 import com.growatt.atess.ui.plant.fragment.AddPlant2Fragment
 import com.growatt.atess.ui.plant.monitor.PlantMonitor
@@ -31,8 +32,14 @@ class AddPlantActivity : BaseActivity(), View.OnClickListener {
 
     companion object {
 
-        fun start(context: Context?) {
-            context?.startActivity(Intent(context, AddPlantActivity::class.java))
+        private const val KEY_PLANT_INFO = "KEY_PLANT_INFO"
+
+        fun start(context: Context?, plantModel: PlantModel? = null) {
+            context?.startActivity(Intent(context, AddPlantActivity::class.java).apply {
+                if (plantModel != null) {
+                    putExtra(KEY_PLANT_INFO, plantModel)
+                }
+            })
         }
 
     }
@@ -64,6 +71,24 @@ class AddPlantActivity : BaseActivity(), View.OnClickListener {
                 ToastUtil.show(it.second)
             }
         }
+
+        viewModel.editPlantLiveData.observe(this) {
+            dismissDialog()
+            if (it == null) {
+                PlantMonitor.notifyPlant()
+                finish()
+            } else {
+                ToastUtil.show(it)
+            }
+        }
+
+        if (intent.hasExtra(KEY_PLANT_INFO)) {
+            viewModel.addPlantModel =
+                intent.getParcelableExtra<PlantModel>(KEY_PLANT_INFO)?.convert() ?: AddPlantModel()
+            viewModel.isEditMode = true
+        } else {
+            viewModel.isEditMode = false
+        }
     }
 
     private fun setListener() {
@@ -73,8 +98,10 @@ class AddPlantActivity : BaseActivity(), View.OnClickListener {
     private fun initView() {
         if (viewModel.isEditMode) {
             binding.title.setTitleText(getString(R.string.edit_plant))
+            binding.btNextStep.text = getString(R.string.finish)
         } else {
             binding.title.setTitleText(getString(R.string.add_plant))
+            binding.btNextStep.text = getString(R.string.next_step)
         }
 
         addPlant1Fragment =
@@ -140,8 +167,16 @@ class AddPlantActivity : BaseActivity(), View.OnClickListener {
                     compressImagePath
                 }
                 addPlantModel.plantFileCompress = async.await()
-                viewModel.addPlant()
+                startRequest()
             }
+        } else {
+            startRequest()
+        }
+    }
+
+    private fun startRequest() {
+        if (viewModel.isEditMode) {
+            viewModel.editPlant()
         } else {
             viewModel.addPlant()
         }

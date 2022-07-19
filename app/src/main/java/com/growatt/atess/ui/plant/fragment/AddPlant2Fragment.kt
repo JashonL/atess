@@ -6,6 +6,7 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
+import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -60,10 +61,13 @@ class AddPlant2Fragment : BaseFragment(), View.OnClickListener {
         viewModel.timeZoneLiveData.observe(viewLifecycleOwner) {
             dismissDialog()
             if (it.second == null) {
-                viewModel.addPlantModel.formulaMoneyUnitId = it.first?.monetaryUnit
-                binding.tvCurrency.text = it.first?.monetaryUnit
-                viewModel.addPlantModel.plantTimeZone = it.first?.timezoneList?.get(0)
-                binding.tvTimezone.text = viewModel.addPlantModel.plantTimeZone
+                if (!viewModel.isEditMode) {
+                    //新增电站的情况下才需要初始化显示
+                    viewModel.addPlantModel.formulaMoneyUnitId = it.first?.monetaryUnit
+                    binding.tvCurrency.text = it.first?.monetaryUnit
+                    viewModel.addPlantModel.plantTimeZone = it.first?.timezoneList?.get(0)
+                    binding.tvTimezone.text = viewModel.addPlantModel.plantTimeZone
+                }
             } else {
                 ToastUtil.show(it.second)
             }
@@ -80,6 +84,11 @@ class AddPlant2Fragment : BaseFragment(), View.OnClickListener {
                 ToastUtil.show(it.second)
             }
         }
+
+        if (viewModel.isEditMode) {
+            showDialog()
+            viewModel.fetchTimeZoneList(viewModel.addPlantModel.country ?: "")
+        }
     }
 
     private fun setListener() {
@@ -90,12 +99,37 @@ class AddPlant2Fragment : BaseFragment(), View.OnClickListener {
     }
 
     private fun initView() {
-        if (viewModel.addPlantModel.plantFile == null) {
+        if (TextUtils.isEmpty(viewModel.addPlantModel.plantFileService)) {
             binding.ivPlantImage.gone()
             binding.tvUploadPlantImage.visible()
         } else {
-            setPlantImage(viewModel.addPlantModel.plantFile)
+            Glide.with(this).load(viewModel.addPlantModel.plantFileService)
+                .placeholder(R.drawable.ic_placeholder)
+                .apply(
+                    RequestOptions().transform(
+                        CenterCrop(), RoundedCorners(ViewUtil.dp2px(requireContext(), 2f))
+                    )
+                )
+                .into(binding.ivPlantImage)
+            binding.ivPlantImage.visible()
+            binding.tvUploadPlantImage.gone()
         }
+        refreshTimezoneView()
+        refreshTotalPower()
+        refreshFormulaMoney()
+    }
+
+    /**
+     * 资金收益
+     */
+    private fun refreshFormulaMoney() {
+        refreshFormulaMoneyView()
+        refreshCurrencyView()
+    }
+
+    private fun refreshFormulaMoneyView() {
+        binding.etElectrovalence.setText(viewModel.addPlantModel.formulaMoney)
+        binding.etElectrovalence.setSelection(viewModel.addPlantModel.formulaMoney?.length ?: 0)
     }
 
     override fun onClick(v: View?) {
@@ -131,6 +165,10 @@ class AddPlant2Fragment : BaseFragment(), View.OnClickListener {
 
     private fun setCurrency(currency: String) {
         viewModel.addPlantModel.formulaMoneyUnitId = currency
+        refreshCurrencyView()
+    }
+
+    private fun refreshCurrencyView() {
         binding.tvCurrency.text = viewModel.addPlantModel.formulaMoneyUnitId
     }
 
@@ -140,15 +178,23 @@ class AddPlant2Fragment : BaseFragment(), View.OnClickListener {
         }
         PickerDialog.show(childFragmentManager, timeZones) {
             viewModel.addPlantModel.plantTimeZone = timeZones[it].name
-            binding.tvTimezone.text = viewModel.addPlantModel.plantTimeZone
+            refreshTimezoneView()
         }
+    }
+
+    private fun refreshTotalPower() {
+        binding.etTotalComponentPower.setText(viewModel.addPlantModel.totalPower)
+        binding.etTotalComponentPower.setSelection(viewModel.addPlantModel.totalPower?.length ?: 0)
+    }
+
+    private fun refreshTimezoneView() {
+        binding.tvTimezone.text = viewModel.addPlantModel.plantTimeZone
     }
 
     private fun selectPictureMode() {
         val takeAPicture = getString(R.string.take_a_picture)
         val fromTheAlbum = getString(R.string.from_the_album)
-        val options =
-            arrayOf(takeAPicture, fromTheAlbum)
+        val options = arrayOf(takeAPicture, fromTheAlbum)
         OptionsDialog.show(childFragmentManager, options) {
             when (options[it]) {
                 takeAPicture -> takeAPicture()

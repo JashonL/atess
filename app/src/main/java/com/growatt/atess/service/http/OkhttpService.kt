@@ -73,15 +73,17 @@ class OkhttpService : IHttpService() {
     override fun postFile(
         urlOrApi: String,
         params: Map<String, String>,
-        file: File,
+        file: File?,
         callback: IHttpCallback
     ) {
-        val requestBody = file.asRequestBody(FILE)
         val multipartBodyBuilder = MultipartBody.Builder().setType(MultipartBody.FORM)
         for (param in params) {
             multipartBodyBuilder.addFormDataPart(param.key, param.value)
         }
-        multipartBodyBuilder.addFormDataPart("file", file.name, requestBody)
+        file?.let {
+            val requestBody = it.asRequestBody(FILE)
+            multipartBodyBuilder.addFormDataPart("file", it.name, requestBody)
+        }
         val requestBuilder = Request.Builder()
         for (head in generateHeads()) {
             requestBuilder.addHeader(head.key, head.value)

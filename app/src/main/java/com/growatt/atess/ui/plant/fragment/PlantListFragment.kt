@@ -185,7 +185,7 @@ class PlantListFragment(
                         }
                     }
                     edit -> {
-
+                        AddPlantActivity.start(requireActivity(), getItem(position))
                     }
                 }
             }
@@ -198,7 +198,7 @@ class PlantListFragment(
 
     class PlantViewHolder(
         itemView: View,
-        private val onItemClickListener: OnItemClickListener,
+        onItemClickListener: OnItemClickListener,
     ) :
         BaseViewHolder(itemView, onItemClickListener) {
 

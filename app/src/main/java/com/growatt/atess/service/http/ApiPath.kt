@@ -106,6 +106,11 @@ object ApiPath {
         const val ADD_PLANT = "ATSplant/addPlant"
 
         /**
+         * 修改电站
+         */
+        const val UPDATE_PLANT = "ATSplant/updatePlant"
+
+        /**
          * 通过采集器序列号获取校验码
          */
         const val GET_CHECK_CODE = "ATSplant/getValidCodeBySN"

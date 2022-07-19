@@ -5,6 +5,8 @@ import java.lang.reflect.Type
 
 object GsonManager {
 
+    const val TAG = "GsonManager"
+
     private val gson = Gson()
 
     fun toJson(any: Any?): String {
@@ -16,7 +18,7 @@ object GsonManager {
         try {
             result = gson.fromJson(json, clazz)
         } catch (e: Exception) {
-
+            LogUtil.i(TAG, e.toString())
         }
         return result
     }
@@ -26,7 +28,7 @@ object GsonManager {
         try {
             result = gson.fromJson(json, type)
         } catch (e: Exception) {
-
+            LogUtil.i(TAG, e.toString())
         }
         return result
     }

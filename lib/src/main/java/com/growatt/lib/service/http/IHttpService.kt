@@ -49,7 +49,7 @@ abstract class IHttpService : Service {
     abstract fun postFile(
         urlOrApi: String,
         params: Map<String, String>,
-        file: File,
+        file: File?,
         callback: IHttpCallback
     )
 
