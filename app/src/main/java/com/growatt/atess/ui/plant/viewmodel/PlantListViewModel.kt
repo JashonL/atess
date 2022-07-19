@@ -20,6 +20,8 @@ class PlantListViewModel : BaseViewModel() {
 
     val getPlantStatusNumLiveData = MutableLiveData<Pair<PlantStatusNumModel, String?>>()
 
+    val deletePlantLiveData = MutableLiveData<String?>()
+
     /**
      * 获取电站列表
      */
@@ -53,4 +55,35 @@ class PlantListViewModel : BaseViewModel() {
                 })
         }
     }
+
+
+    /**
+     * 删除电站
+     */
+    fun deletePlant(plantId: String) {
+        viewModelScope.launch {
+            val params = hashMapOf<String, String>().apply {
+                put("plantId", plantId)
+            }
+            apiService().postForm(
+                ApiPath.Plant.DELETE_PLANT,
+                params,
+                object : HttpCallback<HttpResult<String?>>() {
+                    override fun success(result: HttpResult<String?>) {
+                        if (result.isBusinessSuccess()) {
+                            deletePlantLiveData.value = null
+                        } else {
+                            deletePlantLiveData.value = result.msg ?: ""
+                        }
+                    }
+
+                    override fun onFailure(error: String?) {
+                        super.onFailure(error)
+                        deletePlantLiveData.value = error ?: ""
+                    }
+                })
+        }
+    }
+
+
 }

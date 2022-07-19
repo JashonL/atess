@@ -61,6 +61,9 @@ class PlantInfoActivity : BaseActivity(), View.OnClickListener {
 
     private fun setListener() {
         binding.tvDeviceSn.setOnClickListener(this)
+        binding.title.setOnRightImageClickListener {
+            AddCollectorActivity.start(this, viewModel.plantId)
+        }
     }
 
     override fun onClick(v: View?) {

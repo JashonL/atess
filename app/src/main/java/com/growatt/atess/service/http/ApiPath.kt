@@ -116,6 +116,11 @@ object ApiPath {
         const val GET_PLANT_LIST = "ATSplant/getAllPlantList"
 
         /**
+         * 删除电站
+         */
+        const val DELETE_PLANT = "ATSplant/delplant"
+
+        /**
          * 获取电站详情
          */
         const val GET_PLANT_INFO = "ATSplant/getUserCenterEnertyDataByPlantid"

@@ -16,7 +16,7 @@ open class BaseViewHolder(
     itemView: View,
     private val onItemClickListener: OnItemClickListener? = null
 ) : RecyclerView.ViewHolder(itemView), ViewHelper,
-    ServiceManager.ServiceInterface, View.OnClickListener {
+    ServiceManager.ServiceInterface, View.OnClickListener, View.OnLongClickListener {
 
     override fun showDialog() {
         (itemView.context as? BaseActivity)?.showDialog()
@@ -58,8 +58,16 @@ open class BaseViewHolder(
         return MainApplication.instance().getString(stringId)
     }
 
+    override fun onLongClick(v: View?): Boolean {
+        onItemClickListener?.onItemLongClick(v, bindingAdapterPosition)
+        return true
+    }
+
 }
 
 interface OnItemClickListener {
-    fun onItemClick(v: View?, position: Int)
+
+    fun onItemClick(v: View?, position: Int) {}
+
+    fun onItemLongClick(v: View?, position: Int) {}
 }

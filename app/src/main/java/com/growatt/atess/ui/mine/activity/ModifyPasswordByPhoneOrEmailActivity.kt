@@ -16,7 +16,7 @@ import com.growatt.lib.util.ToastUtil
 import com.growatt.lib.util.setViewHeight
 
 /**
- * 设置-修改密码页面
+ * 找回密码-修改密码页面
  */
 class ModifyPasswordByPhoneOrEmailActivity : BaseActivity(), View.OnClickListener {
 

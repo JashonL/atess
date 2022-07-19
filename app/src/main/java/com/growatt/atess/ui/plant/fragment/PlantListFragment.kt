@@ -24,11 +24,13 @@ import com.growatt.atess.base.OnItemClickListener
 import com.growatt.atess.databinding.FragmentPlantListBinding
 import com.growatt.atess.databinding.PlantViewHolderBinding
 import com.growatt.atess.model.plant.PlantModel
+import com.growatt.atess.ui.common.fragment.OptionsDialog
 import com.growatt.atess.ui.home.viewmodel.PlantFilterViewModel
 import com.growatt.atess.ui.plant.activity.AddPlantActivity
 import com.growatt.atess.ui.plant.activity.PlantInfoActivity
 import com.growatt.atess.ui.plant.monitor.PlantMonitor
 import com.growatt.atess.ui.plant.viewmodel.PlantListViewModel
+import com.growatt.atess.view.dialog.AlertDialog
 import com.growatt.lib.util.ToastUtil
 import com.growatt.lib.util.ViewUtil
 import com.growatt.lib.util.gone
@@ -86,6 +88,14 @@ class PlantListFragment(
         }
         filterViewModel.getPlantFilterLiveData.observe(viewLifecycleOwner) {
             binding.srfRefresh.autoRefresh()
+        }
+        viewModel.deletePlantLiveData.observe(viewLifecycleOwner) {
+            dismissDialog()
+            if (it == null) {
+                PlantMonitor.notifyPlant()
+            } else {
+                ToastUtil.show(it)
+            }
         }
         PlantMonitor.watch(viewLifecycleOwner.lifecycle) {
             binding.srfRefresh.autoRefresh()
@@ -156,18 +166,46 @@ class PlantListFragment(
             PlantInfoActivity.start(requireContext(), getItem(position).id)
         }
 
+        override fun onItemLongClick(v: View?, position: Int) {
+            val title = getString(R.string.plant_manage)
+            val delete = getString(R.string.delete_plant)
+            val edit = getString(R.string.edit_plant)
+            val options = arrayOf(delete, edit)
+            OptionsDialog.show(childFragmentManager, options, title) {
+                when (options[it]) {
+                    delete -> {
+                        AlertDialog.showDialog(
+                            childFragmentManager,
+                            getString(R.string.delete_plant_confirm),
+                            getString(R.string.delete),
+                            getString(R.string.cancel)
+                        ) {
+                            showDialog()
+                            viewModel.deletePlant(getItem(position)?.id ?: "")
+                        }
+                    }
+                    edit -> {
+
+                    }
+                }
+            }
+        }
+
         fun refresh(plantModels: Array<PlantModel>?) {
             submitList(plantModels?.toList())
         }
     }
 
-    class PlantViewHolder(itemView: View, onItemClickListener: OnItemClickListener) :
+    class PlantViewHolder(
+        itemView: View,
+        private val onItemClickListener: OnItemClickListener,
+    ) :
         BaseViewHolder(itemView, onItemClickListener) {
 
         companion object {
             fun create(
                 parent: ViewGroup,
-                onItemClickListener: OnItemClickListener
+                onItemClickListener: OnItemClickListener,
             ): PlantViewHolder {
                 val binding = PlantViewHolderBinding.inflate(
                     LayoutInflater.from(parent.context),
@@ -184,6 +222,7 @@ class PlantListFragment(
                 )
                 holder.binding = binding
                 binding.root.setOnClickListener(holder)
+                binding.root.setOnLongClickListener(holder)
                 return holder
             }
         }

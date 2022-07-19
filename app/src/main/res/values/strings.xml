@@ -99,6 +99,9 @@
     <string name="please_input_plant_or_sn">请输入电站名称或电站设备中的序列号</string>
     <string name="add_plant">添加电站</string>
     <string name="edit_plant">编辑电站</string>
+    <string name="delete_plant">删除电站</string>
+    <string name="plant_manage">电站管理</string>
+    <string name="delete_plant_confirm">是否删除电站？</string>
 
     <string name="device_count">设备数量</string>
     <string name="total_component_power">组件总功率</string>
@@ -171,6 +174,7 @@
     <string name="load_power_format">负载功率:%skW</string>
     <string name="discharge_power_format">放电功率:%skW</string>
     <string name="current_power_format">当前功率:%skW</string>
+    <string name="delete">删除</string>
 
     <!-- image crop-->
     <string name="crop_image_menu_crop">裁剪</string>

@@ -2,6 +2,7 @@ package com.growatt.atess.ui.common.fragment
 
 import android.app.Dialog
 import android.os.Bundle
+import android.text.TextUtils
 import android.view.Gravity
 import android.view.View
 import android.widget.LinearLayout
@@ -22,11 +23,13 @@ class OptionsDialog : BottomSheetDialogFragment() {
         fun show(
             fragmentManager: FragmentManager,
             options: Array<String>,
+            title: String? = null,
             callback: ((selectPosition: Int) -> Unit)? = null
         ) {
             val dialog = OptionsDialog()
             dialog.options = options
             dialog.callback = callback
+            dialog.title = title
             dialog.show(fragmentManager, OptionsDialog::class.java.name)
         }
 
@@ -35,16 +38,13 @@ class OptionsDialog : BottomSheetDialogFragment() {
     private lateinit var options: Array<String>
     private lateinit var binding: DialogOptionsBinding
     private var callback: ((selectPosition: Int) -> Unit)? = null
+    private var title: String? = null
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val dialog = super.onCreateDialog(savedInstanceState)
         binding = DialogOptionsBinding.inflate(layoutInflater, null, false)
         initView()
         dialog.setContentView(binding.root)
-
-
-        //设置dialog背景透明
-        (binding.root.parent as? View)?.setBackgroundColor(resources.getColor(android.R.color.transparent))
         return dialog
     }
 
@@ -54,6 +54,9 @@ class OptionsDialog : BottomSheetDialogFragment() {
         }
         binding.tvCancel.setOnClickListener {
             dismissAllowingStateLoss()
+        }
+        if (!TextUtils.isEmpty(title)) {
+            binding.tvTitle.text = title
         }
     }
 
