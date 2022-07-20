@@ -130,6 +130,11 @@ object ApiPath {
          */
         const val GET_PLANT_INFO = "ATSplant/getUserCenterEnertyDataByPlantid"
 
+        /**
+         * 我的设备列表
+         */
+        const val GET_DEVICE_LIST = "ATSDevice/getDevices"
+
 
     }
 }

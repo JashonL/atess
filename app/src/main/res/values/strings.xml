@@ -175,6 +175,25 @@
     <string name="discharge_power_format">放电功率:%skW</string>
     <string name="current_power_format">当前功率:%skW</string>
     <string name="delete">删除</string>
+    <string name="my_devices">我的设备</string>
+    <string name="sn_format">序列号:%s</string>
+    <string name="today_power_format">今日发电:%s</string>
+    <string name="total_power_format">累计发电:%s</string>
+    <string name="hps">HPS</string>
+    <string name="pcs">PCS</string>
+    <string name="pbd">PBD</string>
+    <string name="bms">BMS</string>
+    <string name="combiner">Combiner</string>
+    <string name="collector">采集器</string>
+    <string name="charging">充电中</string>
+    <string name="discharging">放电中</string>
+    <string name="connect_status_format">连接状态:%s</string>
+    <string name="connected">已连接</string>
+    <string name="disconnect">未连接</string>
+    <string name="soc_format">SOC:%d</string>
+    <string name="update_interval_format">更新间隔:%s分钟</string>
+    <string name="last_update_time_format">最后更新时间:%s</string>
+    <string name="see_more">查看更多</string>
 
     <!-- image crop-->
     <string name="crop_image_menu_crop">裁剪</string>

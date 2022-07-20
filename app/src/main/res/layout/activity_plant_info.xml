@@ -102,7 +102,13 @@
                 android:layout_marginTop="10dp"
                 tools:layout="@layout/fragment_plant_energy_info" />
 
-
+            <androidx.fragment.app.FragmentContainerView
+                android:id="@+id/fragment_device_list"
+                android:name="com.growatt.atess.ui.plant.fragment.info.PlantDeviceListFragment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                tools:layout="@layout/fragment_plant_device_list" />
         </LinearLayout>
 
     </ScrollView>

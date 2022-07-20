@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="104dp"
+    android:background="@color/color_white"
+    tools:context=".ui.plant.viewholder.CollectorViewHolder">
+
+    <ImageView
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="22dp"
+        android:src="@drawable/ic_device_collector"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_device_model"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="98dp"
+        android:layout_marginTop="16dp"
+        android:textColor="@color/text_black"
+        android:textSize="@dimen/text_medium"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="设备型号" />
+
+    <TextView
+        android:id="@+id/tv_status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="128dp"
+        android:textColor="@color/text_green"
+        android:textSize="@dimen/text_small"
+        app:layout_constraintBottom_toBottomOf="@id/tv_device_model"
+        app:layout_constraintStart_toStartOf="@id/tv_device_model"
+        app:layout_constraintTop_toTopOf="@id/tv_device_model"
+        tools:text="已连接" />
+
+    <TextView
+        android:id="@+id/tv_device_sn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:textColor="@color/text_gray_99"
+        android:textSize="@dimen/text_small"
+        app:layout_constraintStart_toStartOf="@id/tv_device_model"
+        app:layout_constraintTop_toBottomOf="@id/tv_device_model"
+        tools:text="序列号：123456" />
+
+    <TextView
+        android:id="@+id/tv_last_update_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:textColor="@color/text_gray_99"
+        android:textSize="@dimen/text_small"
+        app:layout_constraintStart_toStartOf="@id/tv_device_model"
+        app:layout_constraintTop_toBottomOf="@id/tv_device_sn"
+        tools:text="最后更新时间：2022-05-07 16:02:03 " />
+
+    <TextView
+        android:id="@+id/tv_update_interval"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/text_gray_99"
+        android:textSize="@dimen/text_small"
+        app:layout_constraintBottom_toBottomOf="@id/tv_device_sn"
+        app:layout_constraintStart_toStartOf="@id/tv_status"
+        app:layout_constraintTop_toTopOf="@id/tv_device_sn"
+        tools:text="更新间隔:1分钟" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
