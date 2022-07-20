@@ -157,7 +157,7 @@
                 android:text="@string/monthly_output"
                 android:textColor="@color/text_gray_99"
                 android:textSize="@dimen/text_small"
-                app:drawableStartCompat="@drawable/ic_today_power" />
+                app:drawableStartCompat="@drawable/ic_monthly_power" />
 
             <TextView
                 android:id="@+id/tv_monthly_output"
@@ -185,7 +185,7 @@
                 android:text="@string/accumulative_output"
                 android:textColor="@color/text_gray_99"
                 android:textSize="@dimen/text_small"
-                app:drawableStartCompat="@drawable/ic_today_power" />
+                app:drawableStartCompat="@drawable/ic_total_power" />
 
             <TextView
                 android:id="@+id/tv_accumulative_output"

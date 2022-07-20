@@ -163,7 +163,7 @@ class PlantListFragment(
         }
 
         override fun onItemClick(v: View?, position: Int) {
-            PlantInfoActivity.start(requireContext(), getItem(position).id)
+            getItem(position).id?.let { PlantInfoActivity.start(requireContext(), it) }
         }
 
         override fun onItemLongClick(v: View?, position: Int) {

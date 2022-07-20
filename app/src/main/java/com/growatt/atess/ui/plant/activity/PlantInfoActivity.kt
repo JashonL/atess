@@ -22,7 +22,7 @@ class PlantInfoActivity : BaseActivity(), View.OnClickListener {
 
         fun start(
             context: Context?,
-            plantId: String?,
+            plantId: String,
             plantModels: Array<PlantModel> = emptyArray()
         ) {
             context?.startActivity(Intent(context, PlantInfoActivity::class.java).also {

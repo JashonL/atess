@@ -14,12 +14,14 @@ import kotlinx.coroutines.launch
  */
 class DeviceListViewModel : BaseViewModel() {
 
+    lateinit var plantId: String
+
     val getDeviceListLiveData = MutableLiveData<Pair<DeviceListResultModel?, String?>>()
 
     /**
      * 添加采集器
      */
-    fun getDeviceList(plantId: String) {
+    fun getDeviceList() {
         viewModelScope.launch {
             val params = hashMapOf<String, String>().apply {
                 put("plantId", plantId)

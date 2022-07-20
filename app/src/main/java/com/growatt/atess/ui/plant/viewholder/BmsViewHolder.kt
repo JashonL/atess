@@ -7,6 +7,7 @@ import com.growatt.atess.R
 import com.growatt.atess.base.OnItemClickListener
 import com.growatt.atess.databinding.BmsViewHolderBinding
 import com.growatt.atess.model.plant.DeviceModel
+import com.growatt.atess.model.plant.DeviceType
 
 /**
  * BMS设备
@@ -38,6 +39,7 @@ class BmsViewHolder(
     override fun bindData(deviceModel: DeviceModel) {
         binding.tvDeviceModel.text = deviceModel.deviceModel
         binding.tvDeviceSn.text = deviceModel.bmsid
+        binding.ivIcon.setImageResource(if (deviceModel.getRealDeviceType() == DeviceType.MBMS) R.drawable.ic_device_mbms else R.drawable.ic_device_bms)
         binding.tvStatus.text = deviceModel.getSysStatusText()
         binding.tvStatus.setBackgroundResource(if (deviceModel.sysStatus == -1) R.color.color_82DCDC else R.color.color_D4EC59)
         binding.tvSoc.text = deviceModel.getSocText()
