@@ -9,6 +9,8 @@ import com.growatt.atess.base.BaseActivity
 import com.growatt.atess.databinding.ActivityPlantInfoBinding
 import com.growatt.atess.model.plant.PlantModel
 import com.growatt.atess.ui.plant.viewmodel.PlantInfoViewModel
+import com.growatt.atess.view.dialog.OptionsDialog
+import com.growatt.lib.util.ToastUtil
 
 /**
  * 电站详情页面
@@ -55,8 +57,32 @@ class PlantInfoActivity : BaseActivity(), View.OnClickListener {
 
     private fun initData() {
         viewModel.plantId = intent.getStringExtra(KEY_PLANT_ID)
-        viewModel.plantModels =
-            intent.getParcelableArrayExtra(KEY_PLANT_LIST) as? Array<PlantModel>?
+        val parcelableArrayExtra = intent.getParcelableArrayExtra(KEY_PLANT_LIST)
+        if (!parcelableArrayExtra.isNullOrEmpty()) {
+            viewModel.plantModels = Array(parcelableArrayExtra.size) {
+                PlantModel()
+            }
+            for (index in parcelableArrayExtra.indices) {
+                viewModel.plantModels!![index] = parcelableArrayExtra[index] as PlantModel
+            }
+        }
+
+        viewModel.getPcsHpsSNLiveData.observe(this) {
+            if (it.second == null) {
+                if (it.first?.isNullOrEmpty() == false) {
+                    refreshSNView(it.first!![0])
+                }
+            } else {
+                ToastUtil.show(it.second)
+            }
+        }
+
+        viewModel.getPcsHpsSN()
+    }
+
+    private fun refreshSNView(typeAndSN: Pair<String, String>) {
+        binding.tvDeviceType.text = typeAndSN.first
+        binding.tvDeviceSn.text = typeAndSN.second
     }
 
     private fun setListener() {
@@ -68,8 +94,20 @@ class PlantInfoActivity : BaseActivity(), View.OnClickListener {
 
     override fun onClick(v: View?) {
         when {
-            v === binding.tvDeviceSn -> {
+            v === binding.tvDeviceSn -> selectSN()
+        }
+    }
 
+    private fun selectSN() {
+        val options = mutableListOf<String>()
+        val snList = viewModel.getPcsHpsSNLiveData.value?.first
+        snList?.all {
+            options.add(it.second)
+            true
+        }
+        if (options.size > 0) {
+            OptionsDialog.show(supportFragmentManager, options.toTypedArray()) {
+                refreshSNView(snList!![it])
             }
         }
     }

@@ -18,11 +18,11 @@ import com.growatt.atess.base.BaseActivity
 import com.growatt.atess.component.image.crop.CropShape
 import com.growatt.atess.component.image.crop.ImageCrop
 import com.growatt.atess.databinding.ActivitySettingBinding
-import com.growatt.atess.ui.common.fragment.OptionsDialog
 import com.growatt.atess.ui.common.fragment.RequestPermissionHub
 import com.growatt.atess.ui.mine.fragment.RegisterAccountType
 import com.growatt.atess.ui.mine.viewmodel.SettingViewModel
 import com.growatt.atess.util.AppUtil
+import com.growatt.atess.view.dialog.OptionsDialog
 import com.growatt.lib.service.account.IAccountService
 import com.growatt.lib.util.ActivityBridge
 import com.growatt.lib.util.ToastUtil

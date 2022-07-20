@@ -16,11 +16,11 @@ import com.growatt.atess.base.BaseFragment
 import com.growatt.atess.databinding.FragmentAddPlant1Binding
 import com.growatt.atess.model.plant.ProvinceModel
 import com.growatt.atess.ui.common.activity.AMapActivity
-import com.growatt.atess.ui.common.fragment.PickerDialog
 import com.growatt.atess.ui.common.fragment.RequestPermissionHub
 import com.growatt.atess.ui.common.fragment.SystemLocationDisableTipDialog
 import com.growatt.atess.ui.mine.activity.SelectAreaActivity
 import com.growatt.atess.ui.plant.viewmodel.AddPlantViewModel
+import com.growatt.atess.view.dialog.PickerDialog
 import com.growatt.lib.service.location.LocationInfo
 import com.growatt.lib.service.location.OnLocationListener
 import com.growatt.lib.util.*

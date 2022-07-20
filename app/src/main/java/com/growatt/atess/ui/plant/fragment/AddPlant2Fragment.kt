@@ -22,11 +22,11 @@ import com.growatt.atess.R
 import com.growatt.atess.base.BaseFragment
 import com.growatt.atess.databinding.FragmentAddPlant2Binding
 import com.growatt.atess.model.plant.GeneralItemModel
-import com.growatt.atess.ui.common.fragment.OptionsDialog
-import com.growatt.atess.ui.common.fragment.PickerDialog
 import com.growatt.atess.ui.common.fragment.RequestPermissionHub
 import com.growatt.atess.ui.plant.viewmodel.AddPlantViewModel
 import com.growatt.atess.util.AppUtil
+import com.growatt.atess.view.dialog.OptionsDialog
+import com.growatt.atess.view.dialog.PickerDialog
 import com.growatt.lib.util.*
 import java.io.File
 

@@ -1,7 +1,7 @@
 package com.growatt.atess.model.plant
 
 /**
- * 电站列表返回的数据模型
+ * 电站列表后台返回的数据模型
  */
 data class PlantListResultModel(
     val plantList: Array<PlantModel>,

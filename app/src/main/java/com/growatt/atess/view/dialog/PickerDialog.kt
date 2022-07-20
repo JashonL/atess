@@ -1,4 +1,4 @@
-package com.growatt.atess.ui.common.fragment
+package com.growatt.atess.view.dialog
 
 import android.app.Dialog
 import android.os.Bundle

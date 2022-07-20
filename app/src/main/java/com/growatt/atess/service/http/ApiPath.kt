@@ -135,6 +135,10 @@ object ApiPath {
          */
         const val GET_DEVICE_LIST = "ATSDevice/getDevices"
 
+        /**
+         * 电站详情-PCS和HPS设备序列号
+         */
+        const val GET_PCS_AND_HPS_LIST = "ATSplant/getPCSAndHPSList"
 
     }
 }

@@ -1,6 +1,6 @@
 package com.growatt.atess.model.plant
 
-import com.growatt.atess.ui.common.fragment.ItemName
+import com.growatt.atess.view.dialog.ItemName
 
 /**
  * 通用选择器器Model

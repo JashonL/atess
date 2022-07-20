@@ -6,21 +6,21 @@ import com.growatt.lib.util.Util
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-data class PlantModel(
-    val id: String?,//电站ID
-    val plantName: String?,//电站名
-    val plantImgName: String?,//电站图片
-    val createDateText: String?,//安装日期
-    val hasDeviceOnLine: Int,//电站状态   0：离线  1：故障  2：在线
-    val city: String?,//城市
-    val timezone: String?,//时区
-    val currentPacStr: String?,//实时功率0kW
-    val nominalPowerStr: String?,//组件总功率1130kWp
+data class PlantModel @JvmOverloads constructor(
+    val id: String? = null,//电站ID
+    val plantName: String? = null,//电站名
+    val plantImgName: String? = null,//电站图片
+    val createDateText: String? = null,//安装日期
+    val hasDeviceOnLine: Int = 0,//电站状态   0：离线  1：故障  2：在线
+    val city: String? = null,//城市
+    val timezone: String? = null,//时区
+    val currentPacStr: String? = null,//实时功率0kW
+    val nominalPowerStr: String? = null,//组件总功率1130kWp
     var nominalPower: String? = null,//组件总功率不带单位的，1130
-    val eToday: Double?,//今日发电量
-    val eTotal: Double?,//累计发电量
-    val country: String?,//国家
-    val plantAddress: String?,//详细地址
+    val eToday: Double? = null,//今日发电量
+    val eTotal: Double? = null,//累计发电量
+    val country: String? = null,//国家
+    val plantAddress: String? = null,//详细地址
     var plant_lat: String? = null,//纬度
     var plant_lng: String? = null,//经度
     var formulaMoneyUnitId: String? = null,//货币单位
