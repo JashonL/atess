@@ -128,7 +128,12 @@
             android:screenOrientation="nosensor" />
 
         <activity
-            android:name=".ui.mine.activity.MyDeviceListActivity"
+            android:name=".ui.plant.activity.MyDeviceListActivity"
+            android:exported="false"
+            android:screenOrientation="nosensor" />
+
+        <activity
+            android:name=".ui.plant.activity.DeviceParamsActivity"
             android:exported="false"
             android:screenOrientation="nosensor" />
 

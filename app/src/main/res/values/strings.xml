@@ -195,6 +195,7 @@
     <string name="last_update_time_format">最后更新时间:%s</string>
     <string name="see_more">查看更多</string>
     <string name="please_input_device_sn_or_alias">请输入设备序列号或别名</string>
+    <string name="all_params">全部参数</string>
 
     <!-- image crop-->
     <string name="crop_image_menu_crop">裁剪</string>

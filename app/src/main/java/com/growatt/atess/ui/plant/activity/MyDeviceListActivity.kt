@@ -1,4 +1,4 @@
-package com.growatt.atess.ui.mine.activity
+package com.growatt.atess.ui.plant.activity
 
 import android.content.Context
 import android.content.Intent

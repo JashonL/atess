@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.growatt.atess.R
 import com.growatt.atess.base.BaseFragment
 import com.growatt.atess.databinding.FragmentPlantDeviceListBinding
-import com.growatt.atess.ui.mine.activity.MyDeviceListActivity
+import com.growatt.atess.ui.plant.activity.MyDeviceListActivity
 import com.growatt.atess.ui.plant.adapter.DeviceAdapter
 import com.growatt.atess.ui.plant.viewmodel.PlantInfoViewModel
 import com.growatt.lib.util.ToastUtil
