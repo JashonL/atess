@@ -157,8 +157,8 @@
     <string name="monthly_output">月发电量</string>
     <string name="accumulative_output">累计电量</string>
     <string name="energy_info">能源概况</string>
-    <string name="day">当日</string>
-    <string name="accumulative">累计</string>
+    <string name="day_with_unit">当日(kWh)</string>
+    <string name="accumulative_with_unit">累计(kWh)</string>
     <string name="photovoltaic_output">光伏产出</string>
     <string name="diesel_engine_machine_output">柴油机电机产出</string>
     <string name="battery_charge">电池充电</string>
@@ -177,6 +177,7 @@
     <string name="delete">删除</string>
     <string name="my_devices">我的设备</string>
     <string name="sn_format">序列号:%s</string>
+    <string name="model_format">型号:%s</string>
     <string name="today_power_format">今日发电:%s</string>
     <string name="total_power_format">累计发电:%s</string>
     <string name="hps">HPS</string>
@@ -196,6 +197,15 @@
     <string name="see_more">查看更多</string>
     <string name="please_input_device_sn_or_alias">请输入设备序列号或别名</string>
     <string name="all_params">全部参数</string>
+    <string name="kwh">Kwh</string>
+    <string name="output_voltage">输出电压</string>
+    <string name="output_frequency">输出频率</string>
+    <string name="environment_temperature">环境温度</string>
+    <string name="startup_self_test_time">开机自检时间</string>
+    <string name="load_time_power">负载视在功率</string>
+    <string name="load_active_power">负载有功功率</string>
+    <string name="load_reactive_power">负载无功功率</string>
+    <string name="load_power_factor">负载功率因素</string>
 
     <!-- image crop-->
     <string name="crop_image_menu_crop">裁剪</string>

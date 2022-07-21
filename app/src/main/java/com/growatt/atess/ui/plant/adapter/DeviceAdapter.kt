@@ -1,10 +1,13 @@
 package com.growatt.atess.ui.plant.adapter
 
 import android.annotation.SuppressLint
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.growatt.atess.base.OnItemClickListener
 import com.growatt.atess.model.plant.DeviceModel
+import com.growatt.atess.model.plant.DeviceType
+import com.growatt.atess.ui.plant.activity.HpsInfoActivity
 import com.growatt.atess.ui.plant.viewholder.BaseDeviceViewHolder
 
 /**
@@ -32,6 +35,16 @@ class DeviceAdapter : RecyclerView.Adapter<BaseDeviceViewHolder>(), OnItemClickL
 
     override fun getItemViewType(position: Int): Int {
         return deviceList[position].getRealDeviceType()
+    }
+
+    override fun onItemClick(v: View?, position: Int) {
+        when (getItemViewType(position)) {
+            DeviceType.HPS -> HpsInfoActivity.start(v?.context, deviceList[position].hpsid)
+            DeviceType.PCS -> HpsInfoActivity.start(v?.context, deviceList[position].pcsid)
+            DeviceType.PBD -> HpsInfoActivity.start(v?.context, deviceList[position].pbdid)
+            DeviceType.BMS -> {}
+            DeviceType.MBMS -> {}
+        }
     }
 
     @SuppressLint("NotifyDataSetChanged")

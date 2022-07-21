@@ -4,6 +4,9 @@ import com.growatt.atess.R
 import com.growatt.atess.application.MainApplication
 import com.growatt.lib.util.Util
 
+/**
+ * 设备列表Model
+ */
 data class DeviceModel(
     val deviceType: String?,//设备类型
     val deviceModel: String?,//设备型号
@@ -22,12 +25,18 @@ data class DeviceModel(
 ) {
     fun getETodayText(): String {
         return MainApplication.instance()
-            .getString(R.string.today_power_format, "${Util.getDoubleText(eToday)}kWh")
+            .getString(
+                R.string.today_power_format,
+                "${Util.getDoubleText(eToday)}${MainApplication.instance().getString(R.string.kwh)}"
+            )
     }
 
     fun getETotalText(): String {
         return MainApplication.instance()
-            .getString(R.string.total_power_format, "${Util.getDoubleText(eToday)}kWh")
+            .getString(
+                R.string.total_power_format,
+                "${Util.getDoubleText(eToday)}${MainApplication.instance().getString(R.string.kwh)}"
+            )
     }
 
     fun getRealDeviceType(): Int {

@@ -4,11 +4,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.bumptech.glide.Glide
 import com.growatt.atess.base.BaseFragment
 import com.growatt.atess.databinding.FragmentPlantEnergyInfoBinding
+import com.growatt.atess.databinding.ItemEnergyInfoBinding
 
 /**
- * 能源概况
+ * 电站详情-能源概况
  */
 class PlantEnergyInfoFragment : BaseFragment() {
 
@@ -33,4 +35,11 @@ class PlantEnergyInfoFragment : BaseFragment() {
 
     }
 
+    fun generateItemView(iconUrl: String, name: String, day: String, total: String) {
+        val itemBinding = ItemEnergyInfoBinding.inflate(layoutInflater, binding.llContainer, false)
+        Glide.with(this).load(iconUrl).into(itemBinding.ivIcon)
+        itemBinding.tvName.text = name
+        itemBinding.tvPhotovoltaicOutputDay.text = day
+        itemBinding.tvPhotovoltaicOutputTotal.text = total
+    }
 }

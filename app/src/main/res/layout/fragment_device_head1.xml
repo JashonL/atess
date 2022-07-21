@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/color_white"
+    android:padding="10dp"
+    tools:context="com.growatt.atess.ui.plant.fragment.device.DeviceHead1Fragment">
+
+    <ImageView
+        android:id="@+id/iv_icon"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_margin="22dp"
+        android:src="@drawable/ic_device_hps"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_device_sn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:textColor="@color/text_gray_99"
+        android:textSize="@dimen/text_small"
+        app:layout_constraintStart_toEndOf="@id/iv_icon"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="序列号：HPS00001" />
+
+    <TextView
+        android:id="@+id/tv_device_model"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:textColor="@color/text_gray_99"
+        android:textSize="@dimen/text_small"
+        app:layout_constraintStart_toStartOf="@id/tv_device_sn"
+        app:layout_constraintTop_toBottomOf="@id/tv_device_sn"
+        tools:text="型号：ATESS105" />
+
+    <TextView
+        android:id="@+id/tv_all_params"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:paddingTop="14dp"
+        android:paddingEnd="14dp"
+        android:text="@string/all_params"
+        android:textColor="@color/text_black"
+        android:textSize="@dimen/text_13"
+        app:drawableEndCompat="@drawable/ic_right"
+        app:layout_constraintStart_toStartOf="@id/tv_device_model"
+        app:layout_constraintTop_toBottomOf="@id/tv_device_model" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
