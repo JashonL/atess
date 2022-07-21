@@ -3,6 +3,7 @@ package com.growatt.atess.model.plant
 import com.growatt.atess.R
 import com.growatt.atess.application.MainApplication
 import com.growatt.atess.model.plant.ui.IDeviceInfoHead
+import com.growatt.lib.util.Util
 import org.json.JSONObject
 
 data class PbdModel(
@@ -65,4 +66,15 @@ data class PbdModel(
         return json.toString()
     }
 
+    fun getTotalPowerText(): String {
+        return Util.getDoubleText(ppv) + "W"
+    }
+
+    fun getETodayText(): String {
+        return Util.getDoubleText(eToday)
+    }
+
+    fun getETotalText(): String {
+        return Util.getDoubleText(eTotal)
+    }
 }

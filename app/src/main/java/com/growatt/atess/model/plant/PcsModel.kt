@@ -3,6 +3,7 @@ package com.growatt.atess.model.plant
 import com.growatt.atess.R
 import com.growatt.atess.application.MainApplication
 import com.growatt.atess.model.plant.ui.IDeviceInfoHead
+import com.growatt.lib.util.Util
 import org.json.JSONObject
 
 data class PcsModel(
@@ -67,6 +68,10 @@ data class PcsModel(
 //        json.put(MainApplication.instance().getString(R.string.load_power_factor), loadPfText)
 
         return json.toString()
+    }
+
+    fun getTotalPowerText(): String {
+        return Util.getDoubleText(ppv) + "W"
     }
 
 }

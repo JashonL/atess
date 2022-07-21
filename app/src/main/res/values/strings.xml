@@ -155,10 +155,10 @@
 
     <string name="daily_output">日发电量</string>
     <string name="monthly_output">月发电量</string>
-    <string name="accumulative_output">累计电量</string>
+    <string name="total_output">累计电量</string>
     <string name="energy_info">能源概况</string>
     <string name="day_with_unit">当日(kWh)</string>
-    <string name="accumulative_with_unit">累计(kWh)</string>
+    <string name="total_with_unit">累计(kWh)</string>
     <string name="photovoltaic_output">光伏产出</string>
     <string name="diesel_engine_machine_output">柴油机电机产出</string>
     <string name="battery_charge">电池充电</string>
@@ -206,6 +206,7 @@
     <string name="load_active_power">负载有功功率</string>
     <string name="load_reactive_power">负载无功功率</string>
     <string name="load_power_factor">负载功率因素</string>
+    <string name="generate_power">发电功率</string>
 
     <!-- image crop-->
     <string name="crop_image_menu_crop">裁剪</string>

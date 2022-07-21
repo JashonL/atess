@@ -13,6 +13,7 @@ import com.growatt.atess.model.plant.PcsModel
 import com.growatt.atess.ui.plant.fragment.device.DeviceHead1Fragment
 import com.growatt.atess.ui.plant.viewmodel.DeviceInfoViewModel
 import com.growatt.lib.util.ToastUtil
+import com.growatt.lib.util.ViewUtil
 
 /**
  * PCS设备详情
@@ -46,14 +47,26 @@ class PcsInfoActivity : BaseActivity(), View.OnClickListener {
         viewModel.deviceSn = intent.getStringExtra(KEY_SN)
         viewModel.getDeviceInfoLiveData.observe(this) {
             if (it.second == null) {
-                (supportFragmentManager.findFragmentById(R.id.fragment_head) as DeviceHead1Fragment).bindData(
-                    it.first!!
-                )
+                refreshView(it.first!!)
             } else {
                 ToastUtil.show(it.second)
             }
         }
         viewModel.getDeviceInfo(DeviceType.PCS)
+    }
+
+    private fun refreshView(pcsModel: PcsModel) {
+        (supportFragmentManager.findFragmentById(R.id.fragment_head) as DeviceHead1Fragment).bindData(
+            pcsModel
+        )
+        binding.tvDeviceStatus.text =
+            getString(if (pcsModel.lost == true) R.string.offline else R.string.online)
+        binding.tvDeviceStatus.background = if (pcsModel.lost == true) ViewUtil.createShape(
+            resources.getColor(R.color.color_0D000000),
+            2
+        ) else ViewUtil.createShape(resources.getColor(R.color.color_1A3FAE29), 2)
+        binding.tvDeviceStatus.setTextColor(resources.getColor(if (pcsModel.lost == true) R.color.text_green else R.color.text_gray_bb))
+        binding.tvPower.text = pcsModel.getTotalPowerText()
     }
 
     private fun initView() {

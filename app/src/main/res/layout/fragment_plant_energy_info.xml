@@ -37,7 +37,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="114.5"
             android:gravity="center"
-            android:text="@string/accumulative_with_unit"
+            android:text="@string/total_with_unit"
             android:textColor="@color/text_gray_99"
             android:textSize="@dimen/text_medium" />
     </LinearLayout>

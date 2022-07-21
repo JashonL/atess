@@ -13,6 +13,7 @@ import com.growatt.atess.model.plant.PbdModel
 import com.growatt.atess.ui.plant.fragment.device.DeviceHead1Fragment
 import com.growatt.atess.ui.plant.viewmodel.DeviceInfoViewModel
 import com.growatt.lib.util.ToastUtil
+import com.growatt.lib.util.ViewUtil
 
 /**
  * PBD设备详情
@@ -46,9 +47,7 @@ class PbdInfoActivity : BaseActivity(), View.OnClickListener {
         viewModel.deviceSn = intent.getStringExtra(KEY_SN)
         viewModel.getDeviceInfoLiveData.observe(this) {
             if (it.second == null) {
-                (supportFragmentManager.findFragmentById(R.id.fragment_head) as DeviceHead1Fragment).bindData(
-                    it.first!!
-                )
+                refreshView(it.first!!)
             } else {
                 ToastUtil.show(it.second)
             }
@@ -56,8 +55,33 @@ class PbdInfoActivity : BaseActivity(), View.OnClickListener {
         viewModel.getDeviceInfo(DeviceType.PBD)
     }
 
-    private fun initView() {
+    private fun refreshView(pbdModel: PbdModel) {
+        (supportFragmentManager.findFragmentById(R.id.fragment_head) as DeviceHead1Fragment).bindData(
+            pbdModel
+        )
+        binding.tvDeviceStatus.text =
+            getString(if (pbdModel.lost == true) R.string.offline else R.string.online)
+        binding.tvDeviceStatus.background = if (pbdModel.lost == true) ViewUtil.createShape(
+            resources.getColor(R.color.color_0D000000),
+            2
+        ) else ViewUtil.createShape(resources.getColor(R.color.color_1A3FAE29), 2)
+        binding.tvDeviceStatus.setTextColor(resources.getColor(if (pbdModel.lost == true) R.color.text_green else R.color.text_gray_bb))
+        binding.tvPower.text = pbdModel.getTotalPowerText()
+        binding.tvTodayPower.text = pbdModel.getETodayText()
+        binding.tvTotalPower.text = pbdModel.getETotalText()
+    }
 
+    private fun initView() {
+        binding.tvTodayUnit.text = getString(
+            R.string.slash_format,
+            getString(R.string.today_power),
+            getString(R.string.kwh)
+        )
+        binding.tvTotalUnit.text = getString(
+            R.string.slash_format,
+            getString(R.string.total_power),
+            getString(R.string.kwh)
+        )
     }
 
     override fun onClick(v: View?) {

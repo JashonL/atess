@@ -182,13 +182,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:drawablePadding="4dp"
-                android:text="@string/accumulative_output"
+                android:text="@string/total_output"
                 android:textColor="@color/text_gray_99"
                 android:textSize="@dimen/text_small"
                 app:drawableStartCompat="@drawable/ic_total_power" />
 
             <TextView
-                android:id="@+id/tv_accumulative_output"
+                android:id="@+id/tv_total_output"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"

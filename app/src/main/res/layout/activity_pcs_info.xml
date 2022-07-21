@@ -25,4 +25,51 @@
         android:layout_height="wrap_content"
         tools:layout="@layout/fragment_device_head1" />
 
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="@color/color_white"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp">
+
+        <LinearLayout
+            android:layout_width="154dp"
+            android:layout_height="154dp"
+            android:layout_gravity="center"
+            android:background="@drawable/ic_circle_power"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_device_status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingStart="5dp"
+                android:paddingEnd="5dp"
+                android:textSize="@dimen/text_small"
+                tools:text="在线" />
+
+            <TextView
+                android:id="@+id/tv_power"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:textColor="@color/text_blue"
+                android:textSize="@dimen/text_22"
+                android:textStyle="bold"
+                tools:text="45W" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="@string/generate_power"
+                android:textColor="@color/text_gray_99"
+                android:textSize="@dimen/text_small" />
+
+        </LinearLayout>
+
+    </FrameLayout>
+
 </LinearLayout>
