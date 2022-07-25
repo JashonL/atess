@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.view.View
 import androidx.activity.viewModels
 import com.growatt.atess.R
-import com.growatt.atess.base.BaseActivity
 import com.growatt.atess.databinding.ActivityPbdInfoBinding
 import com.growatt.atess.model.plant.DeviceType
 import com.growatt.atess.model.plant.PbdModel
@@ -18,7 +17,7 @@ import com.growatt.lib.util.ViewUtil
 /**
  * PBD设备详情
  */
-class PbdInfoActivity : BaseActivity(), View.OnClickListener {
+class PbdInfoActivity : BaseDeviceActivity(), View.OnClickListener {
 
     companion object {
 
@@ -52,7 +51,7 @@ class PbdInfoActivity : BaseActivity(), View.OnClickListener {
                 ToastUtil.show(it.second)
             }
         }
-        viewModel.getDeviceInfo(DeviceType.PBD)
+        viewModel.getDeviceInfo(getDeviceType())
     }
 
     private fun refreshView(pbdModel: PbdModel) {
@@ -86,5 +85,9 @@ class PbdInfoActivity : BaseActivity(), View.OnClickListener {
 
     override fun onClick(v: View?) {
 
+    }
+
+    override fun getDeviceType(): Int {
+        return DeviceType.PBD
     }
 }

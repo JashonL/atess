@@ -207,6 +207,17 @@
     <string name="load_reactive_power">负载无功功率</string>
     <string name="load_power_factor">负载功率因素</string>
     <string name="generate_power">发电功率</string>
+    <string name="pv_power">PV功率</string>
+    <string name="grid_power">电网功率</string>
+    <string name="battery_charge_power">电池充电功率</string>
+    <string name="battery_discharge_power">电池放电功率</string>
+    <string name="load_power">负载功率</string>
+    <string name="pv_voltage">PV电压</string>
+    <string name="battery_charge_voltage">电池充电电压</string>
+    <string name="battery_discharge_voltage">电池放电电压</string>
+    <string name="pv_electricity">PV电流</string>
+    <string name="battery_charge_electricity">电池充电电流</string>
+    <string name="battery_discharge_electricity">电池放电电流</string>
 
     <!-- image crop-->
     <string name="crop_image_menu_crop">裁剪</string>

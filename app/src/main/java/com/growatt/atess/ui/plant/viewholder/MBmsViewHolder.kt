@@ -37,7 +37,7 @@ class MBmsViewHolder(
 
     override fun bindData(deviceModel: DeviceModel) {
         binding.tvDeviceModel.text = deviceModel.deviceModel
-        binding.tvDeviceSn.text = deviceModel.bmsid
+        binding.tvDeviceSn.text = deviceModel.getDeviceSN()
         binding.tvStatus.text = deviceModel.getSysStatusText()
         binding.tvStatus.setBackgroundResource(if (deviceModel.sysStatus == -1) R.color.color_82DCDC else R.color.color_D4EC59)
         binding.tvSoc.text = deviceModel.getSocText()

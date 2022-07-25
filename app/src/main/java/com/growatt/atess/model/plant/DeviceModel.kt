@@ -50,6 +50,17 @@ data class DeviceModel(
         }
     }
 
+    fun getDeviceSN(): String {
+        return when (getRealDeviceType()) {
+            DeviceType.HPS -> hpsid!!
+            DeviceType.PBD -> pbdid!!
+            DeviceType.PCS -> pcsid!!
+            DeviceType.BMS -> bmsid!!
+            DeviceType.MBMS -> bmsid!!
+            else -> datalogID!!
+        }
+    }
+
     fun getSysStatusText(): String {
         return when (sysStatus) {
             -1 -> MainApplication.instance().getString(R.string.charging)

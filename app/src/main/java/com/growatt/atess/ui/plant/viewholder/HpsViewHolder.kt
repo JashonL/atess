@@ -37,7 +37,7 @@ class HpsViewHolder(
 
     override fun bindData(deviceModel: DeviceModel) {
         binding.tvDeviceModel.text = deviceModel.deviceModel
-        binding.tvDeviceSn.text = deviceModel.hpsid
+        binding.tvDeviceSn.text = deviceModel.getDeviceSN()
         binding.tvStatus.text = deviceModel.getStatusText()
         binding.tvStatus.setBackgroundResource(if (deviceModel.lost) R.color.text_green else R.color.text_gray_99)
         binding.tvTodayPower.text = deviceModel.getETodayText()

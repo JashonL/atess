@@ -11,6 +11,7 @@ object DateUtils {
     val yyyy_MM_dd_format = SimpleDateFormat("yyyy-MM-dd", Locale.US)
     val yyyy_MM_dd_HH_mm_ss_format = SimpleDateFormat("yyyy-MM-dd HH-mm-ss", Locale.US)
     val yyyy_MM_dd_HH_mm_ss_format_2 = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.US)
+    val yyyy_MM_dd_HH_mm_format = SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.US)
     val HH_mm_format = SimpleDateFormat("HH:mm", Locale.US)
     val HH_mm_ss_format = SimpleDateFormat("HH:mm:ss", Locale.US)
     val MM_dd_HH_mm_format = SimpleDateFormat("MM-dd HH:mm", Locale.US)
@@ -18,6 +19,10 @@ object DateUtils {
 
     fun yyyy_MM_dd_format(date: Date): String {
         return yyyy_MM_dd_format.format(date)
+    }
+
+    fun yyyy_MM_dd_format(time: Long): String {
+        return yyyy_MM_dd_format.format(Date(time))
     }
 
     fun yyyy_MM_dd_hh_mm_ss_format(date: Date): String {
@@ -34,6 +39,14 @@ object DateUtils {
 
     fun HH_mm_format(date: Date): String {
         return HH_mm_format.format(date)
+    }
+
+    fun from_HH_mm_format(dateString: String): Date {
+        return try {
+            HH_mm_format.parse(dateString)
+        } catch (e: ParseException) {
+            Date()
+        }
     }
 
     fun MM_dd_HH_mm_format(date: Date): String {

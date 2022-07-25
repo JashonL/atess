@@ -146,14 +146,29 @@ object ApiPath {
         const val GET_DEVICE_HPS_INFO = "ATSDevice/getHPSBySn"
 
         /**
-         * HPS设备详情
+         * HPS图表详情
+         */
+        const val GET_DEVICE_HPS_CHART_INFO = "ATSDevice/getHPSDataList"
+
+        /**
+         * PCS设备详情
          */
         const val GET_DEVICE_PCS_INFO = "ATSDevice/getPCSBySn"
 
         /**
-         * HPS设备详情
+         * PCS图表详情
+         */
+        const val GET_DEVICE_PCS_CHART_INFO = "ATSDevice/getPCSDataList"
+
+        /**
+         * PBD设备详情
          */
         const val GET_DEVICE_PBD_INFO = "ATSDevice/getPBDBySn"
+
+        /**
+         * PBD图表详情
+         */
+        const val GET_DEVICE_PBD_CHART_INFO = "ATSDevice/getPBDDataList"
 
     }
 }

@@ -6,8 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.growatt.atess.base.OnItemClickListener
 import com.growatt.atess.model.plant.DeviceModel
-import com.growatt.atess.model.plant.DeviceType
-import com.growatt.atess.ui.plant.activity.HpsInfoActivity
+import com.growatt.atess.ui.plant.activity.BaseDeviceActivity
 import com.growatt.atess.ui.plant.viewholder.BaseDeviceViewHolder
 
 /**
@@ -38,13 +37,11 @@ class DeviceAdapter : RecyclerView.Adapter<BaseDeviceViewHolder>(), OnItemClickL
     }
 
     override fun onItemClick(v: View?, position: Int) {
-        when (getItemViewType(position)) {
-            DeviceType.HPS -> HpsInfoActivity.start(v?.context, deviceList[position].hpsid)
-            DeviceType.PCS -> HpsInfoActivity.start(v?.context, deviceList[position].pcsid)
-            DeviceType.PBD -> HpsInfoActivity.start(v?.context, deviceList[position].pbdid)
-            DeviceType.BMS -> {}
-            DeviceType.MBMS -> {}
-        }
+        BaseDeviceActivity.jumpToDeviceInfoPage(
+            v?.context,
+            getItemViewType(position),
+            deviceList[position].getDeviceSN()
+        )
     }
 
     @SuppressLint("NotifyDataSetChanged")

@@ -5,11 +5,12 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.activity.viewModels
+import androidx.fragment.app.commit
 import com.growatt.atess.R
-import com.growatt.atess.base.BaseActivity
 import com.growatt.atess.databinding.ActivityHpsInfoBinding
 import com.growatt.atess.model.plant.DeviceType
 import com.growatt.atess.model.plant.HpsModel
+import com.growatt.atess.ui.plant.fragment.device.DeviceChartFragment
 import com.growatt.atess.ui.plant.fragment.device.DeviceHead1Fragment
 import com.growatt.atess.ui.plant.viewmodel.DeviceInfoViewModel
 import com.growatt.lib.util.ToastUtil
@@ -17,7 +18,7 @@ import com.growatt.lib.util.ToastUtil
 /**
  * HPS设备详情
  */
-class HpsInfoActivity : BaseActivity(), View.OnClickListener {
+class HpsInfoActivity : BaseDeviceActivity(), View.OnClickListener {
 
     companion object {
 
@@ -53,14 +54,23 @@ class HpsInfoActivity : BaseActivity(), View.OnClickListener {
                 ToastUtil.show(it.second)
             }
         }
-        viewModel.getDeviceInfo(DeviceType.HPS)
+        viewModel.getDeviceInfo(getDeviceType())
     }
 
     private fun initView() {
-
+        supportFragmentManager.commit(true) {
+            add(
+                R.id.fragment_chart,
+                DeviceChartFragment(getDeviceType(), HpsModel.createChartType())
+            )
+        }
     }
 
     override fun onClick(v: View?) {
 
+    }
+
+    override fun getDeviceType(): Int {
+        return DeviceType.HPS
     }
 }

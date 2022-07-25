@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.view.View
 import androidx.activity.viewModels
 import com.growatt.atess.R
-import com.growatt.atess.base.BaseActivity
 import com.growatt.atess.databinding.ActivityPcsInfoBinding
 import com.growatt.atess.model.plant.DeviceType
 import com.growatt.atess.model.plant.PcsModel
@@ -18,7 +17,7 @@ import com.growatt.lib.util.ViewUtil
 /**
  * PCS设备详情
  */
-class PcsInfoActivity : BaseActivity(), View.OnClickListener {
+class PcsInfoActivity : BaseDeviceActivity(), View.OnClickListener {
 
     companion object {
 
@@ -75,5 +74,9 @@ class PcsInfoActivity : BaseActivity(), View.OnClickListener {
 
     override fun onClick(v: View?) {
 
+    }
+
+    override fun getDeviceType(): Int {
+        return DeviceType.PCS
     }
 }

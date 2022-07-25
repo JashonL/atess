@@ -32,6 +32,7 @@ class PlantInfoActivity : BaseActivity(), View.OnClickListener {
                 it.putExtra(KEY_PLANT_LIST, plantModels)
             })
         }
+
     }
 
     private lateinit var binding: ActivityPlantInfoBinding
