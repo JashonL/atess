@@ -39,7 +39,7 @@ class CollectorViewHolder(
         binding.tvDeviceModel.text = deviceModel.deviceModel
         binding.tvDeviceSn.text = deviceModel.getDeviceSN()
         binding.tvStatus.text = deviceModel.getConnectStatusText2()
-        binding.tvStatus.setBackgroundResource(if (deviceModel.lost) R.color.text_green else R.color.text_gray_99)
+        binding.tvStatus.setBackgroundResource(if (deviceModel.lost == true) R.color.text_green else R.color.text_gray_99)
         binding.tvUpdateInterval.text = deviceModel.getUpdateIntervalText()
         binding.tvLastUpdateTime.text = deviceModel.getLastUpdateTimeText()
     }

@@ -10,18 +10,17 @@ import com.growatt.lib.util.Util
 data class DeviceModel(
     val deviceType: String?,//设备类型
     val deviceModel: String?,//设备型号
-    val hpsid: String?,//HPS设备id
-    val pbdid: String?,//PBD设备id
-    val pcsid: String?,//PCS设备id
-    val bmsid: String?,//BMS设备id
-    val datalogID: String?,//采集器设备id
+    val deviceSn: String?,//设备SN
     val soc: Int?,//剩余电量
     val sysStatus: Int?,// 系统状态 -1充电 0 无数据 +1 放电
     val eToday: Double?,//今日发电量
     val eTotal: Double?,//累计发电量
-    val lost: Boolean,//1.(true-离线、false-在线),2.(true-未连接、false-已连接)
-    val interval: String,//采集器-更新间隔，"0"
-    val lastUpdate: String//采集器-最后更新时间，"2020-06-01 07:00:48"
+    val lost: Boolean?,//1.(true-离线、false-在线),2.(true-未连接、false-已连接)
+    val interval: String?,//采集器-更新间隔，"0"
+    val lastUpdate: String?,//采集器-最后更新时间，"2020-06-01 07:00:48"
+    val power: Double?,//Combiner汇流箱-功率1.0
+    val vol: Double?,//Combiner汇流箱-电压1.0
+    val cur: Double?,//Combiner汇流箱-电流2.0
 ) {
     fun getETodayText(): String {
         return MainApplication.instance()
@@ -41,24 +40,19 @@ data class DeviceModel(
 
     fun getRealDeviceType(): Int {
         return when {
-            !hpsid.isNullOrEmpty() -> DeviceType.HPS
-            !pbdid.isNullOrEmpty() -> DeviceType.PBD
-            !pcsid.isNullOrEmpty() -> DeviceType.PCS
-            !bmsid.isNullOrEmpty() && "bms" == deviceType -> DeviceType.BMS
-            !bmsid.isNullOrEmpty() && "mbms" == deviceType -> DeviceType.MBMS
+            "HPS" == deviceType -> DeviceType.HPS
+            "PBD" == deviceType -> DeviceType.PBD
+            "PCS" == deviceType -> DeviceType.PCS
+            "bms" == deviceType -> DeviceType.BMS
+            "mbms" == deviceType -> DeviceType.MBMS
+            "bcu_bms" == deviceType -> DeviceType.BCU_BMS
+            "combiner" == deviceType -> DeviceType.COMBINER
             else -> DeviceType.COLLECTOR
         }
     }
 
-    fun getDeviceSN(): String {
-        return when (getRealDeviceType()) {
-            DeviceType.HPS -> hpsid!!
-            DeviceType.PBD -> pbdid!!
-            DeviceType.PCS -> pcsid!!
-            DeviceType.BMS -> bmsid!!
-            DeviceType.MBMS -> bmsid!!
-            else -> datalogID!!
-        }
+    fun getDeviceSN(): String? {
+        return deviceSn
     }
 
     fun getSysStatusText(): String {
@@ -71,7 +65,7 @@ data class DeviceModel(
 
     fun getConnectStatusText(): String {
         val connectStatusText = MainApplication.instance()
-            .getString(if (lost) R.string.disconnect else R.string.connected)
+            .getString(if (lost == true) R.string.disconnect else R.string.connected)
         return MainApplication.instance()
             .getString(R.string.connect_status_format, connectStatusText)
     }
@@ -81,12 +75,13 @@ data class DeviceModel(
     }
 
     fun getStatusText(): String {
-        return MainApplication.instance().getString(if (lost) R.string.offline else R.string.online)
+        return MainApplication.instance()
+            .getString(if (lost == true) R.string.offline else R.string.online)
     }
 
     fun getConnectStatusText2(): String {
         return MainApplication.instance()
-            .getString(if (lost) R.string.disconnect else R.string.connected)
+            .getString(if (lost == true) R.string.disconnect else R.string.connected)
     }
 
     fun getUpdateIntervalText(): String {
@@ -97,5 +92,29 @@ data class DeviceModel(
     fun getLastUpdateTimeText(): String {
         return MainApplication.instance()
             .getString(R.string.last_update_time_format, lastUpdate)
+    }
+
+    /**
+     * 功率
+     */
+    fun getPowerText(): String {
+        return MainApplication.instance()
+            .getString(R.string.current_power_format, Util.getDoubleText(power))
+    }
+
+    /**
+     * 电流
+     */
+    fun getElectricityText(): String {
+        return MainApplication.instance()
+            .getString(R.string.electricity_format, Util.getDoubleText(cur) + "A")
+    }
+
+    /**
+     * 电压
+     */
+    fun getVoltageText(): String {
+        return MainApplication.instance()
+            .getString(R.string.voltage_format, Util.getDoubleText(vol) + "V")
     }
 }

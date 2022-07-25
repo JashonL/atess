@@ -24,7 +24,7 @@ abstract class BaseDeviceActivity : BaseActivity() {
                 DeviceType.PBD -> PbdInfoActivity.start(context, deviceSN)
                 DeviceType.BMS -> {}
                 DeviceType.MBMS -> {}
-                else -> {}
+                DeviceType.BCU_BMS -> {}
             }
         }
     }

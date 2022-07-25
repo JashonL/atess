@@ -26,6 +26,8 @@ abstract class BaseDeviceViewHolder(
                 DeviceType.PBD -> PbdViewHolder.create(parent, onItemClickListener)
                 DeviceType.BMS -> BmsViewHolder.create(parent, onItemClickListener)
                 DeviceType.MBMS -> MBmsViewHolder.create(parent, onItemClickListener)
+                DeviceType.BCU_BMS -> BcuBmsViewHolder.create(parent, onItemClickListener)
+                DeviceType.COMBINER -> CombinerViewHolder.create(parent, onItemClickListener)
                 else -> CollectorViewHolder.create(parent, onItemClickListener)
             }
         }

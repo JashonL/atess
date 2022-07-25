@@ -222,6 +222,8 @@
     <string name="photovoltaic_power">光伏功率</string>
     <string name="battery_power">电池功率</string>
     <string name="out_electricity">输出电流</string>
+    <string name="voltage_format">电压:%s</string>
+    <string name="electricity_format">电流:%s</string>
 
     <!-- image crop-->
     <string name="crop_image_menu_crop">裁剪</string>

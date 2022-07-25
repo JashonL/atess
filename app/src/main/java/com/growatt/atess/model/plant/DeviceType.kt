@@ -11,6 +11,7 @@ import androidx.annotation.IntDef
     DeviceType.PBD,
     DeviceType.BMS,
     DeviceType.MBMS,
+    DeviceType.BCU_BMS,
     DeviceType.COMBINER,
     DeviceType.COLLECTOR
 )
@@ -23,7 +24,8 @@ annotation class DeviceType {
         const val PBD = 3
         const val BMS = 4
         const val MBMS = 5
-        const val COMBINER = 6
+        const val BCU_BMS = 6
+        const val COMBINER = 7
         const val COLLECTOR = 0
     }
 }

@@ -65,6 +65,7 @@ class DeviceTabFragment : BaseFragment() {
             it.add(DeviceListFragment(deviceListResultModel.pcslist))
             it.add(DeviceListFragment(deviceListResultModel.pbdlist))
             it.add(DeviceListFragment(deviceListResultModel.bmslist))
+            it.add(DeviceListFragment(deviceListResultModel.combinerList))
             it.add(DeviceListFragment(deviceListResultModel.datalogList))
         }
         (binding.vpDevice.adapter as Adapter).refresh(fragments)

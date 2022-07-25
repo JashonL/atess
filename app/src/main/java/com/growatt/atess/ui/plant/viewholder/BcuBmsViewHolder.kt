@@ -5,13 +5,13 @@ import android.view.View
 import android.view.ViewGroup
 import com.growatt.atess.R
 import com.growatt.atess.base.OnItemClickListener
-import com.growatt.atess.databinding.PcsViewHolderBinding
+import com.growatt.atess.databinding.BcuBmsViewHolderBinding
 import com.growatt.atess.model.plant.DeviceModel
 
 /**
- * PCS设备
+ * BCU_BMS设备
  */
-class PcsViewHolder(
+class BcuBmsViewHolder(
     itemView: View,
     onItemClickListener: OnItemClickListener
 ) : BaseDeviceViewHolder(itemView, onItemClickListener) {
@@ -20,27 +20,27 @@ class PcsViewHolder(
         fun create(
             parent: ViewGroup,
             onItemClickListener: OnItemClickListener
-        ): PcsViewHolder {
-            val binding = PcsViewHolderBinding.inflate(
+        ): BcuBmsViewHolder {
+            val binding = BcuBmsViewHolderBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent,
                 false
             )
-            val holder = PcsViewHolder(binding.root, onItemClickListener)
+            val holder = BcuBmsViewHolder(binding.root, onItemClickListener)
             holder.binding = binding
             binding.root.setOnClickListener(holder)
             return holder
         }
     }
 
-    private lateinit var binding: PcsViewHolderBinding
+    private lateinit var binding: BcuBmsViewHolderBinding
 
     override fun bindData(deviceModel: DeviceModel) {
         binding.tvDeviceModel.text = deviceModel.deviceModel
         binding.tvDeviceSn.text = deviceModel.getDeviceSN()
-        binding.tvStatus.text = deviceModel.getStatusText()
-        binding.tvStatus.setBackgroundResource(if (deviceModel.lost == true) R.color.text_green else R.color.text_gray_99)
-        binding.tvTodayPower.text = deviceModel.getETodayText()
-        binding.tvTotalPower.text = deviceModel.getETotalText()
+        binding.tvStatus.text = deviceModel.getSysStatusText()
+        binding.tvStatus.setBackgroundResource(if (deviceModel.sysStatus == -1) R.color.color_82DCDC else R.color.color_D4EC59)
+        binding.tvSoc.text = deviceModel.getSocText()
+        binding.tvConnectStatus.text = deviceModel.getConnectStatusText()
     }
 }

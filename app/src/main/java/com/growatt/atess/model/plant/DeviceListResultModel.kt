@@ -20,6 +20,7 @@ class DeviceListResultModel(
         tabsText.add(MainApplication.instance().getString(R.string.pcs))
         tabsText.add(MainApplication.instance().getString(R.string.pbd))
         tabsText.add(MainApplication.instance().getString(R.string.bms))
+        tabsText.add(MainApplication.instance().getString(R.string.combiner))
         tabsText.add(MainApplication.instance().getString(R.string.collector))
         return tabsText
     }
