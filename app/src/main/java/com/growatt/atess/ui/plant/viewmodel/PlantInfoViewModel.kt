@@ -52,15 +52,6 @@ class PlantInfoViewModel : BaseViewModel() {
                         if (deviceList.size < 3 && !data?.pbdlist.isNullOrEmpty()) {
                             deviceList.add(data?.pbdlist!![0])
                         }
-                        if (deviceList.size < 3 && !data?.bmslist.isNullOrEmpty()) {
-                            deviceList.add(data?.bmslist!![0])
-                        }
-//                        if (deviceList.size < 3 && !data?.combinerList.isNullOrEmpty()) {
-//                            deviceList.add(data?.combinerList!![0])
-//                        }
-                        if (deviceList.size < 3 && !data?.datalogList.isNullOrEmpty()) {
-                            deviceList.add(data?.datalogList!![0])
-                        }
                         getDeviceListLiveData.value = Pair(deviceList, null)
                     } else {
                         getDeviceListLiveData.value = Pair(emptyList(), result.msg ?: "")
