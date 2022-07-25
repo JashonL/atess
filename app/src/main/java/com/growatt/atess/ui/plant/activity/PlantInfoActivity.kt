@@ -5,8 +5,11 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.activity.viewModels
+import com.growatt.atess.R
+import com.growatt.atess.application.MainApplication
 import com.growatt.atess.base.BaseActivity
 import com.growatt.atess.databinding.ActivityPlantInfoBinding
+import com.growatt.atess.model.plant.DeviceType
 import com.growatt.atess.model.plant.PlantModel
 import com.growatt.atess.ui.plant.viewmodel.PlantInfoViewModel
 import com.growatt.atess.view.dialog.OptionsDialog
@@ -71,7 +74,9 @@ class PlantInfoActivity : BaseActivity(), View.OnClickListener {
         viewModel.getPcsHpsSNLiveData.observe(this) {
             if (it.second == null) {
                 if (it.first?.isNullOrEmpty() == false) {
-                    refreshSNView(it.first!![0])
+                    val defaultDevice = it.first!![0]
+                    refreshSNView(defaultDevice)
+                    viewModel.getEnergyInfo(defaultDevice.first, defaultDevice.second)
                 }
             } else {
                 ToastUtil.show(it.second)
@@ -81,8 +86,9 @@ class PlantInfoActivity : BaseActivity(), View.OnClickListener {
         viewModel.getPcsHpsSN()
     }
 
-    private fun refreshSNView(typeAndSN: Pair<String, String>) {
-        binding.tvDeviceType.text = typeAndSN.first
+    private fun refreshSNView(typeAndSN: Pair<Int, String>) {
+        binding.tvDeviceType.text = MainApplication.instance()
+            .getString(if (typeAndSN.first == DeviceType.HPS) R.string.hps else R.string.pcs)
         binding.tvDeviceSn.text = typeAndSN.second
     }
 
@@ -108,7 +114,9 @@ class PlantInfoActivity : BaseActivity(), View.OnClickListener {
         }
         if (options.size > 0) {
             OptionsDialog.show(supportFragmentManager, options.toTypedArray()) {
-                refreshSNView(snList!![it])
+                val selectDevice = snList!![it]
+                refreshSNView(selectDevice)
+                viewModel.getEnergyInfo(selectDevice.first, selectDevice.second)
             }
         }
     }

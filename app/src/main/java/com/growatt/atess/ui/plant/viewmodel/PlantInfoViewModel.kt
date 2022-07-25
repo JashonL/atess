@@ -2,13 +2,8 @@ package com.growatt.atess.ui.plant.viewmodel
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.growatt.atess.R
-import com.growatt.atess.application.MainApplication
 import com.growatt.atess.base.BaseViewModel
-import com.growatt.atess.model.plant.DeviceListResultModel
-import com.growatt.atess.model.plant.DeviceModel
-import com.growatt.atess.model.plant.PcsHpsSNModel
-import com.growatt.atess.model.plant.PlantModel
+import com.growatt.atess.model.plant.*
 import com.growatt.atess.service.http.ApiPath
 import com.growatt.lib.service.http.HttpCallback
 import com.growatt.lib.service.http.HttpResult
@@ -24,10 +19,12 @@ class PlantInfoViewModel : BaseViewModel() {
 
     val getDeviceListLiveData = MutableLiveData<Pair<List<DeviceModel>, String?>>()
 
+    val getDeviceEnergyInfoLiveData = MutableLiveData<Pair<DeviceEnergyInfoModel?, String?>>()
+
     /**
      * 里面一层Pair，first是设备类型，second是设备序列号
      */
-    val getPcsHpsSNLiveData = MutableLiveData<Pair<MutableList<Pair<String, String>>?, String?>>()
+    val getPcsHpsSNLiveData = MutableLiveData<Pair<MutableList<Pair<Int, String>>?, String?>>()
 
     /**
      * 获取设备列表，每种类型的设备取第一个，最多3个
@@ -78,13 +75,13 @@ class PlantInfoViewModel : BaseViewModel() {
                 HttpCallback<HttpResult<PcsHpsSNModel>>() {
                 override fun success(result: HttpResult<PcsHpsSNModel>) {
                     if (result.isBusinessSuccess()) {
-                        val snList = mutableListOf<Pair<String, String>>()
+                        val snList = mutableListOf<Pair<Int, String>>()
                         val hpsList = result.data?.hps
                         if (!hpsList.isNullOrEmpty()) {
                             for (hpsSN in hpsList) {
                                 snList.add(
                                     Pair(
-                                        MainApplication.instance().getString(R.string.hps),
+                                        DeviceType.HPS,
                                         hpsSN
                                     )
                                 )
@@ -95,7 +92,7 @@ class PlantInfoViewModel : BaseViewModel() {
                             for (pcsSN in pcsList) {
                                 snList.add(
                                     Pair(
-                                        MainApplication.instance().getString(R.string.pcs),
+                                        DeviceType.PCS,
                                         pcsSN
                                     )
                                 )
@@ -110,6 +107,34 @@ class PlantInfoViewModel : BaseViewModel() {
                 override fun onFailure(error: String?) {
                     super.onFailure(error)
                     getPcsHpsSNLiveData.value = Pair(null, error ?: "")
+                }
+            })
+        }
+    }
+
+    /**
+     * 获取HPS或PCS能源概况
+     */
+    fun getEnergyInfo(deviceType: Int, deviceSn: String?) {
+        viewModelScope.launch {
+            val params = hashMapOf<String, String>().apply {
+                put("plantId", plantId ?: "")
+                put("deviceSn", deviceSn ?: "")
+                put("deviceType", if (deviceType == DeviceType.HPS) "hps" else "pcs")
+            }
+            apiService().postForm(ApiPath.Plant.GET_ENERGY_INFO, params, object :
+                HttpCallback<HttpResult<DeviceEnergyInfoModel>>() {
+                override fun success(result: HttpResult<DeviceEnergyInfoModel>) {
+                    if (result.isBusinessSuccess()) {
+                        getDeviceEnergyInfoLiveData.value = Pair(result.data, null)
+                    } else {
+                        getDeviceEnergyInfoLiveData.value = Pair(null, result.msg ?: "")
+                    }
+                }
+
+                override fun onFailure(error: String?) {
+                    super.onFailure(error)
+                    getDeviceEnergyInfoLiveData.value = Pair(null, error ?: "")
                 }
             })
         }

@@ -170,5 +170,10 @@ object ApiPath {
          */
         const val GET_DEVICE_PBD_CHART_INFO = "ATSDevice/getPBDDataList"
 
+        /**
+         * HPS或PCS能源概况
+         */
+        const val GET_ENERGY_INFO = "ATSDevice/getEnergyOverview"
+
     }
 }
