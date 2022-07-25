@@ -20,7 +20,10 @@ import com.growatt.atess.model.plant.ChartTypeModel
 import com.growatt.atess.model.plant.DeviceType
 import com.growatt.atess.model.plant.HpsModel
 import com.growatt.atess.ui.plant.viewmodel.DeviceInfoViewModel
+import com.growatt.atess.view.dialog.OptionsDialog
 import com.growatt.lib.util.*
+import com.growatt.lib.view.dialog.DatePickerFragment
+import com.growatt.lib.view.dialog.OnDateSetListener
 import java.util.*
 
 /**
@@ -77,8 +80,8 @@ class DeviceChartFragment(@DeviceType val deviceType: Int, val types: Array<Char
     private fun initView() {
         binding.llSelectDate.background =
             ViewUtil.createShape(resources.getColor(R.color.color_0D000000), 30)
-        binding.tvDataType.text = viewModel.chartType?.typeName
-        binding.tvDate.text = DateUtils.yyyy_MM_dd_format(viewModel.selectDate)
+        refreshDataTypeView()
+        refreshDateView()
         if (types.size > 1) {
             binding.tvDataType.setDrawableEnd(resources.getDrawable(R.drawable.ic_down))
         } else {
@@ -189,26 +192,58 @@ class DeviceChartFragment(@DeviceType val deviceType: Int, val types: Array<Char
 
     override fun onClick(v: View?) {
         when {
-            v === binding.tvDataType -> {}
+            v === binding.tvDataType -> showSelectChartType()
             v === binding.ivAdd -> {
                 val nextDay = DateUtils.addDateDays(Date(viewModel.selectDate), 1)
                 if (nextDay <= Date()) {
                     viewModel.selectDate = nextDay.time
-                    binding.tvDate.text = DateUtils.yyyy_MM_dd_format(viewModel.selectDate)
+                    refreshDateView()
                     showDialog()
                     viewModel.getDeviceChartInfo(deviceType)
                 }
-
             }
             v === binding.ivReduce -> {
                 viewModel.selectDate = DateUtils.addDateDays(Date(viewModel.selectDate), -1).time
-                binding.tvDate.text = DateUtils.yyyy_MM_dd_format(viewModel.selectDate)
+                refreshDateView()
+                refreshDataTypeView()
                 showDialog()
                 viewModel.getDeviceChartInfo(deviceType)
             }
-            v === binding.tvDate -> {
+            v === binding.tvDate -> showDatePicker()
+        }
+    }
 
+    private fun refreshDataTypeView() {
+        binding.tvDataType.text = viewModel.chartType?.typeName
+    }
+
+    private fun showSelectChartType() {
+        if (types.size > 1) {
+            OptionsDialog.show(childFragmentManager, ChartTypeModel.getTypeNames(types)) {
+                val selectChartType = types[it]
+                if (viewModel.chartType?.type != selectChartType.type) {
+                    viewModel.chartType = selectChartType
+                    refreshDataTypeView()
+                    showDialog()
+                    viewModel.getDeviceChartInfo(deviceType)
+                }
             }
         }
+    }
+
+    private fun refreshDateView() {
+        binding.tvDate.text = DateUtils.yyyy_MM_dd_format(viewModel.selectDate)
+    }
+
+    private fun showDatePicker() {
+        DatePickerFragment.show(childFragmentManager, System.currentTimeMillis(), object :
+            OnDateSetListener {
+            override fun onDateSet(date: Date) {
+                viewModel.selectDate = date.time
+                refreshDateView()
+                showDialog()
+                viewModel.getDeviceChartInfo(deviceType)
+            }
+        })
     }
 }
