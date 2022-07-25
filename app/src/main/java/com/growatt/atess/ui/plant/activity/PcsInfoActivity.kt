@@ -5,10 +5,12 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.activity.viewModels
+import androidx.fragment.app.commit
 import com.growatt.atess.R
 import com.growatt.atess.databinding.ActivityPcsInfoBinding
 import com.growatt.atess.model.plant.DeviceType
 import com.growatt.atess.model.plant.PcsModel
+import com.growatt.atess.ui.plant.fragment.device.DeviceChartFragment
 import com.growatt.atess.ui.plant.fragment.device.DeviceHead1Fragment
 import com.growatt.atess.ui.plant.viewmodel.DeviceInfoViewModel
 import com.growatt.lib.util.ToastUtil
@@ -69,7 +71,12 @@ class PcsInfoActivity : BaseDeviceActivity(), View.OnClickListener {
     }
 
     private fun initView() {
-
+        supportFragmentManager.commit(true) {
+            add(
+                R.id.fragment_chart,
+                DeviceChartFragment(getDeviceType(), PcsModel.createChartType())
+            )
+        }
     }
 
     override fun onClick(v: View?) {

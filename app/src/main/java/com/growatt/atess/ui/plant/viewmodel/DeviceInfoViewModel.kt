@@ -4,6 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.growatt.atess.base.BaseViewModel
 import com.growatt.atess.model.plant.ChartListDataModel
+import com.growatt.atess.model.plant.ChartTypeModel
 import com.growatt.atess.model.plant.DeviceType
 import com.growatt.atess.service.http.ApiPath
 import com.growatt.lib.service.http.HttpCallback
@@ -19,7 +20,7 @@ import java.util.*
 class DeviceInfoViewModel<T> : BaseViewModel() {
 
     var deviceSn: String? = null
-    var chartType: Pair<String, String>? = null
+    var chartType: ChartTypeModel? = null
     var selectDate: Long = Date().time
 
     val getDeviceInfoLiveData = MutableLiveData<Pair<T?, String?>>()
@@ -90,7 +91,7 @@ class DeviceInfoViewModel<T> : BaseViewModel() {
                     }
                 }
                 put("queryDate", DateUtils.yyyy_MM_dd_format(selectDate))
-                put("dataType", chartType?.first ?: "")
+                put("dataType", chartType?.type ?: "")
             }
             apiService().postForm(requestUrl, params, object :
                 HttpCallback<HttpResult<ChartListDataModel>>() {

@@ -18,58 +18,76 @@
         android:layout_height="wrap_content"
         app:titleText="@string/pcs" />
 
-    <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/fragment_head"
-        android:name="com.growatt.atess.ui.plant.fragment.device.DeviceHead1Fragment"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        tools:layout="@layout/fragment_device_head1" />
-
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:background="@color/color_white"
-        android:paddingTop="10dp"
-        android:paddingBottom="10dp">
+        android:layout_height="match_parent">
 
         <LinearLayout
-            android:layout_width="154dp"
-            android:layout_height="154dp"
-            android:layout_gravity="center"
-            android:background="@drawable/ic_circle_power"
-            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
             android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/tv_device_status"
-                android:layout_width="wrap_content"
+            <androidx.fragment.app.FragmentContainerView
+                android:id="@+id/fragment_head"
+                android:name="com.growatt.atess.ui.plant.fragment.device.DeviceHead1Fragment"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingStart="5dp"
-                android:paddingEnd="5dp"
-                android:textSize="@dimen/text_small"
-                tools:text="在线" />
+                tools:layout="@layout/fragment_device_head1" />
 
-            <TextView
-                android:id="@+id/tv_power"
-                android:layout_width="wrap_content"
+            <FrameLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:textColor="@color/text_blue"
-                android:textSize="@dimen/text_22"
-                android:textStyle="bold"
-                tools:text="45W" />
+                android:background="@color/color_white"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp">
 
-            <TextView
-                android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="154dp"
+                    android:layout_height="154dp"
+                    android:layout_gravity="center"
+                    android:background="@drawable/ic_circle_power"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tv_device_status"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingStart="5dp"
+                        android:paddingEnd="5dp"
+                        android:textSize="@dimen/text_small"
+                        tools:text="在线" />
+
+                    <TextView
+                        android:id="@+id/tv_power"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:textColor="@color/text_blue"
+                        android:textSize="@dimen/text_22"
+                        android:textStyle="bold"
+                        tools:text="45W" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:text="@string/generate_power"
+                        android:textColor="@color/text_gray_99"
+                        android:textSize="@dimen/text_small" />
+
+                </LinearLayout>
+
+            </FrameLayout>
+
+            <androidx.fragment.app.FragmentContainerView
+                android:id="@+id/fragment_chart"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:text="@string/generate_power"
-                android:textColor="@color/text_gray_99"
-                android:textSize="@dimen/text_small" />
-
+                android:layout_marginTop="10dp"
+                tools:layout="@layout/fragment_device_chart" />
         </LinearLayout>
-
-    </FrameLayout>
-
+    </ScrollView>
 </LinearLayout>

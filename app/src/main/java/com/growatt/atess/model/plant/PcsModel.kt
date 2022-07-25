@@ -24,6 +24,38 @@ data class PcsModel(
     val selfTime: Int?,//开机自检时间
     val typeFlag: Int?,//监控并机判断标志
 ) : IDeviceInfoHead {
+
+    companion object {
+        /**
+         * 创建图表类型(传给服务端的类型)
+         *
+         * 1 —— 光伏功率
+         * 2 —— 电网功率
+         * 3 —— 电池充电功率
+         * 4 —— 电池放电功率
+         */
+        fun createChartType(): Array<ChartTypeModel> {
+            return arrayOf(
+                ChartTypeModel(
+                    "1",
+                    MainApplication.instance().getString(R.string.photovoltaic_power),
+                    "w"
+                ),
+                ChartTypeModel("2", MainApplication.instance().getString(R.string.grid_power), "w"),
+                ChartTypeModel(
+                    "3",
+                    MainApplication.instance().getString(R.string.battery_charge_power),
+                    "w"
+                ),
+                ChartTypeModel(
+                    "4",
+                    MainApplication.instance().getString(R.string.battery_discharge_power),
+                    "w"
+                )
+            )
+        }
+    }
+
     override fun getIDeviceSn(): String {
         return MainApplication.instance().getString(R.string.sn_format, pcsid)
     }

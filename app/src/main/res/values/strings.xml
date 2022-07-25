@@ -171,6 +171,7 @@
     <string name="device_sn">设备序列号</string>
     <string name="input_power_format">输入功率:%skW</string>
     <string name="output_power_format">输出功率:%skW</string>
+    <string name="output_power">输出功率</string>
     <string name="load_power_format">负载功率:%skW</string>
     <string name="discharge_power_format">放电功率:%skW</string>
     <string name="current_power_format">当前功率:%skW</string>
@@ -218,6 +219,9 @@
     <string name="pv_electricity">PV电流</string>
     <string name="battery_charge_electricity">电池充电电流</string>
     <string name="battery_discharge_electricity">电池放电电流</string>
+    <string name="photovoltaic_power">光伏功率</string>
+    <string name="battery_power">电池功率</string>
+    <string name="out_electricity">输出电流</string>
 
     <!-- image crop-->
     <string name="crop_image_menu_crop">裁剪</string>

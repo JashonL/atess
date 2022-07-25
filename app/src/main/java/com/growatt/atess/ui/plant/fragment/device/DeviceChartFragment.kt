@@ -16,6 +16,7 @@ import com.growatt.atess.R
 import com.growatt.atess.base.BaseFragment
 import com.growatt.atess.databinding.FragmentDeviceChartBinding
 import com.growatt.atess.model.plant.ChartListDataModel
+import com.growatt.atess.model.plant.ChartTypeModel
 import com.growatt.atess.model.plant.DeviceType
 import com.growatt.atess.model.plant.HpsModel
 import com.growatt.atess.ui.plant.viewmodel.DeviceInfoViewModel
@@ -27,7 +28,7 @@ import java.util.*
  * @param deviceType 设备类型
  * @param types 图表类型
  */
-class DeviceChartFragment(@DeviceType val deviceType: Int, val types: Array<Pair<String, String>>) :
+class DeviceChartFragment(@DeviceType val deviceType: Int, val types: Array<ChartTypeModel>) :
     BaseFragment(),
     View.OnClickListener {
 
@@ -76,7 +77,7 @@ class DeviceChartFragment(@DeviceType val deviceType: Int, val types: Array<Pair
     private fun initView() {
         binding.llSelectDate.background =
             ViewUtil.createShape(resources.getColor(R.color.color_0D000000), 30)
-        binding.tvDataType.text = viewModel.chartType?.second
+        binding.tvDataType.text = viewModel.chartType?.typeName
         binding.tvDate.text = DateUtils.yyyy_MM_dd_format(viewModel.selectDate)
         if (types.size > 1) {
             binding.tvDataType.setDrawableEnd(resources.getDrawable(R.drawable.ic_down))

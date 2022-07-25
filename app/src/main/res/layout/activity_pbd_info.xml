@@ -18,126 +18,145 @@
         android:layout_height="wrap_content"
         app:titleText="@string/pbd" />
 
-    <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/fragment_head"
-        android:name="com.growatt.atess.ui.plant.fragment.device.DeviceHead1Fragment"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        tools:layout="@layout/fragment_device_head1" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:background="@color/color_white"
-        android:orientation="vertical"
-        android:padding="10dp">
-
-        <LinearLayout
-            android:layout_width="154dp"
-            android:layout_height="154dp"
-            android:layout_gravity="center"
-            android:background="@drawable/ic_circle_power"
-            android:gravity="center"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/tv_device_status"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingStart="5dp"
-                android:paddingEnd="5dp"
-                android:textSize="@dimen/text_small"
-                tools:text="在线" />
-
-            <TextView
-                android:id="@+id/tv_power"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:textColor="@color/text_blue"
-                android:textSize="@dimen/text_22"
-                android:textStyle="bold"
-                tools:text="45W" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:text="@string/generate_power"
-                android:textColor="@color/text_gray_99"
-                android:textSize="@dimen/text_small" />
-
-        </LinearLayout>
+        android:layout_height="match_parent">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
-            android:orientation="horizontal">
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <androidx.fragment.app.FragmentContainerView
+                android:id="@+id/fragment_head"
+                android:name="com.growatt.atess.ui.plant.fragment.device.DeviceHead1Fragment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:layout="@layout/fragment_device_head1" />
 
             <LinearLayout
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:orientation="vertical">
+                android:layout_marginTop="10dp"
+                android:background="@color/color_white"
+                android:orientation="vertical"
+                android:padding="10dp">
 
-                <TextView
-                    android:id="@+id/tv_today_power"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/text_black"
-                    android:textSize="@dimen/text_subtitle"
-                    android:textStyle="bold"
-                    tools:text="66.6" />
+                <LinearLayout
+                    android:layout_width="154dp"
+                    android:layout_height="154dp"
+                    android:layout_gravity="center"
+                    android:background="@drawable/ic_circle_power"
+                    android:gravity="center"
+                    android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/tv_today_unit"
-                    android:layout_width="wrap_content"
+                    <TextView
+                        android:id="@+id/tv_device_status"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingStart="5dp"
+                        android:paddingEnd="5dp"
+                        android:textSize="@dimen/text_small"
+                        tools:text="在线" />
+
+                    <TextView
+                        android:id="@+id/tv_power"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:textColor="@color/text_blue"
+                        android:textSize="@dimen/text_22"
+                        android:textStyle="bold"
+                        tools:text="45W" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:text="@string/generate_power"
+                        android:textColor="@color/text_gray_99"
+                        android:textSize="@dimen/text_small" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="2dp"
-                    android:textColor="@color/text_gray_99"
-                    android:textSize="@dimen/text_small"
-                    tools:text="今日发电/kWh" />
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/tv_today_power"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/text_black"
+                            android:textSize="@dimen/text_subtitle"
+                            android:textStyle="bold"
+                            tools:text="66.6" />
+
+                        <TextView
+                            android:id="@+id/tv_today_unit"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="2dp"
+                            android:textColor="@color/text_gray_99"
+                            android:textSize="@dimen/text_small"
+                            tools:text="今日发电/kWh" />
+
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/line_divider" />
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/tv_total_power"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/text_black"
+                            android:textSize="@dimen/text_subtitle"
+                            android:textStyle="bold"
+                            tools:text="66.6" />
+
+                        <TextView
+                            android:id="@+id/tv_total_unit"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="2dp"
+                            android:textColor="@color/text_gray_99"
+                            android:textSize="@dimen/text_small"
+                            tools:text="今日发电/kWh" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
 
             </LinearLayout>
 
-            <View
-                android:layout_width="1dp"
-                android:layout_height="match_parent"
-                android:background="@drawable/line_divider" />
-
-            <LinearLayout
-                android:layout_width="0dp"
+            <androidx.fragment.app.FragmentContainerView
+                android:id="@+id/fragment_chart"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/tv_total_power"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/text_black"
-                    android:textSize="@dimen/text_subtitle"
-                    android:textStyle="bold"
-                    tools:text="66.6" />
-
-                <TextView
-                    android:id="@+id/tv_total_unit"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="2dp"
-                    android:textColor="@color/text_gray_99"
-                    android:textSize="@dimen/text_small"
-                    tools:text="今日发电/kWh" />
-
-            </LinearLayout>
-
+                android:layout_marginTop="10dp"
+                tools:layout="@layout/fragment_device_chart" />
         </LinearLayout>
 
-    </LinearLayout>
-
+    </ScrollView>
 </LinearLayout>
