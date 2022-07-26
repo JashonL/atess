@@ -1,13 +1,12 @@
 package com.growatt.atess.ui.plant.activity
 
 import android.content.Context
-import com.growatt.atess.base.BaseActivity
 import com.growatt.atess.model.plant.DeviceType
 
 /**
  * 设备详情基类
  */
-abstract class BaseDeviceActivity : BaseActivity() {
+interface IBaseDeviceActivity {
 
     companion object {
         /**
@@ -22,12 +21,12 @@ abstract class BaseDeviceActivity : BaseActivity() {
                 DeviceType.HPS -> HpsInfoActivity.start(context, deviceSN)
                 DeviceType.PCS -> PcsInfoActivity.start(context, deviceSN)
                 DeviceType.PBD -> PbdInfoActivity.start(context, deviceSN)
-                DeviceType.BMS -> {}
-                DeviceType.MBMS -> {}
-                DeviceType.BCU_BMS -> {}
+                DeviceType.BMS -> BmsInfoActivity.start(context, deviceSN)
+                DeviceType.MBMS -> MBmsInfoActivity.start(context, deviceSN)
+                DeviceType.BCU_BMS -> BcuBmsInfoActivity.start(context, deviceSN)
             }
         }
     }
 
-    abstract fun getDeviceType(): Int
+    fun getDeviceType(): Int
 }

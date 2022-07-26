@@ -185,6 +185,8 @@
     <string name="pcs">PCS</string>
     <string name="pbd">PBD</string>
     <string name="bms">BMS</string>
+    <string name="mbms">MBMS</string>
+    <string name="bcu_bms">BCU_BMS</string>
     <string name="combiner">Combiner</string>
     <string name="collector">采集器</string>
     <string name="charging">充电中</string>
@@ -224,6 +226,15 @@
     <string name="out_electricity">输出电流</string>
     <string name="voltage_format">电压:%s</string>
     <string name="electricity_format">电流:%s</string>
+    <string name="data_info">数据详情</string>
+    <string name="current_soc">实时SOC</string>
+    <string name="current_battery_soc">当前电池SOC:%d</string>
+    <string name="battery_total_voltage">电池总电压</string>
+    <string name="battery_total_electricity">电池总电流</string>
+    <string name="max_temperature">最高温度</string>
+    <string name="min_temperature">最低温度</string>
+    <string name="monomer_max_voltage">单体最大电压</string>
+    <string name="monomer_min_voltage">单体最小电压</string>
 
     <!-- image crop-->
     <string name="crop_image_menu_crop">裁剪</string>

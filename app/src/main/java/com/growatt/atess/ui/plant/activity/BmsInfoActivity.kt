@@ -8,37 +8,37 @@ import androidx.activity.viewModels
 import androidx.fragment.app.commit
 import com.growatt.atess.R
 import com.growatt.atess.base.BaseActivity
-import com.growatt.atess.databinding.ActivityHpsInfoBinding
+import com.growatt.atess.databinding.ActivityBmsInfoBinding
+import com.growatt.atess.model.plant.BmsModel
 import com.growatt.atess.model.plant.DeviceType
-import com.growatt.atess.model.plant.HpsModel
+import com.growatt.atess.ui.plant.fragment.device.BmsHeadFragment
 import com.growatt.atess.ui.plant.fragment.device.DeviceChartFragment
-import com.growatt.atess.ui.plant.fragment.device.DeviceHead1Fragment
 import com.growatt.atess.ui.plant.viewmodel.DeviceInfoViewModel
 import com.growatt.lib.util.ToastUtil
 
 /**
- * HPS设备详情
+ * Bms设备详情
  */
-class HpsInfoActivity : BaseActivity(), IBaseDeviceActivity, View.OnClickListener {
+class BmsInfoActivity : BaseActivity(), IBaseDeviceActivity, View.OnClickListener {
 
     companion object {
 
         private const val KEY_SN = "key_sn"
 
         fun start(context: Context?, deviceSN: String?) {
-            context?.startActivity(Intent(context, HpsInfoActivity::class.java).also {
+            context?.startActivity(Intent(context, BmsInfoActivity::class.java).also {
                 it.putExtra(KEY_SN, deviceSN)
             })
         }
 
     }
 
-    private lateinit var binding: ActivityHpsInfoBinding
-    private val viewModel: DeviceInfoViewModel<HpsModel> by viewModels()
+    private lateinit var binding: ActivityBmsInfoBinding
+    private val viewModel: DeviceInfoViewModel<BmsModel> by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityHpsInfoBinding.inflate(layoutInflater)
+        binding = ActivityBmsInfoBinding.inflate(layoutInflater)
         setContentView(binding.root)
         initData()
         initView()
@@ -48,7 +48,7 @@ class HpsInfoActivity : BaseActivity(), IBaseDeviceActivity, View.OnClickListene
         viewModel.deviceSn = intent.getStringExtra(KEY_SN)
         viewModel.getDeviceInfoLiveData.observe(this) {
             if (it.second == null) {
-                (supportFragmentManager.findFragmentById(R.id.fragment_head) as DeviceHead1Fragment).bindData(
+                (supportFragmentManager.findFragmentById(R.id.fragment_head) as BmsHeadFragment).bindData(
                     it.first!!
                 )
             } else {
@@ -62,7 +62,7 @@ class HpsInfoActivity : BaseActivity(), IBaseDeviceActivity, View.OnClickListene
         supportFragmentManager.commit(true) {
             add(
                 R.id.fragment_chart,
-                DeviceChartFragment(getDeviceType(), HpsModel.createChartType())
+                DeviceChartFragment(getDeviceType(), BmsModel.createChartType())
             )
         }
     }
@@ -72,6 +72,6 @@ class HpsInfoActivity : BaseActivity(), IBaseDeviceActivity, View.OnClickListene
     }
 
     override fun getDeviceType(): Int {
-        return DeviceType.HPS
+        return DeviceType.BMS
     }
 }

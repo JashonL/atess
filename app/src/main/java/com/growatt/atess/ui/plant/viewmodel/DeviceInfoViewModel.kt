@@ -47,6 +47,10 @@ class DeviceInfoViewModel<T> : BaseViewModel() {
                         put("pbdSn", deviceSn ?: "")
                         requestUrl = ApiPath.Plant.GET_DEVICE_PBD_INFO
                     }
+                    DeviceType.BMS, DeviceType.MBMS, DeviceType.BCU_BMS -> {
+                        put("bmsSn", deviceSn ?: "")
+                        requestUrl = ApiPath.Plant.GET_DEVICE_BMS_INFO
+                    }
                 }
             }
             apiService().postForm(requestUrl, params, object :
@@ -88,6 +92,10 @@ class DeviceInfoViewModel<T> : BaseViewModel() {
                     DeviceType.PBD -> {
                         put("pbdSn", deviceSn ?: "")
                         requestUrl = ApiPath.Plant.GET_DEVICE_PBD_CHART_INFO
+                    }
+                    DeviceType.BMS, DeviceType.MBMS, DeviceType.BCU_BMS -> {
+                        put("bmsSn", deviceSn ?: "")
+                        requestUrl = ApiPath.Plant.GET_DEVICE_BMS_CHART_INFO
                     }
                 }
                 put("queryDate", DateUtils.yyyy_MM_dd_format(selectDate))

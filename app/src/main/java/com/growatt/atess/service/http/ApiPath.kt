@@ -171,6 +171,16 @@ object ApiPath {
         const val GET_DEVICE_PBD_CHART_INFO = "ATSDevice/getPBDDataList"
 
         /**
+         * 获取BMS、MBMS、BCU_BMS设备详情
+         */
+        const val GET_DEVICE_BMS_INFO = "ATSDevice/getBMSBySn"
+
+        /**
+         * 获取BMS、MBMS、BCU_BMS图表详情
+         */
+        const val GET_DEVICE_BMS_CHART_INFO = "ATSDevice/getBMSDataList"
+
+        /**
          * HPS或PCS能源概况
          */
         const val GET_ENERGY_INFO = "ATSDevice/getEnergyOverview"

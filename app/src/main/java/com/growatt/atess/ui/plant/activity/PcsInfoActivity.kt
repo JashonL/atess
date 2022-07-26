@@ -7,6 +7,7 @@ import android.view.View
 import androidx.activity.viewModels
 import androidx.fragment.app.commit
 import com.growatt.atess.R
+import com.growatt.atess.base.BaseActivity
 import com.growatt.atess.databinding.ActivityPcsInfoBinding
 import com.growatt.atess.model.plant.DeviceType
 import com.growatt.atess.model.plant.PcsModel
@@ -19,7 +20,7 @@ import com.growatt.lib.util.ViewUtil
 /**
  * PCS设备详情
  */
-class PcsInfoActivity : BaseDeviceActivity(), View.OnClickListener {
+class PcsInfoActivity : BaseActivity(), IBaseDeviceActivity, View.OnClickListener {
 
     companion object {
 

@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.growatt.atess.base.OnItemClickListener
 import com.growatt.atess.model.plant.DeviceModel
-import com.growatt.atess.ui.plant.activity.BaseDeviceActivity
+import com.growatt.atess.ui.plant.activity.IBaseDeviceActivity
 import com.growatt.atess.ui.plant.viewholder.BaseDeviceViewHolder
 
 /**
@@ -37,7 +37,7 @@ class DeviceAdapter : RecyclerView.Adapter<BaseDeviceViewHolder>(), OnItemClickL
     }
 
     override fun onItemClick(v: View?, position: Int) {
-        BaseDeviceActivity.jumpToDeviceInfoPage(
+        IBaseDeviceActivity.jumpToDeviceInfoPage(
             v?.context,
             getItemViewType(position),
             deviceList[position].getDeviceSN()
