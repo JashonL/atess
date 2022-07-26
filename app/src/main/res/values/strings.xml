@@ -201,6 +201,11 @@
     <string name="please_input_device_sn_or_alias">请输入设备序列号或别名</string>
     <string name="all_params">全部参数</string>
     <string name="kwh">Kwh</string>
+    <string name="kw">kW</string>
+    <string name="hz">Hz</string>
+    <string name="kva">KVA</string>
+    <string name="kvar">KVar</string>
+    <string name="min">Min</string>
     <string name="kwh_format">%sKwh</string>
     <string name="output_voltage">输出电压</string>
     <string name="output_frequency">输出频率</string>
@@ -210,7 +215,14 @@
     <string name="load_active_power">负载有功功率</string>
     <string name="load_reactive_power">负载无功功率</string>
     <string name="load_power_factor">负载功率因素</string>
+    <string name="power_factor">负载功率因素</string>
     <string name="generate_power">发电功率</string>
+    <string name="battery_charge_day_time">电池日充电时间</string>
+    <string name="bus_voltage">母线电压</string>
+    <string name="parallel_monitor_judgment_flag">并机监控判断标志</string>
+    <string name="bypass_apparent_power">旁路视在功率</string>
+    <string name="bypass_active_power">旁路有功功率</string>
+    <string name="bypass_reactive_power">旁路无功功率</string>
     <string name="pv_power">PV功率</string>
     <string name="grid_power">电网功率</string>
     <string name="battery_charge_power">电池充电功率</string>
@@ -239,6 +251,8 @@
     <string name="wind_direction_format">风向:%s</string>
     <string name="wind_speed_format">风速:%s</string>
     <string name="sunshine_duration">日照时长</string>
+    <string name="max_voltage_format">最大电压:%s</string>
+    <string name="min_voltage_format">最小电压:%s</string>
 
     <!-- image crop-->
     <string name="crop_image_menu_crop">裁剪</string>

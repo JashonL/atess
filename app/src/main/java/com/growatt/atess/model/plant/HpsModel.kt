@@ -99,16 +99,16 @@ data class HpsModel(
     override fun getIDeviceParamsJsonStr(): String {
         val vpvText = "${Util.getDoubleText(vpv)}V"
         val facText =
-            "${Util.getDoubleText(fac)}${MainApplication.instance().getString(R.string.kwh)}"
+            "${Util.getDoubleText(fac)}${MainApplication.instance().getString(R.string.hz)}"
         val envText = "${Util.getDoubleText(envTemp)}℃"
         val pac2Text =
-            "${Util.getDoubleText(pac2)}${MainApplication.instance().getString(R.string.kwh)}"
+            "${Util.getDoubleText(pac2)}${MainApplication.instance().getString(R.string.kva)}"
         val selfTimeText = "${selfTime}s"
         val loadActivePowerText = "${Util.getDoubleText(loadActivePower)}${
-            MainApplication.instance().getString(R.string.kwh)
+            MainApplication.instance().getString(R.string.kw)
         }"
         val loadReactivePowerText = "${Util.getDoubleText(loadReactivePower)}${
-            MainApplication.instance().getString(R.string.kwh)
+            MainApplication.instance().getString(R.string.kvar)
         }"
         val loadPfText = Util.getDoubleText(loadPf)
 

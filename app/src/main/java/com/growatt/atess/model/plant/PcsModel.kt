@@ -69,40 +69,56 @@ data class PcsModel(
     }
 
     override fun getIDeviceParamsJsonStr(): String {
-//        val vpvText = "${Util.getDoubleText(vpv)}V"
-//        val facText =
-//            "${Util.getDoubleText(fac)}${MainApplication.instance().getString(R.string.kwh)}"
-//        val envText = "${Util.getDoubleText(envTemp)}℃"
-//        val pac2Text =
-//            "${Util.getDoubleText(pac2)}${MainApplication.instance().getString(R.string.kwh)}"
-//        val selfTimeText = "${selfTime}s"
-//        val loadActivePowerText = "${Util.getDoubleText(loadActivePower)}${
-//            MainApplication.instance().getString(R.string.kwh)
-//        }"
-//        val loadReactivePowerText = "${Util.getDoubleText(loadReactivePower)}${
-//            MainApplication.instance().getString(R.string.kwh)
-//        }"
-//        val loadPfText = Util.getDoubleText(loadPf)
-//
-        val json = JSONObject()
-//        json.put(MainApplication.instance().getString(R.string.output_voltage), vpvText)
-//        json.put(MainApplication.instance().getString(R.string.output_frequency), facText)
-//        json.put(MainApplication.instance().getString(R.string.environment_temperature), envText)
-//        json.put(
-//            MainApplication.instance().getString(R.string.startup_self_test_time),
-//            selfTimeText
-//        )
-//        json.put(MainApplication.instance().getString(R.string.load_time_power), pac2Text)
-//        json.put(
-//            MainApplication.instance().getString(R.string.load_active_power),
-//            loadActivePowerText
-//        )
-//        json.put(
-//            MainApplication.instance().getString(R.string.load_reactive_power),
-//            loadReactivePowerText
-//        )
-//        json.put(MainApplication.instance().getString(R.string.load_power_factor), loadPfText)
+        val facText =
+            "${Util.getDoubleText(vacFrequency)}${
+                MainApplication.instance().getString(R.string.hz)
+            }"
+        val pacToBatteryText =
+            "${Util.getDoubleText(pacToBattery)}${
+                MainApplication.instance().getString(R.string.kw)
+            }"
+        val bApparentPowerText =
+            "${Util.getDoubleText(bApparentPower)}${
+                MainApplication.instance().getString(R.string.kva)
+            }"
+        val bActivePowerText =
+            "${Util.getDoubleText(bActivePower)}${
+                MainApplication.instance().getString(R.string.kw)
+            }"
+        val bReactivePowerText =
+            "${Util.getDoubleText(bReactivePower)}${
+                MainApplication.instance().getString(R.string.kvar)
+            }"
+        val loadPfText = Util.getDoubleText(pf)
+        val envText = "${Util.getDoubleText(envTemp)}℃"
+        val selfTimeText = "${selfTime}s"
 
+        val json = JSONObject()
+        json.put(MainApplication.instance().getString(R.string.output_frequency), facText)
+        json.put(MainApplication.instance().getString(R.string.battery_power), pacToBatteryText)
+        json.put(
+            MainApplication.instance().getString(R.string.bypass_apparent_power),
+            bApparentPowerText
+        )
+        json.put(
+            MainApplication.instance().getString(R.string.bypass_active_power),
+            bActivePowerText
+        )
+        json.put(
+            MainApplication.instance().getString(R.string.bypass_reactive_power),
+            bReactivePowerText
+        )
+
+        json.put(MainApplication.instance().getString(R.string.power_factor), loadPfText)
+        json.put(MainApplication.instance().getString(R.string.environment_temperature), envText)
+        json.put(
+            MainApplication.instance().getString(R.string.startup_self_test_time),
+            selfTimeText
+        )
+        json.put(
+            MainApplication.instance().getString(R.string.parallel_monitor_judgment_flag),
+            typeFlag.toString()
+        )
         return json.toString()
     }
 
