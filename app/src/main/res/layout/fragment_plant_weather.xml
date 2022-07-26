@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/color_white"
+    android:padding="20dp"
+    tools:context=".ui.plant.fragment.info.PlantWeatherFragment">
+
+    <ImageView
+        android:id="@+id/iv_weather"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginStart="10dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:src="@drawable/ic_placeholder" />
+
+    <TextView
+        android:id="@+id/tv_temperature"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/text_black"
+        android:textSize="@dimen/text_20"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@id/iv_weather"
+        app:layout_constraintTop_toBottomOf="@id/iv_weather"
+        tools:text="27℃" />
+
+    <TextView
+        android:id="@+id/tv_city_and_weather"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="3dp"
+        android:textColor="@color/text_black"
+        android:textSize="@dimen/text_tab"
+        app:layout_constraintStart_toStartOf="@id/iv_weather"
+        app:layout_constraintTop_toBottomOf="@id/tv_temperature"
+        tools:text="Shenzhen | 晴天" />
+
+
+    <TextView
+        android:id="@+id/tv_wind_direction"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="33dp"
+        android:textColor="@color/text_gray_66"
+        android:textSize="@dimen/text_tab"
+        app:layout_constraintStart_toStartOf="@id/iv_weather"
+        app:layout_constraintTop_toBottomOf="@id/tv_city_and_weather"
+        tools:text="风向:西南风" />
+
+    <TextView
+        android:id="@+id/tv_wind_speed"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="3dp"
+        android:textColor="@color/text_gray_66"
+        android:textSize="@dimen/text_tab"
+        app:layout_constraintStart_toStartOf="@id/iv_weather"
+        app:layout_constraintTop_toBottomOf="@id/tv_wind_direction"
+        tools:text="风速:18m/h" />
+
+    <ImageView
+        android:id="@+id/iv_sunrise_sunset"
+        android:layout_width="110dp"
+        android:layout_height="75dp"
+        android:layout_marginEnd="22dp"
+        android:src="@drawable/ic_sunrise_sunset"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/iv_weather" />
+
+    <TextView
+        android:id="@+id/tv_sunrise"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/text_black"
+        android:textSize="@dimen/text_10"
+        app:layout_constraintBottom_toBottomOf="@id/iv_sunrise_sunset"
+        app:layout_constraintEnd_toStartOf="@id/iv_sunrise_sunset"
+        app:layout_constraintStart_toStartOf="@id/iv_sunrise_sunset"
+        app:layout_constraintTop_toBottomOf="@id/iv_sunrise_sunset"
+        tools:text="05:48" />
+
+    <TextView
+        android:id="@+id/tv_sunset"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/text_black"
+        android:textSize="@dimen/text_10"
+        app:layout_constraintBottom_toBottomOf="@id/iv_sunrise_sunset"
+        app:layout_constraintEnd_toEndOf="@id/iv_sunrise_sunset"
+        app:layout_constraintStart_toEndOf="@id/iv_sunrise_sunset"
+        app:layout_constraintTop_toBottomOf="@id/iv_sunrise_sunset"
+        tools:text="18:52" />
+
+    <TextView
+        android:id="@+id/tv_sunshine_duration_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/sunshine_duration"
+        android:textColor="@color/text_gray_66"
+        android:textSize="@dimen/text_tab"
+        app:layout_constraintBottom_toBottomOf="@id/tv_wind_direction"
+        app:layout_constraintStart_toStartOf="@id/tv_sunrise"
+        app:layout_constraintTop_toTopOf="@id/tv_wind_direction" />
+
+    <TextView
+        android:id="@+id/tv_sunshine_duration_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/text_gray_66"
+        android:textSize="@dimen/text_tab"
+        app:layout_constraintBottom_toBottomOf="@id/tv_wind_speed"
+        app:layout_constraintStart_toStartOf="@id/tv_sunshine_duration_title"
+        app:layout_constraintTop_toTopOf="@id/tv_wind_speed"
+        tools:text="13h 04min" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

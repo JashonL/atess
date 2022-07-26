@@ -201,6 +201,7 @@
     <string name="please_input_device_sn_or_alias">请输入设备序列号或别名</string>
     <string name="all_params">全部参数</string>
     <string name="kwh">Kwh</string>
+    <string name="kwh_format">%sKwh</string>
     <string name="output_voltage">输出电压</string>
     <string name="output_frequency">输出频率</string>
     <string name="environment_temperature">环境温度</string>
@@ -235,6 +236,9 @@
     <string name="min_temperature">最低温度</string>
     <string name="monomer_max_voltage">单体最大电压</string>
     <string name="monomer_min_voltage">单体最小电压</string>
+    <string name="wind_direction_format">风向:%s</string>
+    <string name="wind_speed_format">风速:%s</string>
+    <string name="sunshine_duration">日照时长</string>
 
     <!-- image crop-->
     <string name="crop_image_menu_crop">裁剪</string>

@@ -83,6 +83,7 @@ class PlantInfoActivity : BaseActivity(), View.OnClickListener {
             }
         }
 
+        viewModel.getPlantInfo()
         viewModel.getPcsHpsSN()
     }
 

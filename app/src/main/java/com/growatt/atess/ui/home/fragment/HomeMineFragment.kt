@@ -49,7 +49,6 @@ class HomeMineFragment : HomeBaseFragment(), View.OnClickListener,
         Glide.with(this).load(userAvatar)
             .apply(RequestOptions.bitmapTransform(CircleCrop()))
             .placeholder(R.drawable.ic_default_avatar)
-            .load(accountService().userAvatar())
             .into(binding.ivAvatar)
     }
 

@@ -17,6 +17,10 @@ class PlantInfoViewModel : BaseViewModel() {
     var plantId: String? = null
     var plantModels: Array<PlantModel>? = null
 
+    val getPlantInfoLiveData = MutableLiveData<Pair<PlantModel?, String?>>()
+
+    val getPlantWeatherInfoLiveData = MutableLiveData<Pair<WeatherModel?, String?>>()
+
     val getDeviceListLiveData = MutableLiveData<Pair<List<DeviceModel>, String?>>()
 
     val getDeviceEnergyInfoLiveData = MutableLiveData<Pair<DeviceEnergyInfoModel?, String?>>()
@@ -25,6 +29,35 @@ class PlantInfoViewModel : BaseViewModel() {
      * 里面一层Pair，first是设备类型，second是设备序列号
      */
     val getPcsHpsSNLiveData = MutableLiveData<Pair<MutableList<Pair<Int, String>>?, String?>>()
+
+    /**
+     * 获取电站详情
+     */
+    fun getPlantInfo() {
+        viewModelScope.launch {
+            val params = hashMapOf<String, String>().apply {
+                put("plantId", plantId ?: "")
+            }
+            apiService().postForm(ApiPath.Plant.GET_PLANT_INFO, params, object :
+                HttpCallback<HttpResult<PlantInfoResultModel>>() {
+                override fun success(result: HttpResult<PlantInfoResultModel>) {
+                    if (result.isBusinessSuccess()) {
+                        getPlantInfoLiveData.value = Pair(result.data?.plantBean, null)
+                        getPlantWeatherInfoLiveData.value = Pair(result.data?.weatherMap, null)
+                    } else {
+                        getPlantInfoLiveData.value = Pair(null, result.msg ?: "")
+                        getPlantWeatherInfoLiveData.value = Pair(null, result.msg ?: "")
+                    }
+                }
+
+                override fun onFailure(error: String?) {
+                    super.onFailure(error)
+                    getPlantInfoLiveData.value = Pair(null, error ?: "")
+                    getPlantWeatherInfoLiveData.value = Pair(null, error ?: "")
+                }
+            })
+        }
+    }
 
     /**
      * 获取设备列表，每种类型的设备取第一个，最多3个
