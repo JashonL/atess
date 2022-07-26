@@ -11,6 +11,7 @@ import com.growatt.atess.base.BaseActivity
 import com.growatt.atess.databinding.ActivityPlantInfoBinding
 import com.growatt.atess.model.plant.DeviceType
 import com.growatt.atess.model.plant.PlantModel
+import com.growatt.atess.ui.plant.monitor.PlantMonitor
 import com.growatt.atess.ui.plant.viewmodel.PlantInfoViewModel
 import com.growatt.atess.view.dialog.OptionsDialog
 import com.growatt.lib.util.ToastUtil
@@ -97,6 +98,9 @@ class PlantInfoActivity : BaseActivity(), View.OnClickListener {
         binding.tvDeviceSn.setOnClickListener(this)
         binding.title.setOnRightImageClickListener {
             AddCollectorActivity.start(this, viewModel.plantId)
+        }
+        PlantMonitor.watch(lifecycle) {
+
         }
     }
 

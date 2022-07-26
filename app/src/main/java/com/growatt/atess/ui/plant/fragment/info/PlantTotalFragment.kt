@@ -13,6 +13,7 @@ import com.growatt.atess.R
 import com.growatt.atess.base.BaseFragment
 import com.growatt.atess.databinding.FragmentPlantTotalBinding
 import com.growatt.atess.model.plant.PlantModel
+import com.growatt.atess.ui.plant.activity.AddPlantActivity
 import com.growatt.atess.ui.plant.viewmodel.PlantInfoViewModel
 import com.growatt.lib.util.ToastUtil
 import com.growatt.lib.util.ViewUtil
@@ -80,7 +81,12 @@ class PlantTotalFragment : BaseFragment(), View.OnClickListener {
 
     override fun onClick(v: View?) {
         when {
-            v === binding.tvCity -> {}
+            v === binding.tvCity -> {
+                val plantInfo = viewModel.getPlantInfoLiveData.value?.first
+                if (plantInfo != null) {
+                    AddPlantActivity.start(requireContext(), plantInfo)
+                }
+            }
         }
     }
 
