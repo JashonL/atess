@@ -38,43 +38,51 @@ data class HpsModel(
          */
         fun createChartType(): Array<ChartTypeModel> {
             return arrayOf(
-                ChartTypeModel("1", MainApplication.instance().getString(R.string.pv_power), "w"),
-                ChartTypeModel("2", MainApplication.instance().getString(R.string.grid_power), "w"),
+                ChartTypeModel("1", MainApplication.instance().getString(R.string.pv_power), "kW"),
+                ChartTypeModel(
+                    "2",
+                    MainApplication.instance().getString(R.string.grid_power),
+                    "kW"
+                ),
                 ChartTypeModel(
                     "3",
                     MainApplication.instance().getString(R.string.battery_charge_power),
-                    "w"
+                    "kW"
                 ),
                 ChartTypeModel(
                     "4",
                     MainApplication.instance().getString(R.string.battery_discharge_power),
-                    "w"
+                    "kW"
                 ),
-                ChartTypeModel("5", MainApplication.instance().getString(R.string.load_power), "w"),
-                ChartTypeModel("6", MainApplication.instance().getString(R.string.pv_voltage), "w"),
+                ChartTypeModel(
+                    "5",
+                    MainApplication.instance().getString(R.string.load_power),
+                    "kW"
+                ),
+                ChartTypeModel("6", MainApplication.instance().getString(R.string.pv_voltage), "v"),
                 ChartTypeModel(
                     "7",
                     MainApplication.instance().getString(R.string.battery_charge_voltage),
-                    "w"
+                    "v"
                 ),
                 ChartTypeModel(
                     "8",
                     MainApplication.instance().getString(R.string.battery_discharge_voltage),
-                    "w"
+                    "v"
                 ),
                 ChartTypeModel(
                     "9",
                     MainApplication.instance().getString(R.string.pv_electricity),
-                    "w"
+                    "A"
                 ),
                 ChartTypeModel(
                     "10",
-                    MainApplication.instance().getString(R.string.battery_charge_electricity), "w"
+                    MainApplication.instance().getString(R.string.battery_charge_electricity), "A"
                 ),
                 ChartTypeModel(
                     "11",
                     MainApplication.instance().getString(R.string.battery_discharge_electricity),
-                    "w"
+                    "A"
                 )
             )
         }

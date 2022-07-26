@@ -31,7 +31,10 @@ import java.util.*
  * @param deviceType 设备类型
  * @param types 图表类型
  */
-class DeviceChartFragment(@DeviceType val deviceType: Int, val types: Array<ChartTypeModel>) :
+class DeviceChartFragment(
+    @DeviceType val deviceType: Int,
+    private val types: Array<ChartTypeModel>
+) :
     BaseFragment(),
     View.OnClickListener {
 
@@ -87,6 +90,7 @@ class DeviceChartFragment(@DeviceType val deviceType: Int, val types: Array<Char
         } else {
             binding.tvDataType.setDrawableNull()
         }
+        binding.tvUnit.text = viewModel.chartType?.typeUnit
         initChartView()
     }
 

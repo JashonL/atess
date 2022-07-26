@@ -37,46 +37,46 @@ data class PbdModel(
          */
         fun createChartType(): Array<ChartTypeModel> {
             return arrayOf(
-                ChartTypeModel("1", MainApplication.instance().getString(R.string.pv_power), "w"),
+                ChartTypeModel("1", MainApplication.instance().getString(R.string.pv_power), "kW"),
                 ChartTypeModel(
                     "2",
                     MainApplication.instance().getString(R.string.battery_power),
-                    "w"
+                    "kW"
                 ),
                 ChartTypeModel(
                     "3",
                     MainApplication.instance().getString(R.string.output_power),
-                    "w"
+                    "kW"
                 ),
                 ChartTypeModel(
                     "4",
                     MainApplication.instance().getString(R.string.pv_voltage),
-                    "w"
+                    "v"
                 ),
                 ChartTypeModel(
                     "5",
                     MainApplication.instance().getString(R.string.output_voltage),
-                    "w"
+                    "v"
                 ),
                 ChartTypeModel(
                     "6",
                     MainApplication.instance().getString(R.string.battery_charge_voltage),
-                    "w"
+                    "v"
                 ),
                 ChartTypeModel(
                     "7",
                     MainApplication.instance().getString(R.string.pv_electricity),
-                    "w"
+                    "A"
                 ),
                 ChartTypeModel(
                     "8",
                     MainApplication.instance().getString(R.string.out_electricity),
-                    "w"
+                    "A"
                 ),
                 ChartTypeModel(
                     "9",
                     MainApplication.instance().getString(R.string.battery_charge_electricity),
-                    "w"
+                    "A"
                 )
             )
         }
