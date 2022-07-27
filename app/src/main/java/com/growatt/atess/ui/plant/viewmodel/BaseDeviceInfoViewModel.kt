@@ -14,62 +14,20 @@ import kotlinx.coroutines.launch
 import java.util.*
 
 /**
- * 设备详情ViewModel
- * 泛型T是对应设备详情Model
+ * 设备详情基类ViewModel
  */
-class DeviceInfoViewModel<T> : BaseViewModel() {
+abstract class BaseDeviceInfoViewModel : BaseViewModel() {
 
     var deviceSn: String? = null
     var chartType: ChartTypeModel? = null
     var selectDate: Long = Date().time
-
-    val getDeviceInfoLiveData = MutableLiveData<Pair<T?, String?>>()
 
     val getDeviceChartLiveData = MutableLiveData<Pair<ChartListDataModel?, String?>>()
 
     /**
      * 获取设备详情
      */
-    fun getDeviceInfo(@DeviceType type: Int) {
-        var requestUrl = ""
-        viewModelScope.launch {
-            val params = hashMapOf<String, String>().apply {
-                when (type) {
-                    DeviceType.HPS -> {
-                        put("hpsSn", deviceSn ?: "")
-                        requestUrl = ApiPath.Plant.GET_DEVICE_HPS_INFO
-                    }
-                    DeviceType.PCS -> {
-                        put("pcsSn", deviceSn ?: "")
-                        requestUrl = ApiPath.Plant.GET_DEVICE_PCS_INFO
-                    }
-                    DeviceType.PBD -> {
-                        put("pbdSn", deviceSn ?: "")
-                        requestUrl = ApiPath.Plant.GET_DEVICE_PBD_INFO
-                    }
-                    DeviceType.BMS, DeviceType.MBMS, DeviceType.BCU_BMS -> {
-                        put("bmsSn", deviceSn ?: "")
-                        requestUrl = ApiPath.Plant.GET_DEVICE_BMS_INFO
-                    }
-                }
-            }
-            apiService().postForm(requestUrl, params, object :
-                HttpCallback<HttpResult<T>>() {
-                override fun success(result: HttpResult<T>) {
-                    if (result.isBusinessSuccess()) {
-                        getDeviceInfoLiveData.value = Pair(result.data, null)
-                    } else {
-                        getDeviceInfoLiveData.value = Pair(null, result.msg ?: "")
-                    }
-                }
-
-                override fun onFailure(error: String?) {
-                    super.onFailure(error)
-                    getDeviceInfoLiveData.value = Pair(null, error ?: "")
-                }
-            })
-        }
-    }
+    abstract fun getDeviceInfo(@DeviceType type: Int)
 
     /**
      * 获取图表详情

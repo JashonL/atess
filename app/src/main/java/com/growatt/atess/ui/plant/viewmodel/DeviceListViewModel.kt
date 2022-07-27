@@ -10,7 +10,7 @@ import com.growatt.lib.service.http.HttpResult
 import kotlinx.coroutines.launch
 
 /**
- * 添加采集器
+ * 我的设备列表
  */
 class DeviceListViewModel : BaseViewModel() {
 
@@ -19,7 +19,7 @@ class DeviceListViewModel : BaseViewModel() {
     val getDeviceListLiveData = MutableLiveData<Pair<DeviceListResultModel?, String?>>()
 
     /**
-     * 添加采集器
+     * 获取我的设备列表
      */
     fun getDeviceList() {
         viewModelScope.launch {

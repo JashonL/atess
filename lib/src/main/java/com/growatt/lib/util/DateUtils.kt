@@ -8,6 +8,8 @@ import java.util.*
  * 日期格式化工具类
  */
 object DateUtils {
+    val yyyy_format = SimpleDateFormat("yyyy", Locale.US)
+    val yyyy_MM_format = SimpleDateFormat("yyyy-MM", Locale.US)
     val yyyy_MM_dd_format = SimpleDateFormat("yyyy-MM-dd", Locale.US)
     val yyyy_MM_dd_HH_mm_ss_format = SimpleDateFormat("yyyy-MM-dd HH-mm-ss", Locale.US)
     val yyyy_MM_dd_HH_mm_ss_format_2 = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.US)
@@ -16,6 +18,14 @@ object DateUtils {
     val HH_mm_ss_format = SimpleDateFormat("HH:mm:ss", Locale.US)
     val MM_dd_HH_mm_format = SimpleDateFormat("MM-dd HH:mm", Locale.US)
     val HH_mm_ss_SSS_format = SimpleDateFormat("HH:mm:ss::SSS", Locale.US)
+
+    fun yyyy_format(date: Date): String {
+        return yyyy_format.format(date)
+    }
+
+    fun yyyy_MM_format(date: Date): String {
+        return yyyy_MM_format.format(date)
+    }
 
     fun yyyy_MM_dd_format(date: Date): String {
         return yyyy_MM_dd_format.format(date)

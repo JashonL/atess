@@ -8,7 +8,7 @@ import org.json.JSONObject
 
 data class PbdModel(
     val deviceModel: String?,//设备型号
-    val pbdid: String?,//设备序列号
+    val deviceSn: String?,//设备序列号
     val realType: Int = DeviceType.PBD,
     val eToday: Double?,//今日发电量
     val eTotal: Double?,//累计发电量
@@ -83,7 +83,7 @@ data class PbdModel(
     }
 
     override fun getIDeviceSn(): String {
-        return MainApplication.instance().getString(R.string.sn_format, pbdid)
+        return MainApplication.instance().getString(R.string.sn_format, deviceSn)
     }
 
     override fun getIDeviceModel(): String {

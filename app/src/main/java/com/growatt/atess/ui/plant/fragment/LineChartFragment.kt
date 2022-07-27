@@ -1,4 +1,4 @@
-package com.growatt.atess.ui.plant.fragment.device
+package com.growatt.atess.ui.plant.fragment
 
 import android.graphics.Color
 import android.os.Bundle
@@ -13,91 +13,52 @@ import com.github.mikephil.charting.data.LineDataSet
 import com.github.mikephil.charting.formatter.ValueFormatter
 import com.growatt.atess.R
 import com.growatt.atess.base.BaseFragment
-import com.growatt.atess.databinding.FragmentDeviceChartBinding
+import com.growatt.atess.databinding.FragmentLineChartBinding
 import com.growatt.atess.model.plant.ChartListDataModel
-import com.growatt.atess.model.plant.ChartTypeModel
-import com.growatt.atess.model.plant.DeviceType
-import com.growatt.atess.ui.plant.viewmodel.BaseDeviceInfoViewModel
-import com.growatt.atess.view.dialog.OptionsDialog
-import com.growatt.lib.util.*
-import com.growatt.lib.view.dialog.DatePickerFragment
-import com.growatt.lib.view.dialog.OnDateSetListener
+import com.growatt.lib.util.DateUtils
+import com.growatt.lib.util.Util
 import java.util.*
 
 /**
- * 设备详情中的报表(HPS、PCS、PBD、MBMS、BMS)
- * @param deviceType 设备类型
- * @param types 图表类型
+ * 折线图表
  */
-class DeviceChartFragment(
-    @DeviceType val deviceType: Int,
-    private val types: Array<ChartTypeModel>,
-    private val viewModel: BaseDeviceInfoViewModel
-) :
-    BaseFragment(),
-    View.OnClickListener {
+class LineChartFragment(var chartListDataModel: ChartListDataModel? = null, val unit: String) :
+    BaseFragment() {
 
     companion object {
         const val MINUTES_INTERVAL = 60 * 1000
     }
 
-    private lateinit var binding: FragmentDeviceChartBinding
+    private lateinit var binding: FragmentLineChartBinding
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentDeviceChartBinding.inflate(inflater, container, false)
-        initData()
+        binding = FragmentLineChartBinding.inflate(inflater, container, false)
         initView()
-        setListener()
         return binding.root
     }
 
-    private fun initData() {
-        if (viewModel.chartType == null) {
-            viewModel.chartType = types[0]
-        }
-        viewModel.getDeviceChartLiveData.observe(viewLifecycleOwner) {
-            dismissDialog()
-            if (it.second == null) {
-                setDeviceChartData(it.first)
-            } else {
-                ToastUtil.show(it.second)
-            }
-        }
-        viewModel.getDeviceChartInfo(deviceType)
-    }
-
-    private fun setListener() {
-        binding.tvDataType.setOnClickListener(this)
-        binding.ivAdd.setOnClickListener(this)
-        binding.ivReduce.setOnClickListener(this)
-        binding.tvDate.setOnClickListener(this)
-    }
 
     private fun initView() {
-        binding.llSelectDate.background =
-            ViewUtil.createShape(resources.getColor(R.color.color_0D000000), 30)
-        refreshDataTypeView()
-        refreshDateView()
-        if (types.size > 1) {
-            binding.tvDataType.setDrawableEnd(resources.getDrawable(R.drawable.ic_down))
-        } else {
-            binding.tvDataType.setDrawableNull()
-        }
-        binding.tvUnit.text = viewModel.chartType?.typeUnit
+        binding.tvUnit.text = unit
         initChartView()
     }
 
-    private fun setDeviceChartData(chartListDataModel: ChartListDataModel?) {
+    fun refresh(chartListDataModel: ChartListDataModel?) {
+        this.chartListDataModel = chartListDataModel
+        showChartData()
+    }
+
+    private fun showChartData() {
         if (chartListDataModel == null) {
             return
         }
 
-        val timeList = chartListDataModel.getXTimeList()
-        val chartYDataList = chartListDataModel.getYDataList()
+        val timeList = chartListDataModel!!.getXTimeList()
+        val chartYDataList = chartListDataModel!!.getYDataList()
         val lineData = LineData().also {
             it.isHighlightEnabled = true
         }
@@ -164,7 +125,7 @@ class DeviceChartFragment(
             it.axisLineWidth = 2f//设置x轴线宽度
             it.valueFormatter = object : ValueFormatter() {
                 override fun getFormattedValue(value: Float): String {
-                    return DateUtils.HH_mm_format(Date((value * MINUTES_INTERVAL).toLong()))
+                    return DateUtils.HH_mm_format(Date((value * 60 * 1000).toLong()))
                 }
             }
         }
@@ -188,62 +149,5 @@ class DeviceChartFragment(
             it.setPosition(YAxis.YAxisLabelPosition.OUTSIDE_CHART)//设置Y轴坐标值显示的位置
         }
         binding.lineChart.invalidate()
-    }
-
-    override fun onClick(v: View?) {
-        when {
-            v === binding.tvDataType -> showSelectChartType()
-            v === binding.ivAdd -> {
-                val nextDay = DateUtils.addDateDays(Date(viewModel.selectDate), 1)
-                if (nextDay <= Date()) {
-                    viewModel.selectDate = nextDay.time
-                    refreshDateView()
-                    showDialog()
-                    viewModel.getDeviceChartInfo(deviceType)
-                }
-            }
-            v === binding.ivReduce -> {
-                viewModel.selectDate = DateUtils.addDateDays(Date(viewModel.selectDate), -1).time
-                refreshDateView()
-                refreshDataTypeView()
-                showDialog()
-                viewModel.getDeviceChartInfo(deviceType)
-            }
-            v === binding.tvDate -> showDatePicker()
-        }
-    }
-
-    private fun refreshDataTypeView() {
-        binding.tvDataType.text = viewModel.chartType?.typeName
-    }
-
-    private fun showSelectChartType() {
-        if (types.size > 1) {
-            OptionsDialog.show(childFragmentManager, ChartTypeModel.getTypeNames(types)) {
-                val selectChartType = types[it]
-                if (viewModel.chartType?.type != selectChartType.type) {
-                    viewModel.chartType = selectChartType
-                    refreshDataTypeView()
-                    showDialog()
-                    viewModel.getDeviceChartInfo(deviceType)
-                }
-            }
-        }
-    }
-
-    private fun refreshDateView() {
-        binding.tvDate.text = DateUtils.yyyy_MM_dd_format(viewModel.selectDate)
-    }
-
-    private fun showDatePicker() {
-        DatePickerFragment.show(childFragmentManager, System.currentTimeMillis(), object :
-            OnDateSetListener {
-            override fun onDateSet(date: Date) {
-                viewModel.selectDate = date.time
-                refreshDateView()
-                showDialog()
-                viewModel.getDeviceChartInfo(deviceType)
-            }
-        })
     }
 }

@@ -11,9 +11,10 @@ import com.growatt.atess.base.BaseActivity
 import com.growatt.atess.databinding.ActivityHpsInfoBinding
 import com.growatt.atess.model.plant.DeviceType
 import com.growatt.atess.model.plant.HpsModel
+import com.growatt.atess.model.plant.ui.IDeviceInfoHead
 import com.growatt.atess.ui.plant.fragment.device.DeviceChartFragment
 import com.growatt.atess.ui.plant.fragment.device.DeviceHead1Fragment
-import com.growatt.atess.ui.plant.viewmodel.DeviceInfoViewModel
+import com.growatt.atess.ui.plant.viewmodel.HpsViewModel
 import com.growatt.lib.util.ToastUtil
 
 /**
@@ -34,7 +35,7 @@ class HpsInfoActivity : BaseActivity(), IBaseDeviceActivity, View.OnClickListene
     }
 
     private lateinit var binding: ActivityHpsInfoBinding
-    private val viewModel: DeviceInfoViewModel<HpsModel> by viewModels()
+    private val viewModel: HpsViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,7 +50,7 @@ class HpsInfoActivity : BaseActivity(), IBaseDeviceActivity, View.OnClickListene
         viewModel.getDeviceInfoLiveData.observe(this) {
             if (it.second == null) {
                 (supportFragmentManager.findFragmentById(R.id.fragment_head) as DeviceHead1Fragment).bindData(
-                    it.first!!
+                    it.first as IDeviceInfoHead
                 )
             } else {
                 ToastUtil.show(it.second)
@@ -62,7 +63,7 @@ class HpsInfoActivity : BaseActivity(), IBaseDeviceActivity, View.OnClickListene
         supportFragmentManager.commit(true) {
             add(
                 R.id.fragment_chart,
-                DeviceChartFragment(getDeviceType(), HpsModel.createChartType())
+                DeviceChartFragment(getDeviceType(), HpsModel.createChartType(), viewModel)
             )
         }
     }

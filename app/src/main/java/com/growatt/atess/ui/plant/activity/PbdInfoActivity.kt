@@ -13,7 +13,7 @@ import com.growatt.atess.model.plant.DeviceType
 import com.growatt.atess.model.plant.PbdModel
 import com.growatt.atess.ui.plant.fragment.device.DeviceChartFragment
 import com.growatt.atess.ui.plant.fragment.device.DeviceHead1Fragment
-import com.growatt.atess.ui.plant.viewmodel.DeviceInfoViewModel
+import com.growatt.atess.ui.plant.viewmodel.PbdViewModel
 import com.growatt.lib.util.ToastUtil
 import com.growatt.lib.util.ViewUtil
 
@@ -35,7 +35,7 @@ class PbdInfoActivity : BaseActivity(), IBaseDeviceActivity, View.OnClickListene
     }
 
     private lateinit var binding: ActivityPbdInfoBinding
-    private val viewModel: DeviceInfoViewModel<PbdModel> by viewModels()
+    private val viewModel: PbdViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -87,7 +87,7 @@ class PbdInfoActivity : BaseActivity(), IBaseDeviceActivity, View.OnClickListene
         supportFragmentManager.commit(true) {
             add(
                 R.id.fragment_chart,
-                DeviceChartFragment(getDeviceType(), PbdModel.createChartType())
+                DeviceChartFragment(getDeviceType(), PbdModel.createChartType(), viewModel)
             )
         }
     }

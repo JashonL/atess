@@ -40,9 +40,9 @@ data class DeviceModel(
 
     fun getRealDeviceType(): Int {
         return when {
-            "HPS" == deviceType -> DeviceType.HPS
-            "PBD" == deviceType -> DeviceType.PBD
-            "PCS" == deviceType -> DeviceType.PCS
+            "hps" == deviceType -> DeviceType.HPS
+            "pbd" == deviceType -> DeviceType.PBD
+            "pcs" == deviceType -> DeviceType.PCS
             "bms" == deviceType -> DeviceType.BMS
             "mbms" == deviceType -> DeviceType.MBMS
             "bcu_bms" == deviceType -> DeviceType.BCU_BMS

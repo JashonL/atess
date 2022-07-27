@@ -7,6 +7,8 @@ import android.location.LocationManager
 import android.net.Uri
 import android.os.Process
 import android.text.TextUtils
+import androidx.fragment.app.FragmentActivity
+import androidx.fragment.app.FragmentManager
 import com.growatt.lib.LibApplication
 import org.json.JSONObject
 import java.io.File
@@ -102,5 +104,12 @@ object Util {
             return "0.0"
         }
         return BigDecimal(value).setScale(1, BigDecimal.ROUND_HALF_UP).toDouble().toString()
+    }
+
+    fun getFragmentManagerForContext(context: Context?): FragmentManager? {
+        if (context is FragmentActivity) {
+            return context.supportFragmentManager
+        }
+        return null
     }
 }

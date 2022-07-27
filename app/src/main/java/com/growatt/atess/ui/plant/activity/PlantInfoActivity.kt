@@ -74,18 +74,20 @@ class PlantInfoActivity : BaseActivity(), View.OnClickListener {
 
         viewModel.getPcsHpsSNLiveData.observe(this) {
             if (it.second == null) {
-                if (it.first?.isNullOrEmpty() == false) {
+                if (viewModel.typeAndSn == null && it.first?.isNullOrEmpty() == false) {
                     val defaultDevice = it.first!![0]
                     refreshSNView(defaultDevice)
-                    viewModel.getEnergyInfo(defaultDevice.first, defaultDevice.second)
+                    viewModel.typeAndSn = defaultDevice
+                    viewModel.getEnergyInfo()
+                    viewModel.getChartInfo()
                 }
             } else {
                 ToastUtil.show(it.second)
             }
         }
-
         viewModel.getPlantInfo()
         viewModel.getPcsHpsSN()
+        viewModel.getDeviceList()
     }
 
     private fun refreshSNView(typeAndSN: Pair<Int, String>) {
@@ -102,6 +104,16 @@ class PlantInfoActivity : BaseActivity(), View.OnClickListener {
         PlantMonitor.watch(lifecycle) {
 
         }
+        binding.srlRefresh.setOnRefreshListener {
+            refresh()
+            binding.srlRefresh.finishRefresh(2000)
+        }
+    }
+
+    private fun refresh() {
+        viewModel.getPlantInfo()
+        refreshDeviceInfo()
+        viewModel.getDeviceList()
     }
 
     override fun onClick(v: View?) {
@@ -121,9 +133,15 @@ class PlantInfoActivity : BaseActivity(), View.OnClickListener {
             OptionsDialog.show(supportFragmentManager, options.toTypedArray()) {
                 val selectDevice = snList!![it]
                 refreshSNView(selectDevice)
-                viewModel.getEnergyInfo(selectDevice.first, selectDevice.second)
+                viewModel.typeAndSn = selectDevice
+                refreshDeviceInfo()
             }
         }
+    }
+
+    private fun refreshDeviceInfo() {
+        viewModel.getEnergyInfo()
+        viewModel.getChartInfo()
     }
 
 }

@@ -13,7 +13,7 @@ import com.growatt.atess.model.plant.BmsModel
 import com.growatt.atess.model.plant.DeviceType
 import com.growatt.atess.ui.plant.fragment.device.BmsHeadFragment
 import com.growatt.atess.ui.plant.fragment.device.DeviceChartFragment
-import com.growatt.atess.ui.plant.viewmodel.DeviceInfoViewModel
+import com.growatt.atess.ui.plant.viewmodel.BmsViewModel
 import com.growatt.lib.util.ToastUtil
 
 /**
@@ -34,7 +34,7 @@ class BcuBmsInfoActivity : BaseActivity(), IBaseDeviceActivity, View.OnClickList
     }
 
     private lateinit var binding: ActivityBcuBmsInfoBinding
-    private val viewModel: DeviceInfoViewModel<BmsModel> by viewModels()
+    private val viewModel: BmsViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -62,7 +62,7 @@ class BcuBmsInfoActivity : BaseActivity(), IBaseDeviceActivity, View.OnClickList
         supportFragmentManager.commit(true) {
             add(
                 R.id.fragment_chart,
-                DeviceChartFragment(getDeviceType(), BmsModel.createChartType())
+                DeviceChartFragment(getDeviceType(), BmsModel.createChartType(), viewModel)
             )
         }
     }

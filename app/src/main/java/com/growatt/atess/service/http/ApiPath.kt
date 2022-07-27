@@ -185,5 +185,10 @@ object ApiPath {
          */
         const val GET_ENERGY_INFO = "ATSDevice/getEnergyOverview"
 
+        /**
+         * 电站详情获取HPS与PCS设备图表详情
+         */
+        const val GET_HPS_OR_PCS_CHART_INFO = "ATSDevice/getHpsOrPcsChartData"
+
     }
 }

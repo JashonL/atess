@@ -41,7 +41,7 @@ class BmsViewHolder(
         binding.tvDeviceSn.text = deviceModel.getDeviceSN()
         binding.ivIcon.setImageResource(if (deviceModel.getRealDeviceType() == DeviceType.MBMS) R.drawable.ic_device_mbms else R.drawable.ic_device_bms)
         binding.tvStatus.text = deviceModel.getSysStatusText()
-        binding.tvStatus.setBackgroundResource(if (deviceModel.sysStatus == -1) R.color.color_82DCDC else R.color.color_D4EC59)
+        binding.tvStatus.setTextColor(getColor(if (deviceModel.sysStatus == -1) R.color.color_82DCDC else R.color.color_D4EC59))
         binding.tvSoc.text = deviceModel.getSocText()
         binding.tvConnectStatus.text = deviceModel.getConnectStatusText()
     }

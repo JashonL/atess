@@ -60,6 +60,8 @@ class PlantWeatherFragment : BaseFragment() {
                 binding.tvSunrise.text = it.sr
                 binding.tvSunset.text = it.ss
                 binding.tvSunshineDurationValue.text = it.duration
+                binding.tvWindDirection.text = it.getWindDirectionText()
+                binding.tvWindSpeed.text = it.getWindSpeedText()
                 binding.root.visible()
             } else {
                 binding.root.gone()

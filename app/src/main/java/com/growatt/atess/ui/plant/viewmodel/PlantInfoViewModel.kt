@@ -5,9 +5,12 @@ import androidx.lifecycle.viewModelScope
 import com.growatt.atess.base.BaseViewModel
 import com.growatt.atess.model.plant.*
 import com.growatt.atess.service.http.ApiPath
+import com.growatt.atess.view.DateType
 import com.growatt.lib.service.http.HttpCallback
 import com.growatt.lib.service.http.HttpResult
+import com.growatt.lib.util.DateUtils
 import kotlinx.coroutines.launch
+import java.util.*
 
 /**
  * 电站详情
@@ -16,6 +19,12 @@ class PlantInfoViewModel : BaseViewModel() {
 
     var plantId: String? = null
     var plantModels: Array<PlantModel>? = null
+
+    //图表数据请求参数
+    var typeAndSn: Pair<Int, String>? = null
+    var selectDate = Date()
+    var dataType = "1" //dataType 1 —— 功率电量；2 —— soc; 3 —— 充放电
+    var dateType = DateType.HOUR //dateType 1 —— 时；2 —— 日；3 —— 月；4 —— 年
 
     val getPlantInfoLiveData = MutableLiveData<Pair<PlantModel?, String?>>()
 
@@ -29,6 +38,8 @@ class PlantInfoViewModel : BaseViewModel() {
      * 里面一层Pair，first是设备类型，second是设备序列号
      */
     val getPcsHpsSNLiveData = MutableLiveData<Pair<MutableList<Pair<Int, String>>?, String?>>()
+
+    val getChartLiveData = MutableLiveData<Pair<ChartListDataModel?, String?>>()
 
     /**
      * 获取电站详情
@@ -148,12 +159,12 @@ class PlantInfoViewModel : BaseViewModel() {
     /**
      * 获取HPS或PCS能源概况
      */
-    fun getEnergyInfo(deviceType: Int, deviceSn: String?) {
+    fun getEnergyInfo() {
         viewModelScope.launch {
             val params = hashMapOf<String, String>().apply {
                 put("plantId", plantId ?: "")
-                put("deviceSn", deviceSn ?: "")
-                put("deviceType", if (deviceType == DeviceType.HPS) "hps" else "pcs")
+                put("deviceSn", typeAndSn?.second ?: "")
+                put("deviceType", if (typeAndSn?.first == DeviceType.HPS) "hps" else "pcs")
             }
             apiService().postForm(ApiPath.Plant.GET_ENERGY_INFO, params, object :
                 HttpCallback<HttpResult<DeviceEnergyInfoModel>>() {
@@ -168,6 +179,47 @@ class PlantInfoViewModel : BaseViewModel() {
                 override fun onFailure(error: String?) {
                     super.onFailure(error)
                     getDeviceEnergyInfoLiveData.value = Pair(null, error ?: "")
+                }
+            })
+        }
+    }
+
+    /**
+     * 获取HPS或PCS图表详情
+     */
+    fun getChartInfo() {
+        viewModelScope.launch {
+            val params = hashMapOf<String, String>().apply {
+                put("plantId", plantId ?: "")
+                put("deviceType", if (typeAndSn?.first == DeviceType.HPS) "hps" else "pcs")
+                put("deviceSn", typeAndSn?.second ?: "")
+                put("dataType", dataType)
+                if (dataType == "2" || dataType == "3") {
+                    //SOC与充放电类型
+                    put("queryDate", DateUtils.yyyy_MM_dd_format(selectDate))
+                    put("dateType", "1")
+                } else {
+                    //功率电量类型
+                    if (dateType != "4") {
+                        //年的情况就不需要传时间字段
+                        put("queryDate", DateUtils.yyyy_MM_dd_format(selectDate))
+                    }
+                    put("dateType", dateType)
+                }
+            }
+            apiService().postForm(ApiPath.Plant.GET_HPS_OR_PCS_CHART_INFO, params, object :
+                HttpCallback<HttpResult<ChartListDataModel>>() {
+                override fun success(result: HttpResult<ChartListDataModel>) {
+                    if (result.isBusinessSuccess()) {
+                        getChartLiveData.value = Pair(result.data, null)
+                    } else {
+                        getChartLiveData.value = Pair(null, result.msg ?: "")
+                    }
+                }
+
+                override fun onFailure(error: String?) {
+                    super.onFailure(error)
+                    getChartLiveData.value = Pair(null, error ?: "")
                 }
             })
         }

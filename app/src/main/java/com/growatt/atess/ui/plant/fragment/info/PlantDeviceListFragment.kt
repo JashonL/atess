@@ -44,7 +44,6 @@ class PlantDeviceListFragment : BaseFragment(), View.OnClickListener {
                 ToastUtil.show(it.second)
             }
         }
-        viewModel.getDeviceList()
     }
 
     private fun setListener() {

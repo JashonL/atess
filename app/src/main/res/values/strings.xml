@@ -253,6 +253,13 @@
     <string name="sunshine_duration">日照时长</string>
     <string name="max_voltage_format">最大电压:%s</string>
     <string name="min_voltage_format">最小电压:%s</string>
+    <string name="power_output">功率/电量</string>
+    <string name="soc">SOC</string>
+    <string name="charge_discharge_output">充放电</string>
+    <string name="hour">时</string>
+    <string name="day">日</string>
+    <string name="month">月</string>
+    <string name="year">年</string>
 
     <!-- image crop-->
     <string name="crop_image_menu_crop">裁剪</string>

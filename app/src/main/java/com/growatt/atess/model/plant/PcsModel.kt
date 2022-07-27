@@ -8,7 +8,7 @@ import org.json.JSONObject
 
 data class PcsModel(
     val deviceModel: String?,//设备型号
-    val pcsid: String?,//设备序列号
+    val deviceSn: String?,//设备序列号
     val realType: Int = DeviceType.PCS,
     val eToday: Double?,//今日发电量
     val eTotal: Double?,//累计发电量
@@ -61,7 +61,7 @@ data class PcsModel(
     }
 
     override fun getIDeviceSn(): String {
-        return MainApplication.instance().getString(R.string.sn_format, pcsid)
+        return MainApplication.instance().getString(R.string.sn_format, deviceSn)
     }
 
     override fun getIDeviceModel(): String {

@@ -8,7 +8,7 @@ import org.json.JSONObject
 
 data class HpsModel(
     val deviceModel: String?,//设备型号
-    val hpsid: String?,//设备序列号
+    val deviceSn: String?,//设备序列号
     val realType: Int = DeviceType.HPS,
     val vpv: Double?,//输出电压
     val fac: Double?,//输出频率
@@ -89,7 +89,7 @@ data class HpsModel(
     }
 
     override fun getIDeviceSn(): String {
-        return MainApplication.instance().getString(R.string.sn_format, hpsid)
+        return MainApplication.instance().getString(R.string.sn_format, deviceSn)
     }
 
     override fun getIDeviceModel(): String {

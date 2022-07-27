@@ -8,9 +8,8 @@ import androidx.fragment.app.activityViewModels
 import com.growatt.atess.base.BaseFragment
 import com.growatt.atess.databinding.FragmentBmsBatteryBinding
 import com.growatt.atess.model.plant.BatteryModel
-import com.growatt.atess.model.plant.BmsModel
 import com.growatt.atess.ui.plant.activity.BatteryInfoActivity
-import com.growatt.atess.ui.plant.viewmodel.DeviceInfoViewModel
+import com.growatt.atess.ui.plant.viewmodel.BmsViewModel
 import com.growatt.lib.util.ToastUtil
 import com.growatt.lib.util.gone
 import com.growatt.lib.util.invisible
@@ -23,7 +22,7 @@ class BmsBatteryFragment : BaseFragment(), View.OnClickListener {
 
     private lateinit var binding: FragmentBmsBatteryBinding
 
-    private val viewModel: DeviceInfoViewModel<BmsModel> by activityViewModels()
+    private val viewModel: BmsViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
