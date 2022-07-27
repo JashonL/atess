@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/color_white"
+    android:gravity="center"
+    android:orientation="horizontal"
+    android:paddingTop="16dp"
+    android:paddingBottom="16dp"
+    tools:context="com.growatt.atess.ui.plant.activity.BatteryViewHolder">
+
+    <ImageView
+        android:id="@+id/iv_icon"
+        android:layout_width="58dp"
+        android:layout_height="58dp"
+        tools:src="@drawable/ic_battery_box" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_battery_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/text_black"
+            android:textSize="@dimen/text_13"
+            android:textStyle="bold"
+            tools:text="#1电池箱" />
+
+        <TextView
+            android:id="@+id/tv_max_vol"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:textColor="@color/text_gray_99"
+            android:textSize="@dimen/text_small"
+            tools:text="最大电压：220V" />
+
+        <TextView
+            android:id="@+id/tv_min_vol"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:textColor="@color/text_gray_99"
+            android:textSize="@dimen/text_small"
+            tools:text="最小电压：220V" />
+
+        <TextView
+            android:id="@+id/tv_vol"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:textColor="@color/text_gray_99"
+            android:textSize="@dimen/text_small"
+            tools:text="电压：220V" />
+    </LinearLayout>
+
+</LinearLayout>

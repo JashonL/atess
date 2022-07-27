@@ -31,12 +31,13 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.growatt.lib.util.ViewUtil;
 
+/**
+ * LinearLayoutManager分割线
+ * GridLayoutManager分割线
+ */
 public class DividerItemDecoration extends RecyclerView.ItemDecoration {
     public static final int HORIZONTAL = LinearLayout.HORIZONTAL;
     public static final int VERTICAL = LinearLayout.VERTICAL;
-
-    private static final String TAG = "DividerItem";
-    private static final int[] ATTRS = new int[]{android.R.attr.listDivider};
 
     private final Drawable mDivider;
     private final Rect mBounds = new Rect();
@@ -46,7 +47,12 @@ public class DividerItemDecoration extends RecyclerView.ItemDecoration {
         setOrientation(orientation);
         GradientDrawable drawable = new GradientDrawable();
         drawable.setColor(colorInt);
-        drawable.setSize(-1, ViewUtil.INSTANCE.dp2px(context, 1f));
+        if (orientation == HORIZONTAL) {
+            drawable.setSize(ViewUtil.INSTANCE.dp2px(context, 1f), LinearLayout.LayoutParams.MATCH_PARENT);
+        } else {
+            drawable.setSize(LinearLayout.LayoutParams.MATCH_PARENT, ViewUtil.INSTANCE.dp2px(context, 1f));
+        }
+
         mDivider = drawable;
     }
 

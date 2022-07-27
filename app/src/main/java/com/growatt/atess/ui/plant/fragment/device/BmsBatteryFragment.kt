@@ -9,6 +9,7 @@ import com.growatt.atess.base.BaseFragment
 import com.growatt.atess.databinding.FragmentBmsBatteryBinding
 import com.growatt.atess.model.plant.BatteryModel
 import com.growatt.atess.model.plant.BmsModel
+import com.growatt.atess.ui.plant.activity.BatteryInfoActivity
 import com.growatt.atess.ui.plant.viewmodel.DeviceInfoViewModel
 import com.growatt.lib.util.ToastUtil
 import com.growatt.lib.util.gone
@@ -70,7 +71,7 @@ class BmsBatteryFragment : BaseFragment(), View.OnClickListener {
             } else {
                 binding.llChildBattery2.invisible()
             }
-
+            binding.tvSeeMore.tag = batteryModel
             binding.root.visible()
         }
     }
@@ -128,7 +129,12 @@ class BmsBatteryFragment : BaseFragment(), View.OnClickListener {
 
     override fun onClick(v: View?) {
         when {
-            v === binding.tvSeeMore -> {}
+            v === binding.tvSeeMore -> {
+                val tag = v.tag
+                if (tag is BatteryModel) {
+                    BatteryInfoActivity.start(requireContext(), tag)
+                }
+            }
         }
     }
 
