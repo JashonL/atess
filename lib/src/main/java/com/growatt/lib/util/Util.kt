@@ -97,13 +97,14 @@ object Util {
 
 
     /**
-     * Double转为字符串，四舍五入
+     * Double转为字符串，四舍五入后去掉后面的0
      */
     fun getDoubleText(value: Double?): String {
         if (value == null) {
             return "0.0"
         }
-        return BigDecimal(value).setScale(1, BigDecimal.ROUND_HALF_UP).toDouble().toString()
+        return BigDecimal(value).setScale(1, BigDecimal.ROUND_HALF_UP).stripTrailingZeros()
+            .toPlainString()
     }
 
     fun getFragmentManagerForContext(context: Context?): FragmentManager? {

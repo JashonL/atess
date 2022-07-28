@@ -6,7 +6,38 @@ import com.growatt.atess.application.MainApplication
 /**
  * 电站详情服务端返回来Model
  */
-data class PlantInfoResultModel(val plantBean: PlantModel, val weatherMap: WeatherModel)
+data class PlantInfoResultModel(val plantBean: PlantModel, val weatherMap: WeatherModel) {
+
+    companion object {
+        /**
+         * 创建图表类型(传给服务端的类型)
+         *
+         * 1 —— 功率/电量
+         * 2 —— SOC
+         * 3 —— 充放电
+         */
+        fun createChartType(): Array<ChartTypeModel> {
+            return arrayOf(
+                ChartTypeModel(
+                    "1",
+                    MainApplication.instance().getString(R.string.power_output),
+                    MainApplication.instance().getString(R.string.kwh)
+                ),
+                ChartTypeModel(
+                    "2",
+                    MainApplication.instance().getString(R.string.soc),
+                    "%"
+                ),
+                ChartTypeModel(
+                    "3",
+                    MainApplication.instance().getString(R.string.charge_discharge_output),
+                    MainApplication.instance().getString(R.string.kwh)
+                )
+            )
+        }
+    }
+
+}
 
 
 data class WeatherModel(

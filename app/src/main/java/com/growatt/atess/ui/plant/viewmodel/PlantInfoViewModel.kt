@@ -23,7 +23,8 @@ class PlantInfoViewModel : BaseViewModel() {
     //图表数据请求参数
     var typeAndSn: Pair<Int, String>? = null
     var selectDate = Date()
-    var dataType = "1" //dataType 1 —— 功率电量；2 —— soc; 3 —— 充放电
+    val chartTypes = PlantInfoResultModel.createChartType()
+    var dataType = chartTypes[0]
     var dateType = DateType.HOUR //dateType 1 —— 时；2 —— 日；3 —— 月；4 —— 年
 
     val getPlantInfoLiveData = MutableLiveData<Pair<PlantModel?, String?>>()
@@ -193,8 +194,8 @@ class PlantInfoViewModel : BaseViewModel() {
                 put("plantId", plantId ?: "")
                 put("deviceType", if (typeAndSn?.first == DeviceType.HPS) "hps" else "pcs")
                 put("deviceSn", typeAndSn?.second ?: "")
-                put("dataType", dataType)
-                if (dataType == "2" || dataType == "3") {
+                put("dataType", dataType.type)
+                if (dataType.type == chartTypes[1].type || dataType.type == chartTypes[2].type) {
                     //SOC与充放电类型
                     put("queryDate", DateUtils.yyyy_MM_dd_format(selectDate))
                     put("dateType", "1")

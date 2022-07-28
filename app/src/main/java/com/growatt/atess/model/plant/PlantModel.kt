@@ -60,7 +60,7 @@ data class PlantModel @JvmOverloads constructor(
         addPlantModel.country = country
         addPlantModel.city = city
         addPlantModel.plantAddress = plantAddress
-        addPlantModel.plantTimeZone = "+$timezone"
+        addPlantModel.plantTimeZone = timezone
         addPlantModel.totalPower = nominalPower
         addPlantModel.formulaMoney = formulaMoney
         addPlantModel.formulaMoneyUnitId = formulaMoneyUnitId

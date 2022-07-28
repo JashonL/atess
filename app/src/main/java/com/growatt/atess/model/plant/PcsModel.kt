@@ -39,22 +39,22 @@ data class PcsModel(
                 ChartTypeModel(
                     "1",
                     MainApplication.instance().getString(R.string.photovoltaic_power),
-                    "kW"
+                    MainApplication.instance().getString(R.string.kw)
                 ),
                 ChartTypeModel(
                     "2",
                     MainApplication.instance().getString(R.string.grid_power),
-                    "kW"
+                    MainApplication.instance().getString(R.string.kw)
                 ),
                 ChartTypeModel(
                     "3",
                     MainApplication.instance().getString(R.string.battery_charge_power),
-                    "kW"
+                    MainApplication.instance().getString(R.string.kw)
                 ),
                 ChartTypeModel(
                     "4",
                     MainApplication.instance().getString(R.string.battery_discharge_power),
-                    "kW"
+                    MainApplication.instance().getString(R.string.kw)
                 )
             )
         }

@@ -10,12 +10,16 @@ import com.growatt.atess.R
 import com.growatt.atess.base.BaseFragment
 import com.growatt.atess.databinding.FragmentPlantTabChartBinding
 import com.growatt.atess.model.plant.ChartListDataModel
+import com.growatt.atess.model.plant.PlantInfoResultModel
+import com.growatt.atess.ui.plant.fragment.BarChartFragment
 import com.growatt.atess.ui.plant.fragment.LineChartFragment
 import com.growatt.atess.ui.plant.viewmodel.PlantInfoViewModel
 import com.growatt.atess.view.DateType
 import com.growatt.atess.view.OnTabSelectedListener
 import com.growatt.atess.view.Tab
 import com.growatt.lib.util.ToastUtil
+import com.growatt.lib.util.gone
+import com.growatt.lib.util.visible
 
 /**
  * 电站详情中的报表(HPS、PCS)
@@ -27,6 +31,8 @@ class PlantTabChartFragment :
     private lateinit var binding: FragmentPlantTabChartBinding
 
     private val viewModel: PlantInfoViewModel by activityViewModels()
+
+    private val chartTypes = PlantInfoResultModel.createChartType()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -53,22 +59,38 @@ class PlantTabChartFragment :
 
     private fun showData(chartListDataModel: ChartListDataModel?) {
         chartListDataModel?.also {
+            val chartFragment = childFragmentManager.findFragmentById(R.id.fragment_chart)
             if (isShowLineChart()) {
-                childFragmentManager.commit(true) {
-                    replace(
-                        R.id.fragment_chart,
-                        LineChartFragment(chartListDataModel, getString(R.string.kwh))
-                    )
+                if (chartFragment is LineChartFragment) {
+                    chartFragment.refresh(chartListDataModel, viewModel.dataType.typeUnit)
+                } else {
+                    childFragmentManager.commit(true) {
+                        replace(
+                            R.id.fragment_chart,
+                            LineChartFragment(chartListDataModel, viewModel.dataType.typeUnit)
+                        )
+                    }
+                }
+            } else {
+                if (chartFragment is BarChartFragment) {
+                    chartFragment.refresh(chartListDataModel, viewModel.dataType.typeUnit)
+                } else {
+                    childFragmentManager.commit(true) {
+                        replace(
+                            R.id.fragment_chart,
+                            BarChartFragment(chartListDataModel, viewModel.dataType.typeUnit)
+                        )
+                    }
                 }
             }
         }
     }
 
     private fun isShowLineChart(): Boolean {
-        if (viewModel.dataType == "1" && viewModel.dateType == DateType.HOUR) {
+        if (viewModel.dataType.type == chartTypes[0].type && viewModel.dateType == DateType.HOUR) {
             return true
         }
-        if (viewModel.dataType == "2" || viewModel.dataType == "3") {
+        if (viewModel.dataType.type == chartTypes[1].type || viewModel.dataType.type == chartTypes[2].type) {
             return true
         }
         return false
@@ -79,13 +101,16 @@ class PlantTabChartFragment :
             override fun onTabSelect(selectTab: Tab, selectPosition: Int) {
                 when (selectPosition) {
                     0 -> {
-                        viewModel.dataType = "1"
+                        viewModel.dataType = chartTypes[0]
+                        binding.chartTimeSelectLayout.visible()
                     }
                     1 -> {
-                        viewModel.dataType = "2"
+                        viewModel.dataType = chartTypes[1]
+                        binding.chartTimeSelectLayout.gone()
                     }
                     2 -> {
-                        viewModel.dataType = "3"
+                        viewModel.dataType = chartTypes[2]
+                        binding.chartTimeSelectLayout.gone()
                     }
                 }
                 showDialog()

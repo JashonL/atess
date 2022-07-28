@@ -1,5 +1,8 @@
 package com.growatt.atess.model.plant
 
+import com.growatt.atess.R
+import com.growatt.atess.application.MainApplication
+
 /**
  * 图表数据模型
  * 时间列表-timeList
@@ -58,5 +61,37 @@ data class ChartYDataList(val chartDataList: Array<Float>?, val type: String?) {
 
     fun getYDataList(): Array<Float> {
         return chartDataList ?: arrayOf()
+    }
+
+    /**
+     * 获取具体折线或者柱状图小类型的类型名称
+     */
+    fun getTypeName(): String? {
+        return when (type) {
+            "pvout" -> MainApplication.instance().getString(R.string.photovoltaic_output)
+            "oilout" -> MainApplication.instance().getString(R.string.diesel_engine_machine_output)
+            "batCharge" -> MainApplication.instance().getString(R.string.battery_charge)
+            "batDischarge" -> MainApplication.instance().getString(R.string.battery_discharge)
+            "load" -> MainApplication.instance().getString(R.string.load_consumption)
+            "toGrid" -> MainApplication.instance().getString(R.string.feed_into_the_grid)
+            "fromGrid" -> MainApplication.instance().getString(R.string.take_electricity_grid)
+//            "" -> MainApplication.instance().getString(R.string.pv_power)
+//            "" -> MainApplication.instance().getString(R.string.pv_power_1)
+//            "" -> MainApplication.instance().getString(R.string.pv_power_2)
+//            "" -> MainApplication.instance().getString(R.string.pv_power_3)
+//            "" -> MainApplication.instance().getString(R.string.pv_power_4)
+//            "" -> MainApplication.instance().getString(R.string.pv_power_5)
+//            "" -> MainApplication.instance().getString(R.string.pv_electricity_1)
+//            "" -> MainApplication.instance().getString(R.string.pv_electricity_2)
+//            "" -> MainApplication.instance().getString(R.string.pv_electricity_3)
+//            "" -> MainApplication.instance().getString(R.string.pv_electricity_4)
+//            "" -> MainApplication.instance().getString(R.string.pv_electricity_5)
+//            "" -> MainApplication.instance().getString(R.string.pv_voltage_1)
+//            "" -> MainApplication.instance().getString(R.string.pv_voltage_2)
+//            "" -> MainApplication.instance().getString(R.string.pv_voltage_3)
+//            "" -> MainApplication.instance().getString(R.string.pv_voltage_4)
+//            "" -> MainApplication.instance().getString(R.string.pv_voltage_5)
+            else -> type
+        }
     }
 }
