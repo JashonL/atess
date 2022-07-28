@@ -56,20 +56,9 @@
 
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/tv_unit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="start"
-        android:layout_marginStart="10dp"
-        android:textColor="@color/text_gray_66"
-        android:textSize="@dimen/text_small"
-        tools:text="kW" />
-
-    <com.github.mikephil.charting.charts.LineChart
-        android:id="@+id/line_chart"
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/fragment_line_chart"
         android:layout_width="match_parent"
-        android:layout_height="250dp"
-        android:layout_margin="10dp" />
+        android:layout_height="wrap_content" />
 
 </LinearLayout>
