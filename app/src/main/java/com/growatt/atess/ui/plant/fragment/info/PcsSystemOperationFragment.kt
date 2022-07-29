@@ -5,21 +5,23 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.growatt.atess.base.BaseFragment
-import com.growatt.atess.databinding.FragmentPlantSystemOperationBinding
+import com.growatt.atess.databinding.FragmentPcsSystemOperationBinding
+import com.growatt.atess.ui.plant.activity.MyDeviceListActivity
 
 /**
- * HPS设备系统运行图
+ * PCS设备系统运行图
  */
-class PcsSystemOperationFragment : BaseFragment() {
+class PcsSystemOperationFragment(val plantId: String?, val deviceSn: String?) : BaseFragment(),
+    View.OnClickListener {
 
-    private lateinit var binding: FragmentPlantSystemOperationBinding
+    private lateinit var binding: FragmentPcsSystemOperationBinding
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentPlantSystemOperationBinding.inflate(inflater, container, false)
+        binding = FragmentPcsSystemOperationBinding.inflate(inflater, container, false)
         initData()
         initView()
         return binding.root
@@ -31,6 +33,15 @@ class PcsSystemOperationFragment : BaseFragment() {
 
     private fun initView() {
 
+    }
+
+    override fun onClick(v: View?) {
+        when {
+            v === binding.ivPcs -> if (plantId != null) MyDeviceListActivity.start(
+                plantId,
+                requireActivity()
+            )
+        }
     }
 
 }

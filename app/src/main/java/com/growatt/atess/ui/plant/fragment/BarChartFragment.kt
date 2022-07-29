@@ -75,9 +75,10 @@ class BarChartFragment(var chartListDataModel: ChartListDataModel? = null, var u
                 barDataValues.add(BarEntry(time.toFloat(), y))
             }
 
+            val color = colors[i % colors.size]
             val barDataSet = BarDataSet(barDataValues, chartYData.getTypeName()).also {
                 it.setDrawValues(false)//是否显示点的值
-                it.color = colors[i / colors.size].color//设置曲线的颜色
+                it.color = color.color//设置曲线的颜色
                 it.valueFormatter = object : ValueFormatter() {
                     override fun getFormattedValue(value: Float): String {
                         return Util.getDoubleText(value.toDouble())

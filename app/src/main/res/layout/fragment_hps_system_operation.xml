@@ -1,9 +1,267 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="@color/color_white"
+    android:paddingBottom="16dp"
     tools:context=".ui.plant.fragment.info.HpsSystemOperationFragment">
+
+    <TextView
+        android:id="@+id/tv_run_mode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="20dp"
+        android:textColor="@color/text_green"
+        android:textSize="@dimen/text_small"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="后备电源管理" />
+
+    <TextView
+        android:id="@+id/tv_system_status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="16dp"
+        android:textColor="@color/text_green"
+        android:textSize="@dimen/text_small"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="并机转并网" />
+
+    <ImageView
+        android:id="@+id/iv_ats"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="20dp"
+        android:src="@drawable/ic_operation_ats"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_system_status" />
+
+    <ImageView
+        android:id="@+id/iv_grid"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginEnd="64dp"
+        android:src="@drawable/ic_operation_grid"
+        app:layout_constraintBottom_toBottomOf="@id/iv_ats"
+        app:layout_constraintEnd_toStartOf="@id/iv_ats"
+        app:layout_constraintTop_toTopOf="@id/iv_ats" />
+
+    <TextView
+        android:id="@+id/tv_grid_power"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:layout_marginEnd="10dp"
+        android:textColor="@color/text_gray_99"
+        android:textSize="@dimen/text_10"
+        app:layout_constraintEnd_toStartOf="@id/iv_ats"
+        app:layout_constraintStart_toStartOf="@id/iv_grid"
+        app:layout_constraintTop_toBottomOf="@id/iv_grid"
+        tools:text="@string/grid_power_format" />
+
+    <ImageView
+        android:id="@+id/iv_oil_engine"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="64dp"
+        android:src="@drawable/ic_operation_oil_engine"
+        app:layout_constraintBottom_toBottomOf="@id/iv_ats"
+        app:layout_constraintStart_toEndOf="@id/iv_ats"
+        app:layout_constraintTop_toTopOf="@id/iv_ats" />
+
+    <TextView
+        android:id="@+id/tv_oil_engine_power"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:layout_marginEnd="10dp"
+        android:textColor="@color/text_gray_99"
+        android:textSize="@dimen/text_10"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/iv_oil_engine"
+        app:layout_constraintTop_toBottomOf="@id/iv_oil_engine"
+        tools:text="@string/oil_engine_power_format" />
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/lav_grid"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        app:layout_constraintBottom_toBottomOf="@id/iv_grid"
+        app:layout_constraintEnd_toStartOf="@id/iv_ats"
+        app:layout_constraintStart_toEndOf="@id/iv_grid"
+        app:layout_constraintTop_toTopOf="@id/iv_grid"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
+        tools:lottie_rawRes="@raw/lottie_arrow_right" />
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/lav_oil_engine"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        app:layout_constraintBottom_toBottomOf="@id/iv_oil_engine"
+        app:layout_constraintEnd_toStartOf="@id/iv_oil_engine"
+        app:layout_constraintStart_toEndOf="@id/iv_ats"
+        app:layout_constraintTop_toTopOf="@id/iv_oil_engine"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
+        tools:lottie_rawRes="@raw/lottie_arrow_left" />
+
+    <ImageView
+        android:id="@+id/iv_hps"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="64dp"
+        android:src="@drawable/ic_operation_hps"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/iv_ats" />
+
+    <TextView
+        android:id="@+id/tv_hps"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:text="@string/hps"
+        android:textColor="@color/text_gray_99"
+        android:textSize="@dimen/text_10"
+        app:layout_constraintEnd_toEndOf="@id/iv_hps"
+        app:layout_constraintStart_toStartOf="@id/iv_hps"
+        app:layout_constraintTop_toBottomOf="@id/iv_hps" />
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/lav_ats"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        app:layout_constraintBottom_toTopOf="@id/iv_hps"
+        app:layout_constraintEnd_toEndOf="@id/iv_ats"
+        app:layout_constraintStart_toStartOf="@id/iv_ats"
+        app:layout_constraintTop_toBottomOf="@id/iv_ats"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
+        tools:lottie_rawRes="@raw/lottie_arrow_down" />
+
+    <ImageView
+        android:id="@+id/iv_photovoltaic"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginEnd="64dp"
+        android:src="@drawable/ic_operation_photovoltaic"
+        app:layout_constraintBottom_toBottomOf="@id/iv_hps"
+        app:layout_constraintEnd_toStartOf="@id/iv_hps"
+        app:layout_constraintTop_toTopOf="@id/iv_hps" />
+
+    <TextView
+        android:id="@+id/tv_pv_power"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:layout_marginEnd="10dp"
+        android:textColor="@color/text_gray_99"
+        android:textSize="@dimen/text_10"
+        app:layout_constraintEnd_toStartOf="@id/iv_hps"
+        app:layout_constraintStart_toStartOf="@id/iv_photovoltaic"
+        app:layout_constraintTop_toBottomOf="@id/iv_photovoltaic"
+        tools:text="@string/pv_power_format" />
+
+    <ImageView
+        android:id="@+id/iv_load"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="64dp"
+        android:src="@drawable/ic_operation_load_power"
+        app:layout_constraintBottom_toBottomOf="@id/iv_hps"
+        app:layout_constraintStart_toEndOf="@id/iv_hps"
+        app:layout_constraintTop_toTopOf="@id/iv_hps" />
+
+    <TextView
+        android:id="@+id/tv_load_power"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:layout_marginEnd="10dp"
+        android:textColor="@color/text_gray_99"
+        android:textSize="@dimen/text_10"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/iv_load"
+        app:layout_constraintTop_toBottomOf="@id/iv_load"
+        tools:text="@string/load_power_format" />
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/lav_4"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        app:layout_constraintBottom_toBottomOf="@id/iv_photovoltaic"
+        app:layout_constraintEnd_toStartOf="@id/iv_hps"
+        app:layout_constraintStart_toEndOf="@id/iv_photovoltaic"
+        app:layout_constraintTop_toTopOf="@id/iv_photovoltaic"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
+        app:lottie_rawRes="@raw/lottie_arrow_right" />
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/lav_5"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        app:layout_constraintBottom_toBottomOf="@id/iv_load"
+        app:layout_constraintEnd_toStartOf="@id/iv_load"
+        app:layout_constraintStart_toEndOf="@id/iv_hps"
+        app:layout_constraintTop_toTopOf="@id/iv_load"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
+        app:lottie_rawRes="@raw/lottie_arrow_right" />
+
+    <ImageView
+        android:id="@+id/iv_battery"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="64dp"
+        android:src="@drawable/ic_operation_battery"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_hps" />
+
+    <TextView
+        android:id="@+id/tv_battery_percent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:textColor="@color/text_gray_99"
+        android:textSize="@dimen/text_10"
+        app:layout_constraintEnd_toEndOf="@id/iv_battery"
+        app:layout_constraintStart_toStartOf="@id/iv_battery"
+        app:layout_constraintTop_toBottomOf="@id/iv_battery"
+        tools:text="@string/battery_percent_format" />
+
+    <TextView
+        android:id="@+id/tv_charge_power"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:textColor="@color/text_gray_99"
+        android:textSize="@dimen/text_10"
+        app:layout_constraintEnd_toEndOf="@id/iv_battery"
+        app:layout_constraintStart_toStartOf="@id/iv_battery"
+        app:layout_constraintTop_toBottomOf="@id/tv_battery_percent"
+        tools:text="@string/charge_power_format" />
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/lav_battery"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        app:layout_constraintBottom_toTopOf="@id/iv_battery"
+        app:layout_constraintEnd_toEndOf="@id/iv_battery"
+        app:layout_constraintStart_toStartOf="@id/iv_battery"
+        app:layout_constraintTop_toBottomOf="@id/tv_hps"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
+        tools:lottie_rawRes="@raw/lottie_arrow_down" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

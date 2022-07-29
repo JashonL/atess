@@ -17,7 +17,7 @@ class MyDeviceListActivity : BaseActivity(), View.OnClickListener {
     companion object {
         private const val KEY_PLANT_ID = "key_plant_id"
 
-        fun start(plantId: String, context: Context?) {
+        fun start(plantId: String?, context: Context?) {
             context?.startActivity(Intent(context, MyDeviceListActivity::class.java).also {
                 it.putExtra(KEY_PLANT_ID, plantId)
             })

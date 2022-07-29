@@ -91,11 +91,12 @@ class LineChartFragment(var chartListDataModel: ChartListDataModel? = null, var 
             }
 
             val lineDataSet = LineDataSet(lineDataValues, chartYData.getTypeName()).also {
+                val color = colors[i % colors.size]
                 it.mode = LineDataSet.Mode.CUBIC_BEZIER
                 it.setDrawCircles(false)//画原点
-                it.setCircleColor(colors[i / colors.size].color)
+                it.setCircleColor(color.color)
                 it.setDrawFilled(true)
-                it.fillColor = colors[i / colors.size].alphaColor//设置fill区域的颜色
+                it.fillColor = color.alphaColor//设置fill区域的颜色
                 it.fillAlpha = 100//设置fill区域的颜色的透明度
                 it.highLightColor = resources.getColor(R.color.colorAccent)
                 it.setDrawVerticalHighlightIndicator(true)
@@ -103,7 +104,7 @@ class LineChartFragment(var chartListDataModel: ChartListDataModel? = null, var 
                 it.enableDashedHighlightLine(4f, 4f, 0f)
                 it.highlightLineWidth = 0.8f
                 it.setDrawValues(false)//是否显示点的值
-                it.color = colors[i / colors.size].color//设置曲线的颜色
+                it.color = color.color//设置曲线的颜色
             }
             if (lineDataValues.size > 2 && granularity == null) {
                 granularity = lineDataValues[1].x - lineDataValues[0].x

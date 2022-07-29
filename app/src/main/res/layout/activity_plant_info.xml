@@ -102,10 +102,9 @@
 
                 <androidx.fragment.app.FragmentContainerView
                     android:id="@+id/fragment_system_operation"
-                    android:name="com.growatt.atess.ui.plant.fragment.info.PlantSystemOperationFragment"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    tools:layout="@layout/fragment_plant_system_operation" />
+                    tools:layout="@layout/fragment_hps_system_operation" />
 
                 <androidx.fragment.app.FragmentContainerView
                     android:id="@+id/fragment_energy_info"

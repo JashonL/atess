@@ -14,6 +14,7 @@ import com.growatt.atess.model.plant.HpsModel
 import com.growatt.atess.model.plant.ui.IDeviceInfoHead
 import com.growatt.atess.ui.plant.fragment.device.DeviceChartFragment
 import com.growatt.atess.ui.plant.fragment.device.DeviceHead1Fragment
+import com.growatt.atess.ui.plant.fragment.info.HpsSystemOperationFragment
 import com.growatt.atess.ui.plant.viewmodel.HpsViewModel
 import com.growatt.lib.util.ToastUtil
 
@@ -64,6 +65,12 @@ class HpsInfoActivity : BaseActivity(), IBaseDeviceActivity, View.OnClickListene
             add(
                 R.id.fragment_chart,
                 DeviceChartFragment(getDeviceType(), HpsModel.createChartType(), viewModel)
+            )
+        }
+        supportFragmentManager.commit(true) {
+            replace(
+                R.id.fragment_system_operation,
+                HpsSystemOperationFragment(null, viewModel.deviceSn)
             )
         }
     }

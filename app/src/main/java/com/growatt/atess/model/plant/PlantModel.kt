@@ -13,7 +13,7 @@ data class PlantModel @JvmOverloads constructor(
     val createDateText: String? = null,//安装日期-2022-03-03
     val hasDeviceOnLine: Int = 0,//电站状态   0：离线  1：故障  2：在线
     val city: String? = null,//城市
-    val timezone: String? = null,//时区
+    val atsTimezoneStr: String? = null,//时区
     val currentPacStr: String? = null,//实时功率0kW
     val nominalPowerStr: String? = null,//组件总功率1130kWp
     var nominalPower: String? = null,//组件总功率不带单位的，1130
@@ -60,7 +60,7 @@ data class PlantModel @JvmOverloads constructor(
         addPlantModel.country = country
         addPlantModel.city = city
         addPlantModel.plantAddress = plantAddress
-        addPlantModel.plantTimeZone = timezone
+        addPlantModel.plantTimeZone = atsTimezoneStr
         addPlantModel.totalPower = nominalPower
         addPlantModel.formulaMoney = formulaMoney
         addPlantModel.formulaMoneyUnitId = formulaMoneyUnitId

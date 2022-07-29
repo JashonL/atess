@@ -5,12 +5,14 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.activity.viewModels
+import androidx.fragment.app.commit
 import com.growatt.atess.R
 import com.growatt.atess.application.MainApplication
 import com.growatt.atess.base.BaseActivity
 import com.growatt.atess.databinding.ActivityPlantInfoBinding
 import com.growatt.atess.model.plant.DeviceType
 import com.growatt.atess.model.plant.PlantModel
+import com.growatt.atess.ui.plant.fragment.info.HpsSystemOperationFragment
 import com.growatt.atess.ui.plant.monitor.PlantMonitor
 import com.growatt.atess.ui.plant.viewmodel.PlantInfoViewModel
 import com.growatt.atess.view.dialog.OptionsDialog
@@ -80,6 +82,16 @@ class PlantInfoActivity : BaseActivity(), View.OnClickListener {
                     viewModel.typeAndSn = defaultDevice
                     viewModel.getEnergyInfo()
                     viewModel.getChartInfo()
+                    if (defaultDevice.first == DeviceType.HPS) {
+                        supportFragmentManager.commit(true) {
+                            replace(
+                                R.id.fragment_system_operation,
+                                HpsSystemOperationFragment(viewModel.plantId, defaultDevice.second)
+                            )
+                        }
+                    } else if (defaultDevice.first == DeviceType.PCS) {
+
+                    }
                 }
             } else {
                 ToastUtil.show(it.second)
@@ -142,6 +154,11 @@ class PlantInfoActivity : BaseActivity(), View.OnClickListener {
     private fun refreshDeviceInfo() {
         viewModel.getEnergyInfo()
         viewModel.getChartInfo()
+        val systemOperationFragment =
+            supportFragmentManager.findFragmentById(R.id.fragment_system_operation)
+        if (systemOperationFragment is HpsSystemOperationFragment) {
+            systemOperationFragment.refresh()
+        }
     }
 
 }

@@ -167,6 +167,7 @@
     <string name="feed_into_the_grid">馈入电网</string>
     <string name="take_electricity_grid">电网取电</string>
     <string name="grid_connected_inverter_output">并网逆变器产出</string>
+    <string name="grid_connected_inverter_power_format">并网逆变器功率:%skW</string>
     <string name="device_type">设备类型</string>
     <string name="device_sn">设备序列号</string>
     <string name="input_power_format">输入功率:%skW</string>
@@ -226,6 +227,7 @@
     <string name="bypass_active_power">旁路有功功率</string>
     <string name="bypass_reactive_power">旁路无功功率</string>
     <string name="pv_power">PV功率</string>
+    <string name="pv_power_format">PV功率:%skW</string>
     <string name="pv_power_1">PV1功率</string>
     <string name="pv_power_2">PV2功率</string>
     <string name="pv_power_3">PV3功率</string>
@@ -242,7 +244,12 @@
     <string name="pv_voltage_4">PV4电压</string>
     <string name="pv_voltage_5">PV5电压</string>
     <string name="grid_power">电网功率</string>
+    <string name="grid_power_format">电网功率:%skW</string>
+    <string name="oil_engine_power_format">油机功率:%skW</string>
     <string name="battery_charge_power">电池充电功率</string>
+    <string name="charge_power_format">充电功率:%skW</string>
+    <string name="battery_percent_format">电池百分比:%s</string>
+    <string name="pbd_output_power_format">PBD输出功率：%skW</string>
     <string name="battery_discharge_power">电池放电功率</string>
     <string name="load_power">负载功率</string>
     <string name="pv_voltage">PV电压</string>
@@ -277,6 +284,7 @@
     <string name="day">日</string>
     <string name="month">月</string>
     <string name="year">年</string>
+    <string name="bypass">Bypass</string>
 
     <!-- image crop-->
     <string name="crop_image_menu_crop">裁剪</string>

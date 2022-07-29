@@ -190,5 +190,10 @@ object ApiPath {
          */
         const val GET_HPS_OR_PCS_CHART_INFO = "ATSDevice/getHpsOrPcsChartData"
 
+        /**
+         * 获取HPS系统运行图
+         */
+        const val GET_HPS_SYSTEM_OPERATION = "ATSDevice/getHPSRunChart"
+
     }
 }

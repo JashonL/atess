@@ -36,7 +36,6 @@
 
             <androidx.fragment.app.FragmentContainerView
                 android:id="@+id/fragment_system_operation"
-                android:name="com.growatt.atess.ui.plant.fragment.info.HpsSystemOperationFragment"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"

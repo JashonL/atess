@@ -28,6 +28,7 @@ import com.growatt.atess.ui.home.viewmodel.PlantFilterViewModel
 import com.growatt.atess.ui.plant.activity.AddPlantActivity
 import com.growatt.atess.ui.plant.activity.PlantInfoActivity
 import com.growatt.atess.ui.plant.monitor.PlantMonitor
+import com.growatt.atess.ui.plant.viewmodel.PlantInfoViewModel
 import com.growatt.atess.ui.plant.viewmodel.PlantListViewModel
 import com.growatt.atess.view.dialog.AlertDialog
 import com.growatt.atess.view.dialog.OptionsDialog
@@ -49,6 +50,7 @@ class PlantListFragment(
     private lateinit var binding: FragmentPlantListBinding
     private val viewModel: PlantListViewModel by viewModels()
     private val filterViewModel: PlantFilterViewModel by activityViewModels()
+    private val plantInfoViewModel: PlantInfoViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -95,6 +97,14 @@ class PlantListFragment(
                 PlantMonitor.notifyPlant()
             } else {
                 ToastUtil.show(it)
+            }
+        }
+        plantInfoViewModel.getPlantInfoLiveData.observe(viewLifecycleOwner) {
+            dismissDialog()
+            if (it.second == null) {
+                AddPlantActivity.start(requireContext(), it.first)
+            } else {
+                ToastUtil.show(it.second)
             }
         }
         PlantMonitor.watch(viewLifecycleOwner.lifecycle) {
@@ -185,7 +195,9 @@ class PlantListFragment(
                         }
                     }
                     edit -> {
-                        AddPlantActivity.start(requireActivity(), getItem(position))
+                        plantInfoViewModel.plantId = getItem(position)?.id
+                        showDialog()
+                        plantInfoViewModel.getPlantInfo()
                     }
                 }
             }
