@@ -1,59 +1,51 @@
 package com.growatt.atess.model.plant
 
-import com.growatt.lib.util.Util
+import androidx.annotation.DrawableRes
+import com.growatt.atess.R
+import com.growatt.atess.application.MainApplication
 
+/**
+ * 1 —— 光伏产出
+ * 2 —— 油机产出
+ * 3 —— 电池充电
+ * 4 —— 电池放电
+ * 5 —— 负载消耗
+ * 6 —— 馈入电网
+ * 7 —— 电网取电
+ * 8 —— 逆变器产出
+ * 服务端逻辑-由于pcs没有统计光伏，所以当设备为pcs类型时，没有光伏数据
+ */
 data class DeviceEnergyInfoModel(
-    val pvout: Array<Double>?,//光伏产出
-    val oilout: Array<Double>?,//柴油机电机产出
-    val batCharge: Array<Double>?,//电池充电
-    val batDisCharge: Array<Double>?,//电池放电
-    val load: Array<Double>?,//负载消耗
-    val toGrid: Array<Double>?,// 馈入电网
-    val fromGrid: Array<Double>?,// 电网取电
-    val inverterOut: Array<Double>? // 并网逆变器产出
+    val total: Double,
+    val today: Double,
+    val type: Int,
 ) {
-
-    fun getFormatValues(values: Array<Double>?): Pair<String, String> {
-        if (values == null) {
-            return Pair("0", "0")
+    fun getTypeName(): String {
+        return when (type) {
+            1 -> MainApplication.instance().getString(R.string.photovoltaic_output)
+            2 -> MainApplication.instance().getString(R.string.diesel_engine_machine_output)
+            3 -> MainApplication.instance().getString(R.string.battery_charge)
+            4 -> MainApplication.instance().getString(R.string.battery_discharge)
+            5 -> MainApplication.instance().getString(R.string.load_consumption)
+            6 -> MainApplication.instance().getString(R.string.feed_into_the_grid)
+            7 -> MainApplication.instance().getString(R.string.take_electricity_grid)
+            8 -> MainApplication.instance().getString(R.string.grid_connected_inverter_output)
+            else -> ""
         }
-        return Pair(Util.getDoubleText(values[0]), Util.getDoubleText(values[1]))
     }
 
-    /**
-     * 是否有光伏产出
-     */
-    fun hasPhotovoltaicOut(): Boolean {
-        return pvout != null
-    }
-
-    override fun equals(other: Any?): Boolean {
-        if (this === other) return true
-        if (javaClass != other?.javaClass) return false
-
-        other as DeviceEnergyInfoModel
-
-        if (!pvout.contentEquals(other.pvout)) return false
-        if (!oilout.contentEquals(other.oilout)) return false
-        if (!batCharge.contentEquals(other.batCharge)) return false
-        if (!batDisCharge.contentEquals(other.batDisCharge)) return false
-        if (!load.contentEquals(other.load)) return false
-        if (!toGrid.contentEquals(other.toGrid)) return false
-        if (!fromGrid.contentEquals(other.fromGrid)) return false
-        if (!inverterOut.contentEquals(other.inverterOut)) return false
-
-        return true
-    }
-
-    override fun hashCode(): Int {
-        var result = pvout.contentHashCode()
-        result = 31 * result + oilout.contentHashCode()
-        result = 31 * result + batCharge.contentHashCode()
-        result = 31 * result + batDisCharge.contentHashCode()
-        result = 31 * result + load.contentHashCode()
-        result = 31 * result + toGrid.contentHashCode()
-        result = 31 * result + fromGrid.contentHashCode()
-        result = 31 * result + inverterOut.contentHashCode()
-        return result
+    @DrawableRes
+    fun getTypeDrawableResId(): Int {
+        return when (type) {
+            1 -> R.drawable.ic_photovoltaic_output
+            2 -> R.drawable.ic_diesel_engine_machine_output
+            3 -> R.drawable.ic_battery_charge
+            4 -> R.drawable.ic_battery_discharge
+            5 -> R.drawable.ic_load_consumption
+            6 -> R.drawable.ic_feed_into_the_grid
+            7 -> R.drawable.ic_take_electricity_grid
+            8 -> R.drawable.ic_grid_connected_inverter_output
+            else -> R.drawable.ic_photovoltaic_output
+        }
     }
 }

@@ -33,7 +33,8 @@ class PlantInfoViewModel : BaseViewModel() {
 
     val getDeviceListLiveData = MutableLiveData<Pair<List<DeviceModel>, String?>>()
 
-    val getDeviceEnergyInfoLiveData = MutableLiveData<Pair<DeviceEnergyInfoModel?, String?>>()
+    val getDeviceEnergyInfoLiveData =
+        MutableLiveData<Pair<Array<DeviceEnergyInfoModel>?, String?>>()
 
     /**
      * 里面一层Pair，first是设备类型，second是设备序列号
@@ -168,8 +169,8 @@ class PlantInfoViewModel : BaseViewModel() {
                 put("deviceType", if (typeAndSn?.first == DeviceType.HPS) "hps" else "pcs")
             }
             apiService().postForm(ApiPath.Plant.GET_ENERGY_INFO, params, object :
-                HttpCallback<HttpResult<DeviceEnergyInfoModel>>() {
-                override fun success(result: HttpResult<DeviceEnergyInfoModel>) {
+                HttpCallback<HttpResult<Array<DeviceEnergyInfoModel>>>() {
+                override fun success(result: HttpResult<Array<DeviceEnergyInfoModel>>) {
                     if (result.isBusinessSuccess()) {
                         getDeviceEnergyInfoLiveData.value = Pair(result.data, null)
                     } else {
