@@ -28,7 +28,9 @@ class PlantTabChartFragment :
     BaseFragment(),
     View.OnClickListener {
 
-    private lateinit var binding: FragmentPlantTabChartBinding
+    private var _binding: FragmentPlantTabChartBinding? = null
+
+    private val binding get() = _binding!!
 
     private val viewModel: PlantInfoViewModel by activityViewModels()
 
@@ -39,7 +41,7 @@ class PlantTabChartFragment :
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentPlantTabChartBinding.inflate(inflater, container, false)
+        _binding = FragmentPlantTabChartBinding.inflate(inflater, container, false)
         initData()
         initView()
         setListener()
@@ -131,5 +133,10 @@ class PlantTabChartFragment :
 
     override fun onClick(v: View?) {
 
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

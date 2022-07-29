@@ -31,19 +31,16 @@ class DeviceChartFragment(
 ) :
     BaseFragment(),
     View.OnClickListener {
+    private var _binding: FragmentDeviceChartBinding? = null
 
-    companion object {
-        const val MINUTES_INTERVAL = 60 * 1000
-    }
-
-    private lateinit var binding: FragmentDeviceChartBinding
+    private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentDeviceChartBinding.inflate(inflater, container, false)
+        _binding = FragmentDeviceChartBinding.inflate(inflater, container, false)
         initData()
         initView()
         setListener()
@@ -156,5 +153,10 @@ class DeviceChartFragment(
                 viewModel.getDeviceChartInfo(deviceType)
             }
         })
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

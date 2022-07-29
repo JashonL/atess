@@ -15,14 +15,16 @@ import com.growatt.atess.ui.service.fragment.ServiceManualFragment
  */
 class HomeServiceFragment : HomeBaseFragment() {
 
-    private lateinit var binding: FragmentHomeServiceBinding
+    private var _binding: FragmentHomeServiceBinding? = null
+
+    private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentHomeServiceBinding.inflate(inflater, container, false)
+        _binding = FragmentHomeServiceBinding.inflate(inflater, container, false)
         initView()
         return binding.root
     }
@@ -32,6 +34,11 @@ class HomeServiceFragment : HomeBaseFragment() {
         binding.viewpager2.adapter = Adapter(this)
         binding.tabLayout.setupWithViewPager2(binding.viewpager2)
 
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
     inner class Adapter(fragment: Fragment) : FragmentStateAdapter(fragment) {

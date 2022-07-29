@@ -37,7 +37,9 @@ import java.util.*
  */
 class AddPlant1Fragment : BaseFragment(), View.OnClickListener, OnLocationListener {
 
-    private lateinit var binding: FragmentAddPlant1Binding
+    private var _binding: FragmentAddPlant1Binding? = null
+
+    private val binding get() = _binding!!
 
     private val viewModel: AddPlantViewModel by activityViewModels()
 
@@ -46,7 +48,7 @@ class AddPlant1Fragment : BaseFragment(), View.OnClickListener, OnLocationListen
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentAddPlant1Binding.inflate(inflater, container, false)
+        _binding = FragmentAddPlant1Binding.inflate(inflater, container, false)
         initData()
         initView()
         setListener()
@@ -298,6 +300,7 @@ class AddPlant1Fragment : BaseFragment(), View.OnClickListener, OnLocationListen
     override fun onDestroyView() {
         super.onDestroyView()
         locationService().removeLocationListener(this)
+        _binding = null
     }
 
 }

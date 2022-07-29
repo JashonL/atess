@@ -17,14 +17,16 @@ import com.growatt.atess.model.plant.PlantStatusNumModel
  */
 class PlantTabFragment : BaseFragment(), OnPlantStatusNumChangeListener {
 
-    private lateinit var binding: FragmentPlantTabBinding
+    private var _binding: FragmentPlantTabBinding? = null
+
+    private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentPlantTabBinding.inflate(inflater, container, false)
+        _binding = FragmentPlantTabBinding.inflate(inflater, container, false)
         initView()
         return binding.root
     }
@@ -79,6 +81,11 @@ class PlantTabFragment : BaseFragment(), OnPlantStatusNumChangeListener {
 
     override fun onPlantStatusNumChange(plantStatusNumModel: PlantStatusNumModel) {
         refreshPlantStatusNum(plantStatusNumModel)
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
 }

@@ -12,14 +12,21 @@ import com.growatt.atess.databinding.FragmentServiceManualBinding
  */
 class ServiceManualFragment : BaseFragment() {
 
-    private lateinit var binding: FragmentServiceManualBinding
+    private var _binding: FragmentServiceManualBinding? = null
+
+    private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentServiceManualBinding.inflate(layoutInflater, container, false)
+        _binding = FragmentServiceManualBinding.inflate(layoutInflater, container, false)
         return binding.root
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

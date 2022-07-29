@@ -15,7 +15,9 @@ import com.growatt.atess.ui.plant.view.PlantFilterPopup
  */
 class HomePlantFragment : HomeBaseFragment(), View.OnClickListener {
 
-    private lateinit var binding: FragmentHomePlantBinding
+    private var _binding: FragmentHomePlantBinding? = null
+
+    private val binding get() = _binding!!
     private var selectedFilterModer: PlantFilterModel =
         PlantFilterModel.getDefaultFilter()
     private val filterViewModel: PlantFilterViewModel by activityViewModels()
@@ -25,7 +27,7 @@ class HomePlantFragment : HomeBaseFragment(), View.OnClickListener {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentHomePlantBinding.inflate(inflater, container, false)
+        _binding = FragmentHomePlantBinding.inflate(inflater, container, false)
         initData()
         initView()
         setListener()
@@ -67,4 +69,8 @@ class HomePlantFragment : HomeBaseFragment(), View.OnClickListener {
         }
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
 }

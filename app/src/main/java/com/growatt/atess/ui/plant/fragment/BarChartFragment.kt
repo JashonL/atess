@@ -25,7 +25,9 @@ import com.growatt.lib.util.Util
 class BarChartFragment(var chartListDataModel: ChartListDataModel? = null, var unit: String) :
     BaseFragment(), IChartRefreshListener {
 
-    private lateinit var binding: FragmentBarChartBinding
+    private var _binding: FragmentBarChartBinding? = null
+
+    private val binding get() = _binding!!
 
     private val colors = ChartTypeModel.createChartColors()
 
@@ -34,7 +36,7 @@ class BarChartFragment(var chartListDataModel: ChartListDataModel? = null, var u
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentBarChartBinding.inflate(inflater, container, false)
+        _binding = FragmentBarChartBinding.inflate(inflater, container, false)
         initView()
         return binding.root
     }
@@ -191,5 +193,10 @@ class BarChartFragment(var chartListDataModel: ChartListDataModel? = null, var u
             }
         }
         binding.barChart.invalidate()
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

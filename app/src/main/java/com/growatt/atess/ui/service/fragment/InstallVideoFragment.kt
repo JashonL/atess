@@ -12,14 +12,21 @@ import com.growatt.atess.databinding.FragmentInstallVideoBinding
  */
 class InstallVideoFragment : BaseFragment() {
 
-    private lateinit var binding: FragmentInstallVideoBinding
+    private var _binding: FragmentInstallVideoBinding? = null
+
+    private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentInstallVideoBinding.inflate(layoutInflater, container, false)
+        _binding = FragmentInstallVideoBinding.inflate(layoutInflater, container, false)
         return binding.root
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:gravity="center_horizontal"
     android:orientation="vertical"
-    tools:context=".ui.plant.activity.MyDeviceListActivity">
+    tools:context=".ui.plant.activity.PlantDeviceListActivity">
 
     <com.growatt.lib.view.StatusBarHeightView
         android:layout_width="match_parent"

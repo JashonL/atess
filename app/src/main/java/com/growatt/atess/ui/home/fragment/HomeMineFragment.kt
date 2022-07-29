@@ -20,8 +20,9 @@ import com.growatt.lib.service.account.IAccountService
  */
 class HomeMineFragment : HomeBaseFragment(), View.OnClickListener,
     IAccountService.OnUserProfileChangeListener {
+    private var _binding: FragmentHomeMineBinding? = null
 
-    private lateinit var binding: FragmentHomeMineBinding
+    private val binding get() = _binding!!
     private val viewModel: SettingViewModel by activityViewModels()
 
     override fun onCreateView(
@@ -29,7 +30,7 @@ class HomeMineFragment : HomeBaseFragment(), View.OnClickListener,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentHomeMineBinding.inflate(inflater, container, false)
+        _binding = FragmentHomeMineBinding.inflate(inflater, container, false)
         initData()
         initView()
         setListener()
@@ -77,6 +78,7 @@ class HomeMineFragment : HomeBaseFragment(), View.OnClickListener,
     override fun onDestroyView() {
         super.onDestroyView()
         accountService().removeUserProfileChangeListener(this)
+        _binding = null
     }
 
 }

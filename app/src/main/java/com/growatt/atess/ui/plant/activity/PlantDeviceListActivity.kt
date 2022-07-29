@@ -6,32 +6,32 @@ import android.os.Bundle
 import android.view.View
 import androidx.activity.viewModels
 import com.growatt.atess.base.BaseActivity
-import com.growatt.atess.databinding.ActivityMyDeviceListBinding
+import com.growatt.atess.databinding.ActivityPlantDeviceListBinding
 import com.growatt.atess.ui.plant.viewmodel.DeviceListViewModel
 
 /**
- * 我的设备
+ * 我的设备（电站设备列表）
  */
-class MyDeviceListActivity : BaseActivity(), View.OnClickListener {
+class PlantDeviceListActivity : BaseActivity(), View.OnClickListener {
 
     companion object {
         private const val KEY_PLANT_ID = "key_plant_id"
 
         fun start(plantId: String?, context: Context?) {
-            context?.startActivity(Intent(context, MyDeviceListActivity::class.java).also {
+            context?.startActivity(Intent(context, PlantDeviceListActivity::class.java).also {
                 it.putExtra(KEY_PLANT_ID, plantId)
             })
         }
 
     }
 
-    private lateinit var binding: ActivityMyDeviceListBinding
+    private lateinit var binding: ActivityPlantDeviceListBinding
 
     private val viewModel: DeviceListViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityMyDeviceListBinding.inflate(layoutInflater)
+        binding = ActivityPlantDeviceListBinding.inflate(layoutInflater)
         setContentView(binding.root)
         initData()
         initView()

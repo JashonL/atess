@@ -20,8 +20,9 @@ import com.growatt.lib.util.ToastUtil
  * 设备列表TAB
  */
 class DeviceTabFragment : BaseFragment() {
+    private var _binding: FragmentDeviceTabBinding? = null
 
-    private lateinit var binding: FragmentDeviceTabBinding
+    private val binding get() = _binding!!
 
     private val viewModel: DeviceListViewModel by activityViewModels()
 
@@ -32,7 +33,7 @@ class DeviceTabFragment : BaseFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentDeviceTabBinding.inflate(inflater, container, false)
+        _binding = FragmentDeviceTabBinding.inflate(inflater, container, false)
         initData()
         initView()
         return binding.root
@@ -74,6 +75,11 @@ class DeviceTabFragment : BaseFragment() {
 
     private fun initView() {
         binding.vpDevice.adapter = Adapter(requireActivity())
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
     inner class Adapter(fragmentActivity: FragmentActivity) :

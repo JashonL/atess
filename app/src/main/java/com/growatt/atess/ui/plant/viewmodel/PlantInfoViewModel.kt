@@ -38,8 +38,12 @@ class PlantInfoViewModel : BaseViewModel() {
 
     /**
      * 里面一层Pair，first是设备类型，second是设备序列号
+     * Boolean-数据是否有改变
      */
-    val getPcsHpsSNLiveData = MutableLiveData<Pair<MutableList<Pair<Int, String>>?, String?>>()
+    val getPcsHpsSNLiveData =
+        MutableLiveData<Triple<MutableList<Pair<Int, String>>?, Boolean, String?>>()
+
+    private var pcsHpsSNModel: PcsHpsSNModel? = null
 
     val getChartLiveData = MutableLiveData<Pair<ChartListDataModel?, String?>>()
 
@@ -121,6 +125,8 @@ class PlantInfoViewModel : BaseViewModel() {
                 HttpCallback<HttpResult<PcsHpsSNModel>>() {
                 override fun success(result: HttpResult<PcsHpsSNModel>) {
                     if (result.isBusinessSuccess()) {
+                        val isChange = !Objects.equals(pcsHpsSNModel, result.data)
+                        pcsHpsSNModel = result.data
                         val snList = mutableListOf<Pair<Int, String>>()
                         val hpsList = result.data?.hps
                         if (!hpsList.isNullOrEmpty()) {
@@ -144,15 +150,16 @@ class PlantInfoViewModel : BaseViewModel() {
                                 )
                             }
                         }
-                        getPcsHpsSNLiveData.value = Pair(snList, null)
+
+                        getPcsHpsSNLiveData.value = Triple(snList, isChange, null)
                     } else {
-                        getPcsHpsSNLiveData.value = Pair(null, result.msg ?: "")
+                        getPcsHpsSNLiveData.value = Triple(null, false, result.msg ?: "")
                     }
                 }
 
                 override fun onFailure(error: String?) {
                     super.onFailure(error)
-                    getPcsHpsSNLiveData.value = Pair(null, error ?: "")
+                    getPcsHpsSNLiveData.value = Triple(null, false, error ?: "")
                 }
             })
         }

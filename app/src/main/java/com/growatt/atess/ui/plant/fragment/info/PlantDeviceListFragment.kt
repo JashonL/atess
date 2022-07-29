@@ -9,10 +9,12 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.growatt.atess.R
 import com.growatt.atess.base.BaseFragment
 import com.growatt.atess.databinding.FragmentPlantDeviceListBinding
-import com.growatt.atess.ui.plant.activity.MyDeviceListActivity
+import com.growatt.atess.ui.plant.activity.PlantDeviceListActivity
 import com.growatt.atess.ui.plant.adapter.DeviceAdapter
 import com.growatt.atess.ui.plant.viewmodel.PlantInfoViewModel
 import com.growatt.lib.util.ToastUtil
+import com.growatt.lib.util.gone
+import com.growatt.lib.util.visible
 import com.growatt.lib.view.DividerItemDecoration
 
 /**
@@ -20,7 +22,9 @@ import com.growatt.lib.view.DividerItemDecoration
  */
 class PlantDeviceListFragment : BaseFragment(), View.OnClickListener {
 
-    private lateinit var binding: FragmentPlantDeviceListBinding
+    private var _binding: FragmentPlantDeviceListBinding? = null
+
+    private val binding get() = _binding!!
 
     private val viewModel: PlantInfoViewModel by activityViewModels()
 
@@ -29,7 +33,7 @@ class PlantDeviceListFragment : BaseFragment(), View.OnClickListener {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentPlantDeviceListBinding.inflate(inflater, container, false)
+        _binding = FragmentPlantDeviceListBinding.inflate(inflater, container, false)
         initData()
         initView()
         setListener()
@@ -39,6 +43,11 @@ class PlantDeviceListFragment : BaseFragment(), View.OnClickListener {
     private fun initData() {
         viewModel.getDeviceListLiveData.observe(viewLifecycleOwner) {
             if (it.second == null) {
+                if (it.first.isNullOrEmpty()) {
+                    binding.root.gone()
+                } else {
+                    binding.root.visible()
+                }
                 (binding.rvDeviceList.adapter as DeviceAdapter).refresh(it.first)
             } else {
                 ToastUtil.show(it.second)
@@ -59,12 +68,13 @@ class PlantDeviceListFragment : BaseFragment(), View.OnClickListener {
             )
         )
         binding.rvDeviceList.adapter = DeviceAdapter()
+        binding.root.gone()
     }
 
     override fun onClick(v: View?) {
         when {
             v === binding.tvSeeMore -> viewModel.plantId?.let {
-                MyDeviceListActivity.start(
+                PlantDeviceListActivity.start(
                     it,
                     requireContext()
                 )
@@ -72,4 +82,8 @@ class PlantDeviceListFragment : BaseFragment(), View.OnClickListener {
         }
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
 }

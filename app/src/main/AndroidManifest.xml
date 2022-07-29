@@ -128,7 +128,7 @@
             android:screenOrientation="nosensor" />
 
         <activity
-            android:name=".ui.plant.activity.MyDeviceListActivity"
+            android:name=".ui.plant.activity.PlantDeviceListActivity"
             android:exported="false"
             android:screenOrientation="nosensor" />
 

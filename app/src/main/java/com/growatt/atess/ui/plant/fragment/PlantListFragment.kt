@@ -47,7 +47,9 @@ class PlantListFragment(
 ) :
     BaseFragment() {
 
-    private lateinit var binding: FragmentPlantListBinding
+    private var _binding: FragmentPlantListBinding? = null
+
+    private val binding get() = _binding!!
     private val viewModel: PlantListViewModel by viewModels()
     private val filterViewModel: PlantFilterViewModel by activityViewModels()
     private val plantInfoViewModel: PlantInfoViewModel by viewModels()
@@ -57,7 +59,7 @@ class PlantListFragment(
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentPlantListBinding.inflate(inflater, container, false)
+        _binding = FragmentPlantListBinding.inflate(inflater, container, false)
         setListener()
         initData()
         initView()
@@ -158,6 +160,11 @@ class PlantListFragment(
         }
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
     /**
      * ListAdapter需要搭配DiffUtil一起使用
      */
@@ -173,7 +180,13 @@ class PlantListFragment(
         }
 
         override fun onItemClick(v: View?, position: Int) {
-            getItem(position).id?.let { PlantInfoActivity.start(requireContext(), it) }
+            getItem(position).id?.let {
+                PlantInfoActivity.start(
+                    requireContext(),
+                    it,
+                    currentList.toTypedArray()
+                )
+            }
         }
 
         override fun onItemLongClick(v: View?, position: Int) {
@@ -281,7 +294,13 @@ class PlantListFragment(
         }
 
         private fun getTvSpan(plantModel: PlantModel): SpannableString {
-            return SpannableString("${plantModel.getETodayText()}/${plantModel.getETotalText()}kWh").also {
+            return SpannableString(
+                "${plantModel.getETodayText()}/${plantModel.getETotalText()}${
+                    getString(
+                        R.string.kwh
+                    )
+                }"
+            ).also {
                 val span = ForegroundColorSpan(getColor(R.color.text_gray_99))
                 val startPosition = it.toString().indexOf("/")
                 val endPosition = startPosition + "/".length

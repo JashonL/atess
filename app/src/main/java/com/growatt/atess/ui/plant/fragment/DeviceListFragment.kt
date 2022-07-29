@@ -17,14 +17,16 @@ import com.growatt.lib.view.DividerItemDecoration
  */
 class DeviceListFragment(private val deviceList: Array<DeviceModel>?) : BaseFragment() {
 
-    private lateinit var binding: FragmentDeviceListBinding
+    private var _binding: FragmentDeviceListBinding? = null
+
+    private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentDeviceListBinding.inflate(inflater, container, false)
+        _binding = FragmentDeviceListBinding.inflate(inflater, container, false)
         initView()
         return binding.root
     }
@@ -40,5 +42,10 @@ class DeviceListFragment(private val deviceList: Array<DeviceModel>?) : BaseFrag
         binding.rvDeviceList.adapter = DeviceAdapter().also {
             it.refresh(deviceList?.toList())
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

@@ -13,10 +13,13 @@ import com.growatt.atess.databinding.ActivityPlantInfoBinding
 import com.growatt.atess.model.plant.DeviceType
 import com.growatt.atess.model.plant.PlantModel
 import com.growatt.atess.ui.plant.fragment.info.HpsSystemOperationFragment
+import com.growatt.atess.ui.plant.fragment.info.PcsSystemOperationFragment
 import com.growatt.atess.ui.plant.monitor.PlantMonitor
 import com.growatt.atess.ui.plant.viewmodel.PlantInfoViewModel
 import com.growatt.atess.view.dialog.OptionsDialog
 import com.growatt.lib.util.ToastUtil
+import com.growatt.lib.util.gone
+import com.growatt.lib.util.visible
 
 /**
  * 电站详情页面
@@ -73,33 +76,39 @@ class PlantInfoActivity : BaseActivity(), View.OnClickListener {
                 viewModel.plantModels!![index] = parcelableArrayExtra[index] as PlantModel
             }
         }
-
-        viewModel.getPcsHpsSNLiveData.observe(this) {
+        viewModel.getPlantInfoLiveData.observe(this) {
             if (it.second == null) {
-                if (viewModel.typeAndSn == null && it.first?.isNullOrEmpty() == false) {
-                    val defaultDevice = it.first!![0]
-                    refreshSNView(defaultDevice)
-                    viewModel.typeAndSn = defaultDevice
-                    viewModel.getEnergyInfo()
-                    viewModel.getChartInfo()
-                    if (defaultDevice.first == DeviceType.HPS) {
-                        supportFragmentManager.commit(true) {
-                            replace(
-                                R.id.fragment_system_operation,
-                                HpsSystemOperationFragment(viewModel.plantId, defaultDevice.second)
-                            )
-                        }
-                    } else if (defaultDevice.first == DeviceType.PCS) {
-
-                    }
-                }
+                binding.title.setTitleText(it.first?.plantName)
             } else {
                 ToastUtil.show(it.second)
             }
         }
-        viewModel.getPlantInfo()
-        viewModel.getPcsHpsSN()
-        viewModel.getDeviceList()
+        viewModel.getPcsHpsSNLiveData.observe(this) {
+            if (it.third == null) {
+                handlePcsHpsSNList(it.first, it.second)
+            } else {
+                ToastUtil.show(it.third)
+            }
+        }
+        refresh()
+    }
+
+    /**
+     * @param snList hps与pcs列表
+     * @param isDataChange 数据是否有改变
+     */
+    private fun handlePcsHpsSNList(snList: MutableList<Pair<Int, String>>?, isDataChange: Boolean) {
+        if (snList?.isNullOrEmpty() == true) {
+            binding.llHpsPcsInfo.gone()
+        } else {
+            binding.llHpsPcsInfo.visible()
+            if (isDataChange) {
+                val defaultDevice = snList[0]
+                viewModel.typeAndSn = defaultDevice
+                refreshSNView(defaultDevice)
+            }
+            refreshDeviceInfo()
+        }
     }
 
     private fun refreshSNView(typeAndSN: Pair<Int, String>) {
@@ -114,17 +123,36 @@ class PlantInfoActivity : BaseActivity(), View.OnClickListener {
             AddCollectorActivity.start(this, viewModel.plantId)
         }
         PlantMonitor.watch(lifecycle) {
-
+            refresh()
         }
         binding.srlRefresh.setOnRefreshListener {
             refresh()
             binding.srlRefresh.finishRefresh(2000)
         }
+        binding.title.setOnTitleClickListener {
+            if (viewModel.plantModels?.size ?: 0 > 1) {
+                showPlantList(viewModel.plantModels!!)
+            }
+        }
+    }
+
+    private fun showPlantList(plantModels: Array<PlantModel>) {
+        val options = mutableListOf<String>()
+        for (plant in plantModels) {
+            options.add(plant.plantName ?: "")
+        }
+        OptionsDialog.show(supportFragmentManager, options.toTypedArray()) {
+            val plant = plantModels[it]
+            if (plant.id != viewModel.plantId) {
+                viewModel.plantId = plant.id
+                refresh()
+            }
+        }
     }
 
     private fun refresh() {
         viewModel.getPlantInfo()
-        refreshDeviceInfo()
+        viewModel.getPcsHpsSN()
         viewModel.getDeviceList()
     }
 
@@ -156,8 +184,37 @@ class PlantInfoActivity : BaseActivity(), View.OnClickListener {
         viewModel.getChartInfo()
         val systemOperationFragment =
             supportFragmentManager.findFragmentById(R.id.fragment_system_operation)
-        if (systemOperationFragment is HpsSystemOperationFragment) {
-            systemOperationFragment.refresh()
+        when (viewModel.typeAndSn?.first) {
+            DeviceType.HPS -> {
+                if (systemOperationFragment is HpsSystemOperationFragment) {
+                    systemOperationFragment.refresh()
+                } else {
+                    supportFragmentManager.commit(true) {
+                        replace(
+                            R.id.fragment_system_operation,
+                            HpsSystemOperationFragment(
+                                viewModel.plantId,
+                                viewModel.typeAndSn?.second
+                            )
+                        )
+                    }
+                }
+            }
+            DeviceType.PCS -> {
+                if (systemOperationFragment is PcsSystemOperationFragment) {
+                    systemOperationFragment.refresh()
+                } else {
+                    supportFragmentManager.commit(true) {
+                        replace(
+                            R.id.fragment_system_operation,
+                            PcsSystemOperationFragment(
+                                viewModel.plantId,
+                                viewModel.typeAndSn?.second
+                            )
+                        )
+                    }
+                }
+            }
         }
     }
 

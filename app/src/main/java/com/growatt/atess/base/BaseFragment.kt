@@ -39,4 +39,5 @@ abstract class BaseFragment : Fragment(), ViewHelper, ServiceManager.ServiceInte
     override fun dismissDialog() {
         (activity as? BaseActivity)?.dismissDialog()
     }
+
 }

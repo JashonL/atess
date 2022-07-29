@@ -31,7 +31,9 @@ class LineChartFragment(var chartListDataModel: ChartListDataModel? = null, var 
         const val MINUTES_INTERVAL = 60 * 1000
     }
 
-    private lateinit var binding: FragmentLineChartBinding
+    private var _binding: FragmentLineChartBinding? = null
+
+    private val binding get() = _binding!!
 
     private val colors = ChartTypeModel.createChartColors()
 
@@ -40,7 +42,7 @@ class LineChartFragment(var chartListDataModel: ChartListDataModel? = null, var 
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentLineChartBinding.inflate(inflater, container, false)
+        _binding = FragmentLineChartBinding.inflate(inflater, container, false)
         initView()
         return binding.root
     }
@@ -183,6 +185,11 @@ class LineChartFragment(var chartListDataModel: ChartListDataModel? = null, var 
             }
         }
         binding.lineChart.invalidate()
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }
 

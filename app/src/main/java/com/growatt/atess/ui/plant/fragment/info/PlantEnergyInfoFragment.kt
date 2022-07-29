@@ -14,13 +14,17 @@ import com.growatt.atess.model.plant.DeviceEnergyInfoModel
 import com.growatt.atess.ui.plant.viewmodel.PlantInfoViewModel
 import com.growatt.lib.util.ToastUtil
 import com.growatt.lib.util.Util
+import com.growatt.lib.util.gone
+import com.growatt.lib.util.visible
 
 /**
  * 电站详情-能源概况
  */
 class PlantEnergyInfoFragment : BaseFragment() {
 
-    private lateinit var binding: FragmentPlantEnergyInfoBinding
+    private var _binding: FragmentPlantEnergyInfoBinding? = null
+
+    private val binding get() = _binding!!
 
     private val viewModel: PlantInfoViewModel by activityViewModels()
 
@@ -29,8 +33,9 @@ class PlantEnergyInfoFragment : BaseFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentPlantEnergyInfoBinding.inflate(inflater, container, false)
+        _binding = FragmentPlantEnergyInfoBinding.inflate(inflater, container, false)
         initData()
+        binding.root.gone()
         return binding.root
     }
 
@@ -46,19 +51,23 @@ class PlantEnergyInfoFragment : BaseFragment() {
 
     private fun showEnergyInfo(deviceEnergyInfoList: Array<DeviceEnergyInfoModel>?) {
         binding.llContainer.removeAllViews()
-        deviceEnergyInfoList?.all {
-            if (!TextUtils.isEmpty(it.getTypeName())) {
-                binding.llContainer.addView(
-                    generateItemView(
-                        it.getTypeDrawableResId(),
-                        it.getTypeName(),
-                        Pair(Util.getDoubleText(it.today), Util.getDoubleText(it.total))
+        if (deviceEnergyInfoList.isNullOrEmpty()) {
+            binding.root.gone()
+        } else {
+            binding.root.visible()
+            deviceEnergyInfoList.all {
+                if (!TextUtils.isEmpty(it.getTypeName())) {
+                    binding.llContainer.addView(
+                        generateItemView(
+                            it.getTypeDrawableResId(),
+                            it.getTypeName(),
+                            Pair(Util.getDoubleText(it.today), Util.getDoubleText(it.total))
+                        )
                     )
-                )
+                }
+                true
             }
-            true
         }
-
     }
 
     private fun generateItemView(
@@ -72,5 +81,10 @@ class PlantEnergyInfoFragment : BaseFragment() {
         itemBinding.tvPhotovoltaicOutputDay.text = dayAndTotal.first
         itemBinding.tvPhotovoltaicOutputTotal.text = dayAndTotal.second
         return itemBinding.root
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

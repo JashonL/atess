@@ -20,7 +20,9 @@ import com.growatt.lib.util.visible
  */
 class PlantWeatherFragment : BaseFragment() {
 
-    private lateinit var binding: FragmentPlantWeatherBinding
+    private var _binding: FragmentPlantWeatherBinding? = null
+
+    private val binding get() = _binding!!
 
     private val viewModel: PlantInfoViewModel by activityViewModels()
 
@@ -29,7 +31,7 @@ class PlantWeatherFragment : BaseFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentPlantWeatherBinding.inflate(inflater, container, false)
+        _binding = FragmentPlantWeatherBinding.inflate(inflater, container, false)
         initData()
         initView()
         return binding.root
@@ -69,4 +71,8 @@ class PlantWeatherFragment : BaseFragment() {
         }
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
 }

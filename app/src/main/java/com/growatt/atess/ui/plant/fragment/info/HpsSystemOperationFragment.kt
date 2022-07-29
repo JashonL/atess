@@ -9,7 +9,7 @@ import com.growatt.atess.R
 import com.growatt.atess.base.BaseFragment
 import com.growatt.atess.databinding.FragmentHpsSystemOperationBinding
 import com.growatt.atess.model.plant.HpsSystemOperationModel
-import com.growatt.atess.ui.plant.activity.MyDeviceListActivity
+import com.growatt.atess.ui.plant.activity.PlantDeviceListActivity
 import com.growatt.atess.ui.plant.viewmodel.HpsViewModel
 import com.growatt.lib.util.ToastUtil
 import com.growatt.lib.util.invisible
@@ -21,7 +21,9 @@ import com.growatt.lib.util.visible
 class HpsSystemOperationFragment(val plantId: String?, val deviceSn: String?) : BaseFragment(),
     View.OnClickListener {
 
-    private lateinit var binding: FragmentHpsSystemOperationBinding
+    private var _binding: FragmentHpsSystemOperationBinding? = null
+
+    private val binding get() = _binding!!
 
     private val viewModel: HpsViewModel by viewModels()
 
@@ -30,7 +32,7 @@ class HpsSystemOperationFragment(val plantId: String?, val deviceSn: String?) : 
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentHpsSystemOperationBinding.inflate(inflater, container, false)
+        _binding = FragmentHpsSystemOperationBinding.inflate(inflater, container, false)
         initData()
         setListener()
         return binding.root
@@ -97,11 +99,15 @@ class HpsSystemOperationFragment(val plantId: String?, val deviceSn: String?) : 
 
     override fun onClick(v: View?) {
         when {
-            v === binding.ivHps -> if (plantId != null) MyDeviceListActivity.start(
+            v === binding.ivHps -> if (plantId != null) PlantDeviceListActivity.start(
                 plantId,
                 requireActivity()
             )
         }
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
 }

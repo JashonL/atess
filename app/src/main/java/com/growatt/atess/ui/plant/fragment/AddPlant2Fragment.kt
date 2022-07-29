@@ -39,7 +39,9 @@ import java.io.File
  */
 class AddPlant2Fragment : BaseFragment(), View.OnClickListener {
 
-    private lateinit var binding: FragmentAddPlant2Binding
+    private var _binding: FragmentAddPlant2Binding? = null
+
+    private val binding get() = _binding!!
     private val viewModel: AddPlantViewModel by activityViewModels()
 
     private var isClickSelectCurrency = false
@@ -50,7 +52,7 @@ class AddPlant2Fragment : BaseFragment(), View.OnClickListener {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentAddPlant2Binding.inflate(inflater, container, false)
+        _binding = FragmentAddPlant2Binding.inflate(inflater, container, false)
         initData()
         initView()
         setListener()
@@ -287,6 +289,11 @@ class AddPlant2Fragment : BaseFragment(), View.OnClickListener {
     fun saveEditTextString() {
         viewModel.addPlantModel.totalPower = binding.etTotalComponentPower.text.toString().trim()
         viewModel.addPlantModel.formulaMoney = binding.etElectrovalence.text.toString().trim()
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
 }

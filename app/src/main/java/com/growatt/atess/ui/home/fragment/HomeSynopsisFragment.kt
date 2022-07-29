@@ -12,14 +12,16 @@ import com.growatt.atess.ui.plant.activity.AddPlantActivity
  */
 class HomeSynopsisFragment : HomeBaseFragment() {
 
-    private lateinit var binding: FragmentHomeSynopsisBinding
+    private var _binding: FragmentHomeSynopsisBinding? = null
+
+    private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentHomeSynopsisBinding.inflate(inflater, container, false)
+        _binding = FragmentHomeSynopsisBinding.inflate(inflater, container, false)
         initView()
         return binding.root
     }
@@ -30,4 +32,8 @@ class HomeSynopsisFragment : HomeBaseFragment() {
         }
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
 }

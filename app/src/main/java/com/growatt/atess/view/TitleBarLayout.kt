@@ -36,6 +36,7 @@ class TitleBarLayout @JvmOverloads constructor(
     private var rightButtonClickListener: ((View?) -> Unit)? = null
     private var rightTextClickListener: ((View?) -> Unit)? = null
     private var rightImageClickListener: ((View?) -> Unit)? = null
+    private var titleClickListener: ((View?) -> Unit)? = null
 
     init {
         val view = LayoutInflater.from(context).inflate(R.layout.title_bar_layout, this)
@@ -95,6 +96,7 @@ class TitleBarLayout @JvmOverloads constructor(
         binding.btRight.setOnClickListener(this)
         binding.tvRightText.setOnClickListener(this)
         binding.ivRight.setOnClickListener(this)
+        binding.tvTitle.setOnClickListener(this)
     }
 
     private fun showFilterIconView() {
@@ -128,6 +130,9 @@ class TitleBarLayout @JvmOverloads constructor(
             v === binding.ivRight -> {
                 rightImageClickListener?.invoke(v)
             }
+            v === binding.tvTitle -> {
+                titleClickListener?.invoke(v)
+            }
         }
     }
 
@@ -145,6 +150,10 @@ class TitleBarLayout @JvmOverloads constructor(
 
     fun setOnRightImageClickListener(rightImageClickListener: (v: View?) -> Unit) {
         this.rightImageClickListener = rightImageClickListener
+    }
+
+    fun setOnTitleClickListener(titleClickListener: (v: View?) -> Unit) {
+        this.titleClickListener = titleClickListener
     }
 
     fun setRightText(rightText: String?) {

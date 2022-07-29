@@ -19,8 +19,9 @@ import com.growatt.lib.util.visible
  * 设备详情-BMS、MBMS、BCU_BMS电池信息
  */
 class BmsBatteryFragment : BaseFragment(), View.OnClickListener {
+    private var _binding: FragmentBmsBatteryBinding? = null
 
-    private lateinit var binding: FragmentBmsBatteryBinding
+    private val binding get() = _binding!!
 
     private val viewModel: BmsViewModel by activityViewModels()
 
@@ -29,7 +30,7 @@ class BmsBatteryFragment : BaseFragment(), View.OnClickListener {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentBmsBatteryBinding.inflate(inflater, container, false)
+        _binding = FragmentBmsBatteryBinding.inflate(inflater, container, false)
         initData()
         initView()
         setListener()
@@ -137,4 +138,8 @@ class BmsBatteryFragment : BaseFragment(), View.OnClickListener {
         }
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
 }

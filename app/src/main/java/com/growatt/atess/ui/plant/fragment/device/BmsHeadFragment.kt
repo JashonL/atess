@@ -23,15 +23,16 @@ import com.growatt.lib.util.ViewUtil
  * 设备详情-BMS、MBMS、BCU_BMS头部
  */
 class BmsHeadFragment : BaseFragment() {
+    private var _binding: FragmentBmsDeviceBinding? = null
 
-    private lateinit var binding: FragmentBmsDeviceBinding
+    private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentBmsDeviceBinding.inflate(inflater, container, false)
+        _binding = FragmentBmsDeviceBinding.inflate(inflater, container, false)
         initView()
         return binding.root
     }
@@ -114,5 +115,10 @@ class BmsHeadFragment : BaseFragment() {
                 LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.MATCH_PARENT, 1f)
             it.setPadding(ViewUtil.dp2px(requireContext(), 20f), 3, 0, 3)
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

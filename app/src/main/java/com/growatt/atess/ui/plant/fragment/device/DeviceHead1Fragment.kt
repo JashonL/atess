@@ -14,14 +14,16 @@ import com.growatt.atess.ui.plant.activity.DeviceParamsActivity
  */
 class DeviceHead1Fragment : BaseFragment(), View.OnClickListener {
 
-    private lateinit var binding: FragmentDeviceHead1Binding
+    private var _binding: FragmentDeviceHead1Binding? = null
+
+    private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentDeviceHead1Binding.inflate(inflater, container, false)
+        _binding = FragmentDeviceHead1Binding.inflate(inflater, container, false)
         initView()
         return binding.root
     }
@@ -43,5 +45,10 @@ class DeviceHead1Fragment : BaseFragment(), View.OnClickListener {
                 v.tag as String
             )
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

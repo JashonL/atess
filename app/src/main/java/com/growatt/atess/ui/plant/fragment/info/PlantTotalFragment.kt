@@ -23,7 +23,9 @@ import com.growatt.lib.util.ViewUtil
  */
 class PlantTotalFragment : BaseFragment(), View.OnClickListener {
 
-    private lateinit var binding: FragmentPlantTotalBinding
+    private var _binding: FragmentPlantTotalBinding? = null
+
+    private val binding get() = _binding!!
 
     private val viewModel: PlantInfoViewModel by activityViewModels()
 
@@ -32,7 +34,7 @@ class PlantTotalFragment : BaseFragment(), View.OnClickListener {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentPlantTotalBinding.inflate(inflater, container, false)
+        _binding = FragmentPlantTotalBinding.inflate(inflater, container, false)
         initData()
         initView()
         setListener()
@@ -90,4 +92,8 @@ class PlantTotalFragment : BaseFragment(), View.OnClickListener {
         }
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
 }
