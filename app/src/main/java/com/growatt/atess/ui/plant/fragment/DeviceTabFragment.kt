@@ -62,12 +62,24 @@ class DeviceTabFragment : BaseFragment() {
                 tab.text = deviceListResultModel.getTabsText()[position]
             }
         val fragments = mutableListOf<BaseFragment>().also {
-            it.add(DeviceListFragment(deviceListResultModel.hpslist))
-            it.add(DeviceListFragment(deviceListResultModel.pcslist))
-            it.add(DeviceListFragment(deviceListResultModel.pbdlist))
-            it.add(DeviceListFragment(deviceListResultModel.bmslist))
-            it.add(DeviceListFragment(deviceListResultModel.combinerList))
-            it.add(DeviceListFragment(deviceListResultModel.datalogList))
+            if (!deviceListResultModel.hpslist.isNullOrEmpty()) {
+                it.add(DeviceListFragment(deviceListResultModel.hpslist))
+            }
+            if (!deviceListResultModel.pcslist.isNullOrEmpty()) {
+                it.add(DeviceListFragment(deviceListResultModel.pcslist))
+            }
+            if (!deviceListResultModel.pbdlist.isNullOrEmpty()) {
+                it.add(DeviceListFragment(deviceListResultModel.pbdlist))
+            }
+            if (!deviceListResultModel.bmslist.isNullOrEmpty()) {
+                it.add(DeviceListFragment(deviceListResultModel.bmslist))
+            }
+            if (!deviceListResultModel.combinerList.isNullOrEmpty()) {
+                it.add(DeviceListFragment(deviceListResultModel.combinerList))
+            }
+            if (!deviceListResultModel.datalogList.isNullOrEmpty()) {
+                it.add(DeviceListFragment(deviceListResultModel.datalogList))
+            }
         }
         (binding.vpDevice.adapter as Adapter).refresh(fragments)
         tabLayoutMediator?.attach()

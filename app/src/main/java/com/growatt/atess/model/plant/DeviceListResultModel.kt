@@ -16,12 +16,24 @@ class DeviceListResultModel(
 ) {
     fun getTabsText(): MutableList<String> {
         val tabsText = mutableListOf<String>()
-        tabsText.add(MainApplication.instance().getString(R.string.hps))
-        tabsText.add(MainApplication.instance().getString(R.string.pcs))
-        tabsText.add(MainApplication.instance().getString(R.string.pbd))
-        tabsText.add(MainApplication.instance().getString(R.string.bms))
-        tabsText.add(MainApplication.instance().getString(R.string.combiner))
-        tabsText.add(MainApplication.instance().getString(R.string.collector))
+        if (!hpslist.isNullOrEmpty()) {
+            tabsText.add(MainApplication.instance().getString(R.string.hps))
+        }
+        if (!pcslist.isNullOrEmpty()) {
+            tabsText.add(MainApplication.instance().getString(R.string.pcs))
+        }
+        if (!pbdlist.isNullOrEmpty()) {
+            tabsText.add(MainApplication.instance().getString(R.string.pbd))
+        }
+        if (!bmslist.isNullOrEmpty()) {
+            tabsText.add(MainApplication.instance().getString(R.string.bms))
+        }
+        if (!combinerList.isNullOrEmpty()) {
+            tabsText.add(MainApplication.instance().getString(R.string.combiner))
+        }
+        if (!datalogList.isNullOrEmpty()) {
+            tabsText.add(MainApplication.instance().getString(R.string.collector))
+        }
         return tabsText
     }
 }
