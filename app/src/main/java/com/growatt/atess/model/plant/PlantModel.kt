@@ -25,7 +25,8 @@ data class PlantModel @JvmOverloads constructor(
     var plant_lat: String? = null,//纬度
     var plant_lng: String? = null,//经度
     var formulaMoneyUnitId: String? = null,//货币单位
-    var formulaMoney: String? = null//资金收益
+    var formulaMoney: String? = null,//资金收益
+    var atsDeviceFlag: Int = 1// 是否有设备 0 无设备； 1 有设备
 ) : Parcelable {
 
     companion object {
@@ -82,5 +83,8 @@ data class PlantModel @JvmOverloads constructor(
         return Util.getDoubleText(energyMonth)
     }
 
+    fun hasDevices(): Boolean {
+        return atsDeviceFlag == 1
+    }
 }
 

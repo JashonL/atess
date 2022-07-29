@@ -79,6 +79,12 @@ class PlantInfoActivity : BaseActivity(), View.OnClickListener {
         viewModel.getPlantInfoLiveData.observe(this) {
             if (it.second == null) {
                 binding.title.setTitleText(it.first?.plantName)
+                if (it.first?.hasDevices() == true) {
+                    binding.llHpsPcsInfo.visible()
+                    viewModel.getPcsHpsSN()
+                } else {
+                    binding.llHpsPcsInfo.gone()
+                }
             } else {
                 ToastUtil.show(it.second)
             }
@@ -150,9 +156,11 @@ class PlantInfoActivity : BaseActivity(), View.OnClickListener {
         }
     }
 
+    /**
+     * 先请求电站详情与设备列表，再根据电站详情请求设备相关的信息
+     */
     private fun refresh() {
         viewModel.getPlantInfo()
-        viewModel.getPcsHpsSN()
         viewModel.getDeviceList()
     }
 

@@ -57,6 +57,7 @@ class PlantTabFragment : BaseFragment(), OnPlantStatusNumChangeListener {
         binding.tabLayout.setSelectTabPosition(0, false)
         binding.vpPlant.adapter = Adapter(this)
         binding.tabLayout.setupWithViewPager2(binding.vpPlant)
+        binding.vpPlant.offscreenPageLimit = binding.vpPlant.childCount
 
         refreshPlantStatusNum(PlantStatusNumModel())
     }

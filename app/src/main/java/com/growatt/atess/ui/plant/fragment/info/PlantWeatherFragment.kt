@@ -64,7 +64,11 @@ class PlantWeatherFragment : BaseFragment() {
                 binding.tvSunshineDurationValue.text = it.duration
                 binding.tvWindDirection.text = it.getWindDirectionText()
                 binding.tvWindSpeed.text = it.getWindSpeedText()
-                binding.root.visible()
+                if (viewModel.getPlantInfoLiveData.value?.first?.hasDevices() == true) {
+                    binding.root.visible()
+                } else {
+                    binding.root.gone()
+                }
             } else {
                 binding.root.gone()
             }

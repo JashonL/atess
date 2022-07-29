@@ -49,6 +49,14 @@
                     android:layout_marginTop="10dp"
                     tools:layout="@layout/fragment_plant_weather" />
 
+                <androidx.fragment.app.FragmentContainerView
+                    android:id="@+id/fragment_empty_device"
+                    android:name="com.growatt.atess.ui.plant.fragment.info.PlantEmptyDeviceFragment"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    tools:layout="@layout/fragment_plant_empty_device" />
+
                 <LinearLayout
                     android:id="@+id/ll_hps_pcs_info"
                     android:layout_width="match_parent"

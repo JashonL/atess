@@ -60,6 +60,7 @@ class PlantTabChartFragment :
     }
 
     private fun showData(chartListDataModel: ChartListDataModel?) {
+        binding.root.visible()
         chartListDataModel?.also {
             val chartFragment = childFragmentManager.findFragmentById(R.id.fragment_chart)
             if (isShowLineChart()) {
@@ -129,6 +130,7 @@ class PlantTabChartFragment :
 
     private fun initView() {
         binding.tabLayout.setSelectTabPosition(0, false)
+        binding.root.gone()
     }
 
     override fun onClick(v: View?) {
