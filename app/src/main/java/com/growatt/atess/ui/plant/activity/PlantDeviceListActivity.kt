@@ -4,10 +4,11 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import androidx.activity.viewModels
+import androidx.fragment.app.commit
+import com.growatt.atess.R
 import com.growatt.atess.base.BaseActivity
 import com.growatt.atess.databinding.ActivityPlantDeviceListBinding
-import com.growatt.atess.ui.plant.viewmodel.DeviceListViewModel
+import com.growatt.atess.ui.plant.fragment.DeviceTabFragment
 
 /**
  * 我的设备（电站设备列表）
@@ -26,8 +27,7 @@ class PlantDeviceListActivity : BaseActivity(), View.OnClickListener {
     }
 
     private lateinit var binding: ActivityPlantDeviceListBinding
-
-    private val viewModel: DeviceListViewModel by viewModels()
+    private lateinit var plantId: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,7 +39,7 @@ class PlantDeviceListActivity : BaseActivity(), View.OnClickListener {
     }
 
     private fun initData() {
-        viewModel.plantId = intent.getStringExtra(KEY_PLANT_ID) ?: ""
+        plantId = intent.getStringExtra(KEY_PLANT_ID) ?: ""
     }
 
     private fun setListener() {
@@ -47,12 +47,14 @@ class PlantDeviceListActivity : BaseActivity(), View.OnClickListener {
     }
 
     private fun initView() {
-
+        supportFragmentManager.commit(true) {
+            add(R.id.fragment_device_tab, DeviceTabFragment(plantId))
+        }
     }
 
     override fun onClick(v: View?) {
         when {
-            v === binding.tvSearch -> {}
+            v === binding.tvSearch -> SearchActivity.startDeviceSearch(this, plantId)
         }
     }
 

@@ -14,6 +14,7 @@ import com.growatt.atess.R
 import com.growatt.atess.base.BaseActivity
 import com.growatt.atess.databinding.ActivitySearchBinding
 import com.growatt.atess.model.plant.SearchType
+import com.growatt.atess.ui.plant.fragment.DeviceTabFragment
 import com.growatt.atess.ui.plant.fragment.PlantTabFragment
 import com.growatt.atess.ui.plant.viewmodel.SearchViewModel
 import com.growatt.lib.util.ViewUtil
@@ -28,6 +29,7 @@ class SearchActivity : BaseActivity(), View.OnClickListener {
     companion object {
 
         private const val KEY_SEARCH_TYPE = "key_search_type"
+        private const val KEY_PLANT_ID = "key_plant_id"
 
         fun startPlantSearch(context: Context?) {
             context?.startActivity(Intent(context, SearchActivity::class.java).also {
@@ -35,9 +37,10 @@ class SearchActivity : BaseActivity(), View.OnClickListener {
             })
         }
 
-        fun startDeviceSearch(context: Context?) {
+        fun startDeviceSearch(context: Context?, plantId: String?) {
             context?.startActivity(Intent(context, SearchActivity::class.java).also {
                 it.putExtra(KEY_SEARCH_TYPE, SearchType.DEVICE)
+                it.putExtra(KEY_PLANT_ID, plantId)
             })
         }
 
@@ -45,6 +48,7 @@ class SearchActivity : BaseActivity(), View.OnClickListener {
 
     private lateinit var binding: ActivitySearchBinding
     private val viewModel: SearchViewModel by viewModels()
+    private var plantId: String? = null
 
     private val searchType: Int by lazy(LazyThreadSafetyMode.NONE) {
         intent.getIntExtra(KEY_SEARCH_TYPE, SearchType.PLANT)
@@ -54,8 +58,13 @@ class SearchActivity : BaseActivity(), View.OnClickListener {
         super.onCreate(savedInstanceState)
         binding = ActivitySearchBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        initData()
         initView()
         setListener()
+    }
+
+    private fun initData() {
+        plantId = intent.getStringExtra(KEY_PLANT_ID)
     }
 
     private fun setListener() {
@@ -86,7 +95,13 @@ class SearchActivity : BaseActivity(), View.OnClickListener {
     private fun search(searchWord: String) {
         binding.clContainer.gone()
         supportFragmentManager.commit(true) {
-            add(R.id.fragment_search_result, PlantTabFragment(searchWord))
+            when (searchType) {
+                SearchType.PLANT -> add(R.id.fragment_search_result, PlantTabFragment(searchWord))
+                SearchType.DEVICE -> add(
+                    R.id.fragment_search_result,
+                    DeviceTabFragment(plantId, searchWord)
+                )
+            }
         }
     }
 

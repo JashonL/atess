@@ -1,5 +1,6 @@
 package com.growatt.atess.ui.plant.viewmodel
 
+import android.text.TextUtils
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.growatt.atess.base.BaseViewModel
@@ -14,17 +15,19 @@ import kotlinx.coroutines.launch
  */
 class DeviceListViewModel : BaseViewModel() {
 
-    lateinit var plantId: String
 
     val getDeviceListLiveData = MutableLiveData<Pair<DeviceListResultModel?, String?>>()
 
     /**
      * 获取我的设备列表
      */
-    fun getDeviceList() {
+    fun getDeviceList(plantId: String?, searchWord: String = "") {
         viewModelScope.launch {
             val params = hashMapOf<String, String>().apply {
-                put("plantId", plantId)
+                put("plantId", plantId ?: "")
+                if (!TextUtils.isEmpty(searchWord)) {
+                    put("searchWord", searchWord)
+                }
             }
             apiService().postForm(ApiPath.Plant.GET_DEVICE_LIST, params, object :
                 HttpCallback<HttpResult<DeviceListResultModel>>() {

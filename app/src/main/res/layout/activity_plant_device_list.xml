@@ -45,7 +45,6 @@
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/fragment_device_tab"
-        android:name="com.growatt.atess.ui.plant.fragment.DeviceTabFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 

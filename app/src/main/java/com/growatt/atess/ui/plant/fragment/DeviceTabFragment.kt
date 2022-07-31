@@ -19,7 +19,8 @@ import com.growatt.lib.util.ToastUtil
 /**
  * 设备列表TAB
  */
-class DeviceTabFragment : BaseFragment() {
+class DeviceTabFragment(val plantId: String?, private val searchWord: String = "") :
+    BaseFragment() {
     private var _binding: FragmentDeviceTabBinding? = null
 
     private val binding get() = _binding!!
@@ -52,7 +53,7 @@ class DeviceTabFragment : BaseFragment() {
         }
 
         showDialog()
-        viewModel.getDeviceList()
+        viewModel.getDeviceList(plantId, searchWord)
     }
 
     private fun refreshViewPager(deviceListResultModel: DeviceListResultModel) {
