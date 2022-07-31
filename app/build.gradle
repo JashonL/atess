@@ -106,4 +106,5 @@ dependencies {
     implementation project(path: ':lib')
     implementation project(path: ':thirdsdk:amap')
     implementation project(path: ':thirdsdk:scan')
+    implementation project(path: ':thirdsdk:mpchart')
 }
