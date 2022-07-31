@@ -63,12 +63,16 @@ class HomeActivity : BaseActivity() {
     }
 
     private fun initView() {
-        binding.homeBottomView.setSelectPosition(homeTab)
+        setHomeBottomPosition(homeTab)
         binding.homeBottomView.setOnTabSelectListener {
             homeTab = it
             switchToFragment(it)
         }
         switchToFragment(homeTab)
+    }
+
+    fun setHomeBottomPosition(@HomeTab homeTab: Int) {
+        binding.homeBottomView.setSelectPosition(homeTab)
     }
 
     private fun switchToFragment(@HomeTab homeTab: Int) {

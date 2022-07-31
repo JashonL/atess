@@ -11,6 +11,7 @@ import com.growatt.atess.base.BaseFragment
 import com.growatt.atess.databinding.FragmentPlantTabBinding
 import com.growatt.atess.model.plant.PlantModel
 import com.growatt.atess.model.plant.PlantStatusNumModel
+import com.growatt.atess.ui.plant.monitor.PlantTabSwitchMonitor
 
 /**
  * 电站列表TAB
@@ -18,7 +19,6 @@ import com.growatt.atess.model.plant.PlantStatusNumModel
 class PlantTabFragment : BaseFragment(), OnPlantStatusNumChangeListener {
 
     private var _binding: FragmentPlantTabBinding? = null
-
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -28,6 +28,7 @@ class PlantTabFragment : BaseFragment(), OnPlantStatusNumChangeListener {
     ): View {
         _binding = FragmentPlantTabBinding.inflate(inflater, container, false)
         initView()
+        setListener()
         return binding.root
     }
 
@@ -60,6 +61,12 @@ class PlantTabFragment : BaseFragment(), OnPlantStatusNumChangeListener {
         binding.vpPlant.offscreenPageLimit = binding.vpPlant.childCount
 
         refreshPlantStatusNum(PlantStatusNumModel())
+    }
+
+    private fun setListener() {
+        PlantTabSwitchMonitor.watch(viewLifecycleOwner.lifecycle) { _, position ->
+            binding.tabLayout.setSelectTabPosition(position, false)
+        }
     }
 
     inner class Adapter(fragment: Fragment) : FragmentStateAdapter(fragment) {

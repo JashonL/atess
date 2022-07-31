@@ -109,7 +109,7 @@ data class PcsModel(
             bReactivePowerText
         )
 
-        json.put(MainApplication.instance().getString(R.string.power_factor), loadPfText)
+        json.put(MainApplication.instance().getString(R.string.load_power_format), loadPfText)
         json.put(MainApplication.instance().getString(R.string.environment_temperature), envText)
         json.put(
             MainApplication.instance().getString(R.string.startup_self_test_time),

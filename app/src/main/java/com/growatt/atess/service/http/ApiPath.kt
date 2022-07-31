@@ -195,5 +195,10 @@ object ApiPath {
          */
         const val GET_HPS_SYSTEM_OPERATION = "ATSDevice/getHPSRunChart"
 
+        /**
+         * 获取总览头部信息
+         */
+        const val GET_SYNOPSIS_TOTAL = "ATSOverview/getOverview"
+
     }
 }
