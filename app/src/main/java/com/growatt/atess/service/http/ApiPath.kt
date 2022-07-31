@@ -200,5 +200,10 @@ object ApiPath {
          */
         const val GET_SYNOPSIS_TOTAL = "ATSOverview/getOverview"
 
+        /**
+         * 获取总览头部信息
+         */
+        const val GET_POWER_TRENDS_INFO = "ATSOverview/batTrend"
+
     }
 }

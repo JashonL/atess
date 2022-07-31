@@ -19,6 +19,7 @@ import com.growatt.atess.view.OnTabSelectedListener
 import com.growatt.atess.view.Tab
 import com.growatt.lib.util.ToastUtil
 import com.growatt.lib.util.gone
+import com.growatt.lib.util.invisible
 import com.growatt.lib.util.visible
 
 /**
@@ -109,11 +110,11 @@ class PlantTabChartFragment :
                     }
                     1 -> {
                         viewModel.dataType = chartTypes[1]
-                        binding.chartTimeSelectLayout.gone()
+                        binding.chartTimeSelectLayout.invisible()
                     }
                     2 -> {
                         viewModel.dataType = chartTypes[2]
-                        binding.chartTimeSelectLayout.gone()
+                        binding.chartTimeSelectLayout.invisible()
                     }
                 }
                 showDialog()

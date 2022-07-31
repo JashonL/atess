@@ -3,18 +3,27 @@ package com.growatt.atess.ui.home.viewmodel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.growatt.atess.base.BaseViewModel
+import com.growatt.atess.model.plant.ChartListDataModel
 import com.growatt.atess.model.plant.SynopsisTotalModel
 import com.growatt.atess.service.http.ApiPath
+import com.growatt.atess.view.DateType
 import com.growatt.lib.service.http.HttpCallback
 import com.growatt.lib.service.http.HttpResult
+import com.growatt.lib.util.DateUtils
 import kotlinx.coroutines.launch
+import java.util.*
 
 /**
  * 首页-总览
  */
 class HomeSynopsisViewModel : BaseViewModel() {
 
+    var selectDate = Date()
+    var dateType = DateType.HOUR //dateType 1 —— 时；2 —— 日；3 —— 月；4 —— 年
+
     val getSynopsisTotalLiveData = MutableLiveData<Pair<SynopsisTotalModel?, String?>>()
+
+    val getPowerTrendsChartLiveData = MutableLiveData<Pair<ChartListDataModel?, String?>>()
 
     /**
      * 获取总览信息
@@ -37,6 +46,33 @@ class HomeSynopsisViewModel : BaseViewModel() {
                         getSynopsisTotalLiveData.value = Pair(null, error ?: "")
                     }
                 })
+        }
+    }
+
+    /**
+     * 获取电量趋势图表详情
+     */
+    fun getPowerTrendsInfo() {
+        viewModelScope.launch {
+            val params = hashMapOf<String, String>().apply {
+                put("queryDate", DateUtils.yyyy_MM_dd_format(selectDate))
+                put("type", dateType)
+            }
+            apiService().postForm(ApiPath.Plant.GET_POWER_TRENDS_INFO, params, object :
+                HttpCallback<HttpResult<ChartListDataModel>>() {
+                override fun success(result: HttpResult<ChartListDataModel>) {
+                    if (result.isBusinessSuccess()) {
+                        getPowerTrendsChartLiveData.value = Pair(result.data, null)
+                    } else {
+                        getPowerTrendsChartLiveData.value = Pair(null, result.msg ?: "")
+                    }
+                }
+
+                override fun onFailure(error: String?) {
+                    super.onFailure(error)
+                    getPowerTrendsChartLiveData.value = Pair(null, error ?: "")
+                }
+            })
         }
     }
 }

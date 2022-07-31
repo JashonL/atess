@@ -5,8 +5,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import com.growatt.atess.R
 import com.growatt.atess.databinding.FragmentHomeSynopsisBinding
 import com.growatt.atess.ui.home.HomeActivity
+import com.growatt.atess.ui.home.fragment.synopsis.PowerTrendsChartFragment
 import com.growatt.atess.ui.home.view.HomeTab
 import com.growatt.atess.ui.home.viewmodel.HomeSynopsisViewModel
 import com.growatt.atess.ui.plant.activity.AddPlantActivity
@@ -61,6 +63,11 @@ class HomeSynopsisFragment : HomeBaseFragment(), View.OnClickListener {
     fun setListener() {
         binding.srlRefresh.setOnRefreshListener {
             viewModel.getSynopsisTotal()
+            val powerTrendsChartFragment =
+                childFragmentManager.findFragmentById(R.id.fragment_power_trends_chart)
+            if (powerTrendsChartFragment is PowerTrendsChartFragment) {
+                powerTrendsChartFragment.refresh()
+            }
         }
         binding.llTotalComponentPower.setOnClickListener(this)
         binding.llPlantCount.setOnClickListener(this)
