@@ -8,6 +8,7 @@ import androidx.fragment.app.activityViewModels
 import com.growatt.atess.databinding.FragmentHomePlantBinding
 import com.growatt.atess.model.plant.PlantFilterModel
 import com.growatt.atess.ui.home.viewmodel.PlantFilterViewModel
+import com.growatt.atess.ui.plant.activity.SearchActivity
 import com.growatt.atess.ui.plant.view.PlantFilterPopup
 
 /**
@@ -65,7 +66,7 @@ class HomePlantFragment : HomeBaseFragment(), View.OnClickListener {
                     binding.tvFilter.text = it.filterName
                 }
             }
-            v === binding.tvSearch -> {}
+            v === binding.tvSearch -> SearchActivity.startPlantSearch(requireContext())
         }
     }
 

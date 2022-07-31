@@ -1,5 +1,6 @@
 package com.growatt.atess.ui.plant.viewmodel
 
+import android.text.TextUtils
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.growatt.atess.base.BaseViewModel
@@ -25,13 +26,18 @@ class PlantListViewModel : BaseViewModel() {
     /**
      * 获取电站列表
      */
-    fun getPlantList(plantStatus: Int, orderType: Int = 1) {
+    fun getPlantList(plantStatus: Int, orderType: Int? = null, searchWord: String = "") {
         viewModelScope.launch {
             val params = hashMapOf<String, String>().apply {
                 if (plantStatus != PlantModel.PLANT_STATUS_ALL) {
                     put("plantStatus", plantStatus.toString())
                 }
-                put("order", orderType.toString())
+                if (orderType != null) {
+                    put("order", orderType.toString())
+                }
+                if (!TextUtils.isEmpty(searchWord)) {
+                    put("searchWord", searchWord)
+                }
             }
             apiService().postForm(
                 ApiPath.Plant.GET_PLANT_LIST,

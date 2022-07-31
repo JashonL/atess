@@ -14,7 +14,7 @@ interface IStorageService : Service {
 
     fun put(key: String, value: Float)
 
-    fun getString(key: String, defValue: String): String?
+    fun getString(key: String, defValue: String?): String?
 
     fun getBoolean(key: String, defValue: Boolean): Boolean
 

@@ -27,6 +27,7 @@ import com.growatt.atess.model.plant.PlantModel
 import com.growatt.atess.ui.home.viewmodel.PlantFilterViewModel
 import com.growatt.atess.ui.plant.activity.AddPlantActivity
 import com.growatt.atess.ui.plant.activity.PlantInfoActivity
+import com.growatt.atess.ui.plant.activity.SearchActivity
 import com.growatt.atess.ui.plant.monitor.PlantMonitor
 import com.growatt.atess.ui.plant.viewmodel.PlantInfoViewModel
 import com.growatt.atess.ui.plant.viewmodel.PlantListViewModel
@@ -43,7 +44,8 @@ import com.growatt.lib.view.DividerItemDecoration
  */
 class PlantListFragment(
     private val plantStatus: Int,
-    private val listener: OnPlantStatusNumChangeListener
+    private val listener: OnPlantStatusNumChangeListener,
+    private val searchWord: String
 ) :
     BaseFragment() {
 
@@ -112,6 +114,9 @@ class PlantListFragment(
         PlantMonitor.watch(viewLifecycleOwner.lifecycle) {
             binding.srfRefresh.autoRefresh()
         }
+        if (requireActivity() is SearchActivity) {
+            viewModel.getPlantList(plantStatus, searchWord = searchWord)
+        }
     }
 
     private fun refreshEmptyView(plantModels: Array<PlantModel>?) {
@@ -132,7 +137,7 @@ class PlantListFragment(
 
     private fun refresh() {
         filterViewModel.getPlantFilterLiveData.value?.let {
-            viewModel.getPlantList(plantStatus, it)
+            viewModel.getPlantList(plantStatus, it, searchWord)
         }
     }
 

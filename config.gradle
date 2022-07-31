@@ -68,5 +68,8 @@ ext {
 
             //Json工具Gson
             gson                         : 'com.google.code.gson:gson:2.9.0',
+
+            //自动换行 https://github.com/google/flexbox-layout
+            flexbox                      : 'com.google.android.flexbox:flexbox:3.0.0',
     ]
 }

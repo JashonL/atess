@@ -298,6 +298,7 @@
     <string name="saving_standard_coal">节约标准煤</string>
     <string name="reduce_deforestation">减少森林砍伐</string>
     <string name="power_trends">电量趋势</string>
+    <string name="recent_search">最近搜索</string>
 
     <!-- image crop-->
     <string name="crop_image_menu_crop">裁剪</string>

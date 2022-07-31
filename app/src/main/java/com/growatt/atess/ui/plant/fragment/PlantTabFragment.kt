@@ -16,7 +16,8 @@ import com.growatt.atess.ui.plant.monitor.PlantTabSwitchMonitor
 /**
  * 电站列表TAB
  */
-class PlantTabFragment : BaseFragment(), OnPlantStatusNumChangeListener {
+class PlantTabFragment(val searchWord: String = "") : BaseFragment(),
+    OnPlantStatusNumChangeListener {
 
     private var _binding: FragmentPlantTabBinding? = null
     private val binding get() = _binding!!
@@ -72,10 +73,10 @@ class PlantTabFragment : BaseFragment(), OnPlantStatusNumChangeListener {
     inner class Adapter(fragment: Fragment) : FragmentStateAdapter(fragment) {
 
         private val fragments = arrayOf(
-            PlantListFragment(PlantModel.PLANT_STATUS_ALL, this@PlantTabFragment),
-            PlantListFragment(PlantModel.PLANT_STATUS_ONLINE, this@PlantTabFragment),
-            PlantListFragment(PlantModel.PLANT_STATUS_OFFLINE, this@PlantTabFragment),
-            PlantListFragment(PlantModel.PLANT_STATUS_TROUBLE, this@PlantTabFragment)
+            PlantListFragment(PlantModel.PLANT_STATUS_ALL, this@PlantTabFragment, searchWord),
+            PlantListFragment(PlantModel.PLANT_STATUS_ONLINE, this@PlantTabFragment, searchWord),
+            PlantListFragment(PlantModel.PLANT_STATUS_OFFLINE, this@PlantTabFragment, searchWord),
+            PlantListFragment(PlantModel.PLANT_STATUS_TROUBLE, this@PlantTabFragment, searchWord)
         )
 
         override fun getItemCount(): Int {

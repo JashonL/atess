@@ -32,7 +32,7 @@ class DefaultStorageService(context: Context, name: String = "growatt_atess") : 
         storage.edit().putFloat(key, value).apply()
     }
 
-    override fun getString(key: String, defValue: String): String? {
+    override fun getString(key: String, defValue: String?): String? {
         return storage.getString(key, "")
     }
 
