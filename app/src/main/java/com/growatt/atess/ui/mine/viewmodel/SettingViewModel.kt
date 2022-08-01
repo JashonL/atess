@@ -113,9 +113,9 @@ class SettingViewModel : BaseViewModel() {
     ) {
         val params = hashMapOf<String, String>().apply {
             if (registerAccountType == RegisterAccountType.PHONE) {
-                put("Email", phoneOrEmail)
+                put("phoneNum", phoneOrEmail)
             } else {
-                put("OldPWD", phoneOrEmail)
+                put("Email", phoneOrEmail)
             }
             put("validCode", verifyCode)
         }
