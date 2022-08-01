@@ -3,6 +3,7 @@ package com.growatt.atess.model.plant
 import com.growatt.atess.R
 import com.growatt.atess.application.MainApplication
 import com.growatt.atess.model.plant.ui.IDeviceInfoHead
+import com.growatt.atess.util.ValueUtil
 import com.growatt.lib.util.Util
 import org.json.JSONObject
 
@@ -73,24 +74,22 @@ data class PcsModel(
             "${Util.getDoubleText(vacFrequency)}${
                 MainApplication.instance().getString(R.string.hz)
             }"
-        val pacToBatteryText =
-            "${Util.getDoubleText(pacToBattery)}${
-                MainApplication.instance().getString(R.string.kw)
-            }"
+        val pacToBatteryWithUnit = ValueUtil.valueFromW(pacToBattery)
+        val pacToBatteryText = pacToBatteryWithUnit.first + pacToBatteryWithUnit.second
         val bApparentPowerText =
             "${Util.getDoubleText(bApparentPower)}${
                 MainApplication.instance().getString(R.string.kva)
             }"
-        val bActivePowerText =
-            "${Util.getDoubleText(bActivePower)}${
-                MainApplication.instance().getString(R.string.kw)
-            }"
+        val bActivePowerWithUnit = ValueUtil.valueFromW(bActivePower)
+        val bActivePowerText = bActivePowerWithUnit.first + bActivePowerWithUnit.second
         val bReactivePowerText =
             "${Util.getDoubleText(bReactivePower)}${
                 MainApplication.instance().getString(R.string.kvar)
             }"
         val loadPfText = Util.getDoubleText(pf)
-        val envText = "${Util.getDoubleText(envTemp)}℃"
+        val envText = "${Util.getDoubleText(envTemp)}${
+            MainApplication.instance().getString(R.string.temperature_unit)
+        }"
         val selfTimeText = "${selfTime}s"
 
         val json = JSONObject()
@@ -123,7 +122,8 @@ data class PcsModel(
     }
 
     fun getTotalPowerText(): String {
-        return Util.getDoubleText(ppv) + "W"
+        val valueFromW2 = ValueUtil.valueFromW(ppv)
+        return valueFromW2.first + valueFromW2.second
     }
 
 }

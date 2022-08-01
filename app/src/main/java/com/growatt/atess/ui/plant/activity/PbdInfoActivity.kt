@@ -69,21 +69,23 @@ class PbdInfoActivity : BaseActivity(), IBaseDeviceActivity, View.OnClickListene
         ) else ViewUtil.createShape(resources.getColor(R.color.color_1A3FAE29), 2)
         binding.tvDeviceStatus.setTextColor(resources.getColor(if (pbdModel.lost == true) R.color.text_green else R.color.text_gray_bb))
         binding.tvPower.text = pbdModel.getTotalPowerText()
-        binding.tvTodayPower.text = pbdModel.getETodayText()
-        binding.tvTotalPower.text = pbdModel.getETotalText()
+        val eTodayWithUnitText = pbdModel.getETodayWithUnitText()
+        binding.tvTodayPower.text = eTodayWithUnitText.first
+        binding.tvTodayUnit.text = getString(
+            R.string.slash_format,
+            getString(R.string.today_generate_electricity),
+            eTodayWithUnitText.second
+        )
+        val eTotalWithUnitText = pbdModel.getETotalWithUnitText()
+        binding.tvTotalPower.text = eTotalWithUnitText.first
+        binding.tvTotalUnit.text = getString(
+            R.string.slash_format,
+            getString(R.string.total_generate_electricity),
+            eTotalWithUnitText.second
+        )
     }
 
     private fun initView() {
-        binding.tvTodayUnit.text = getString(
-            R.string.slash_format,
-            getString(R.string.today_power),
-            getString(R.string.kwh)
-        )
-        binding.tvTotalUnit.text = getString(
-            R.string.slash_format,
-            getString(R.string.total_power),
-            getString(R.string.kwh)
-        )
         supportFragmentManager.commit(true) {
             add(
                 R.id.fragment_chart,

@@ -20,6 +20,7 @@ object DateUtils {
     val HH_mm_ss_SSS_format = SimpleDateFormat("HH:mm:ss::SSS", Locale.US)
 
     fun yyyy_format(date: Date): String {
+
         return yyyy_format.format(date)
     }
 

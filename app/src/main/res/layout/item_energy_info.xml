@@ -23,30 +23,62 @@
         android:textSize="@dimen/text_medium"
         tools:text="@string/photovoltaic_output" />
 
-    <TextView
-        android:id="@+id/tv_photovoltaic_output_day"
+    <LinearLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="114"
-        android:gravity="center"
-        android:textColor="@color/text_black"
-        android:textSize="@dimen/text_medium"
-        tools:text="34" />
+        android:gravity="center|bottom"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tv_photovoltaic_output_day"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/text_black"
+            android:textSize="@dimen/text_medium"
+            tools:text="34" />
+
+        <TextView
+            android:id="@+id/tv_photovoltaic_output_day_unit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="2dp"
+            android:textColor="@color/text_gray_99"
+            android:textSize="@dimen/text_tab"
+            tools:text="@string/kwh" />
+
+    </LinearLayout>
+
 
     <View
         android:layout_width="1dp"
         android:layout_height="20dp"
         android:background="@color/color_line" />
 
-    <TextView
-        android:id="@+id/tv_photovoltaic_output_total"
+    <LinearLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="2dp"
         android:layout_weight="114"
-        android:gravity="center"
-        android:textColor="@color/text_black"
-        android:textSize="@dimen/text_medium"
-        tools:text="34" />
+        android:gravity="center|bottom"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tv_photovoltaic_output_total"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/text_black"
+            android:textSize="@dimen/text_medium"
+            tools:text="34" />
+
+        <TextView
+            android:id="@+id/tv_photovoltaic_output_total_unit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="2dp"
+            android:textColor="@color/text_gray_99"
+            android:textSize="@dimen/text_tab"
+            tools:text="@string/kwh" />
+
+    </LinearLayout>
 
 </LinearLayout>

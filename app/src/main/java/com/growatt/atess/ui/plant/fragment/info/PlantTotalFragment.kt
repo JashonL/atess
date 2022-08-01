@@ -68,9 +68,9 @@ class PlantTotalFragment : BaseFragment(), View.OnClickListener {
                 .into(binding.ivPlantImage)
             binding.tvTotalComponentPower.text = it.nominalPowerStr
             binding.tvInstallDate.text = it.createDateText
-            binding.tvDailyOutput.text = getString(R.string.kwh_format, it.getETodayText())
-            binding.tvMonthlyOutput.text = getString(R.string.kwh_format, it.getMonthlyPowerText())
-            binding.tvTotalOutput.text = getString(R.string.kwh_format, it.getETotalText())
+            binding.tvDailyOutput.text = it.getETodayWithUnitText()
+            binding.tvMonthlyOutput.text = it.getMonthGenerateElectricityWithUnitText()
+            binding.tvTotalOutput.text = it.getETotalWithUnitText()
         }
     }
 

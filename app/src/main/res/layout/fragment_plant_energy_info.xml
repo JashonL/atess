@@ -28,7 +28,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="114.5"
             android:gravity="center"
-            android:text="@string/day_with_unit"
+            android:text="@string/current_day"
             android:textColor="@color/text_gray_99"
             android:textSize="@dimen/text_medium" />
 
@@ -37,7 +37,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="114.5"
             android:gravity="center"
-            android:text="@string/total_with_unit"
+            android:text="@string/total"
             android:textColor="@color/text_gray_99"
             android:textSize="@dimen/text_medium" />
     </LinearLayout>

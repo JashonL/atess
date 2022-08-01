@@ -2,6 +2,7 @@ package com.growatt.atess.model.plant
 
 import com.growatt.atess.R
 import com.growatt.atess.application.MainApplication
+import com.growatt.atess.util.ValueUtil
 import com.growatt.lib.util.Util
 
 /**
@@ -23,18 +24,20 @@ data class DeviceModel(
     val cur: Double?,//Combiner汇流箱-电流2.0
 ) {
     fun getETodayText(): String {
+        val valueFromKWh = ValueUtil.valueFromKWh(eToday)
         return MainApplication.instance()
             .getString(
-                R.string.today_power_format,
-                "${Util.getDoubleText(eToday)}${MainApplication.instance().getString(R.string.kwh)}"
+                R.string.today_generate_electricity_format,
+                valueFromKWh.first + valueFromKWh.second
             )
     }
 
     fun getETotalText(): String {
+        val valueFromKWh = ValueUtil.valueFromKWh(eTotal)
         return MainApplication.instance()
             .getString(
-                R.string.total_power_format,
-                "${Util.getDoubleText(eTotal)}${MainApplication.instance().getString(R.string.kwh)}"
+                R.string.total_generate_electricity_format,
+                valueFromKWh.first + valueFromKWh.second
             )
     }
 
@@ -98,8 +101,9 @@ data class DeviceModel(
      * 功率
      */
     fun getPowerText(): String {
+        val valueFromW = ValueUtil.valueFromW(power)
         return MainApplication.instance()
-            .getString(R.string.current_power_format, Util.getDoubleText(power))
+            .getString(R.string.current_power_format, valueFromW.first + valueFromW.second)
     }
 
     /**
@@ -107,7 +111,10 @@ data class DeviceModel(
      */
     fun getElectricityText(): String {
         return MainApplication.instance()
-            .getString(R.string.electricity_format, Util.getDoubleText(cur) + "A")
+            .getString(
+                R.string.electricity_format,
+                Util.getDoubleText(cur) + MainApplication.instance().getString(R.string.a)
+            )
     }
 
     /**
@@ -115,6 +122,9 @@ data class DeviceModel(
      */
     fun getVoltageText(): String {
         return MainApplication.instance()
-            .getString(R.string.voltage_format, Util.getDoubleText(vol) + "V")
+            .getString(
+                R.string.voltage_format,
+                Util.getDoubleText(vol) + MainApplication.instance().getString(R.string.v)
+            )
     }
 }

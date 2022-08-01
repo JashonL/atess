@@ -2,6 +2,7 @@ package com.growatt.atess.model.plant
 
 import com.growatt.atess.R
 import com.growatt.atess.application.MainApplication
+import com.growatt.atess.util.ValueUtil
 import com.growatt.lib.util.Util
 
 /**
@@ -86,28 +87,33 @@ data class HpsSystemOperationModel(
     }
 
     fun getOilEngineText(): String {
+        val valueFromW = ValueUtil.valueFromW(dgGridPower)
         return MainApplication.instance()
-            .getString(R.string.oil_engine_power_format, Util.getDoubleText(dgGridPower))
+            .getString(R.string.oil_engine_power_format, valueFromW.first + valueFromW.second)
     }
 
     fun getPVText(): String {
+        val valueFromW = ValueUtil.valueFromW(ppv)
         return MainApplication.instance()
-            .getString(R.string.pv_power_format, Util.getDoubleText(ppv))
+            .getString(R.string.pv_power_format, valueFromW.first + valueFromW.second)
     }
 
     fun getGridText(): String {
+        val valueFromW = ValueUtil.valueFromW(bActivePower)
         return MainApplication.instance()
-            .getString(R.string.grid_power_format, Util.getDoubleText(bActivePower))
+            .getString(R.string.grid_power_format, valueFromW.first + valueFromW.second)
     }
 
     fun getLoadText(): String {
+        val valueFromW = ValueUtil.valueFromW(loadActivePower)
         return MainApplication.instance()
-            .getString(R.string.load_power_format, Util.getDoubleText(loadActivePower))
+            .getString(R.string.load_power_format, valueFromW.first + valueFromW.second)
     }
 
     fun getChargeText(): String {
+        val valueFromW = ValueUtil.valueFromW(pac)
         return MainApplication.instance()
-            .getString(R.string.charge_power_format, Util.getDoubleText(pac))
+            .getString(R.string.charge_power_format, valueFromW.first + valueFromW.second)
     }
 
     fun getBatteryPercentText(): String {

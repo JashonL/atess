@@ -12,8 +12,8 @@ import com.growatt.atess.databinding.FragmentPlantEnergyInfoBinding
 import com.growatt.atess.databinding.ItemEnergyInfoBinding
 import com.growatt.atess.model.plant.DeviceEnergyInfoModel
 import com.growatt.atess.ui.plant.viewmodel.PlantInfoViewModel
+import com.growatt.atess.util.ValueUtil
 import com.growatt.lib.util.ToastUtil
-import com.growatt.lib.util.Util
 import com.growatt.lib.util.gone
 import com.growatt.lib.util.visible
 
@@ -61,7 +61,7 @@ class PlantEnergyInfoFragment : BaseFragment() {
                         generateItemView(
                             it.getTypeDrawableResId(),
                             it.getTypeName(),
-                            Pair(Util.getDoubleText(it.today), Util.getDoubleText(it.total))
+                            ValueUtil.valueFromKWh(it.today), ValueUtil.valueFromKWh(it.total)
                         )
                     )
                 }
@@ -73,13 +73,16 @@ class PlantEnergyInfoFragment : BaseFragment() {
     private fun generateItemView(
         @DrawableRes drawableResId: Int,
         name: String,
-        dayAndTotal: Pair<String, String>
+        dayAndUnit: Pair<String, String>,
+        totalAndUnit: Pair<String, String>
     ): View {
         val itemBinding = ItemEnergyInfoBinding.inflate(layoutInflater, binding.llContainer, false)
         itemBinding.ivIcon.setImageResource(drawableResId)
         itemBinding.tvName.text = name
-        itemBinding.tvPhotovoltaicOutputDay.text = dayAndTotal.first
-        itemBinding.tvPhotovoltaicOutputTotal.text = dayAndTotal.second
+        itemBinding.tvPhotovoltaicOutputDay.text = dayAndUnit.first
+        itemBinding.tvPhotovoltaicOutputDayUnit.text = dayAndUnit.second
+        itemBinding.tvPhotovoltaicOutputTotal.text = totalAndUnit.first
+        itemBinding.tvPhotovoltaicOutputTotalUnit.text = totalAndUnit.second
         return itemBinding.root
     }
 

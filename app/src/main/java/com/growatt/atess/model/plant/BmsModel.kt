@@ -83,17 +83,26 @@ data class BatteryModel(
 
     fun getMaxVolText(): String {
         return MainApplication.instance()
-            .getString(R.string.max_voltage_format, Util.getDoubleText(maxVol) + "V")
+            .getString(
+                R.string.max_voltage_format,
+                Util.getDoubleText(maxVol) + MainApplication.instance().getString(R.string.v)
+            )
     }
 
     fun getMinVolText(): String {
         return MainApplication.instance()
-            .getString(R.string.min_voltage_format, Util.getDoubleText(minVol) + "V")
+            .getString(
+                R.string.min_voltage_format,
+                Util.getDoubleText(minVol) + MainApplication.instance().getString(R.string.v)
+            )
     }
 
     fun getVolText(): String {
         return MainApplication.instance()
-            .getString(R.string.voltage_format, Util.getDoubleText(vol) + "V")
+            .getString(
+                R.string.voltage_format,
+                Util.getDoubleText(vol) + MainApplication.instance().getString(R.string.v)
+            )
     }
 
     private fun getSafeChildList(): Array<BatteryModel> {

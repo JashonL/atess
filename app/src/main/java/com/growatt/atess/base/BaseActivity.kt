@@ -5,8 +5,8 @@ import android.content.Context
 import android.os.Build
 import android.os.LocaleList
 import androidx.appcompat.app.AppCompatActivity
+import com.growatt.atess.R
 import com.growatt.lib.LibApplication
-import com.growatt.lib.R
 import com.growatt.lib.service.ServiceManager
 import com.growatt.lib.service.account.IAccountService
 import com.growatt.lib.service.device.IDeviceService

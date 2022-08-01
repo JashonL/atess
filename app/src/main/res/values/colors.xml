@@ -15,6 +15,7 @@
     <color name="text_gray_99">#FF999999</color>
     <color name="text_gray_bb">#FFBBBBBB</color>
     <color name="text_red">@color/colorAccent</color>
+    <color name="text_red_99">@color/color_99E2001A</color>
     <color name="text_green">#3FAE29</color>
     <color name="text_blue">@color/color_0087FD</color>
     <color name="text_0F4006">#FF0F4006</color>
@@ -39,4 +40,5 @@
     <color name="color_D4EC59">#D4EC59</color>
     <color name="color_1A3FAE29">#1A3FAE29</color>
     <color name="color_F6F6F8">#FFF6F6F8</color>
+    <color name="color_99E2001A">#99E2001A</color>
 </resources>

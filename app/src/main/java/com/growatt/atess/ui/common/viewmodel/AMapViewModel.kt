@@ -11,7 +11,7 @@ import com.growatt.atess.base.BaseViewModel
 import com.growatt.lib.service.location.LocationInfo
 
 /**
- * 找回密码
+ * 高德地图
  */
 class AMapViewModel : BaseViewModel(), GeocodeSearch.OnGeocodeSearchListener {
     private val geocodeSearch = GeocodeSearch(MainApplication.instance())

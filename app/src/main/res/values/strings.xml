@@ -16,6 +16,7 @@
     <string name="info_space">体验馆>></string>
     <string name="username">用户名</string>
     <string name="password">密码</string>
+    <string name="loading">正在加载中...</string>
     <string name="please_input_username">请输入用户名</string>
     <string name="please_input_password">请输入密码</string>
     <string name="agree_company_user_agreement">同意本公司各项%s&amp;%s</string>
@@ -106,8 +107,6 @@
     <string name="device_count">设备数量</string>
     <string name="total_component_power">组件总功率</string>
     <string name="current_power">实时功率</string>
-    <string name="today_power">今日发电</string>
-    <string name="total_power">累计发电</string>
     <string name="slash_format">%s/%s</string>
 
     <string name="service_manual">使用手册</string>
@@ -153,12 +152,14 @@
     <string name="trouble_format">故障(%d)</string>
     <string name="nothing_plant_format">无%s电站</string>
 
-    <string name="daily_output">日发电量</string>
-    <string name="monthly_output">月发电量</string>
-    <string name="total_output">累计电量</string>
+    <string name="today_generate_electricity">今日发电</string>
+    <string name="month_generate_electricity">当月发电</string>
+    <string name="total_generate_electricity">累计发电</string>
+    <string name="today_generate_electricity_format">今日发电:%s</string>
+    <string name="total_generate_electricity_format">累计发电:%s</string>
     <string name="energy_info">能源概况</string>
-    <string name="day_with_unit">当日(kWh)</string>
-    <string name="total_with_unit">累计(kWh)</string>
+    <string name="current_day">当日</string>
+    <string name="total">累计</string>
     <string name="photovoltaic_output">光伏产出</string>
     <string name="diesel_engine_machine_output">柴油机电机产出</string>
     <string name="battery_charge">电池充电</string>
@@ -171,18 +172,16 @@
     <string name="grid_connected_inverter_power_format">并网逆变器功率:%skW</string>
     <string name="device_type">设备类型</string>
     <string name="device_sn">设备序列号</string>
-    <string name="input_power_format">输入功率:%skW</string>
-    <string name="output_power_format">输出功率:%skW</string>
+    <string name="input_power_format">输入功率:%s</string>
+    <string name="output_power_format">输出功率:%s</string>
     <string name="output_power">输出功率</string>
-    <string name="load_power_format">负载功率:%skW</string>
-    <string name="discharge_power_format">放电功率:%skW</string>
-    <string name="current_power_format">当前功率:%skW</string>
+    <string name="load_power_format">负载功率:%s</string>
+    <string name="discharge_power_format">放电功率:%s</string>
+    <string name="current_power_format">当前功率:%s</string>
     <string name="delete">删除</string>
     <string name="my_devices">我的设备</string>
     <string name="sn_format">序列号:%s</string>
     <string name="model_format">型号:%s</string>
-    <string name="today_power_format">今日发电:%s</string>
-    <string name="total_power_format">累计发电:%s</string>
     <string name="hps">HPS</string>
     <string name="pcs">PCS</string>
     <string name="pbd">PBD</string>
@@ -203,15 +202,20 @@
     <string name="please_input_device_sn_or_alias">请输入设备序列号或别名</string>
     <string name="all_params">全部参数</string>
     <string name="kwh">kWh</string>
+    <string name="mwh">MWh</string>
     <string name="kwp">kWp</string>
+    <string name="mwp">MWp</string>
     <string name="kw">kW</string>
+    <string name="mw">MW</string>
     <string name="hz">Hz</string>
     <string name="kva">KVA</string>
     <string name="kvar">KVar</string>
     <string name="v">V</string>
     <string name="a">A</string>
+    <string name="kg">kg</string>
+    <string name="t">t</string>
+    <string name="temperature_unit">℃</string>
     <string name="min">Min</string>
-    <string name="kwh_format">%skWh</string>
     <string name="output_voltage">输出电压</string>
     <string name="output_frequency">输出频率</string>
     <string name="environment_temperature">环境温度</string>
@@ -228,7 +232,7 @@
     <string name="bypass_active_power">旁路有功功率</string>
     <string name="bypass_reactive_power">旁路无功功率</string>
     <string name="pv_power">PV功率</string>
-    <string name="pv_power_format">PV功率:%skW</string>
+    <string name="pv_power_format">PV功率:%s</string>
     <string name="pv_power_1">PV1功率</string>
     <string name="pv_power_2">PV2功率</string>
     <string name="pv_power_3">PV3功率</string>
@@ -245,12 +249,12 @@
     <string name="pv_voltage_4">PV4电压</string>
     <string name="pv_voltage_5">PV5电压</string>
     <string name="grid_power">电网功率</string>
-    <string name="grid_power_format">电网功率:%skW</string>
-    <string name="oil_engine_power_format">油机功率:%skW</string>
+    <string name="grid_power_format">电网功率:%s</string>
+    <string name="oil_engine_power_format">油机功率:%s</string>
     <string name="battery_charge_power">电池充电功率</string>
-    <string name="charge_power_format">充电功率:%skW</string>
+    <string name="charge_power_format">充电功率:%s</string>
     <string name="battery_percent_format">电池百分比:%s</string>
-    <string name="pbd_output_power_format">PBD输出功率：%skW</string>
+    <string name="pbd_output_power_format">PBD输出功率：%s</string>
     <string name="battery_discharge_power">电池放电功率</string>
     <string name="load_power">负载功率</string>
     <string name="pv_voltage">PV电压</string>
@@ -299,6 +303,10 @@
     <string name="reduce_deforestation">减少森林砍伐</string>
     <string name="power_trends">电量趋势</string>
     <string name="recent_search">最近搜索</string>
+    <string name="today_use_electricity">今日用电</string>
+    <string name="month_use_electricity">当月用电</string>
+    <string name="total_use_electricity">累计用电</string>
+    <string name="spec">棵</string>
 
     <!-- image crop-->
     <string name="crop_image_menu_crop">裁剪</string>

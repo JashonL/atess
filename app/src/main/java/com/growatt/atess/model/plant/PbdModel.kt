@@ -3,6 +3,7 @@ package com.growatt.atess.model.plant
 import com.growatt.atess.R
 import com.growatt.atess.application.MainApplication
 import com.growatt.atess.model.plant.ui.IDeviceInfoHead
+import com.growatt.atess.util.ValueUtil
 import com.growatt.lib.util.Util
 import org.json.JSONObject
 
@@ -98,9 +99,12 @@ data class PbdModel(
         val eChargeTimeTodayText = "${Util.getDoubleText(eChargeTimeToday)}${
             MainApplication.instance().getString(R.string.min)
         }"
-        val envText = "${Util.getDoubleText(envTemp)}℃"
+        val envText = "${Util.getDoubleText(envTemp)}${
+            MainApplication.instance().getString(R.string.temperature_unit)
+        }"
         val selfTimeText = "${selfTime}s"
-        val bvbusText = "${Util.getDoubleText(bvbus)}V}"
+        val bvbusText =
+            "${Util.getDoubleText(bvbus)}${MainApplication.instance().getString(R.string.v)}}"
 
         val json = JSONObject()
         json.put(
@@ -121,14 +125,15 @@ data class PbdModel(
     }
 
     fun getTotalPowerText(): String {
-        return Util.getDoubleText(ppv) + "W"
+        val valueFromW2 = ValueUtil.valueFromW(ppv)
+        return valueFromW2.first + valueFromW2.second
     }
 
-    fun getETodayText(): String {
-        return Util.getDoubleText(eToday)
+    fun getETodayWithUnitText(): Pair<String, String> {
+        return ValueUtil.valueFromKWh(eToday)
     }
 
-    fun getETotalText(): String {
-        return Util.getDoubleText(eTotal)
+    fun getETotalWithUnitText(): Pair<String, String> {
+        return ValueUtil.valueFromKWh(eTotal)
     }
 }

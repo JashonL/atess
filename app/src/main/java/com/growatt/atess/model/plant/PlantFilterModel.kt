@@ -18,9 +18,9 @@ data class PlantFilterModel(val filterName: String, val filterType: Int) {
                 ), PlantFilterModel(
                     MainApplication.instance().getString(R.string.current_power), 4
                 ), PlantFilterModel(
-                    MainApplication.instance().getString(R.string.today_power), 5
+                    MainApplication.instance().getString(R.string.today_generate_electricity), 5
                 ), PlantFilterModel(
-                    MainApplication.instance().getString(R.string.total_power), 6
+                    MainApplication.instance().getString(R.string.total_generate_electricity), 6
                 )
             )
         }

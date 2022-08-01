@@ -247,8 +247,8 @@ class PlantListFragment(
                     ViewUtil.createShape(holder.getColor(R.color.color_33000000), 0, 0, 2, 2)
                 binding.tvTodayText.text = MainApplication.instance().getString(
                     R.string.slash_format,
-                    holder.getString(R.string.today_power),
-                    holder.getString(R.string.total_power)
+                    holder.getString(R.string.today_generate_electricity),
+                    holder.getString(R.string.total_generate_electricity)
                 )
                 holder.binding = binding
                 binding.root.setOnClickListener(holder)

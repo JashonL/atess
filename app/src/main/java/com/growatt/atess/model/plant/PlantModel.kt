@@ -1,6 +1,7 @@
 package com.growatt.atess.model.plant
 
 import android.os.Parcelable
+import com.growatt.atess.util.ValueUtil
 import com.growatt.lib.util.DateUtils
 import com.growatt.lib.util.Util
 import kotlinx.parcelize.Parcelize
@@ -16,7 +17,7 @@ data class PlantModel @JvmOverloads constructor(
     val atsTimezoneStr: String? = null,//时区
     val currentPacStr: String? = null,//实时功率0kW
     val nominalPowerStr: String? = null,//组件总功率1130kWp
-    var nominalPower: String? = null,//组件总功率不带单位的，1130
+    var nominalPower: String? = null,//组件总功率不带单位的，1130000
     val eToday: Double? = null,//今日发电量
     val energyMonth: Double? = null,//月发电量
     val eTotal: Double? = null,//累计发电量
@@ -72,15 +73,30 @@ data class PlantModel @JvmOverloads constructor(
         return Util.getDoubleText(eToday)
     }
 
+    fun getETodayWithUnitText(): String {
+        val valueFromKWh = ValueUtil.valueFromKWh(eToday)
+        return valueFromKWh.first + valueFromKWh.second
+    }
+
     fun getETotalText(): String {
         return Util.getDoubleText(eTotal)
     }
 
+    fun getETotalWithUnitText(): String {
+        val valueFromKWh = ValueUtil.valueFromKWh(eTotal)
+        return valueFromKWh.first + valueFromKWh.second
+    }
+
     /**
-     * 月发电量
+     * 当月发电
      */
-    fun getMonthlyPowerText(): String {
+    fun getMonthGenerateElectricity(): String {
         return Util.getDoubleText(energyMonth)
+    }
+
+    fun getMonthGenerateElectricityWithUnitText(): String {
+        val valueFromKWh = ValueUtil.valueFromKWh(energyMonth)
+        return valueFromKWh.first + valueFromKWh.second
     }
 
     fun hasDevices(): Boolean {

@@ -126,10 +126,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:drawablePadding="4dp"
-                android:text="@string/daily_output"
+                android:text="@string/today_generate_electricity"
                 android:textColor="@color/text_gray_99"
                 android:textSize="@dimen/text_small"
-                app:drawableStartCompat="@drawable/ic_today_power" />
+                app:drawableStartCompat="@drawable/ic_today_generate_electricity" />
 
             <TextView
                 android:id="@+id/tv_daily_output"
@@ -139,7 +139,7 @@
                 android:textColor="@color/text_black"
                 android:textSize="@dimen/text_small"
                 android:textStyle="bold"
-                tools:text="32Wp" />
+                tools:text="32kWh" />
 
         </LinearLayout>
 
@@ -154,10 +154,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:drawablePadding="4dp"
-                android:text="@string/monthly_output"
+                android:text="@string/month_generate_electricity"
                 android:textColor="@color/text_gray_99"
                 android:textSize="@dimen/text_small"
-                app:drawableStartCompat="@drawable/ic_monthly_power" />
+                app:drawableStartCompat="@drawable/ic_month_generate_electricity" />
 
             <TextView
                 android:id="@+id/tv_monthly_output"
@@ -167,7 +167,7 @@
                 android:textColor="@color/text_black"
                 android:textSize="@dimen/text_small"
                 android:textStyle="bold"
-                tools:text="32Wp" />
+                tools:text="32kWh" />
 
         </LinearLayout>
 
@@ -182,10 +182,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:drawablePadding="4dp"
-                android:text="@string/total_output"
+                android:text="@string/total_generate_electricity"
                 android:textColor="@color/text_gray_99"
                 android:textSize="@dimen/text_small"
-                app:drawableStartCompat="@drawable/ic_total_power" />
+                app:drawableStartCompat="@drawable/ic_total_generate_electricity" />
 
             <TextView
                 android:id="@+id/tv_total_output"
@@ -195,7 +195,7 @@
                 android:textColor="@color/text_black"
                 android:textSize="@dimen/text_small"
                 android:textStyle="bold"
-                tools:text="32Wp" />
+                tools:text="32kWh" />
 
         </LinearLayout>
 

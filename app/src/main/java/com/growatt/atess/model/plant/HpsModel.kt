@@ -3,6 +3,7 @@ package com.growatt.atess.model.plant
 import com.growatt.atess.R
 import com.growatt.atess.application.MainApplication
 import com.growatt.atess.model.plant.ui.IDeviceInfoHead
+import com.growatt.atess.util.ValueUtil
 import com.growatt.lib.util.Util
 import org.json.JSONObject
 
@@ -106,16 +107,18 @@ data class HpsModel(
     }
 
     override fun getIDeviceParamsJsonStr(): String {
-        val vpvText = "${Util.getDoubleText(vpv)}V"
+        val vpvText =
+            "${Util.getDoubleText(vpv)}${MainApplication.instance().getString(R.string.v)}"
         val facText =
             "${Util.getDoubleText(fac)}${MainApplication.instance().getString(R.string.hz)}"
-        val envText = "${Util.getDoubleText(envTemp)}℃"
+        val envText = "${Util.getDoubleText(envTemp)}${
+            MainApplication.instance().getString(R.string.temperature_unit)
+        }"
         val pac2Text =
             "${Util.getDoubleText(pac2)}${MainApplication.instance().getString(R.string.kva)}"
         val selfTimeText = "${selfTime}s"
-        val loadActivePowerText = "${Util.getDoubleText(loadActivePower)}${
-            MainApplication.instance().getString(R.string.kw)
-        }"
+        val loadActivePowerWithUnit = ValueUtil.valueFromW(loadActivePower)
+        val loadActivePowerText = loadActivePowerWithUnit.first + loadActivePowerWithUnit.second
         val loadReactivePowerText = "${Util.getDoubleText(loadReactivePower)}${
             MainApplication.instance().getString(R.string.kvar)
         }"

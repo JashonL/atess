@@ -57,13 +57,13 @@ class BmsHeadFragment : BaseFragment() {
         binding.llContainer.addView(
             generateItemView(
                 getString(R.string.battery_total_voltage),
-                Util.getDoubleText(bmsModel.vBat) + "V"
+                Util.getDoubleText(bmsModel.vBat) + getString(R.string.v)
             )
         )
         binding.llContainer.addView(
             generateItemView(
                 getString(R.string.battery_total_electricity),
-                Util.getDoubleText(bmsModel.cBat) + "A"
+                Util.getDoubleText(bmsModel.cBat) + getString(R.string.a)
             )
         )
         binding.llContainer.addView(

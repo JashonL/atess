@@ -95,15 +95,17 @@ object Util {
         }
     }
 
-
     /**
-     * Double转为字符串，四舍五入后去掉后面的0
+     * Double转为字符串，四舍五入后保留newScale位小数点，去掉末尾的0
+     * @param newScale 小数点后面保留的位数
+     * 添加JvmOverloads注解，可以在java代码中调用这个有默认参数的方法
      */
-    fun getDoubleText(value: Double?): String {
+    @JvmOverloads
+    fun getDoubleText(value: Double?, newScale: Int = 1): String {
         if (value == null) {
-            return "0.0"
+            return "0"
         }
-        return BigDecimal(value).setScale(1, BigDecimal.ROUND_HALF_UP).stripTrailingZeros()
+        return BigDecimal(value).setScale(newScale, BigDecimal.ROUND_HALF_UP).stripTrailingZeros()
             .toPlainString()
     }
 
