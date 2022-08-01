@@ -98,7 +98,7 @@ object ApiPath {
         /**
          * 添加采集器
          */
-        const val ADD_COLLECTOR = "ATSplant/addDevice"
+        const val ADD_COLLECTOR = "ATSplant/addDatalog"
 
         /**
          * 添加电站
