@@ -55,6 +55,23 @@ class HomeBottomView @JvmOverloads constructor(
         updateView()
     }
 
+    fun showRedPoint(@HomeTab tab: Int, redPointText: String?) {
+        getTabView(tab).showRedPoint(redPointText)
+    }
+
+    fun hideRedPoint(@HomeTab tab: Int) {
+        getTabView(tab).hideRedPoint()
+    }
+
+    private fun getTabView(@HomeTab tab: Int): HomeTabView {
+        return when (tab) {
+            HomeTab.PLANT -> binding.tabPlant
+            HomeTab.SERVICE -> binding.tabService
+            HomeTab.MINE -> binding.tabMine
+            else -> binding.tabSynopsis
+        }
+    }
+
     override fun onClick(v: View?) {
         when {
             v === binding.tabSynopsis -> setSelectPosition(HomeTab.SYNOPSIS)

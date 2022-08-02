@@ -32,13 +32,16 @@
 
     <TextView
         android:id="@+id/tv_red_point"
-        android:layout_width="21dp"
+        android:layout_width="wrap_content"
         android:layout_height="16dp"
         android:background="@drawable/red_point_background"
         android:gravity="center"
+        android:minWidth="16dp"
+        android:paddingStart="5dp"
+        android:paddingEnd="5dp"
         android:textColor="@color/text_white"
-        android:textSize="10sp"
-        tools:text="16" />
+        android:textSize="@dimen/text_10"
+        tools:text="1" />
 
     <TextView
         android:id="@+id/tv_item_sub_name"

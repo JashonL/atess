@@ -60,6 +60,14 @@
             app:showLeftIcon="true" />
 
         <com.growatt.atess.ui.mine.view.SettingItemView
+            android:id="@+id/item_message_center"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            app:itemName="@string/message_center"
+            app:leftIcon="@drawable/ic_message"
+            app:showLeftIcon="true" />
+
+        <com.growatt.atess.ui.mine.view.SettingItemView
             android:id="@+id/item_about"
             android:layout_width="match_parent"
             android:layout_height="50dp"

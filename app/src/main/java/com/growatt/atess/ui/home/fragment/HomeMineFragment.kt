@@ -5,11 +5,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import com.bumptech.glide.Glide
 import com.growatt.atess.R
 import com.growatt.atess.databinding.FragmentHomeMineBinding
 import com.growatt.atess.ui.mine.activity.AboutActivity
 import com.growatt.atess.ui.mine.activity.SettingActivity
+import com.growatt.atess.ui.mine.viewmodel.MessageViewModel
 import com.growatt.atess.ui.mine.viewmodel.SettingViewModel
 import com.growatt.lib.service.account.IAccountService
 
@@ -21,7 +23,8 @@ class HomeMineFragment : HomeBaseFragment(), View.OnClickListener,
     private var _binding: FragmentHomeMineBinding? = null
 
     private val binding get() = _binding!!
-    private val viewModel: SettingViewModel by activityViewModels()
+    private val viewModel: SettingViewModel by viewModels()
+    private val messageViewModel: MessageViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -36,6 +39,11 @@ class HomeMineFragment : HomeBaseFragment(), View.OnClickListener,
     }
 
     private fun initData() {
+        messageViewModel.getUnReadMsgNumLiveData.observe(viewLifecycleOwner) {
+            if (it.second == null && it.first != null) {
+                showUnReadMsgNum(it.first!!)
+            }
+        }
         viewModel.userAvatarLiveData.observe(viewLifecycleOwner) {
             if (it.second == null) {
                 accountService().saveUserAvatar(it.first)
@@ -43,6 +51,16 @@ class HomeMineFragment : HomeBaseFragment(), View.OnClickListener,
         }
         viewModel.fetchUserAvatar()
     }
+
+    private fun showUnReadMsgNum(unReadNum: Int) {
+        if (unReadNum > 0) {
+            binding.itemMessageCenter.showRedPoint(true)
+            binding.itemMessageCenter.setRedPointText(unReadNum.toString())
+        } else {
+            binding.itemMessageCenter.showRedPoint(false)
+        }
+    }
+
 
     private fun showUserAvatar(userAvatar: String?) {
         Glide.with(this).load(userAvatar)
@@ -59,6 +77,7 @@ class HomeMineFragment : HomeBaseFragment(), View.OnClickListener,
     private fun initView() {
         binding.tvUserName.text = accountService().user()?.userName
         showUserAvatar(accountService().userAvatar())
+        showUnReadMsgNum(messageViewModel.getUnReadMsgNumLiveData.value?.first ?: 0)
     }
 
     override fun onClick(v: View?) {

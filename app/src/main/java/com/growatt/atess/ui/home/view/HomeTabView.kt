@@ -4,9 +4,11 @@ import android.content.Context
 import android.graphics.drawable.Drawable
 import android.util.AttributeSet
 import android.view.LayoutInflater
-import android.widget.LinearLayout
+import androidx.constraintlayout.widget.ConstraintLayout
 import com.growatt.atess.R
 import com.growatt.atess.databinding.HomeTabViewBinding
+import com.growatt.lib.util.gone
+import com.growatt.lib.util.visible
 
 /**
  * 自定义组合View-首页底部Tab
@@ -15,7 +17,7 @@ class HomeTabView @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0
-) : LinearLayout(context, attrs, defStyleAttr) {
+) : ConstraintLayout(context, attrs, defStyleAttr) {
 
     private val binding: HomeTabViewBinding
 
@@ -67,4 +69,12 @@ class HomeTabView @JvmOverloads constructor(
         updateView()
     }
 
+    fun showRedPoint(redPointText: String?) {
+        binding.tvRedPoint.visible()
+        binding.tvRedPoint.text = redPointText
+    }
+
+    fun hideRedPoint() {
+        binding.tvRedPoint.gone()
+    }
 }

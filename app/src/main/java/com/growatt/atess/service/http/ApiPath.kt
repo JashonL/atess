@@ -77,6 +77,21 @@ object ApiPath {
          */
         const val UPLOAD_USER_ICON = "ATSSetting/uploadUserIcon"
 
+        /**
+         * 获取消息列表
+         */
+        const val GET_MESSAGE_LIST = "ATSSetting/getUserUnreadMsgList"
+
+        /**
+         * 获取未读消息数量
+         */
+        const val GET_MESSAGE_UNREAD_NUM = "ATSSetting/getUserUnreadMsgNum"
+
+        /**
+         * 删除消息
+         */
+        const val DELETE_MESSAGE = "ATSSetting/delMsgById"
+
     }
 
     object Plant {

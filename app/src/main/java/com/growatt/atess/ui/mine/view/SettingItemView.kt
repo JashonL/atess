@@ -73,11 +73,7 @@ class SettingItemView @JvmOverloads constructor(
         } else {
             binding.tvItemSubName.gone()
         }
-        if (showRedPoint) {
-            binding.tvRedPoint.visible()
-        } else {
-            binding.tvRedPoint.gone()
-        }
+        refreshRedPoint()
         binding.tvItemSubName.setTextColor(textSubNameColor)
         binding.tvItemName.text = itemName
         setSubName(subName)
@@ -92,5 +88,22 @@ class SettingItemView @JvmOverloads constructor(
 
     fun getSubName(): String {
         return binding.tvItemSubName.text.toString()
+    }
+
+    fun setRedPointText(redText: String) {
+        binding.tvRedPoint.text = redText
+    }
+
+    fun showRedPoint(isShow: Boolean) {
+        showRedPoint = isShow
+        refreshRedPoint()
+    }
+
+    private fun refreshRedPoint() {
+        if (showRedPoint) {
+            binding.tvRedPoint.visible()
+        } else {
+            binding.tvRedPoint.gone()
+        }
     }
 }

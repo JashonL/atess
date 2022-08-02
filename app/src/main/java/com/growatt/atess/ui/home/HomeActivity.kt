@@ -3,11 +3,14 @@ package com.growatt.atess.ui.home
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import androidx.activity.viewModels
 import com.growatt.atess.R
 import com.growatt.atess.base.BaseActivity
 import com.growatt.atess.databinding.ActivityHomeBinding
 import com.growatt.atess.ui.home.fragment.*
 import com.growatt.atess.ui.home.view.HomeTab
+import com.growatt.atess.ui.mine.viewmodel.MessageViewModel
+import com.growatt.lib.util.ToastUtil
 
 class HomeActivity : BaseActivity() {
 
@@ -25,6 +28,8 @@ class HomeActivity : BaseActivity() {
     private lateinit var binding: ActivityHomeBinding
 
     private var currentShowFragment: HomeBaseFragment? = null
+
+    private val messageViewModel: MessageViewModel by viewModels()
 
     private val homeFragments by lazy(LazyThreadSafetyMode.NONE) {
         mutableMapOf(
@@ -52,6 +57,17 @@ class HomeActivity : BaseActivity() {
         } else {
             homeTab = savedInstanceState.getInt(KEY_HOME_TAB)
         }
+        messageViewModel.getUnReadMsgNumLiveData.observe(this) {
+            if (it.second == null) {
+                if (it.first ?: 0 > 0) {
+                    binding.homeBottomView.showRedPoint(HomeTab.MINE, it.first?.toString())
+                } else {
+                    binding.homeBottomView.hideRedPoint(HomeTab.MINE)
+                }
+            } else {
+                ToastUtil.show(it.second)
+            }
+        }
     }
 
     override fun onNewIntent(intent: Intent?) {
@@ -60,6 +76,11 @@ class HomeActivity : BaseActivity() {
             homeTab = intent.getIntExtra(KEY_HOME_TAB, HomeTab.SYNOPSIS)
         }
         switchToFragment(homeTab)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        messageViewModel.getUnReadMessageNum()
     }
 
     private fun initView() {

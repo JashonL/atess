@@ -81,13 +81,27 @@ class HpsSystemOperationFragment(val plantId: String?, val deviceSn: String?) : 
             binding.tvBatteryPercent.text = it.getBatteryPercentText()
 
             when (it.gridFlowDirection()) {
-                HpsSystemOperationModel.OUTPUT -> binding.lavGrid.setAnimation(R.raw.lottie_arrow_right)
-                HpsSystemOperationModel.INPUT -> binding.lavGrid.setAnimation(R.raw.lottie_arrow_left)
+                HpsSystemOperationModel.OUTPUT -> {
+                    binding.lavGrid.setAnimation(R.raw.lottie_arrow_right)
+                    binding.lavGrid.visible()
+                }
+                HpsSystemOperationModel.INPUT -> {
+                    binding.lavGrid.setAnimation(R.raw.lottie_arrow_left)
+                    binding.lavGrid.visible()
+                }
+                HpsSystemOperationModel.NEUTRALIZE -> binding.lavGrid.invisible()
             }
 
             when (it.atsFlowDirection()) {
-                HpsSystemOperationModel.OUTPUT -> binding.lavAts.setAnimation(R.raw.lottie_arrow_down)
-                HpsSystemOperationModel.INPUT -> binding.lavAts.setAnimation(R.raw.lottie_arrow_top)
+                HpsSystemOperationModel.OUTPUT -> {
+                    binding.lavAts.setAnimation(R.raw.lottie_arrow_down)
+                    binding.lavAts.visible()
+                }
+                HpsSystemOperationModel.INPUT -> {
+                    binding.lavAts.setAnimation(R.raw.lottie_arrow_top)
+                    binding.lavAts.visible()
+                }
+                HpsSystemOperationModel.NEUTRALIZE -> binding.lavAts.invisible()
             }
 
             when (it.batteryFlowDirection()) {
