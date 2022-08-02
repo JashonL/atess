@@ -71,6 +71,7 @@ class HomeMineFragment : HomeBaseFragment(), View.OnClickListener,
     private fun setListener() {
         binding.itemSetting.setOnClickListener(this)
         binding.itemAbout.setOnClickListener(this)
+        binding.itemMessageCenter.setOnClickListener(this)
         accountService().addUserProfileChangeListener(this)
     }
 
@@ -84,6 +85,7 @@ class HomeMineFragment : HomeBaseFragment(), View.OnClickListener,
         when {
             v === binding.itemSetting -> SettingActivity.start(context)
             v === binding.itemAbout -> AboutActivity.start(context)
+            v === binding.itemMessageCenter -> {}
         }
     }
 

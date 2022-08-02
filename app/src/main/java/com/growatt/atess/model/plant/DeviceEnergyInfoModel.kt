@@ -23,7 +23,7 @@ data class DeviceEnergyInfoModel(
     fun getTypeName(): String {
         return when (type) {
             1 -> MainApplication.instance().getString(R.string.photovoltaic_output)
-            2 -> MainApplication.instance().getString(R.string.diesel_engine_machine_output)
+            2 -> MainApplication.instance().getString(R.string.oil_machine_output)
             3 -> MainApplication.instance().getString(R.string.battery_charge)
             4 -> MainApplication.instance().getString(R.string.battery_discharge)
             5 -> MainApplication.instance().getString(R.string.load_consumption)
@@ -38,7 +38,7 @@ data class DeviceEnergyInfoModel(
     fun getTypeDrawableResId(): Int {
         return when (type) {
             1 -> R.drawable.ic_photovoltaic_output
-            2 -> R.drawable.ic_diesel_engine_machine_output
+            2 -> R.drawable.ic_oil_engine_output
             3 -> R.drawable.ic_battery_charge
             4 -> R.drawable.ic_battery_discharge
             5 -> R.drawable.ic_load_consumption

@@ -161,7 +161,6 @@
     <string name="current_day">当日</string>
     <string name="total">累计</string>
     <string name="photovoltaic_output">光伏产出</string>
-    <string name="diesel_engine_machine_output">柴油机电机产出</string>
     <string name="battery_charge">电池充电</string>
     <string name="battery_discharge">电池放电</string>
     <string name="load_consumption">负载消耗</string>
