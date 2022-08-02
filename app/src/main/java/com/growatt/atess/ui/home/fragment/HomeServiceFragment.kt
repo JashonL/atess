@@ -33,7 +33,7 @@ class HomeServiceFragment : HomeBaseFragment() {
         binding.tabLayout.setSelectTabPosition(0, false)
         binding.viewpager2.adapter = Adapter(this)
         binding.tabLayout.setupWithViewPager2(binding.viewpager2)
-
+        binding.viewpager2.offscreenPageLimit = binding.viewpager2.adapter?.itemCount ?: 0
     }
 
     override fun onDestroyView() {

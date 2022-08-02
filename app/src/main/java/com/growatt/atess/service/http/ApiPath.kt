@@ -211,4 +211,16 @@ object ApiPath {
         const val GET_PV_AND_LOAD = "ATSOverview/getPVAndLoad"
 
     }
+
+    object Service {
+        /**
+         * 服务-使用手册列表
+         */
+        const val GET_SERVICE_MANUAL = "ATService/getManual"
+
+        /**
+         * 服务-安装视频列表
+         */
+        const val GET_INSTALL_VIDEO = "ATService/getInstallVideo"
+    }
 }

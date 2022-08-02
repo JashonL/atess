@@ -44,13 +44,17 @@ public class DividerItemDecoration extends RecyclerView.ItemDecoration {
     private int mOrientation;
 
     public DividerItemDecoration(Context context, int orientation, @ColorInt int colorInt) {
+        this(context, orientation, colorInt, 1f);
+    }
+
+    public DividerItemDecoration(Context context, int orientation, @ColorInt int colorInt, float dividerSizeDp) {
         setOrientation(orientation);
         GradientDrawable drawable = new GradientDrawable();
         drawable.setColor(colorInt);
         if (orientation == HORIZONTAL) {
-            drawable.setSize(ViewUtil.INSTANCE.dp2px(context, 1f), LinearLayout.LayoutParams.MATCH_PARENT);
+            drawable.setSize(ViewUtil.INSTANCE.dp2px(context, dividerSizeDp), LinearLayout.LayoutParams.MATCH_PARENT);
         } else {
-            drawable.setSize(LinearLayout.LayoutParams.MATCH_PARENT, ViewUtil.INSTANCE.dp2px(context, 1f));
+            drawable.setSize(LinearLayout.LayoutParams.MATCH_PARENT, ViewUtil.INSTANCE.dp2px(context, dividerSizeDp));
         }
 
         mDivider = drawable;
