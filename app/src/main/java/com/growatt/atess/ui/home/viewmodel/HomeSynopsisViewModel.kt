@@ -4,6 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.growatt.atess.base.BaseViewModel
 import com.growatt.atess.model.plant.ChartListDataModel
+import com.growatt.atess.model.plant.PVAndLoadModel
 import com.growatt.atess.model.plant.SynopsisTotalModel
 import com.growatt.atess.service.http.ApiPath
 import com.growatt.atess.view.DateType
@@ -24,6 +25,8 @@ class HomeSynopsisViewModel : BaseViewModel() {
     val getSynopsisTotalLiveData = MutableLiveData<Pair<SynopsisTotalModel?, String?>>()
 
     val getPowerTrendsChartLiveData = MutableLiveData<Pair<ChartListDataModel?, String?>>()
+
+    val getPVAndLoadLiveData = MutableLiveData<Pair<PVAndLoadModel?, String?>>()
 
     /**
      * 获取总览信息
@@ -71,6 +74,29 @@ class HomeSynopsisViewModel : BaseViewModel() {
                 override fun onFailure(error: String?) {
                     super.onFailure(error)
                     getPowerTrendsChartLiveData.value = Pair(null, error ?: "")
+                }
+            })
+        }
+    }
+
+    /**
+     * 获取光伏产出与负载用电
+     */
+    fun getPVAndLoadInfo() {
+        viewModelScope.launch {
+            apiService().post(ApiPath.Plant.GET_PV_AND_LOAD, object :
+                HttpCallback<HttpResult<PVAndLoadModel>>() {
+                override fun success(result: HttpResult<PVAndLoadModel>) {
+                    if (result.isBusinessSuccess()) {
+                        getPVAndLoadLiveData.value = Pair(result.data, null)
+                    } else {
+                        getPVAndLoadLiveData.value = Pair(null, result.msg ?: "")
+                    }
+                }
+
+                override fun onFailure(error: String?) {
+                    super.onFailure(error)
+                    getPVAndLoadLiveData.value = Pair(null, error ?: "")
                 }
             })
         }

@@ -1,0 +1,451 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data>
+
+        <import type="com.growatt.atess.util.ValueUtil" />
+
+        <variable
+            name="model"
+            type="com.growatt.atess.model.plant.PVAndLoadModel" />
+
+    </data>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/color_white"
+        android:divider="@drawable/line_divider"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:showDividers="middle"
+        tools:context="com.growatt.atess.ui.home.fragment.synopsis.PvAndLoadFragment">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:paddingTop="16dp"
+            android:paddingBottom="16dp">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="bottom"
+                android:orientation="horizontal"
+                android:paddingBottom="10dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/photovoltaic_output"
+                    android:textColor="@color/text_black"
+                    android:textSize="@dimen/text_medium"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:text='@{model.PVOutWithUnit.first}'
+                    android:textColor="@color/text_green_99"
+                    android:textSize="@dimen/text_medium"
+                    tools:text="624" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="1dp"
+                    android:text='@{model.PVOutWithUnit.second}'
+                    android:textColor="@color/text_green_99"
+                    android:textSize="@dimen/text_10"
+                    tools:text="@string/kwh" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingStart="32dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/use_by_self"
+                    android:textColor="@color/text_black"
+                    android:textSize="@dimen/text_small" />
+
+                <FrameLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="7dp">
+
+                    <View
+                        android:id="@+id/progress_pv_self"
+                        android:layout_width="150dp"
+                        android:layout_height="12dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="20dp" />
+
+                    <TextView
+                        android:id="@+id/tv_pv_self_percent"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:gravity="center"
+                        android:text="@{model.PVSelfPercentText}"
+                        android:textColor="@color/text_white"
+                        android:textSize="8sp"
+                        tools:text="30%" />
+
+                </FrameLayout>
+
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:text='@{model.PVSelfWithUnit.first}'
+                        android:textColor="@color/text_green_99"
+                        android:textSize="@dimen/text_small"
+                        tools:text="624" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom"
+                        android:layout_marginStart="1dp"
+                        android:text='@{model.PVSelfWithUnit.second}'
+                        android:textColor="@color/text_green_99"
+                        android:textSize="@dimen/text_10"
+                        tools:text="@string/kwh" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingStart="32dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/feed_into_the_grid"
+                    android:textColor="@color/text_black"
+                    android:textSize="@dimen/text_small" />
+
+                <FrameLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="7dp">
+
+                    <View
+                        android:id="@+id/progress_pv_grid"
+                        android:layout_width="150dp"
+                        android:layout_height="12dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="20dp" />
+
+                    <TextView
+                        android:id="@+id/tv_pv_grid_percent"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:gravity="center"
+                        android:text="@{model.PVToGridPercentText}"
+                        android:textColor="@color/text_white"
+                        android:textSize="8sp"
+                        tools:text="30%" />
+
+                </FrameLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:text='@{model.PVToGridWithUnit.first}'
+                        android:textColor="@color/text_green_99"
+                        android:textSize="@dimen/text_small"
+                        tools:text="624" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom"
+                        android:layout_marginStart="1dp"
+                        android:text='@{model.PVToGridWithUnit.second}'
+                        android:textColor="@color/text_green_99"
+                        android:textSize="@dimen/text_10"
+                        tools:text="@string/kwh" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:paddingTop="16dp"
+            android:paddingBottom="16dp">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="bottom"
+                android:orientation="horizontal"
+                android:paddingBottom="10dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/load_electricity"
+                    android:textColor="@color/text_black"
+                    android:textSize="@dimen/text_medium"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:text='@{model.loadWithUnit.first}'
+                    android:textColor="@color/text_orange_99"
+                    android:textSize="@dimen/text_medium"
+                    tools:text="624" />
+
+                <TextView
+                    android:id="@+id/pv_unit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="1dp"
+                    android:text='@{model.loadWithUnit.second}'
+                    android:textColor="@color/text_orange_99"
+                    android:textSize="@dimen/text_10"
+                    tools:text="@string/kwh" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingStart="32dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/use_by_self"
+                    android:textColor="@color/text_black"
+                    android:textSize="@dimen/text_small" />
+
+                <FrameLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="7dp">
+
+                    <View
+                        android:id="@+id/progress_load_self"
+                        android:layout_width="150dp"
+                        android:layout_height="12dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="20dp" />
+
+                    <TextView
+                        android:id="@+id/tv_load_self_use_percent"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:gravity="center"
+                        android:text="@{model.loadSelfUsePercentText}"
+                        android:textColor="@color/text_white"
+                        android:textSize="8sp"
+                        tools:text="30%" />
+
+                </FrameLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:text='@{model.loadSelfUseWithUnit.first}'
+                        android:textColor="@color/text_orange_99"
+                        android:textSize="@dimen/text_small"
+                        tools:text="624" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom"
+                        android:layout_marginStart="1dp"
+                        android:text='@{model.loadSelfUseWithUnit.second}'
+                        android:textColor="@color/text_orange_99"
+                        android:textSize="@dimen/text_10"
+                        tools:text="@string/kwh" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingStart="32dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/take_electricity_grid"
+                    android:textColor="@color/text_black"
+                    android:textSize="@dimen/text_small" />
+
+                <FrameLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="7dp">
+
+                    <View
+                        android:id="@+id/progress_load_take_electricity_grid"
+                        android:layout_width="150dp"
+                        android:layout_height="12dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="20dp" />
+
+                    <TextView
+                        android:id="@+id/tv_load_from_grid_percent"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:gravity="center"
+                        android:text="@{model.loadFromGridPercentText}"
+                        android:textColor="@color/text_white"
+                        android:textSize="8sp"
+                        tools:text="30%" />
+
+                </FrameLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:text='@{model.loadFromGridWithUnit.first}'
+                        android:textColor="@color/text_orange_99"
+                        android:textSize="@dimen/text_small"
+                        tools:text="624" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom"
+                        android:layout_marginStart="1dp"
+                        android:text='@{model.PVOutWithUnit.second}'
+                        android:textColor="@color/text_orange_99"
+                        android:textSize="@dimen/text_10"
+                        tools:text="@string/kwh" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingStart="32dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/oil_machine_output"
+                    android:textColor="@color/text_black"
+                    android:textSize="@dimen/text_small" />
+
+                <FrameLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="7dp">
+
+                    <View
+                        android:id="@+id/progress_load_oil_engine_output"
+                        android:layout_width="150dp"
+                        android:layout_height="12dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="20dp" />
+
+                    <TextView
+                        android:id="@+id/tv_load_from_oil_engine"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:gravity="center"
+                        android:text="@{model.loadFromOilenginePercentText}"
+                        android:textColor="@color/text_white"
+                        android:textSize="8sp"
+                        tools:text="30%" />
+
+                </FrameLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:text="@{model.loadFromOilEngineWithUnit.first}"
+                        android:textColor="@color/text_orange_99"
+                        android:textSize="@dimen/text_small"
+                        tools:text="624" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom"
+                        android:layout_marginStart="1dp"
+                        android:text="@{model.loadFromOilEngineWithUnit.second}"
+                        android:textColor="@color/text_orange_99"
+                        android:textSize="@dimen/text_10"
+                        tools:text="@string/kwh" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+</layout>

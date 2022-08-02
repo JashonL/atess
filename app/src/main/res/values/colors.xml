@@ -16,10 +16,12 @@
     <color name="text_gray_bb">#FFBBBBBB</color>
     <color name="text_red">@color/colorAccent</color>
     <color name="text_red_99">@color/color_99E2001A</color>
-    <color name="text_green">#3FAE29</color>
+    <color name="text_green">@color/color_green</color>
+    <color name="text_green_99">@color/color_993FAE29</color>
     <color name="text_blue">@color/color_0087FD</color>
     <color name="text_0F4006">#FF0F4006</color>
     <color name="text_orange">@color/color_FF6434</color>
+    <color name="text_orange_99">@color/color_99FF6434</color>
 
     <color name="color_line">#0D000000</color>
     <color name="color_red_80">#CCE2001A</color>
@@ -33,12 +35,14 @@
     <color name="color_0D000000">#0D000000</color>
     <color name="color_990087FD">#990087FD</color>
     <color name="color_0087FD">#0087FD</color>
-    <color name="color_3FAE29">#3FAE29</color>
+    <color name="color_green">#3FAE29</color>
     <color name="color_FF6434">#FF6434</color>
+    <color name="color_99FF6434">#99FF6434</color>
     <color name="color_1A0087FD">#1A0087FD</color>
     <color name="color_82DCDC">#82DCDC</color>
     <color name="color_D4EC59">#D4EC59</color>
     <color name="color_1A3FAE29">#1A3FAE29</color>
     <color name="color_F6F6F8">#FFF6F6F8</color>
     <color name="color_99E2001A">#99E2001A</color>
+    <color name="color_993FAE29">#993FAE29</color>
 </resources>

@@ -276,7 +276,7 @@ class PlantListFragment(
                 PlantModel.PLANT_STATUS_ONLINE -> {
                     binding.tvPlantStatus.text = getString(R.string.online)
                     binding.tvPlantStatus.background =
-                        ViewUtil.createShape(getColor(R.color.color_3FAE29), 8)
+                        ViewUtil.createShape(getColor(R.color.color_green), 8)
                 }
                 PlantModel.PLANT_STATUS_OFFLINE -> {
                     binding.tvPlantStatus.text = getString(R.string.offline)

@@ -27,6 +27,12 @@ fun View.setViewHeight(dpFloat: Float) {
     layoutParams = newLayoutParams
 }
 
+fun View.setViewWidth(dpFloat: Float) {
+    val newLayoutParams = layoutParams
+    newLayoutParams.width = ViewUtil.dp2px(context, dpFloat)
+    layoutParams = newLayoutParams
+}
+
 /**
  * 设置TextView左边Icon
  */

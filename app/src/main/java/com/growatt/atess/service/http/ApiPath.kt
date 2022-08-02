@@ -205,5 +205,10 @@ object ApiPath {
          */
         const val GET_POWER_TRENDS_INFO = "ATSOverview/batTrend"
 
+        /**
+         * 首页总览-光伏产出与负载用电
+         */
+        const val GET_PV_AND_LOAD = "ATSOverview/getPVAndLoad"
+
     }
 }

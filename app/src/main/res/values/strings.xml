@@ -307,6 +307,8 @@
     <string name="month_use_electricity">当月用电</string>
     <string name="total_use_electricity">累计用电</string>
     <string name="spec">棵</string>
+    <string name="use_by_self">自发自用</string>
+    <string name="oil_machine_output">油机产出</string>
 
     <!-- image crop-->
     <string name="crop_image_menu_crop">裁剪</string>
