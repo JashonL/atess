@@ -13,9 +13,6 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.ListAdapter
 import com.bumptech.glide.Glide
-import com.bumptech.glide.load.resource.bitmap.CenterCrop
-import com.bumptech.glide.load.resource.bitmap.RoundedCorners
-import com.bumptech.glide.request.RequestOptions
 import com.growatt.atess.R
 import com.growatt.atess.application.MainApplication
 import com.growatt.atess.base.BaseFragment
@@ -262,11 +259,6 @@ class PlantListFragment(
         fun bindData(plantModel: PlantModel, fragment: PlantListFragment) {
             Glide.with(fragment).load(plantModel.plantImgName)
                 .placeholder(R.drawable.ic_placeholder)
-                .apply(
-                    RequestOptions().transform(
-                        CenterCrop(), RoundedCorners(ViewUtil.dp2px(fragment.requireContext(), 2f))
-                    )
-                )
                 .into(binding.ivPlantImage)
             binding.llCity.background =
                 ViewUtil.createShape(getColor(R.color.color_33000000), 0, 0, 2, 2)

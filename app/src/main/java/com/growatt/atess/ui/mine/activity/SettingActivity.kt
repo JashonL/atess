@@ -10,8 +10,6 @@ import android.view.View
 import androidx.activity.viewModels
 import androidx.core.content.FileProvider
 import com.bumptech.glide.Glide
-import com.bumptech.glide.load.resource.bitmap.CircleCrop
-import com.bumptech.glide.request.RequestOptions
 import com.growatt.atess.BuildConfig
 import com.growatt.atess.R
 import com.growatt.atess.base.BaseActivity
@@ -78,7 +76,6 @@ class SettingActivity : BaseActivity(), View.OnClickListener,
 
     private fun refreshUserProfile() {
         Glide.with(this).load(accountService().userAvatar())
-            .apply(RequestOptions.bitmapTransform(CircleCrop()))
             .placeholder(R.drawable.ic_default_avatar)
             .into(binding.ivAvatar)
         binding.itemUserName.setSubName(accountService().user()?.userName)

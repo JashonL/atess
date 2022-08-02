@@ -107,11 +107,6 @@ class AddPlant2Fragment : BaseFragment(), View.OnClickListener {
         } else {
             Glide.with(this).load(viewModel.addPlantModel.plantFileService)
                 .placeholder(R.drawable.ic_placeholder)
-                .apply(
-                    RequestOptions().transform(
-                        CenterCrop(), RoundedCorners(ViewUtil.dp2px(requireContext(), 2f))
-                    )
-                )
                 .into(binding.ivPlantImage)
             binding.ivPlantImage.visible()
             binding.tvUploadPlantImage.gone()

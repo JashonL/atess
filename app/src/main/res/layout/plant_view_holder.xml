@@ -6,11 +6,13 @@
     android:layout_height="136dp"
     tools:background="@color/color_white">
 
-    <ImageView
+    <androidx.constraintlayout.utils.widget.ImageFilterView
         android:id="@+id/iv_plant_image"
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_marginTop="10dp"
+        android:scaleType="centerCrop"
+        app:round="2dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:background="@color/colorAccent" />

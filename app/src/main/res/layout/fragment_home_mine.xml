@@ -22,11 +22,13 @@
         android:orientation="horizontal"
         android:padding="12dp">
 
-        <ImageView
+        <androidx.constraintlayout.utils.widget.ImageFilterView
             android:id="@+id/iv_avatar"
             android:layout_width="48dp"
             android:layout_height="48dp"
-            android:src="@drawable/ic_default_avatar" />
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_default_avatar"
+            app:roundPercent="1" />
 
         <TextView
             android:id="@+id/tv_user_name"

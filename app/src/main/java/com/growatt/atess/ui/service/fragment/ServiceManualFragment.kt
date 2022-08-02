@@ -9,9 +9,6 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.bumptech.glide.load.resource.bitmap.CenterCrop
-import com.bumptech.glide.load.resource.bitmap.RoundedCorners
-import com.bumptech.glide.request.RequestOptions
 import com.growatt.atess.R
 import com.growatt.atess.base.BaseFragment
 import com.growatt.atess.base.BaseViewHolder
@@ -22,7 +19,6 @@ import com.growatt.atess.model.plant.ServiceModel
 import com.growatt.atess.ui.common.activity.WebActivity
 import com.growatt.atess.ui.service.viewmodel.ServiceViewModel
 import com.growatt.lib.util.ToastUtil
-import com.growatt.lib.util.ViewUtil
 import com.growatt.lib.view.DividerItemDecoration
 
 /**
@@ -149,11 +145,6 @@ class ServiceManualFragment : BaseFragment() {
             binding.tvTitle.text = serviceModel?.title
             Glide.with(fragment).load(serviceModel?.imgPath)
                 .placeholder(R.drawable.ic_placeholder)
-                .apply(
-                    RequestOptions().transform(
-                        CenterCrop(), RoundedCorners(ViewUtil.dp2px(fragment.requireContext(), 4f))
-                    )
-                )
                 .into(binding.ivIcon)
             binding.root.tag = serviceModel
         }

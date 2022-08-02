@@ -6,8 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import com.bumptech.glide.Glide
-import com.bumptech.glide.load.resource.bitmap.CircleCrop
-import com.bumptech.glide.request.RequestOptions
 import com.growatt.atess.R
 import com.growatt.atess.databinding.FragmentHomeMineBinding
 import com.growatt.atess.ui.mine.activity.AboutActivity
@@ -48,7 +46,6 @@ class HomeMineFragment : HomeBaseFragment(), View.OnClickListener,
 
     private fun showUserAvatar(userAvatar: String?) {
         Glide.with(this).load(userAvatar)
-            .apply(RequestOptions.bitmapTransform(CircleCrop()))
             .placeholder(R.drawable.ic_default_avatar)
             .into(binding.ivAvatar)
     }
