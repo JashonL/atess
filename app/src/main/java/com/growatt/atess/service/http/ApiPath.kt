@@ -80,7 +80,7 @@ object ApiPath {
         /**
          * 获取消息列表
          */
-        const val GET_MESSAGE_LIST = "ATSSetting/getUserUnreadMsgList"
+        const val GET_MESSAGE_LIST = "ATSSetting/getUserMsgList"
 
         /**
          * 获取未读消息数量

@@ -24,7 +24,7 @@ abstract class HttpCallback<R> : IHttpCallback {
 
         val result: R? = GsonManager.fromJsonType(response, getType())
         if (result == null) {
-            onFailure("解析异常")
+            onFailure("parsing exceptions")
         } else {
             success(result)
         }

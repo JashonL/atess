@@ -62,6 +62,11 @@ interface IDeviceService : Service {
     fun setAppLanguage(language: Language)
 
     /**
+     * 获取语言代码-对应上传给服务端的字段
+     */
+    fun getAppLang(): String
+
+    /**
      * 获取屏幕密度
      */
     fun screenDensity(): Float

@@ -30,4 +30,5 @@ open class BaseViewModel : ViewModel(), ServiceManager.ServiceInterface {
     override fun locationService(): ILocationService {
         return LibApplication.instance().locationService()
     }
+
 }

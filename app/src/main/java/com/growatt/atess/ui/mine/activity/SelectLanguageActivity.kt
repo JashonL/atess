@@ -41,19 +41,19 @@ class SelectLanguageActivity : BaseActivity() {
         Pair("中文", Language.SIMPLIFIED_CHINESE),
         Pair("繁體中文", Language.TRADITIONAL_CHINESE),
         Pair("English", Language.ENGLISH),
-        Pair("Français", Language.FRENCH),
-        Pair("Greek", Language.GREEK),
-        Pair("German", Language.GERMAN),
-        Pair("Nederland", Language.NEDERLAND),
-        Pair("Italiano", Language.ITALIANO),
-        Pair("日本語", Language.JAPANESE),
-        Pair("Polish", Language.POLISH),
-        Pair("Português", Language.PORTUGUESE),
-        Pair("Español", Language.SPANISH),
-        Pair("Türkçe", Language.TURKISH),
-        Pair("Vietnamese", Language.VIETNAMESE),
-        Pair("한국어", Language.KOREAN),
-        Pair("ไทย", Language.THAI)
+//        Pair("Français", Language.FRENCH),
+//        Pair("Greek", Language.GREEK),
+//        Pair("German", Language.GERMAN),
+//        Pair("Nederland", Language.NEDERLAND),
+//        Pair("Italiano", Language.ITALIANO),
+//        Pair("日本語", Language.JAPANESE),
+//        Pair("Polish", Language.POLISH),
+//        Pair("Português", Language.PORTUGUESE),
+//        Pair("Español", Language.SPANISH),
+//        Pair("Türkçe", Language.TURKISH),
+//        Pair("Vietnamese", Language.VIETNAMESE),
+//        Pair("한국어", Language.KOREAN),
+//        Pair("ไทย", Language.THAI)
     )
 
     override fun onCreate(savedInstanceState: Bundle?) {

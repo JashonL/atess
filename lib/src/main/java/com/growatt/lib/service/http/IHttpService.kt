@@ -15,6 +15,7 @@ abstract class IHttpService : Service {
         return hashMapOf<String, String>().apply {
             put("deviceType", "Android")
             put("token", LibApplication.instance().accountService().token().orEmpty())
+            put("lang", LibApplication.instance().deviceService().getAppLang())
         }
     }
 

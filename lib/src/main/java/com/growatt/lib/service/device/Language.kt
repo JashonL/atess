@@ -19,46 +19,46 @@ enum class Language(val code: Int, val languageName: String, val locale: Locale?
     TRADITIONAL_CHINESE(1, "繁體中文", Locale("zh")),
 
     //英语
-    ENGLISH(2, "English", Locale.ENGLISH),
+    ENGLISH(2, "English", Locale.ENGLISH);
 
-    //法语
-    FRENCH(3, "Français", Locale.FRENCH),
-
-    //希腊语
-    GREEK(4, "Greek", Locale("el")),
-
-    //德语
-    GERMAN(5, "German", Locale.GERMAN),
-
-    //荷兰
-    NEDERLAND(6, "Nederland", Locale("nl")),
-
-    //意大利语
-    ITALIANO(7, "Italiano", Locale.ITALIAN),
-
-    //日本语
-    JAPANESE(8, "日本語", Locale.JAPANESE),
-
-    //波兰
-    POLISH(9, "Polish", Locale("pl")),
-
-    //葡萄牙
-    PORTUGUESE(10, "Português", Locale("pt")),
-
-    //西班牙
-    SPANISH(11, "Español", Locale("es")),
-
-    //土耳其
-    TURKISH(12, "Türkçe", Locale("tr")),
-
-    //越南语
-    VIETNAMESE(13, "Vietnamese", Locale("vi")),
-
-    //韩文
-    KOREAN(14, "한국어", Locale.KOREAN),
-
-    //泰语
-    THAI(15, "ไทย", Locale("th"));
+//    //法语
+//    FRENCH(3, "Français", Locale.FRENCH),
+//
+//    //希腊语
+//    GREEK(4, "Greek", Locale("el")),
+//
+//    //德语
+//    GERMAN(5, "German", Locale.GERMAN),
+//
+//    //荷兰
+//    NEDERLAND(6, "Nederland", Locale("nl")),
+//
+//    //意大利语
+//    ITALIANO(7, "Italiano", Locale.ITALIAN),
+//
+//    //日本语
+//    JAPANESE(8, "日本語", Locale.JAPANESE),
+//
+//    //波兰
+//    POLISH(9, "Polish", Locale("pl")),
+//
+//    //葡萄牙
+//    PORTUGUESE(10, "Português", Locale("pt")),
+//
+//    //西班牙
+//    SPANISH(11, "Español", Locale("es")),
+//
+//    //土耳其
+//    TURKISH(12, "Türkçe", Locale("tr")),
+//
+//    //越南语
+//    VIETNAMESE(13, "Vietnamese", Locale("vi")),
+//
+//    //韩文
+//    KOREAN(14, "한국어", Locale.KOREAN),
+//
+//    //泰语
+//    THAI(15, "ไทย", Locale("th"));
 
     companion object {
         fun languageNames(): Array<String> {

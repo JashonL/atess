@@ -63,6 +63,29 @@ class DefaultDeviceService(private val context: Context) : IDeviceService {
         LibApplication.instance().storageService().put(APP_LANGUAGE, language.code)
     }
 
+    /**
+     * 目前支持中文简体（zh_CN），中文繁体（zh_TW），英文（en）
+     */
+    override fun getAppLang(): String {
+        return when (getAppLanguage()) {
+            Language.SIMPLIFIED_CHINESE -> "zh_CN"
+            Language.TRADITIONAL_CHINESE -> "zh_TW"
+            Language.ENGLISH -> "en"
+            else -> {
+                val systemDefaultLocale = Language.getSystemDefaultLocale()
+                if (systemDefaultLocale.language == "zh") {
+                    return when (systemDefaultLocale.country) {
+                        "HK", "MO", "TW" -> "zh_TW"
+                        else -> {
+                            "zh_CN"
+                        }
+                    }
+                }
+                systemDefaultLocale.language
+            }
+        }
+    }
+
     override fun screenDensity(): Float {
         return context.resources.displayMetrics.density
     }
