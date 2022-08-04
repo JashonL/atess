@@ -10,7 +10,7 @@ import com.growatt.atess.base.BaseFragment
 import com.growatt.atess.databinding.FragmentDeviceListBinding
 import com.growatt.atess.model.plant.DeviceModel
 import com.growatt.atess.ui.plant.adapter.DeviceAdapter
-import com.growatt.lib.view.DividerItemDecoration
+import com.growatt.atess.view.itemdecoration.DividerItemDecoration
 
 /**
  * 我的设备-设备列表

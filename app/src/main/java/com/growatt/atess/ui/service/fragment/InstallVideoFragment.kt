@@ -19,9 +19,9 @@ import com.growatt.atess.databinding.FragmentInstallVideoBinding
 import com.growatt.atess.databinding.InstallVideoViewHolderBinding
 import com.growatt.atess.model.plant.ServiceModel
 import com.growatt.atess.ui.service.viewmodel.ServiceViewModel
+import com.growatt.atess.view.itemdecoration.DividerItemDecoration
 import com.growatt.lib.util.LogUtil
 import com.growatt.lib.util.ToastUtil
-import com.growatt.lib.view.DividerItemDecoration
 
 /**
  * 安装视频

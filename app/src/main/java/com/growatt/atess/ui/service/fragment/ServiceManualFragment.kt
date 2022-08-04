@@ -18,8 +18,8 @@ import com.growatt.atess.databinding.ServiceManualViewHolderBinding
 import com.growatt.atess.model.plant.ServiceModel
 import com.growatt.atess.ui.common.activity.WebActivity
 import com.growatt.atess.ui.service.viewmodel.ServiceViewModel
+import com.growatt.atess.view.itemdecoration.DividerItemDecoration
 import com.growatt.lib.util.ToastUtil
-import com.growatt.lib.view.DividerItemDecoration
 
 /**
  * 使用手册

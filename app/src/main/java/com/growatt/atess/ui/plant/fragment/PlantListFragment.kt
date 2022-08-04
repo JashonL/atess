@@ -30,11 +30,11 @@ import com.growatt.atess.ui.plant.viewmodel.PlantInfoViewModel
 import com.growatt.atess.ui.plant.viewmodel.PlantListViewModel
 import com.growatt.atess.view.dialog.AlertDialog
 import com.growatt.atess.view.dialog.OptionsDialog
+import com.growatt.atess.view.itemdecoration.DividerItemDecoration
 import com.growatt.lib.util.ToastUtil
 import com.growatt.lib.util.ViewUtil
 import com.growatt.lib.util.gone
 import com.growatt.lib.util.visible
-import com.growatt.lib.view.DividerItemDecoration
 
 /**
  * 电站列表

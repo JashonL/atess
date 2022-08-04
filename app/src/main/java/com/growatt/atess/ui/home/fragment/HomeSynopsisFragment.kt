@@ -12,6 +12,7 @@ import com.growatt.atess.ui.home.fragment.synopsis.PowerTrendsChartFragment
 import com.growatt.atess.ui.home.fragment.synopsis.PvAndLoadFragment
 import com.growatt.atess.ui.home.view.HomeTab
 import com.growatt.atess.ui.home.viewmodel.HomeSynopsisViewModel
+import com.growatt.atess.ui.mine.activity.MessageCenterActivity
 import com.growatt.atess.ui.plant.activity.AddPlantActivity
 import com.growatt.atess.ui.plant.monitor.PlantTabSwitchMonitor
 import com.growatt.lib.util.ToastUtil
@@ -92,7 +93,7 @@ class HomeSynopsisFragment : HomeBaseFragment(), View.OnClickListener {
         when {
             v === binding.llTotalComponentPower -> jumpToHomePlant(0)
             v === binding.llPlantCount -> jumpToHomePlant(0)
-            v === binding.llWarningMessage -> {}
+            v === binding.llWarningMessage -> MessageCenterActivity.start(requireContext())
             v === binding.llOnlineDevice -> jumpToHomePlant(1)
             v === binding.llOfflineDevice -> jumpToHomePlant(2)
             v === binding.llTroubleDevice -> jumpToHomePlant(3)

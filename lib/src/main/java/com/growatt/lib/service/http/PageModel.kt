@@ -8,7 +8,7 @@ data class PageModel<T>(
     val pageSize: Int,//每页条数
     val totalCount: Int,//总条数
     val pageCount: Int,//总页数
-    val list: Array<T>//数据列表
+    val list: Array<T>?//数据列表
 ) {
 
     /**

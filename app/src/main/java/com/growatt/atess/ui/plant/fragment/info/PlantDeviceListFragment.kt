@@ -12,10 +12,10 @@ import com.growatt.atess.databinding.FragmentPlantDeviceListBinding
 import com.growatt.atess.ui.plant.activity.PlantDeviceListActivity
 import com.growatt.atess.ui.plant.adapter.DeviceAdapter
 import com.growatt.atess.ui.plant.viewmodel.PlantInfoViewModel
+import com.growatt.atess.view.itemdecoration.DividerItemDecoration
 import com.growatt.lib.util.ToastUtil
 import com.growatt.lib.util.gone
 import com.growatt.lib.util.visible
-import com.growatt.lib.view.DividerItemDecoration
 
 /**
  * 电站详情-我的设备

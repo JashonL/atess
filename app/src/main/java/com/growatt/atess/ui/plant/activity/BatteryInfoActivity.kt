@@ -16,9 +16,9 @@ import com.growatt.atess.base.OnItemClickListener
 import com.growatt.atess.databinding.ActivityBatteryInfoBinding
 import com.growatt.atess.databinding.BatteryViewHolderBinding
 import com.growatt.atess.model.plant.BatteryModel
+import com.growatt.atess.view.itemdecoration.DividerItemDecoration
 import com.growatt.lib.util.gone
 import com.growatt.lib.util.visible
-import com.growatt.lib.view.DividerItemDecoration
 
 /**
  * 电池详情页面

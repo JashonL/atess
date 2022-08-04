@@ -1,5 +1,8 @@
 package com.growatt.atess.model.mine
 
+import com.growatt.atess.R
+import com.growatt.atess.application.MainApplication
+
 /**
  *消息中心
 "id": 6005, //消息ID
@@ -20,7 +23,19 @@ data class MessageModel(
     val deviceType: String,
     val faultContent: String,
     val isRead: Int
-)
+) {
+    fun getPlantNameText(): String {
+        return MainApplication.instance().getString(R.string.plant_name_format, plantName)
+    }
+
+    fun getDeviceSnText(): String {
+        return MainApplication.instance().getString(R.string.sn_format, deviceSn)
+    }
+
+    fun getDeviceTypeText(): String {
+        return MainApplication.instance().getString(R.string.device_type_format, deviceType)
+    }
+}
 
 /**
  * 未读消息数量

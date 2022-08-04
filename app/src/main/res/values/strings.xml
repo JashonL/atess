@@ -16,7 +16,7 @@
     <string name="info_space">体验馆>></string>
     <string name="username">用户名</string>
     <string name="password">密码</string>
-    <string name="loading">正在加载中...</string>
+    <string name="loading">加载中...</string>
     <string name="please_input_username">请输入用户名</string>
     <string name="please_input_password">请输入密码</string>
     <string name="agree_company_user_agreement">同意本公司各项%s&amp;%s</string>
@@ -113,6 +113,7 @@
     <string name="installation_video">安装视频</string>
 
     <string name="plant_name">电站名称</string>
+    <string name="plant_name_format">电站名称:%s</string>
     <string name="plant_address">电站地址</string>
     <string name="map_for_choosing">地图选点</string>
     <string name="auto_fetch">自动获取</string>
@@ -133,6 +134,7 @@
     <string name="total_component_power_2">组件总功率(W)</string>
     <string name="add_collector">添加采集器</string>
     <string name="serial_number">序列号</string>
+    <string name="serial_number_format">序列号:%s</string>
     <string name="check_code">校验码</string>
     <string name="serial_number_sn">序列号(SN)</string>
     <string name="check_code_sn">校验码(SN)</string>
@@ -170,6 +172,7 @@
     <string name="grid_connected_inverter_output">并网逆变器产出</string>
     <string name="grid_connected_inverter_power_format">并网逆变器功率:%skW</string>
     <string name="device_type">设备类型</string>
+    <string name="device_type_format">设备类型:%s</string>
     <string name="device_sn">设备序列号</string>
     <string name="input_power_format">输入功率:%s</string>
     <string name="output_power_format">输出功率:%s</string>
@@ -308,6 +311,10 @@
     <string name="spec">棵</string>
     <string name="use_by_self">自发自用</string>
     <string name="oil_machine_output">油机产出</string>
+    <string name="trouble_info_format">故障信息:%s</string>
+    <string name="nothing_message">暂无消息哦~</string>
+    <string name="all_page_loading_finish">已全部加载完成</string>
+    <string name="loading_error_please_click_retry">加载失败，请点击重试</string>
 
     <!-- image crop-->
     <string name="crop_image_menu_crop">裁剪</string>

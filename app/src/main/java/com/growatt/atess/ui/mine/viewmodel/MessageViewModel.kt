@@ -21,9 +21,7 @@ class MessageViewModel : BaseViewModel() {
     /**
      * 是否是最后一页
      */
-    val getMessageListLiveData = MutableLiveData<Triple<Array<MessageModel>?, Boolean, String?>>()
-
-    var currentPage = 0
+    val getMessageListLiveData = MutableLiveData<Pair<PageModel<MessageModel>?, String?>>()
 
     val deleteMessageLiveData = MutableLiveData<String?>()
 
@@ -53,16 +51,12 @@ class MessageViewModel : BaseViewModel() {
 
     /**
      * 获取消息列表
-     * @param isRefresh 是否是刷新
+     * @param 请求页数
      */
-    fun getMessageList(isRefresh: Boolean) {
+    fun getMessageList(currentPage: Int) {
         viewModelScope.launch {
             val params = hashMapOf<String, String>().apply {
-                if (isRefresh) {
-                    put("currentPage", "1")
-                } else {
-                    put("currentPage", (currentPage + 1).toString())
-                }
+                put("currentPage", currentPage.toString())
                 put("pageSize", "20")
             }
             apiService().postForm(
@@ -70,18 +64,15 @@ class MessageViewModel : BaseViewModel() {
                 object : HttpCallback<HttpResult<PageModel<MessageModel>>>() {
                     override fun success(result: HttpResult<PageModel<MessageModel>>) {
                         if (result.isBusinessSuccess()) {
-                            currentPage = result.data?.currentPage ?: 1
-                            val isLastPage = result.data?.isLastPage() ?: false
-                            getMessageListLiveData.value =
-                                Triple(result.data?.list ?: emptyArray(), isLastPage, null)
+                            getMessageListLiveData.value = Pair(result.data, null)
                         } else {
-                            getMessageListLiveData.value = Triple(null, false, result.msg ?: "")
+                            getMessageListLiveData.value = Pair(null, result.msg ?: "")
                         }
                     }
 
                     override fun onFailure(error: String?) {
                         super.onFailure(error)
-                        getMessageListLiveData.value = Triple(null, false, error ?: "")
+                        getMessageListLiveData.value = Pair(null, error ?: "")
                     }
                 })
         }
