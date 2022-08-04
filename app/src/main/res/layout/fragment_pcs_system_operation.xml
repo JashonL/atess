@@ -62,7 +62,7 @@
         app:layout_constraintTop_toTopOf="@id/iv_pbd"
         app:lottie_autoPlay="true"
         app:lottie_loop="true"
-        tools:lottie_rawRes="@raw/lottie_arrow_right" />
+        app:lottie_rawRes="@raw/lottie_arrow_right" />
 
     <TextView
         android:id="@+id/tv_pbd_output_power"
@@ -189,7 +189,7 @@
         app:layout_constraintStart_toStartOf="@id/iv_photovoltaic"
         app:lottie_autoPlay="true"
         app:lottie_loop="true"
-        tools:lottie_rawRes="@raw/lottie_arrow_top" />
+        app:lottie_rawRes="@raw/lottie_arrow_top" />
 
     <ImageView
         android:id="@+id/iv_oil_engine"
@@ -224,7 +224,7 @@
         app:layout_constraintStart_toStartOf="@id/iv_oil_engine"
         app:lottie_autoPlay="true"
         app:lottie_loop="true"
-        tools:lottie_rawRes="@raw/lottie_arrow_down" />
+        app:lottie_rawRes="@raw/lottie_arrow_down" />
 
     <ImageView
         android:id="@+id/iv_bypass"
@@ -315,7 +315,7 @@
         app:layout_constraintTop_toTopOf="@id/iv_operation_left"
         app:lottie_autoPlay="true"
         app:lottie_loop="true"
-        tools:lottie_rawRes="@raw/lottie_arrow_left" />
+        app:lottie_rawRes="@raw/lottie_arrow_left" />
 
     <ImageView
         android:id="@+id/iv_load"
@@ -337,7 +337,7 @@
         app:layout_constraintTop_toBottomOf="@id/tv_bypass"
         app:lottie_autoPlay="true"
         app:lottie_loop="true"
-        tools:lottie_rawRes="@raw/lottie_arrow_top" />
+        app:lottie_rawRes="@raw/lottie_arrow_down" />
 
     <TextView
         android:id="@+id/tv_load_power"
@@ -362,7 +362,7 @@
         app:layout_constraintTop_toTopOf="@id/iv_load" />
 
     <TextView
-        android:id="@+id/tv_inverter_power"
+        android:id="@+id/tv_inverter"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="2dp"
@@ -372,7 +372,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@id/iv_inverter"
         app:layout_constraintTop_toBottomOf="@id/iv_load"
-        tools:text="@string/grid_connected_inverter_power_format" />
+        tools:text="@string/grid_connected_inverter" />
 
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/lav_inverter"
@@ -384,6 +384,6 @@
         app:layout_constraintStart_toStartOf="@id/iv_inverter"
         app:lottie_autoPlay="true"
         app:lottie_loop="true"
-        tools:lottie_rawRes="@raw/lottie_arrow_top" />
+        app:lottie_rawRes="@raw/lottie_arrow_top" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

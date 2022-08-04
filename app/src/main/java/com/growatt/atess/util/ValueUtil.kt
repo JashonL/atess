@@ -4,7 +4,9 @@ import com.growatt.atess.R
 import com.growatt.atess.application.MainApplication
 import com.growatt.lib.util.Util
 
-
+/**
+ * 数值换算工具，根据规则换算出单位
+ */
 object ValueUtil {
     /**
      * 数值转换，基础单位是kWh

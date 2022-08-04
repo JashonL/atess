@@ -25,51 +25,69 @@ data class HpsSystemOperationModel(
     val gridFlag: Int,//电网流向 -1 电网取电， 0 无数据， 1 馈入电网
 ) {
 
-    companion object {
-        /**
-         * 流出
-         */
-        const val OUTPUT = -1
-
-        /**
-         * 中和
-         */
-        const val NEUTRALIZE = 0
-
-        /**
-         * 流入
-         */
-        const val INPUT = 1
-    }
-
-
     /**
      * 电网流向
      */
-    fun gridFlowDirection(): Int {
+    @DirectionType
+    fun getGridDirection(): Int {
         return when (gridFlag) {
-            -1 -> OUTPUT
-            1 -> INPUT
-            else -> NEUTRALIZE
+            -1 -> DirectionType.OUTPUT
+            1 -> DirectionType.INPUT
+            else -> DirectionType.HIDE
         }
     }
 
     /**
-     * 电池流向
+     * 油机流向
      */
-    fun batteryFlowDirection(): Int {
-        return when (batFlag) {
-            -1 -> INPUT
-            1 -> OUTPUT
-            else -> NEUTRALIZE
+    @DirectionType
+    fun getOilEngineDirection(): Int {
+        if (isShowOilEngine()) {
+            return DirectionType.OUTPUT
         }
+        return DirectionType.HIDE
     }
 
     /**
      * ATS流向,油机显示时与油机流向(流出)一致，电网显示时与电网流向一致
      */
-    fun atsFlowDirection(): Int {
-        return if (isShowOilEngine()) OUTPUT else gridFlowDirection()
+    @DirectionType
+    fun getAtsDirection(): Int {
+        return if (isShowOilEngine()) getOilEngineDirection() else getGridDirection()
+    }
+
+    /**
+     * PV光伏流向
+     */
+    @DirectionType
+    fun getPVDirection(): Int {
+        if (ppv == 0.0) {
+            return DirectionType.HIDE
+        }
+        return DirectionType.OUTPUT
+    }
+
+    /**
+     * 负载流向
+     */
+    @DirectionType
+    fun getLoadDirection(): Int {
+        if (loadActivePower == 0.0) {
+            return DirectionType.HIDE
+        }
+        return DirectionType.OUTPUT
+    }
+
+    /**
+     * 电池流向
+     */
+    @DirectionType
+    fun getBatteryDirection(): Int {
+        return when (batFlag) {
+            -1 -> DirectionType.INPUT
+            1 -> DirectionType.OUTPUT
+            else -> DirectionType.HIDE
+        }
     }
 
     /**

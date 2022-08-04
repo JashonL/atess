@@ -194,7 +194,7 @@
         tools:text="@string/load_power_format" />
 
     <com.airbnb.lottie.LottieAnimationView
-        android:id="@+id/lav_4"
+        android:id="@+id/lav_photovoltaic"
         android:layout_width="40dp"
         android:layout_height="40dp"
         app:layout_constraintBottom_toBottomOf="@id/iv_photovoltaic"
@@ -206,7 +206,7 @@
         app:lottie_rawRes="@raw/lottie_arrow_right" />
 
     <com.airbnb.lottie.LottieAnimationView
-        android:id="@+id/lav_5"
+        android:id="@+id/lav_load"
         android:layout_width="40dp"
         android:layout_height="40dp"
         app:layout_constraintBottom_toBottomOf="@id/iv_load"

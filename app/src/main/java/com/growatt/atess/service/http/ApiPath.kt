@@ -211,6 +211,11 @@ object ApiPath {
         const val GET_HPS_SYSTEM_OPERATION = "ATSDevice/getHPSRunChart"
 
         /**
+         * 获取PCS系统运行图
+         */
+        const val GET_PCS_SYSTEM_OPERATION = "ATSDevice/getPCSRunChart"
+
+        /**
          * 获取总览头部信息
          */
         const val GET_SYNOPSIS_TOTAL = "ATSOverview/getOverview"

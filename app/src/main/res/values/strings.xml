@@ -171,7 +171,7 @@
     <string name="take_electricity_grid">电网取电</string>
     <string name="grid_total_power">电网总耗电量</string>
     <string name="grid_connected_inverter_output">并网逆变器产出</string>
-    <string name="grid_connected_inverter_power_format">并网逆变器功率:%skW</string>
+    <string name="grid_connected_inverter">并网逆变器</string>
     <string name="device_type">设备类型</string>
     <string name="device_type_format">设备类型:%s</string>
     <string name="device_sn">设备序列号</string>

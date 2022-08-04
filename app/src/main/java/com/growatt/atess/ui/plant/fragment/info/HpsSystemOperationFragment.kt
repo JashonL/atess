@@ -5,13 +5,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import com.airbnb.lottie.LottieAnimationView
 import com.growatt.atess.R
 import com.growatt.atess.base.BaseFragment
 import com.growatt.atess.databinding.FragmentHpsSystemOperationBinding
+import com.growatt.atess.model.plant.DirectionType
 import com.growatt.atess.model.plant.HpsSystemOperationModel
 import com.growatt.atess.ui.plant.activity.PlantDeviceListActivity
 import com.growatt.atess.ui.plant.viewmodel.HpsViewModel
 import com.growatt.lib.util.ToastUtil
+import com.growatt.lib.util.gone
 import com.growatt.lib.util.invisible
 import com.growatt.lib.util.visible
 
@@ -34,12 +37,17 @@ class HpsSystemOperationFragment(val plantId: String?, val deviceSn: String?) : 
     ): View {
         _binding = FragmentHpsSystemOperationBinding.inflate(inflater, container, false)
         initData()
+        initView()
         setListener()
         return binding.root
     }
 
+    private fun initView() {
+        binding.root.gone()
+    }
+
     private fun setListener() {
-        binding.ivHps.setOnClickListener(this)
+        binding.root.setOnClickListener(this)
     }
 
     private fun initData() {
@@ -58,62 +66,82 @@ class HpsSystemOperationFragment(val plantId: String?, val deviceSn: String?) : 
     }
 
     private fun showData(hpsSystemOperationModel: HpsSystemOperationModel?) {
-        hpsSystemOperationModel?.also {
-            if (it.isShowATS()) {
-                binding.ivAts.setImageResource(R.drawable.ic_operation_ats)
-            } else {
-                binding.ivAts.setImageResource(R.drawable.ic_operation_down)
-            }
-            if (it.isShowOilEngine()) {
-                binding.ivOilEngine.visible()
-                binding.tvOilEnginePower.visible()
-                binding.lavOilEngine.visible()
-                binding.tvOilEnginePower.text = it.getOilEngineText()
-            } else {
-                binding.ivOilEngine.invisible()
-                binding.tvOilEnginePower.invisible()
-                binding.lavOilEngine.invisible()
-            }
-            binding.tvGridPower.text = it.getGridText()
-            binding.tvPvPower.text = it.getPVText()
-            binding.tvLoadPower.text = it.getLoadText()
-            binding.tvChargePower.text = it.getChargeText()
-            binding.tvBatteryPercent.text = it.getBatteryPercentText()
+        if (hpsSystemOperationModel == null) {
+            binding.root.gone()
+        } else {
+            binding.root.visible()
+            hpsSystemOperationModel.also {
+                //处理图标的显示隐藏和数值的显示
+                if (it.isShowATS()) {
+                    binding.ivAts.setImageResource(R.drawable.ic_operation_ats)
+                } else {
+                    binding.ivAts.setImageResource(R.drawable.ic_operation_down)
+                }
+                if (it.isShowOilEngine()) {
+                    binding.ivOilEngine.visible()
+                    binding.tvOilEnginePower.visible()
+                    binding.tvOilEnginePower.text = it.getOilEngineText()
+                } else {
+                    binding.ivOilEngine.invisible()
+                    binding.tvOilEnginePower.invisible()
+                }
+                binding.tvGridPower.text = it.getGridText()
+                binding.tvPvPower.text = it.getPVText()
+                binding.tvLoadPower.text = it.getLoadText()
+                binding.tvChargePower.text = it.getChargeText()
+                binding.tvBatteryPercent.text = it.getBatteryPercentText()
 
-            when (it.gridFlowDirection()) {
-                HpsSystemOperationModel.OUTPUT -> {
-                    binding.lavGrid.setAnimation(R.raw.lottie_arrow_right)
-                    binding.lavGrid.visible()
-                }
-                HpsSystemOperationModel.INPUT -> {
-                    binding.lavGrid.setAnimation(R.raw.lottie_arrow_left)
-                    binding.lavGrid.visible()
-                }
-                HpsSystemOperationModel.NEUTRALIZE -> binding.lavGrid.invisible()
-            }
+                //处理左右方向的流向
+                leftRightDirection(binding.lavGrid, it.getGridDirection())
+                leftRightDirection(binding.lavOilEngine, it.getOilEngineDirection())
+                leftRightDirection(binding.lavPhotovoltaic, it.getPVDirection())
+                leftRightDirection(binding.lavLoad, it.getLoadDirection())
+                //处理上下方向的流向
+                topDownDirection(binding.lavAts, it.getAtsDirection())
+                topDownDirection(binding.lavBattery, it.getBatteryDirection())
 
-            when (it.atsFlowDirection()) {
-                HpsSystemOperationModel.OUTPUT -> {
-                    binding.lavAts.setAnimation(R.raw.lottie_arrow_down)
-                    binding.lavAts.visible()
-                }
-                HpsSystemOperationModel.INPUT -> {
-                    binding.lavAts.setAnimation(R.raw.lottie_arrow_top)
-                    binding.lavAts.visible()
-                }
-                HpsSystemOperationModel.NEUTRALIZE -> binding.lavAts.invisible()
             }
+        }
 
-            when (it.batteryFlowDirection()) {
-                HpsSystemOperationModel.OUTPUT -> binding.lavBattery.setAnimation(R.raw.lottie_arrow_top)
-                HpsSystemOperationModel.INPUT -> binding.lavBattery.setAnimation(R.raw.lottie_arrow_down)
+    }
+
+    private fun leftRightDirection(
+        directionView: LottieAnimationView,
+        @DirectionType directionType: Int
+    ) {
+        when (directionType) {
+            DirectionType.OUTPUT -> {
+                directionView.visible()
+                directionView.setAnimation(R.raw.lottie_arrow_left)
             }
+            DirectionType.INPUT -> {
+                directionView.visible()
+                directionView.setAnimation(R.raw.lottie_arrow_right)
+            }
+            DirectionType.HIDE -> directionView.invisible()
+        }
+    }
+
+    private fun topDownDirection(
+        directionView: LottieAnimationView,
+        @DirectionType directionType: Int
+    ) {
+        when (directionType) {
+            DirectionType.OUTPUT -> {
+                directionView.visible()
+                directionView.setAnimation(R.raw.lottie_arrow_top)
+            }
+            DirectionType.INPUT -> {
+                directionView.visible()
+                directionView.setAnimation(R.raw.lottie_arrow_down)
+            }
+            DirectionType.HIDE -> directionView.invisible()
         }
     }
 
     override fun onClick(v: View?) {
         when {
-            v === binding.ivHps -> if (plantId != null) PlantDeviceListActivity.start(
+            v === binding.root -> if (plantId != null) PlantDeviceListActivity.start(
                 plantId,
                 requireActivity()
             )
