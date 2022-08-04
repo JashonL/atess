@@ -40,6 +40,7 @@ class DatePickerFragment : DialogFragment(), DatePickerDialog.OnDateSetListener 
 
     private var listener: OnDateSetListener? = null
 
+    //最大时间戳
     private var maxDateLong: Long? = null
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {

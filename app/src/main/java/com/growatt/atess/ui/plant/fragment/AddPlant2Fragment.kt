@@ -45,6 +45,7 @@ class AddPlant2Fragment : BaseFragment(), View.OnClickListener {
     private val viewModel: AddPlantViewModel by activityViewModels()
 
     private var isClickSelectCurrency = false
+    private var isClickSelectTimeZone = false
     private var takePictureFile: File? = null
 
     override fun onCreateView(
@@ -63,17 +64,22 @@ class AddPlant2Fragment : BaseFragment(), View.OnClickListener {
         viewModel.timeZoneLiveData.observe(viewLifecycleOwner) {
             dismissDialog()
             if (it.second == null) {
-                if (!viewModel.isEditMode) {
-                    //新增电站的情况下才需要初始化显示
+                if (TextUtils.isEmpty(viewModel.addPlantModel.plantTimeZone)) {
+                    //时区为空的时候，设置值
                     viewModel.addPlantModel.formulaMoneyUnitId = it.first?.monetaryUnit
-                    binding.tvCurrency.text = it.first?.monetaryUnit
+                    refreshCurrencyView()
                     viewModel.addPlantModel.plantTimeZone = it.first?.timezoneList?.get(0)
-                    binding.tvTimezone.text = viewModel.addPlantModel.plantTimeZone
+                    refreshTimezoneView()
+                }
+                if (isClickSelectTimeZone) {
+                    it.first?.getGeneralItem()?.let { timeZoneList -> selectTimeZone(timeZoneList) }
                 }
             } else {
                 ToastUtil.show(it.second)
             }
+            isClickSelectTimeZone = false
         }
+
         viewModel.currencyListLiveData.observe(viewLifecycleOwner) {
             dismissDialog()
             if (it.second == null) {
@@ -85,6 +91,7 @@ class AddPlant2Fragment : BaseFragment(), View.OnClickListener {
             } else {
                 ToastUtil.show(it.second)
             }
+            isClickSelectCurrency = false
         }
 
         if (viewModel.isEditMode) {
@@ -132,8 +139,18 @@ class AddPlant2Fragment : BaseFragment(), View.OnClickListener {
     override fun onClick(v: View?) {
         when {
             v === binding.tvTimezone -> {
+                if (viewModel.addPlantModel.country.isNullOrEmpty()) {
+                    ToastUtil.show(getString(R.string.unselected_country_or_area))
+                    return
+                }
                 val timeZone = viewModel.timeZoneLiveData.value?.first
-                selectTimeZone(timeZone?.getGeneralItem())
+                if (timeZone?.getGeneralItem().isNullOrEmpty()) {
+                    isClickSelectTimeZone = true
+                    showDialog()
+                    viewModel.fetchTimeZoneList(viewModel.addPlantModel.country ?: "")
+                    return
+                }
+                timeZone?.getGeneralItem()?.let { selectTimeZone(it) }
             }
             v === binding.tvCurrency -> {
                 val currencyList = viewModel.currencyListLiveData.value?.first
@@ -169,10 +186,7 @@ class AddPlant2Fragment : BaseFragment(), View.OnClickListener {
         binding.tvCurrency.text = viewModel.addPlantModel.formulaMoneyUnitId
     }
 
-    private fun selectTimeZone(timeZones: Array<GeneralItemModel>?) {
-        if (timeZones.isNullOrEmpty()) {
-            return
-        }
+    private fun selectTimeZone(timeZones: Array<GeneralItemModel>) {
         PickerDialog.show(childFragmentManager, timeZones) {
             viewModel.addPlantModel.plantTimeZone = timeZones[it].name
             refreshTimezoneView()

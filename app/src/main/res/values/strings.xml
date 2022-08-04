@@ -23,6 +23,7 @@
     <string name="register">注册</string>
     <string name="login">登录</string>
     <string name="country_or_area">国家/地区</string>
+    <string name="unselected_country_or_area">未选择国家/地区</string>
     <string name="please_select_country_or_area">请选择国家或者地区&#160;&#160;>&#160;</string>
     <string name="input_password_again">重复输入密码</string>
     <string name="password_length_not_enough">密码不少于6位字符</string>

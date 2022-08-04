@@ -105,7 +105,8 @@
         <activity
             android:name=".ui.plant.activity.AddPlantActivity"
             android:exported="false"
-            android:screenOrientation="nosensor" />
+            android:screenOrientation="nosensor"
+            android:windowSoftInputMode="adjustPan" />
 
         <activity
             android:name=".ui.common.activity.AMapActivity"

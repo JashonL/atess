@@ -40,7 +40,7 @@ class AddPlantModel {
     var plantTimeZone: String? = null
 
     //收益公式
-    var formulaMoney: String? = null
+    var formulaMoney: String? = "1.2"
 
     //货币单位
     var formulaMoneyUnitId: String? = null
