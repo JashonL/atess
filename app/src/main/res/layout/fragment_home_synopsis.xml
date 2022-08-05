@@ -410,6 +410,7 @@
                                         android:layout_height="wrap_content"
                                         android:text='@{@string/slash_format(@string/grid_total_power,ValueUtil.INSTANCE.valueFromKWh(total.gridTotal).second)}'
                                         android:textColor="@color/text_gray_99"
+                                        android:gravity="center"
                                         android:textSize="@dimen/text_small" />
                                 </LinearLayout>
 

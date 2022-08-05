@@ -53,6 +53,9 @@ class PlantListFragment(
     private val filterViewModel: PlantFilterViewModel by activityViewModels()
     private val plantInfoViewModel: PlantInfoViewModel by viewModels()
 
+    //TAB为全部的时候使用到
+    private var isNeedJumpToPlantInfo = true
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -80,9 +83,11 @@ class PlantListFragment(
             if (it.second == null) {
                 (binding.rvPlant.adapter as Adapter).refresh(it.first)
                 refreshEmptyView(it.first)
+                checkAutoJumpToPlantInfo(it.first)
             } else {
                 ToastUtil.show(it.second)
             }
+            isNeedJumpToPlantInfo = false
         }
         viewModel.getPlantStatusNumLiveData.observe(viewLifecycleOwner) {
             if (it.second == null) {
@@ -113,6 +118,16 @@ class PlantListFragment(
         }
         if (requireActivity() is SearchActivity) {
             viewModel.getPlantList(plantStatus, searchWord = searchWord)
+        }
+    }
+
+    //点击底部电站初始化的时候，只有1个电站的时候跳转到电站详情，网络异常则状态失效
+    private fun checkAutoJumpToPlantInfo(plantModels: Array<PlantModel>?) {
+        if (plantStatus == PlantModel.PLANT_STATUS_ALL && isNeedJumpToPlantInfo && plantModels?.size ?: 0 == 1) {
+            val plantId = plantModels?.get(0)?.id
+            if (!plantId.isNullOrEmpty()) {
+                PlantInfoActivity.start(requireContext(), plantId)
+            }
         }
     }
 
