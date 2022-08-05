@@ -134,7 +134,7 @@ class SearchActivity : BaseActivity(), View.OnClickListener {
             )
             it.background = ViewUtil.createShape(resources.getColor(R.color.color_05000000), 2)
             it.gravity = Gravity.CENTER
-            it.setTextColor(resources.getColor(R.color.text_black))
+            it.setTextColor(resources.getColor(R.color.text_gray_bb))
             it.setPadding(
                 ViewUtil.dp2px(this, 10f),
                 ViewUtil.dp2px(this, 2f),

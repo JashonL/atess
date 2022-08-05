@@ -11,7 +11,7 @@
     <string name="disagree">不同意</string>
     <string name="agree">同意</string>
     <string name="cancel">取消</string>
-    <string name="confirm">确认</string>
+    <string name="confirm">确定</string>
     <string name="privacy_dialog_tip">不同意协议无法提供服务哦~</string>
     <string name="info_space">体验馆>></string>
     <string name="username">用户名</string>
@@ -317,6 +317,7 @@
     <string name="all_page_loading_finish">已全部加载完成</string>
     <string name="loading_error_please_click_retry">加载失败，请点击重试</string>
     <string name="info_space_not_permission">浏览账号没有权限</string>
+    <string name="delete_message_or_not">是否删除消息?</string>
 
     <!-- image crop-->
     <string name="crop_image_menu_crop">裁剪</string>

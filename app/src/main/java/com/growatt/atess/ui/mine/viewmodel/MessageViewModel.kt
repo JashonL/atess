@@ -23,7 +23,7 @@ class MessageViewModel : BaseViewModel() {
      */
     val getMessageListLiveData = MutableLiveData<Pair<PageModel<MessageModel>?, String?>>()
 
-    val deleteMessageLiveData = MutableLiveData<String?>()
+    val deleteMessageLiveData = MutableLiveData<Pair<Int?, String?>>()
 
     /**
      * 获取未读消息数量
@@ -51,7 +51,7 @@ class MessageViewModel : BaseViewModel() {
 
     /**
      * 获取消息列表
-     * @param 请求页数
+     * @param currentPage 请求的页数
      */
     fun getMessageList(currentPage: Int) {
         viewModelScope.launch {
@@ -81,7 +81,7 @@ class MessageViewModel : BaseViewModel() {
     /**
      * 删除消息
      */
-    fun deleteMessage(msgId: String?) {
+    fun deleteMessage(position: Int, msgId: String?) {
         viewModelScope.launch {
             val params = hashMapOf<String, String>().apply {
                 put("msgId", msgId ?: "")
@@ -91,15 +91,15 @@ class MessageViewModel : BaseViewModel() {
                 object : HttpCallback<HttpResult<String>>() {
                     override fun success(result: HttpResult<String>) {
                         if (result.isBusinessSuccess()) {
-                            deleteMessageLiveData.value = null
+                            deleteMessageLiveData.value = Pair(position, null)
                         } else {
-                            deleteMessageLiveData.value = result.msg ?: ""
+                            deleteMessageLiveData.value = Pair(null, result.msg ?: "")
                         }
                     }
 
                     override fun onFailure(error: String?) {
                         super.onFailure(error)
-                        deleteMessageLiveData.value = error ?: ""
+                        deleteMessageLiveData.value = Pair(null, error ?: "")
                     }
                 })
         }

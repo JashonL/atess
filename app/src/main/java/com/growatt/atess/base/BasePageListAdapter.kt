@@ -101,7 +101,11 @@ abstract class BasePageListAdapter<T>(
             } else {
                 hideEmptyView()
             }
-            loadState = LoadStateType.LOADING
+            if (pageModel.isLastPage()) {
+                loadState = LoadStateType.LOADING_END
+            } else {
+                loadState = LoadStateType.LOADING
+            }
             notifyDataSetChanged()
         } else {
             isLoading = false
@@ -184,6 +188,21 @@ abstract class BasePageListAdapter<T>(
     protected fun getItemViewTypeForItem(position: Int): Int {
         return 0
     }
+
+    /**
+     * 移除某个item
+     */
+    fun removePosition(position: Int) {
+        dataList.removeAt(position)
+        if (dataList.isEmpty()) {
+            loadState = LoadStateType.LOADING_INIT
+            notifyItemRangeRemoved(position, 2)
+            showEmptyView()
+        } else {
+            notifyItemRemoved(position)
+        }
+    }
+
 }
 
 @IntDef(

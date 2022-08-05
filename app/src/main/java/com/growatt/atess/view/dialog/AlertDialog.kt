@@ -21,8 +21,8 @@ class AlertDialog : BaseDialogFragment(), View.OnClickListener {
         fun showDialog(
             fm: FragmentManager,
             content: String?,
-            grayButtonText: String?,
-            redButtonText: String?,
+            grayButtonText: String? = null,
+            redButtonText: String? = null,
             title: String? = null,
             onRedButtonClick: (() -> Unit)? = null,
             onGrayButtonClick: (() -> Unit)?
@@ -67,6 +67,12 @@ class AlertDialog : BaseDialogFragment(), View.OnClickListener {
             binding.tvTitle.text = title
             binding.tvContent.visible()
             binding.tvContent.text = content
+        }
+        if (!grayButtonText.isNullOrEmpty()) {
+            binding.btGray.text = grayButtonText
+        }
+        if (!redButtonText.isNullOrEmpty()) {
+            binding.btRed.text = redButtonText
         }
     }
 

@@ -17,6 +17,7 @@ import com.growatt.atess.databinding.ActivityMessageCenterBinding
 import com.growatt.atess.databinding.MessageViewHolderBinding
 import com.growatt.atess.model.mine.MessageModel
 import com.growatt.atess.ui.mine.viewmodel.MessageViewModel
+import com.growatt.atess.view.dialog.AlertDialog
 import com.growatt.atess.view.itemdecoration.DividerItemDecoration
 import com.growatt.lib.util.ToastUtil
 import com.growatt.lib.util.gone
@@ -56,10 +57,18 @@ class MessageCenterActivity : BaseActivity() {
     private fun initData() {
         viewModel.getMessageListLiveData.observe(this) {
             if (it.second == null) {
-                (binding.rvMessageList.adapter as Adapter).setResultSuccess(it.first!!)
+                getAdapter().setResultSuccess(it.first!!)
             } else {
                 ToastUtil.show(it.second)
-                (binding.rvMessageList.adapter as Adapter).setResultError()
+                getAdapter().setResultError()
+            }
+        }
+        viewModel.deleteMessageLiveData.observe(this) {
+            dismissDialog()
+            if (it.second == null) {
+                getAdapter().removePosition(it.first!!)
+            } else {
+                ToastUtil.show(it.second)
             }
         }
         binding.srlRefresh.autoRefresh()
@@ -69,6 +78,10 @@ class MessageCenterActivity : BaseActivity() {
         binding.srlRefresh.setOnRefreshListener {
             (binding.rvMessageList.adapter as Adapter).refresh()
         }
+    }
+
+    private fun getAdapter(): Adapter {
+        return binding.rvMessageList.adapter as Adapter
     }
 
     private fun initView() {
@@ -87,7 +100,15 @@ class MessageCenterActivity : BaseActivity() {
     inner class Adapter : BasePageListAdapter<MessageModel>() {
 
         override fun onCreateItemViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder {
-            return MessageViewHolder.create(parent)
+            return MessageViewHolder.create(parent) { view, position ->
+                AlertDialog.showDialog(
+                    supportFragmentManager,
+                    getString(R.string.delete_message_or_not)
+                ) {
+                    showDialog()
+                    viewModel.deleteMessage(position, dataList[position].id)
+                }
+            }
         }
 
         override fun onBindItemViewHolder(holder: BaseViewHolder, position: Int) {
@@ -111,6 +132,7 @@ class MessageCenterActivity : BaseActivity() {
         override fun hideEmptyView() {
             binding.tvEmpty.gone()
         }
+
     }
 
 }
@@ -122,6 +144,7 @@ class MessageViewHolder(
     companion object {
         fun create(
             parent: ViewGroup,
+            delete: (View, Int) -> Unit
         ): MessageViewHolder {
             val binding = MessageViewHolderBinding.inflate(
                 LayoutInflater.from(parent.context),
@@ -130,7 +153,9 @@ class MessageViewHolder(
             )
             val holder = MessageViewHolder(binding.root)
             holder.binding = binding
-            binding.root.setOnClickListener(holder)
+            binding.ivDelete.setOnClickListener {
+                delete.invoke(it, holder.absoluteAdapterPosition)
+            }
             return holder
         }
     }
