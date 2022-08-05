@@ -80,7 +80,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="30dp"
             android:hint="@string/please_input_total_component_power"
-            android:inputType="number"
+            android:inputType="numberDecimal"
             android:paddingTop="16dp"
             android:paddingBottom="16dp"
             android:textColor="@color/text_black"

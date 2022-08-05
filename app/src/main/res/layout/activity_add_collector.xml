@@ -124,6 +124,7 @@
                 android:inputType="text"
                 android:paddingTop="16dp"
                 android:paddingBottom="16dp"
+                android:digits="0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
                 android:textColor="@color/text_black"
                 android:textSize="@dimen/text_medium" />
 
@@ -171,6 +172,7 @@
                 android:inputType="text"
                 android:paddingTop="16dp"
                 android:paddingBottom="16dp"
+                android:digits="0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
                 android:textColor="@color/text_black"
                 android:textSize="@dimen/text_medium" />
 

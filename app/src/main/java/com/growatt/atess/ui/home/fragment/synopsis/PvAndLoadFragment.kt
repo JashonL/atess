@@ -79,13 +79,17 @@ class PvAndLoadFragment : BaseFragment() {
 
     private fun initView() {
         binding.root.gone()
-        val greenBg = ViewUtil.createShape(resources.getColor(R.color.color_993FAE29), 6)
-        binding.progressPvSelf.background = greenBg
-        binding.progressPvGrid.background = greenBg
-        val orangeBg = ViewUtil.createShape(resources.getColor(R.color.color_99FF6434), 6)
-        binding.progressLoadSelf.background = orangeBg
-        binding.progressLoadTakeElectricityGrid.background = orangeBg
-        binding.progressLoadOilEngineOutput.background = orangeBg
+
+        binding.progressPvSelf.background =
+            ViewUtil.createShape(resources.getColor(R.color.color_993FAE29), 6)
+        binding.progressPvGrid.background =
+            ViewUtil.createShape(resources.getColor(R.color.color_993FAE29), 6)
+        binding.progressLoadSelf.background =
+            ViewUtil.createShape(resources.getColor(R.color.color_99FF6434), 6)
+        binding.progressLoadTakeElectricityGrid.background =
+            ViewUtil.createShape(resources.getColor(R.color.color_99FF6434), 6)
+        binding.progressLoadOilEngineOutput.background =
+            ViewUtil.createShape(resources.getColor(R.color.color_99FF6434), 6)
 
         binding.tvPvSelfPercent.background =
             ViewUtil.createShape(resources.getColor(R.color.color_green), 15)
