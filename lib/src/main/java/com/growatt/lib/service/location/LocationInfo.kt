@@ -19,4 +19,14 @@ data class LocationInfo @JvmOverloads constructor(
     val city: String? = "",
     //城市编码
     val cityCode: String? = "",
-) : Parcelable
+) : Parcelable {
+
+    fun latitudeStr(): String {
+        return String.format("%.2f", latitude)
+    }
+
+    fun longitudeStr(): String {
+        return String.format("%.2f", longitude)
+    }
+
+}

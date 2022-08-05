@@ -11,6 +11,7 @@ import com.amap.api.maps.CameraUpdateFactory
 import com.amap.api.maps.model.CameraPosition
 import com.amap.api.maps.model.LatLng
 import com.amap.api.maps.model.MyLocationStyle
+import com.growatt.atess.R
 import com.growatt.atess.base.BaseActivity
 import com.growatt.atess.databinding.ActivityAmapBinding
 import com.growatt.atess.ui.common.viewmodel.AMapViewModel
@@ -24,6 +25,9 @@ class AMapActivity : BaseActivity(), View.OnClickListener, AMap.OnMyLocationChan
 
     companion object {
 
+        /**
+         * 缩放等级
+         */
         private const val ZOOM_LEVEL = 15f
         const val KEY_SELECT_ADDRESS = "key_select_address"
 
@@ -54,7 +58,14 @@ class AMapActivity : BaseActivity(), View.OnClickListener, AMap.OnMyLocationChan
     private fun initData() {
         viewModel.regeocodeSearchedLiveData.observe(this) {
             if (it.second == null) {
-                binding.tvLocationInfo.text = it.first.toString()
+                val locationInfo = it.first
+                binding.tvLocationAddress.text = locationInfo?.address
+                binding.tvLocationCity.text = "${locationInfo?.city}(${
+                    getString(
+                        R.string.longitude_format,
+                        locationInfo?.longitudeStr()
+                    )
+                },${getString(R.string.latitude_format, locationInfo?.latitudeStr())})"
             }
         }
     }
@@ -86,6 +97,8 @@ class AMapActivity : BaseActivity(), View.OnClickListener, AMap.OnMyLocationChan
             it.setOnCameraChangeListener(this)
             it.moveCamera(CameraUpdateFactory.zoomTo(ZOOM_LEVEL))
         }
+        //设置缩放按钮不显示
+        map.uiSettings.isZoomControlsEnabled = false
     }
 
     override fun onPause() {

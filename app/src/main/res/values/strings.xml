@@ -318,6 +318,8 @@
     <string name="loading_error_please_click_retry">加载失败，请点击重试</string>
     <string name="info_space_not_permission">浏览账号没有权限</string>
     <string name="delete_message_or_not">是否删除消息?</string>
+    <string name="longitude_format">经度:%s</string>
+    <string name="latitude_format">纬度:%s</string>
 
     <!-- image crop-->
     <string name="crop_image_menu_crop">裁剪</string>
