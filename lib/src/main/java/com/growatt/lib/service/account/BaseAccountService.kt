@@ -11,6 +11,12 @@ abstract class BaseAccountService : IAccountService {
         private const val KEY_TOKEN = "key_token"
         private const val KEY_USER = "key_user"
         private const val KEY_USER_AVATAR = "key_user_avatar"
+
+        /**
+         * 体验账号密码
+         */
+        const val INFO_SPACE_USER_NAME = "guest"
+        const val INFO_SPACE_PASSWORD = "123456"
     }
 
     private var token: String? = null
@@ -74,6 +80,10 @@ abstract class BaseAccountService : IAccountService {
 
     override fun isLogin(): Boolean {
         return !TextUtils.isEmpty(token)
+    }
+
+    override fun isGuest(): Boolean {
+        return user()?.userName == INFO_SPACE_USER_NAME
     }
 
     override fun addAccountListener(accountListener: IAccountService.AccountListener) {

@@ -1,6 +1,7 @@
 package com.growatt.atess.ui.plant.fragment.info
 
 import android.os.Bundle
+import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -167,10 +168,12 @@ class PcsSystemOperationFragment(val plantId: String?, val deviceSn: String?) : 
 
     override fun onClick(v: View?) {
         when {
-            v === binding.root -> if (plantId != null) PlantDeviceListActivity.start(
-                plantId,
-                requireActivity()
-            )
+            v === binding.root -> {
+                if (!TextUtils.isEmpty(plantId)) PlantDeviceListActivity.start(
+                    plantId,
+                    requireActivity()
+                )
+            }
         }
     }
 

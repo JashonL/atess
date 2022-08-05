@@ -25,6 +25,7 @@ import com.growatt.lib.service.account.IAccountService
 import com.growatt.lib.util.ActivityBridge
 import com.growatt.lib.util.ToastUtil
 import com.growatt.lib.util.Util
+import com.growatt.lib.util.gone
 import java.io.File
 import java.util.*
 
@@ -72,6 +73,14 @@ class SettingActivity : BaseActivity(), View.OnClickListener,
 
     private fun initView() {
         refreshUserProfile()
+        if (accountService().isGuest()) {
+            binding.itemUserName.gone()
+            binding.itemModifyPassword.gone()
+            binding.itemPhone.gone()
+            binding.itemEmail.gone()
+            binding.itemInstallerNo.gone()
+            binding.itemCancelAccount.gone()
+        }
     }
 
     private fun refreshUserProfile() {

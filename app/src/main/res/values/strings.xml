@@ -316,6 +316,7 @@
     <string name="nothing_message">暂无消息哦~</string>
     <string name="all_page_loading_finish">已全部加载完成</string>
     <string name="loading_error_please_click_retry">加载失败，请点击重试</string>
+    <string name="info_space_not_permission">浏览账号没有权限</string>
 
     <!-- image crop-->
     <string name="crop_image_menu_crop">裁剪</string>

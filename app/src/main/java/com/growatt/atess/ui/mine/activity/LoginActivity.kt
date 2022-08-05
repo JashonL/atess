@@ -21,6 +21,7 @@ import com.growatt.atess.databinding.ActivityLoginBinding
 import com.growatt.atess.ui.common.activity.WebActivity
 import com.growatt.atess.ui.home.HomeActivity
 import com.growatt.atess.ui.mine.viewmodel.LoginViewModel
+import com.growatt.lib.service.account.BaseAccountService
 import com.growatt.lib.service.account.User
 import com.growatt.lib.util.ToastUtil
 import com.growatt.lib.util.setViewHeight
@@ -31,6 +32,7 @@ import com.growatt.lib.util.setViewHeight
 class LoginActivity : BaseActivity(), View.OnClickListener {
 
     companion object {
+
         fun start(context: Context?) {
             context?.startActivity(Intent(context, LoginActivity::class.java))
         }
@@ -203,7 +205,9 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
                 updateSelectView(!isAgree)
             }
             v === binding.tvInfoSpace -> {
-
+                binding.etUserName.setText(BaseAccountService.INFO_SPACE_USER_NAME)
+                binding.etPassword.setText(BaseAccountService.INFO_SPACE_PASSWORD)
+                checkInfo()
             }
             v === binding.tvFindBackPassword -> {
                 FindBackPasswordActivity.start(this)

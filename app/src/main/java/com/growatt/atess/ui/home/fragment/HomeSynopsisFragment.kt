@@ -35,7 +35,6 @@ class HomeSynopsisFragment : HomeBaseFragment(), View.OnClickListener {
     ): View {
         _binding = FragmentHomeSynopsisBinding.inflate(inflater, container, false)
         initData()
-        initView()
         setListener()
         return binding.root
     }
@@ -50,12 +49,6 @@ class HomeSynopsisFragment : HomeBaseFragment(), View.OnClickListener {
             }
         }
         refresh()
-    }
-
-    private fun initView() {
-        binding.title.setOnRightImageClickListener {
-            AddPlantActivity.start(requireContext())
-        }
     }
 
     fun refresh() {
@@ -82,6 +75,9 @@ class HomeSynopsisFragment : HomeBaseFragment(), View.OnClickListener {
         binding.llOnlineDevice.setOnClickListener(this)
         binding.llOfflineDevice.setOnClickListener(this)
         binding.llTroubleDevice.setOnClickListener(this)
+        binding.title.setOnRightImageClickListener {
+            AddPlantActivity.start(requireContext())
+        }
     }
 
     override fun onDestroyView() {

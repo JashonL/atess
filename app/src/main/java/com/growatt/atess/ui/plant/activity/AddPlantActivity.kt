@@ -8,6 +8,7 @@ import android.view.View
 import androidx.activity.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.growatt.atess.R
+import com.growatt.atess.application.MainApplication
 import com.growatt.atess.base.BaseActivity
 import com.growatt.atess.component.image.crop.BitmapUtils
 import com.growatt.atess.databinding.ActivityAddPlantBinding
@@ -35,11 +36,18 @@ class AddPlantActivity : BaseActivity(), View.OnClickListener {
         private const val KEY_PLANT_INFO = "KEY_PLANT_INFO"
 
         fun start(context: Context?, plantModel: PlantModel? = null) {
-            context?.startActivity(Intent(context, AddPlantActivity::class.java).apply {
-                if (plantModel != null) {
-                    putExtra(KEY_PLANT_INFO, plantModel)
-                }
-            })
+            if (MainApplication.instance().accountService().isGuest()) {
+                ToastUtil.show(
+                    MainApplication.instance().getString(R.string.info_space_not_permission)
+                )
+            } else {
+                context?.startActivity(Intent(context, AddPlantActivity::class.java).apply {
+                    if (plantModel != null) {
+                        putExtra(KEY_PLANT_INFO, plantModel)
+                    }
+                })
+            }
+
         }
 
     }
@@ -64,7 +72,9 @@ class AddPlantActivity : BaseActivity(), View.OnClickListener {
         viewModel.addPlantLiveData.observe(this) {
             dismissDialog()
             if (it.second == null) {
-                AddCollectorActivity.start(this, it.first)
+                if (!accountService().isGuest()) {
+                    AddCollectorActivity.start(this, it.first)
+                }
                 PlantMonitor.notifyPlant()
                 finish()
             } else {

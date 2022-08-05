@@ -30,6 +30,11 @@ interface IAccountService : Service {
 
     fun isLogin(): Boolean
 
+    /**
+     * 是否是体验账号
+     */
+    fun isGuest(): Boolean
+
     fun addAccountListener(accountListener: AccountListener)
 
     fun removeAccountListener(accountListener: AccountListener)

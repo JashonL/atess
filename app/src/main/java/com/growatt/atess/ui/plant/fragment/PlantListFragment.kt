@@ -210,9 +210,13 @@ class PlantListFragment(
                         }
                     }
                     edit -> {
-                        plantInfoViewModel.plantId = getItem(position)?.id
-                        showDialog()
-                        plantInfoViewModel.getPlantInfo()
+                        if (accountService().isGuest()) {
+                            ToastUtil.show(getString(R.string.info_space_not_permission))
+                        } else {
+                            plantInfoViewModel.plantId = getItem(position)?.id
+                            showDialog()
+                            plantInfoViewModel.getPlantInfo()
+                        }
                     }
                 }
             }

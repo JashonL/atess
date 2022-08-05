@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.activity.viewModels
 import com.growatt.atess.R
+import com.growatt.atess.application.MainApplication
 import com.growatt.atess.base.BaseActivity
 import com.growatt.atess.databinding.ActivityAddCollectorBinding
 import com.growatt.atess.ui.common.activity.ScanActivity
@@ -27,9 +28,15 @@ class AddCollectorActivity : BaseActivity(), View.OnClickListener {
         private const val KEY_PLANT_ID = "key_plant_id"
 
         fun start(context: Context?, plantId: String?) {
-            context?.startActivity(Intent(context, AddCollectorActivity::class.java).also {
-                it.putExtra(KEY_PLANT_ID, plantId)
-            })
+            if (MainApplication.instance().accountService().isGuest()) {
+                ToastUtil.show(
+                    MainApplication.instance().getString(R.string.info_space_not_permission)
+                )
+            } else {
+                context?.startActivity(Intent(context, AddCollectorActivity::class.java).also {
+                    it.putExtra(KEY_PLANT_ID, plantId)
+                })
+            }
         }
 
     }

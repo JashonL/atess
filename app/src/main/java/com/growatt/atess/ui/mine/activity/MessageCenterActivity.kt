@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.activity.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.growatt.atess.R
+import com.growatt.atess.application.MainApplication
 import com.growatt.atess.base.BaseActivity
 import com.growatt.atess.base.BasePageListAdapter
 import com.growatt.atess.base.BaseViewHolder
@@ -29,7 +30,13 @@ class MessageCenterActivity : BaseActivity() {
     companion object {
 
         fun start(context: Context?) {
-            context?.startActivity(Intent(context, MessageCenterActivity::class.java))
+            if (MainApplication.instance().accountService().isGuest()) {
+                ToastUtil.show(
+                    MainApplication.instance().getString(R.string.info_space_not_permission)
+                )
+            } else {
+                context?.startActivity(Intent(context, MessageCenterActivity::class.java))
+            }
         }
 
     }
