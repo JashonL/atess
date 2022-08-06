@@ -18,7 +18,8 @@ import com.growatt.atess.model.plant.ChartMarkerViewData
 import com.growatt.lib.util.ViewUtil
 
 @SuppressLint("ViewConstructor")
-class LineMarkerView(context: Context?, layoutResource: Int) : MarkerView(context, layoutResource) {
+class ChartMarkerView(context: Context?, layoutResource: Int) :
+    MarkerView(context, layoutResource) {
 
     var data: ChartMarkerViewData? = null
 

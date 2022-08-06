@@ -21,7 +21,7 @@ import com.growatt.atess.model.plant.ChartDataValue
 import com.growatt.atess.model.plant.ChartListDataModel
 import com.growatt.atess.model.plant.ChartMarkerViewData
 import com.growatt.atess.model.plant.ChartTypeModel
-import com.growatt.atess.ui.plant.view.LineMarkerView
+import com.growatt.atess.ui.plant.view.ChartMarkerView
 import com.growatt.lib.util.DateUtils
 import com.growatt.lib.util.Util
 import java.util.*
@@ -76,7 +76,7 @@ class LineChartFragment(var chartListDataModel: ChartListDataModel? = null, var 
         val lineData = LineData().also {
             it.isHighlightEnabled = true
         }
-        var granularity: Float? = null
+        var granularity: Float? = null//X轴数据间隔
         for (i in chartYDataList.indices) {
             //设置一条折线数据
             val lineDataValues = mutableListOf<Entry>()
@@ -113,7 +113,7 @@ class LineChartFragment(var chartListDataModel: ChartListDataModel? = null, var 
                 it.setDrawValues(false)//是否显示点的值
                 it.color = color.color//设置曲线的颜色
             }
-            if (lineDataValues.size > 2 && granularity == null) {
+            if (granularity == null && lineDataValues.size > 2) {
                 granularity = lineDataValues[1].x - lineDataValues[0].x
             }
             lineData.addDataSet(lineDataSet)
@@ -143,7 +143,7 @@ class LineChartFragment(var chartListDataModel: ChartListDataModel? = null, var 
     }
 
     private fun initChartView() {
-        val marker = LineMarkerView(requireContext(), R.layout.chart_marker_view)
+        val marker = ChartMarkerView(requireContext(), R.layout.chart_marker_view)
         binding.lineChart.also {
             it.setDrawGridBackground(false)
             it.description.isEnabled = false //不显示描述（右下角）

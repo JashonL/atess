@@ -11,13 +11,20 @@ import com.github.mikephil.charting.components.YAxis
 import com.github.mikephil.charting.data.BarData
 import com.github.mikephil.charting.data.BarDataSet
 import com.github.mikephil.charting.data.BarEntry
+import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.formatter.ValueFormatter
+import com.github.mikephil.charting.highlight.Highlight
+import com.github.mikephil.charting.listener.OnChartValueSelectedListener
 import com.growatt.atess.R
 import com.growatt.atess.base.BaseFragment
 import com.growatt.atess.databinding.FragmentBarChartBinding
+import com.growatt.atess.model.plant.ChartDataValue
 import com.growatt.atess.model.plant.ChartListDataModel
+import com.growatt.atess.model.plant.ChartMarkerViewData
 import com.growatt.atess.model.plant.ChartTypeModel
+import com.growatt.atess.ui.plant.view.ChartMarkerView
 import com.growatt.lib.util.Util
+import kotlin.math.floor
 
 /**
  * 柱状图表
@@ -61,8 +68,10 @@ class BarChartFragment(var chartListDataModel: ChartListDataModel? = null, var u
         }
         val timeList = chartListDataModel!!.getXTimeList()
         val chartYDataList = chartListDataModel!!.getYDataList()
-        val barData = BarData()
-        var granularity: Float? = null
+        val barData = BarData().also {
+            it.isHighlightEnabled = true
+        }//数据源
+        var granularity: Float? = null//X轴数据间隔
         for (i in chartYDataList.indices) {
             //设置一种柱状图数据
             val barDataValues = mutableListOf<BarEntry>()
@@ -73,7 +82,6 @@ class BarChartFragment(var chartListDataModel: ChartListDataModel? = null, var u
             for (yDataIndex in chartYData.getYDataList().indices) {
                 val time = timeList[yDataIndex]
                 val y = chartYData.getYDataList()[yDataIndex]
-//                val y = (7 - i).toFloat()
                 barDataValues.add(BarEntry(time.toFloat(), y))
             }
 
@@ -87,7 +95,7 @@ class BarChartFragment(var chartListDataModel: ChartListDataModel? = null, var u
                     }
                 }
             }
-            if (barDataValues.size > 2 && granularity == null) {
+            if (granularity == null && barDataValues.size > 2) {
                 granularity = barDataValues[1].x - barDataValues[0].x
             }
             barData.addDataSet(barDataSet)
@@ -144,6 +152,7 @@ class BarChartFragment(var chartListDataModel: ChartListDataModel? = null, var u
     }
 
     private fun initChartView() {
+        val marker = ChartMarkerView(requireContext(), R.layout.chart_marker_view)
         binding.barChart.also {
             it.setDrawGridBackground(false)
             it.description.isEnabled = false //不显示描述（右下角）
@@ -153,6 +162,40 @@ class BarChartFragment(var chartListDataModel: ChartListDataModel? = null, var u
             it.isDragEnabled = true//设置能够拖动
             it.axisRight.isEnabled = false//设置右边Y轴线不显示
             it.legend.isEnabled = false//是否显示类型图标
+
+            it.setOnChartValueSelectedListener(object : OnChartValueSelectedListener {
+                override fun onValueSelected(e: Entry?, h: Highlight?) {
+                    val dataSets = it.data.dataSets
+                    val chartDataValues: MutableList<ChartDataValue> = mutableListOf()
+                    val x = e?.x ?: 0f
+                    for (index in dataSets.indices) {
+                        val barDataSet = dataSets[index]
+                        val y = barDataSet.getEntryForXValue(e?.x ?: 0f, barDataSet.yMax).y
+                        chartDataValues.add(
+                            ChartDataValue(
+                                barDataSet.color,
+                                barDataSet.label,
+                                Util.getDoubleText(y.toDouble())
+                            )
+                        )
+                        if (index == 0) {
+                            it.highlightValue(Highlight(x, y, index))
+                        }
+                    }
+                    marker.data = ChartMarkerViewData(
+                        Util.getDoubleText(floor(x.toDouble())),
+                        chartDataValues.toTypedArray()
+                    )
+                }
+
+                override fun onNothingSelected() {
+
+                }
+
+            })
+
+            marker.chartView = binding.barChart
+            binding.barChart.marker = marker
         }
 
         //X轴
