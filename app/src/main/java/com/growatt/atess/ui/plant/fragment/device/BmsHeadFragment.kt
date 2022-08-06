@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
+import android.widget.LinearLayout.HORIZONTAL
 import android.widget.TextView
 import androidx.annotation.ColorRes
 import com.growatt.atess.R
@@ -98,6 +99,7 @@ class BmsHeadFragment : BaseFragment() {
                 LinearLayout.LayoutParams.MATCH_PARENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT
             )
+            it.orientation = HORIZONTAL
             it.gravity = Gravity.CENTER_VERTICAL
             it.addView(generateText(R.color.text_gray_99, key))
             if (!TextUtils.isEmpty(value)) {

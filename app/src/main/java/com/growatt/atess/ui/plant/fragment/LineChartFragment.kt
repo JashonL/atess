@@ -12,11 +12,16 @@ import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
 import com.github.mikephil.charting.formatter.ValueFormatter
+import com.github.mikephil.charting.highlight.Highlight
+import com.github.mikephil.charting.listener.OnChartValueSelectedListener
 import com.growatt.atess.R
 import com.growatt.atess.base.BaseFragment
 import com.growatt.atess.databinding.FragmentLineChartBinding
+import com.growatt.atess.model.plant.ChartDataValue
 import com.growatt.atess.model.plant.ChartListDataModel
+import com.growatt.atess.model.plant.ChartMarkerViewData
 import com.growatt.atess.model.plant.ChartTypeModel
+import com.growatt.atess.ui.plant.view.LineMarkerView
 import com.growatt.lib.util.DateUtils
 import com.growatt.lib.util.Util
 import java.util.*
@@ -138,6 +143,7 @@ class LineChartFragment(var chartListDataModel: ChartListDataModel? = null, var 
     }
 
     private fun initChartView() {
+        val marker = LineMarkerView(requireContext(), R.layout.chart_marker_view)
         binding.lineChart.also {
             it.setDrawGridBackground(false)
             it.description.isEnabled = false //不显示描述（右下角）
@@ -146,6 +152,38 @@ class LineChartFragment(var chartListDataModel: ChartListDataModel? = null, var 
             it.isScaleYEnabled = false//设置Y轴能缩小放大,配合setTouchEnabled使用
             it.isDragEnabled = true//设置能够拖动
             it.axisRight.isEnabled = false//设置右边Y轴线不显示
+            it.setOnChartValueSelectedListener(object : OnChartValueSelectedListener {
+                override fun onValueSelected(e: Entry?, h: Highlight?) {
+                    val dataSets = it.data.dataSets
+                    val chartDataValues: MutableList<ChartDataValue> = mutableListOf()
+                    val x = e?.x ?: 0f
+                    for (index in dataSets.indices) {
+                        val lineDataSet = dataSets[index]
+                        val y = lineDataSet.getEntryForXValue(e?.x ?: 0f, lineDataSet.yMax).y
+                        chartDataValues.add(
+                            ChartDataValue(
+                                lineDataSet.color,
+                                lineDataSet.label,
+                                Util.getDoubleText(y.toDouble())
+                            )
+                        )
+                        if (index == 0) {
+                            it.highlightValue(Highlight(x, y, index))
+                        }
+                    }
+                    marker.data = ChartMarkerViewData(
+                        DateUtils.HH_mm_format(Date(x.toLong() * MINUTES_INTERVAL)),
+                        chartDataValues.toTypedArray()
+                    )
+                }
+
+                override fun onNothingSelected() {
+
+                }
+
+            })
+            marker.chartView = binding.lineChart
+            binding.lineChart.marker = marker
         }
 
         //X轴

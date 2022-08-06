@@ -59,6 +59,7 @@ class DeviceParamsActivity : BaseActivity() {
                 LinearLayout.LayoutParams.MATCH_PARENT,
                 ViewUtil.dp2px(this, 50f)
             )
+            it.orientation = LinearLayout.HORIZONTAL
             it.gravity = Gravity.CENTER_VERTICAL
             it.addView(generateText(R.color.text_gray_99, key))
             if (!TextUtils.isEmpty(value)) {
