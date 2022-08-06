@@ -18,7 +18,7 @@ import com.growatt.lib.util.*
 class PvAndLoadFragment : BaseFragment() {
 
     companion object {
-        const val MAX_PROGRESS_WIDTH_DP = 150
+        const val MAX_PROGRESS_WIDTH_DP = 150f
     }
 
     private var _binding: FragmentPvAndLoadBinding? = null
@@ -72,9 +72,9 @@ class PvAndLoadFragment : BaseFragment() {
      */
     private fun getProgressWidth(realRatio: Int): Float {
         if (realRatio % 5 == 0) {
-            return (realRatio / 100 * MAX_PROGRESS_WIDTH_DP).toFloat()
+            return realRatio / 100f * MAX_PROGRESS_WIDTH_DP
         }
-        return ((realRatio / 5 + 1) * 5 / 100 * MAX_PROGRESS_WIDTH_DP).toFloat()
+        return (realRatio / 5 + 1) * 5f / 100f * MAX_PROGRESS_WIDTH_DP
     }
 
     private fun initView() {
