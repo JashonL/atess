@@ -3,6 +3,8 @@ package com.growatt.atess.ui.mine.activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.text.Spannable
 import android.text.SpannableString
 import android.text.TextPaint
@@ -19,6 +21,7 @@ import com.growatt.atess.R
 import com.growatt.atess.base.BaseActivity
 import com.growatt.atess.databinding.ActivityLoginBinding
 import com.growatt.atess.ui.common.activity.WebActivity
+import com.growatt.atess.ui.common.fragment.DebugDialog
 import com.growatt.atess.ui.home.HomeActivity
 import com.growatt.atess.ui.mine.viewmodel.LoginViewModel
 import com.growatt.lib.service.account.BaseAccountService
@@ -98,6 +101,8 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
         binding.tvInfoSpace.setOnClickListener(this)
         binding.tvRegister.setOnClickListener(this)
         binding.btLogin.setOnClickListener(this)
+        binding.ivLogo.setOnClickListener(this)
+        binding.tvAppName.setOnClickListener(this)
     }
 
     private fun initView() {
@@ -224,6 +229,8 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
             v === binding.btLogin -> {
                 checkInfo()
             }
+            v === binding.ivLogo -> clickDebug(binding.ivLogo)
+            v === binding.tvAppName -> clickDebug(binding.tvAppName)
         }
     }
 
@@ -247,5 +254,33 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
             }
         }
     }
+
+    /******************************************调试相关代码***********************************************/
+    private var clickLogoCount = 0
+    private var clickAppNameCount = 0
+    private val INTERVAL = 2000L
+    private var handler: Handler? = null
+
+    private fun clickDebug(view: View) {
+        if (view === binding.ivLogo) {
+            clickLogoCount++
+        } else if (view === binding.tvAppName) {
+            clickAppNameCount++
+        }
+        //在2秒钟内快速点击logo与appname，各点击超过2次以上，并且加起来超过6次
+        if (clickAppNameCount > 2 && clickLogoCount > 2 && clickAppNameCount + clickLogoCount > 6) {
+            DebugDialog.showDialog(supportFragmentManager)
+        }
+
+        if (handler == null) {
+            handler = Handler(Looper.getMainLooper())
+        }
+        handler?.removeCallbacksAndMessages(null)
+        handler?.postDelayed({
+            clickLogoCount = 0
+            clickAppNameCount = 0
+        }, INTERVAL)
+    }
+    /******************************************调试相关代码***********************************************/
 
 }

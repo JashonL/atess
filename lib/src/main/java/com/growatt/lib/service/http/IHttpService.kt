@@ -11,6 +11,8 @@ abstract class IHttpService : Service {
 
     abstract fun host(): String
 
+    abstract fun setHost(host: String)
+
     protected fun generateHeads(): Map<String, String> {
         return hashMapOf<String, String>().apply {
             put("deviceType", "Android")

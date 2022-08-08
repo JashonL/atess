@@ -3,6 +3,8 @@ package com.growatt.atess.service.http
 import android.net.Uri
 import android.os.Handler
 import android.os.Looper
+import com.growatt.atess.BuildConfig
+import com.growatt.atess.application.MainApplication
 import com.growatt.lib.service.http.IHttpCallback
 import com.growatt.lib.service.http.IHttpService
 import com.growatt.lib.util.GsonManager
@@ -25,7 +27,11 @@ class OkhttpService : IHttpService() {
         val JSON = "application/json; charset=utf-8".toMediaType()
         val FILE = "application/octet-stream".toMediaType()
         const val TAG = "http_respone"
+
+        const val KEY_APP_HOST = "key_app_host"
     }
+
+    private var apiServiceUrl: String? = null
 
     private val okHttpClient: OkHttpClient = OkHttpClient.Builder()
         .connectTimeout(30, TimeUnit.SECONDS)
@@ -40,7 +46,15 @@ class OkhttpService : IHttpService() {
     private val mainHandler = Handler(Looper.getMainLooper())
 
     override fun host(): String {
-        return ApiPath.SERVER_HOST
+        if (apiServiceUrl.isNullOrEmpty()) {
+            apiServiceUrl = MainApplication.instance().storageService()
+                .getString(KEY_APP_HOST, BuildConfig.apiServerUrl)
+        }
+        return apiServiceUrl!!
+    }
+
+    override fun setHost(host: String) {
+        MainApplication.instance().storageService().put(KEY_APP_HOST, host)
     }
 
     override fun postForm(urlOrApi: String, params: Map<String, String>, callback: IHttpCallback) {

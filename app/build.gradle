@@ -31,6 +31,7 @@ android {
         buildConfigField("String", "companyWebsite", "\"${odm.companyWebsite}\"")
         buildConfigField("String", "companyPhone", "\"${odm.companyPhone}\"")
         buildConfigField("String", "noticeForCancelAccountUrl", "\"${odm.noticeForCancelAccountUrl}\"")
+        buildConfigField("String", "apiServerUrl", "\"${odm.apiServerUrl}\"")
 
         ndk {
             abiFilters "armeabi-v7a", "arm64-v8a"
