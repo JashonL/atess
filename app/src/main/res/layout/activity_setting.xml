@@ -31,8 +31,8 @@
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
             android:scaleType="centerCrop"
-            app:roundPercent="1"
-            android:src="@drawable/ic_default_avatar" />
+            android:src="@drawable/ic_default_avatar"
+            app:roundPercent="1" />
 
         <TextView
             android:id="@+id/tv_user_name"

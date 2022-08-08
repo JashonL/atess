@@ -2,6 +2,7 @@ package com.growatt.lib.service.http
 
 import  com.growatt.lib.LibApplication
 import com.growatt.lib.util.GsonManager
+import com.growatt.lib.util.ToastUtil
 import org.json.JSONException
 import org.json.JSONObject
 import java.lang.reflect.ParameterizedType
@@ -16,6 +17,8 @@ abstract class HttpCallback<R> : IHttpCallback {
                 val status_code = JSONObject(response).optString("status_code").toString()
                 if (status_code == "90001") {
                     LibApplication.instance().accountService().tokenExpired()
+                    val errorMsg = JSONObject(response).optString("msg").toString()
+                    ToastUtil.show(errorMsg)
                     return
                 }
             }

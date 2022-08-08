@@ -187,35 +187,42 @@ class SettingActivity : BaseActivity(), View.OnClickListener,
      * Intent(MediaStore.ACTION_IMAGE_CAPTURE) 调用系统相机拍照，不需要申请Camera权限
      */
     private fun takeAPicture() {
-        ActivityBridge.startActivity(
-            this,
-            Intent(MediaStore.ACTION_IMAGE_CAPTURE).apply {
-                takePictureFile = AppUtil.createImageFile()?.apply {
-                    putExtra(
-                        MediaStore.EXTRA_OUTPUT,
-                        FileProvider.getUriForFile(
-                            this@SettingActivity,
-                            BuildConfig.APPLICATION_ID + ".fileProvider",
-                            this
-                        )
-                    )
-                }
-            },
-            object :
-                ActivityBridge.OnActivityForResult {
-                override fun onActivityForResult(
-                    context: Context?,
-                    resultCode: Int,
-                    data: Intent?
-                ) {
-                    if (resultCode == RESULT_OK) {
-                        takePictureFile?.also {
-                            Util.galleryAddPic(it.absolutePath)
-                            cropImage(Uri.fromFile(it))
+        RequestPermissionHub.requestPermission(
+            supportFragmentManager,
+            arrayOf(Manifest.permission.CAMERA)
+        ) { isGranted ->
+            if (isGranted) {
+                ActivityBridge.startActivity(
+                    this,
+                    Intent(MediaStore.ACTION_IMAGE_CAPTURE).apply {
+                        takePictureFile = AppUtil.createImageFile()?.apply {
+                            putExtra(
+                                MediaStore.EXTRA_OUTPUT,
+                                FileProvider.getUriForFile(
+                                    this@SettingActivity,
+                                    BuildConfig.APPLICATION_ID + ".fileProvider",
+                                    this
+                                )
+                            )
                         }
-                    }
-                }
-            })
+                    },
+                    object :
+                        ActivityBridge.OnActivityForResult {
+                        override fun onActivityForResult(
+                            context: Context?,
+                            resultCode: Int,
+                            data: Intent?
+                        ) {
+                            if (resultCode == RESULT_OK) {
+                                takePictureFile?.also {
+                                    Util.galleryAddPic(it.absolutePath)
+                                    cropImage(Uri.fromFile(it))
+                                }
+                            }
+                        }
+                    })
+            }
+        }
     }
 
     private fun cropImage(imageUri: Uri?) {

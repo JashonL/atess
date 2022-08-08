@@ -110,7 +110,7 @@ class RequestPermissionHub : Fragment() {
                     getString(R.string.camera)
                 )
             }
-            Manifest.permission.WRITE_EXTERNAL_STORAGE -> {
+            Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE -> {
                 title = getString(
                     R.string.app_want_to_visit_format,
                     appName,
