@@ -9,6 +9,7 @@ import com.growatt.atess.base.BaseActivity
 import com.growatt.atess.databinding.ActivityHomeBinding
 import com.growatt.atess.ui.home.fragment.*
 import com.growatt.atess.ui.home.view.HomeTab
+import com.growatt.atess.ui.home.viewmodel.PlantFilterViewModel
 import com.growatt.atess.ui.mine.viewmodel.MessageViewModel
 import com.growatt.lib.util.ToastUtil
 
@@ -30,6 +31,8 @@ class HomeActivity : BaseActivity() {
     private var currentShowFragment: HomeBaseFragment? = null
 
     private val messageViewModel: MessageViewModel by viewModels()
+
+    private val plantFilterViewModel: PlantFilterViewModel by viewModels()
 
     private val homeFragments by lazy(LazyThreadSafetyMode.NONE) {
         mutableMapOf(
@@ -88,6 +91,9 @@ class HomeActivity : BaseActivity() {
         binding.homeBottomView.setOnTabSelectListener {
             homeTab = it
             switchToFragment(it)
+            if (homeTab == HomeTab.PLANT) {
+                plantFilterViewModel.setNeedAutoGoToPlantInfo(true)
+            }
         }
         switchToFragment(homeTab)
     }

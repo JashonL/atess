@@ -53,8 +53,8 @@ class PlantListFragment(
     private val filterViewModel: PlantFilterViewModel by activityViewModels()
     private val plantInfoViewModel: PlantInfoViewModel by viewModels()
 
-    //TAB为全部的时候使用到
-    private var isNeedJumpToPlantInfo = true
+    //是否是第一次请求数据
+    private var isFirstRequestData = true
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -81,13 +81,17 @@ class PlantListFragment(
         viewModel.getPlantListLiveData.observe(viewLifecycleOwner) {
             binding.srfRefresh.finishRefresh()
             if (it.second == null) {
-                (binding.rvPlant.adapter as Adapter).refresh(it.first)
+                getAdapter()?.refresh(it.first)
                 refreshEmptyView(it.first)
-                checkAutoJumpToPlantInfo(it.first)
+                if (isFirstRequestData) {
+                    filterViewModel.setNeedAutoGoToPlantInfo(true)
+                }
             } else {
                 ToastUtil.show(it.second)
             }
-            isNeedJumpToPlantInfo = false
+            if (isFirstRequestData) {
+                isFirstRequestData = false
+            }
         }
         viewModel.getPlantStatusNumLiveData.observe(viewLifecycleOwner) {
             if (it.second == null) {
@@ -119,11 +123,16 @@ class PlantListFragment(
         if (requireActivity() is SearchActivity) {
             viewModel.getPlantList(plantStatus, searchWord = searchWord)
         }
+        if (plantStatus == PlantModel.PLANT_STATUS_ALL) {
+            filterViewModel.getIsNeedAutoGoToPlantInfo.observe(viewLifecycleOwner) {
+                checkAutoJumpToPlantInfo(getAdapter()?.currentList)
+            }
+        }
     }
 
     //点击底部电站初始化的时候，只有1个电站的时候跳转到电站详情，网络异常则状态失效
-    private fun checkAutoJumpToPlantInfo(plantModels: Array<PlantModel>?) {
-        if (plantStatus == PlantModel.PLANT_STATUS_ALL && isNeedJumpToPlantInfo && plantModels?.size ?: 0 == 1) {
+    private fun checkAutoJumpToPlantInfo(plantModels: List<PlantModel>?) {
+        if (plantStatus == PlantModel.PLANT_STATUS_ALL && plantModels?.size ?: 0 == 1) {
             val plantId = plantModels?.get(0)?.id
             if (!plantId.isNullOrEmpty()) {
                 PlantInfoActivity.start(requireContext(), plantId)
@@ -165,7 +174,13 @@ class PlantListFragment(
         //item高度固定的时候，设置这个优化性能
         binding.rvPlant.setHasFixedSize(true)
 
+    }
 
+    private fun getAdapter(): Adapter? {
+        if (binding.rvPlant.adapter is Adapter) {
+            return binding.rvPlant.adapter as Adapter
+        }
+        return null
     }
 
     private fun getPlantStatusText(): String {

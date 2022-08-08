@@ -13,7 +13,7 @@ abstract class HttpCallback<R> : IHttpCallback {
         //统一处理登录失效的问题
         try {
             response?.also {
-                val status_code = JSONObject(response).opt("status_code")?.toString()
+                val status_code = JSONObject(response).optString("status_code").toString()
                 if (status_code == "90001") {
                     LibApplication.instance().accountService().tokenExpired()
                     return

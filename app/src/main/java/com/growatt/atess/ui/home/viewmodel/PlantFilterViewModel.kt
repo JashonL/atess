@@ -4,9 +4,11 @@ import androidx.lifecycle.MutableLiveData
 import com.growatt.atess.base.BaseViewModel
 
 /**
- * 电站列表
+ * 电站筛选
  */
 class PlantFilterViewModel : BaseViewModel() {
+
+    var getIsNeedAutoGoToPlantInfo = MutableLiveData(true)
 
     val getPlantFilterLiveData = MutableLiveData<Int>()
 
@@ -15,5 +17,12 @@ class PlantFilterViewModel : BaseViewModel() {
      */
     fun setFilterType(orderType: Int) {
         getPlantFilterLiveData.value = orderType
+    }
+
+    /**
+     * 通知自动跳转到电站列表
+     */
+    fun setNeedAutoGoToPlantInfo(autoGoToPlantInfo: Boolean) {
+        getIsNeedAutoGoToPlantInfo.value = autoGoToPlantInfo
     }
 }
