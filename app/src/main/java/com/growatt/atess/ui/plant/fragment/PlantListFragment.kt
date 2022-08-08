@@ -84,7 +84,9 @@ class PlantListFragment(
                 getAdapter()?.refresh(it.first)
                 refreshEmptyView(it.first)
                 if (isFirstRequestData) {
-                    filterViewModel.setNeedAutoGoToPlantInfo(true)
+                    if (plantStatus == PlantModel.PLANT_STATUS_ALL) {
+                        filterViewModel.setNeedAutoGoToPlantInfo(true)
+                    }
                 }
             } else {
                 ToastUtil.show(it.second)
