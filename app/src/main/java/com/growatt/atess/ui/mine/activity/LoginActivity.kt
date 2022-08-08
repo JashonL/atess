@@ -205,9 +205,15 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
                 updateSelectView(!isAgree)
             }
             v === binding.tvInfoSpace -> {
-                binding.etUserName.setText(BaseAccountService.INFO_SPACE_USER_NAME)
-                binding.etPassword.setText(BaseAccountService.INFO_SPACE_PASSWORD)
-                checkInfo()
+                if (!isAgree) {
+                    ToastUtil.show(getString(R.string.please_check_agree_agreement))
+                } else {
+                    showDialog()
+                    viewModel.login(
+                        BaseAccountService.INFO_SPACE_USER_NAME,
+                        BaseAccountService.INFO_SPACE_PASSWORD
+                    )
+                }
             }
             v === binding.tvFindBackPassword -> {
                 FindBackPasswordActivity.start(this)
