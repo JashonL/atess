@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.IntDef
 import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.growatt.atess.R
 import com.growatt.atess.base.BaseDialogFragment
@@ -53,7 +53,7 @@ class VerifyCodeDialog : BaseDialogFragment(), View.OnClickListener {
     private var type: Int = RegisterAccountType.PHONE
     private lateinit var phoneOrEmail: String
     private var remainingTime = 0
-    private val viewModel: VerifyCodeViewModel by activityViewModels()
+    private val viewModel: VerifyCodeViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -70,7 +70,7 @@ class VerifyCodeDialog : BaseDialogFragment(), View.OnClickListener {
     }
 
     private fun initData() {
-        viewModel.getVerifyCodeLiveData.observe(this) {
+        viewModel.getVerifyCodeLiveData.observe(viewLifecycleOwner) {
             dismissDialog()
             if (it.second == null) {
                 updateCountDown(it.first)
@@ -79,7 +79,7 @@ class VerifyCodeDialog : BaseDialogFragment(), View.OnClickListener {
             }
         }
 
-        viewModel.verifyCodeLiveData.observe(this) {
+        viewModel.verifyCodeLiveData.observe(viewLifecycleOwner) {
             dismissDialog()
             if (it == null) {
                 val verifyCode = binding.etVerifyCode.text.toString().trim()
@@ -87,7 +87,6 @@ class VerifyCodeDialog : BaseDialogFragment(), View.OnClickListener {
             } else {
                 ToastUtil.show(it)
             }
-            dismissAllowingStateLoss()
         }
     }
 
