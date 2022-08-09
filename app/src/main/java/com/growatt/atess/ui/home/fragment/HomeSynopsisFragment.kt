@@ -103,4 +103,5 @@ class HomeSynopsisFragment : HomeBaseFragment(), View.OnClickListener {
             PlantTabSwitchMonitor.notifyPlantSwitch(position)
         }
     }
+
 }

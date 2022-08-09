@@ -114,6 +114,17 @@ class HomeActivity : BaseActivity() {
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
+
+        //不保存fragment状态，当系统资源不足的时候，activity被销毁，不保存fragment数据，解决恢复状态崩溃问题
+        outState.remove("android:support:fragments")
+        outState.remove("android:fragments")
+        val bundle = outState.get("androidx.lifecycle.BundlableSavedStateRegistry.key")
+        if (bundle is Bundle) {
+            //适配高版本
+            bundle.remove("android:support:fragments")
+            bundle.remove("android:fragments")
+        }
+
         outState.putInt(KEY_HOME_TAB, homeTab)
     }
 
