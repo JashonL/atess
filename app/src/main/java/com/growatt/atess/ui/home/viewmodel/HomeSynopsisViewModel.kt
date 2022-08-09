@@ -9,6 +9,7 @@ import com.growatt.atess.model.plant.SynopsisTotalModel
 import com.growatt.atess.service.http.ApiPath
 import com.growatt.atess.view.DateType
 import com.growatt.lib.service.http.HttpCallback
+import com.growatt.lib.service.http.HttpErrorModel
 import com.growatt.lib.service.http.HttpResult
 import com.growatt.lib.util.DateUtils
 import kotlinx.coroutines.launch
@@ -44,10 +45,10 @@ class HomeSynopsisViewModel : BaseViewModel() {
                         }
                     }
 
-                    override fun onFailure(error: String?) {
-                        super.onFailure(error)
-                        getSynopsisTotalLiveData.value = Pair(null, error ?: "")
+                    override fun onFailure(errorModel: HttpErrorModel) {
+                        getSynopsisTotalLiveData.value = Pair(null, errorModel.errorMsg ?: "")
                     }
+
                 })
         }
     }
@@ -71,10 +72,11 @@ class HomeSynopsisViewModel : BaseViewModel() {
                     }
                 }
 
-                override fun onFailure(error: String?) {
-                    super.onFailure(error)
-                    getPowerTrendsChartLiveData.value = Pair(null, error ?: "")
+                override fun onFailure(errorModel: HttpErrorModel) {
+                    super.onFailure(errorModel)
+                    getPowerTrendsChartLiveData.value = Pair(null, errorModel.errorMsg ?: "")
                 }
+
             })
         }
     }
@@ -94,10 +96,10 @@ class HomeSynopsisViewModel : BaseViewModel() {
                     }
                 }
 
-                override fun onFailure(error: String?) {
-                    super.onFailure(error)
-                    getPVAndLoadLiveData.value = Pair(null, error ?: "")
+                override fun onFailure(errorModel: HttpErrorModel) {
+                    getPVAndLoadLiveData.value = Pair(null, errorModel.errorMsg ?: "")
                 }
+
             })
         }
     }

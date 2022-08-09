@@ -4,7 +4,9 @@ import android.net.Uri
 import android.os.Handler
 import android.os.Looper
 import com.growatt.atess.BuildConfig
+import com.growatt.atess.R
 import com.growatt.atess.application.MainApplication
+import com.growatt.lib.service.http.HttpErrorModel
 import com.growatt.lib.service.http.IHttpCallback
 import com.growatt.lib.service.http.IHttpService
 import com.growatt.lib.util.GsonManager
@@ -131,7 +133,10 @@ class OkhttpService : IHttpService() {
         call.enqueue(object : Callback {
             override fun onFailure(call: Call, e: IOException) {
                 mainHandler.post {
-                    callback.onFailure(e.message)
+                    callback.onFailure(
+                        HttpErrorModel.ERROR_CODE_NETWORK,
+                        MainApplication.instance().getString(R.string.network_error)
+                    )
                 }
             }
 
@@ -141,7 +146,11 @@ class OkhttpService : IHttpService() {
                     if (response.isSuccessful) {
                         callback.onSuccess(result)
                     } else {
-                        callback.onFailure(result)
+                        response.code
+                        callback.onFailure(
+                            HttpErrorModel.ERROR_CODE_NETWORK,
+                            MainApplication.instance().getString(R.string.network_error)
+                        )
                     }
                 }
             }

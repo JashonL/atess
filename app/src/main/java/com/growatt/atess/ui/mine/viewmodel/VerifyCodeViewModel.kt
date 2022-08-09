@@ -6,6 +6,7 @@ import com.growatt.atess.base.BaseViewModel
 import com.growatt.atess.service.http.ApiPath
 import com.growatt.atess.ui.mine.fragment.RegisterAccountType
 import com.growatt.lib.service.http.HttpCallback
+import com.growatt.lib.service.http.HttpErrorModel
 import com.growatt.lib.service.http.HttpResult
 import kotlinx.coroutines.launch
 
@@ -42,10 +43,10 @@ class VerifyCodeViewModel : BaseViewModel() {
                     }
                 }
 
-                override fun onFailure(error: String?) {
-                    super.onFailure(error)
-                    getVerifyCodeLiveData.value = Pair(0, error ?: "")
+                override fun onFailure(errorModel: HttpErrorModel) {
+                    getVerifyCodeLiveData.value = Pair(0, errorModel.errorMsg ?: "")
                 }
+
             })
         }
     }
@@ -69,10 +70,10 @@ class VerifyCodeViewModel : BaseViewModel() {
                     }
                 }
 
-                override fun onFailure(error: String?) {
-                    super.onFailure(error)
-                    verifyCodeLiveData.value = error ?: ""
+                override fun onFailure(errorModel: HttpErrorModel) {
+                    verifyCodeLiveData.value = errorModel.errorMsg ?: ""
                 }
+
             })
         }
     }

@@ -7,6 +7,7 @@ import com.growatt.atess.model.mine.MessageModel
 import com.growatt.atess.model.mine.MessageUnReadNumResultModel
 import com.growatt.atess.service.http.ApiPath
 import com.growatt.lib.service.http.HttpCallback
+import com.growatt.lib.service.http.HttpErrorModel
 import com.growatt.lib.service.http.HttpResult
 import com.growatt.lib.service.http.PageModel
 import kotlinx.coroutines.launch
@@ -41,10 +42,10 @@ class MessageViewModel : BaseViewModel() {
                         }
                     }
 
-                    override fun onFailure(error: String?) {
-                        super.onFailure(error)
-                        getUnReadMsgNumLiveData.value = Pair(null, error ?: "")
+                    override fun onFailure(errorModel: HttpErrorModel) {
+                        getUnReadMsgNumLiveData.value = Pair(null, errorModel.errorMsg ?: "")
                     }
+
                 })
         }
     }
@@ -70,10 +71,10 @@ class MessageViewModel : BaseViewModel() {
                         }
                     }
 
-                    override fun onFailure(error: String?) {
-                        super.onFailure(error)
-                        getMessageListLiveData.value = Pair(null, error ?: "")
+                    override fun onFailure(errorModel: HttpErrorModel) {
+                        getMessageListLiveData.value = Pair(null, errorModel.errorMsg ?: "")
                     }
+
                 })
         }
     }
@@ -97,10 +98,10 @@ class MessageViewModel : BaseViewModel() {
                         }
                     }
 
-                    override fun onFailure(error: String?) {
-                        super.onFailure(error)
-                        deleteMessageLiveData.value = Pair(null, error ?: "")
+                    override fun onFailure(errorModel: HttpErrorModel) {
+                        deleteMessageLiveData.value = Pair(null, errorModel.errorMsg ?: "")
                     }
+
                 })
         }
     }

@@ -6,6 +6,7 @@ import com.growatt.atess.base.BaseViewModel
 import com.growatt.atess.model.plant.ServiceModel
 import com.growatt.atess.service.http.ApiPath
 import com.growatt.lib.service.http.HttpCallback
+import com.growatt.lib.service.http.HttpErrorModel
 import com.growatt.lib.service.http.HttpResult
 import kotlinx.coroutines.launch
 
@@ -33,10 +34,10 @@ class ServiceViewModel : BaseViewModel() {
                     }
                 }
 
-                override fun onFailure(error: String?) {
-                    super.onFailure(error)
-                    getServiceManualLiveData.value = Pair(null, error ?: "")
+                override fun onFailure(errorModel: HttpErrorModel) {
+                    getServiceManualLiveData.value = Pair(null, errorModel.errorMsg ?: "")
                 }
+
             })
         }
     }
@@ -56,10 +57,10 @@ class ServiceViewModel : BaseViewModel() {
                     }
                 }
 
-                override fun onFailure(error: String?) {
-                    super.onFailure(error)
-                    getInstallVideoLiveData.value = Pair(null, error ?: "")
+                override fun onFailure(errorModel: HttpErrorModel) {
+                    getInstallVideoLiveData.value = Pair(null, errorModel.errorMsg ?: "")
                 }
+
             })
         }
     }

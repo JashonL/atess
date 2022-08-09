@@ -6,6 +6,7 @@ import com.growatt.atess.base.BaseViewModel
 import com.growatt.atess.service.http.ApiPath
 import com.growatt.lib.service.account.User
 import com.growatt.lib.service.http.HttpCallback
+import com.growatt.lib.service.http.HttpErrorModel
 import com.growatt.lib.service.http.HttpResult
 import com.growatt.lib.util.MD5Util
 import kotlinx.coroutines.launch
@@ -37,10 +38,10 @@ class LoginViewModel : BaseViewModel() {
                     }
                 }
 
-                override fun onFailure(error: String?) {
-                    super.onFailure(error)
-                    loginLiveData.value = Pair(null, error ?: "")
+                override fun onFailure(errorModel: HttpErrorModel) {
+                    loginLiveData.value = Pair(null, errorModel.errorMsg ?: "")
                 }
+
             })
         }
     }

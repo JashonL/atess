@@ -320,6 +320,7 @@
     <string name="delete_message_or_not">是否删除消息?</string>
     <string name="longitude_format">经度:%s</string>
     <string name="latitude_format">纬度:%s</string>
+    <string name="network_error">网络异常，请稍后重试</string>
 
     <!-- image crop-->
     <string name="crop_image_menu_crop">裁剪</string>

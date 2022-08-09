@@ -9,6 +9,7 @@ import com.growatt.atess.model.plant.PlantModel
 import com.growatt.atess.model.plant.PlantStatusNumModel
 import com.growatt.atess.service.http.ApiPath
 import com.growatt.lib.service.http.HttpCallback
+import com.growatt.lib.service.http.HttpErrorModel
 import com.growatt.lib.service.http.HttpResult
 import kotlinx.coroutines.launch
 
@@ -54,9 +55,8 @@ class PlantListViewModel : BaseViewModel() {
                         }
                     }
 
-                    override fun onFailure(error: String?) {
-                        super.onFailure(error)
-                        getPlantListLiveData.value = Pair(null, error ?: "")
+                    override fun onFailure(errorModel: HttpErrorModel) {
+                        getPlantListLiveData.value = Pair(null, errorModel.errorMsg ?: "")
                     }
                 })
         }
@@ -83,9 +83,8 @@ class PlantListViewModel : BaseViewModel() {
                         }
                     }
 
-                    override fun onFailure(error: String?) {
-                        super.onFailure(error)
-                        deletePlantLiveData.value = error ?: ""
+                    override fun onFailure(errorModel: HttpErrorModel) {
+                        deletePlantLiveData.value = errorModel.errorMsg ?: ""
                     }
                 })
         }

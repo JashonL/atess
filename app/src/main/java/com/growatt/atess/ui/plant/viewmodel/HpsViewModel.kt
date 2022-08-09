@@ -6,6 +6,7 @@ import com.growatt.atess.model.plant.HpsModel
 import com.growatt.atess.model.plant.HpsSystemOperationModel
 import com.growatt.atess.service.http.ApiPath
 import com.growatt.lib.service.http.HttpCallback
+import com.growatt.lib.service.http.HttpErrorModel
 import com.growatt.lib.service.http.HttpResult
 
 class HpsViewModel : BaseDeviceInfoViewModel() {
@@ -28,10 +29,10 @@ class HpsViewModel : BaseDeviceInfoViewModel() {
                 }
             }
 
-            override fun onFailure(error: String?) {
-                super.onFailure(error)
-                getDeviceInfoLiveData.value = Pair(null, error ?: "")
+            override fun onFailure(errorModel: HttpErrorModel) {
+                getDeviceInfoLiveData.value = Pair(null, errorModel.errorMsg ?: "")
             }
+
         })
     }
 
@@ -49,10 +50,10 @@ class HpsViewModel : BaseDeviceInfoViewModel() {
                 }
             }
 
-            override fun onFailure(error: String?) {
-                super.onFailure(error)
-                getSystemOperationInfoLiveData.value = Pair(null, error ?: "")
+            override fun onFailure(errorModel: HttpErrorModel) {
+                getSystemOperationInfoLiveData.value = Pair(null, errorModel.errorMsg ?: "")
             }
+
         })
     }
 

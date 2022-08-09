@@ -7,6 +7,7 @@ import com.growatt.atess.base.BaseViewModel
 import com.growatt.atess.model.plant.DeviceListResultModel
 import com.growatt.atess.service.http.ApiPath
 import com.growatt.lib.service.http.HttpCallback
+import com.growatt.lib.service.http.HttpErrorModel
 import com.growatt.lib.service.http.HttpResult
 import kotlinx.coroutines.launch
 
@@ -39,10 +40,10 @@ class DeviceListViewModel : BaseViewModel() {
                     }
                 }
 
-                override fun onFailure(error: String?) {
-                    super.onFailure(error)
-                    getDeviceListLiveData.value = Pair(null, error ?: "")
+                override fun onFailure(errorModel: HttpErrorModel) {
+                    getDeviceListLiveData.value = Pair(null, errorModel.errorMsg ?: "")
                 }
+
             })
         }
     }

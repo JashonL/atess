@@ -8,4 +8,5 @@ data class HttpResult<T>(var status_code: String, var msg: String?, var data: T?
     fun isBusinessSuccess(): Boolean {
         return status_code == "0"
     }
+
 }

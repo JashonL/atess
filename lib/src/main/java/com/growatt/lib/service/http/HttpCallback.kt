@@ -27,7 +27,10 @@ abstract class HttpCallback<R> : IHttpCallback {
 
         val result: R? = GsonManager.fromJsonType(response, getType())
         if (result == null) {
-            onFailure("parsing exceptions")
+            onFailure(
+                HttpErrorModel.ERROR_CODE_PARSE,
+                LibApplication.instance().getString(com.growatt.lib.R.string.parse_error)
+            )
         } else {
             success(result)
         }
@@ -40,6 +43,9 @@ abstract class HttpCallback<R> : IHttpCallback {
         return parameterizedType.actualTypeArguments[0]
     }
 
-    override fun onFailure(error: String?) {
+    override fun onFailure(errorCode: String, error: String?) {
+        onFailure(HttpErrorModel(errorCode, error))
     }
+
+    open fun onFailure(errorModel: HttpErrorModel) {}
 }

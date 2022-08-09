@@ -5,6 +5,7 @@ import com.growatt.atess.model.plant.DeviceType
 import com.growatt.atess.model.plant.PbdModel
 import com.growatt.atess.service.http.ApiPath
 import com.growatt.lib.service.http.HttpCallback
+import com.growatt.lib.service.http.HttpErrorModel
 import com.growatt.lib.service.http.HttpResult
 
 class PbdViewModel : BaseDeviceInfoViewModel() {
@@ -25,10 +26,10 @@ class PbdViewModel : BaseDeviceInfoViewModel() {
                 }
             }
 
-            override fun onFailure(error: String?) {
-                super.onFailure(error)
-                getDeviceInfoLiveData.value = Pair(null, error ?: "")
+            override fun onFailure(errorModel: HttpErrorModel) {
+                getDeviceInfoLiveData.value = Pair(null, errorModel.errorMsg ?: "")
             }
+
         })
     }
 }

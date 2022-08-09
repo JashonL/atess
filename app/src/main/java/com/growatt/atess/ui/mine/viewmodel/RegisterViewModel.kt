@@ -7,6 +7,7 @@ import com.growatt.atess.base.BaseViewModel
 import com.growatt.atess.service.http.ApiPath
 import com.growatt.atess.ui.mine.fragment.RegisterAccountType
 import com.growatt.lib.service.http.HttpCallback
+import com.growatt.lib.service.http.HttpErrorModel
 import com.growatt.lib.service.http.HttpResult
 import com.growatt.lib.util.MD5Util
 import kotlinx.coroutines.launch
@@ -73,10 +74,10 @@ class RegisterViewModel : BaseViewModel() {
                     }
                 }
 
-                override fun onFailure(error: String?) {
-                    super.onFailure(error)
-                    registerLiveData.value = error ?: ""
+                override fun onFailure(errorModel: HttpErrorModel) {
+                    registerLiveData.value = errorModel.errorMsg ?: ""
                 }
+
             })
         }
     }

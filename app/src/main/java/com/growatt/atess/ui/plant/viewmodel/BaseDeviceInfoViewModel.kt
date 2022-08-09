@@ -8,6 +8,7 @@ import com.growatt.atess.model.plant.ChartTypeModel
 import com.growatt.atess.model.plant.DeviceType
 import com.growatt.atess.service.http.ApiPath
 import com.growatt.lib.service.http.HttpCallback
+import com.growatt.lib.service.http.HttpErrorModel
 import com.growatt.lib.service.http.HttpResult
 import com.growatt.lib.util.DateUtils
 import kotlinx.coroutines.launch
@@ -69,10 +70,10 @@ abstract class BaseDeviceInfoViewModel : BaseViewModel() {
                     }
                 }
 
-                override fun onFailure(error: String?) {
-                    super.onFailure(error)
-                    getDeviceChartLiveData.value = Pair(null, error ?: "")
+                override fun onFailure(errorModel: HttpErrorModel) {
+                    getDeviceChartLiveData.value = Pair(null, errorModel.errorMsg ?: "")
                 }
+
             })
         }
     }

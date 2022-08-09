@@ -7,6 +7,7 @@ import com.growatt.atess.model.plant.*
 import com.growatt.atess.service.http.ApiPath
 import com.growatt.atess.view.DateType
 import com.growatt.lib.service.http.HttpCallback
+import com.growatt.lib.service.http.HttpErrorModel
 import com.growatt.lib.service.http.HttpResult
 import com.growatt.lib.util.DateUtils
 import kotlinx.coroutines.launch
@@ -67,11 +68,11 @@ class PlantInfoViewModel : BaseViewModel() {
                     }
                 }
 
-                override fun onFailure(error: String?) {
-                    super.onFailure(error)
-                    getPlantInfoLiveData.value = Pair(null, error ?: "")
-                    getPlantWeatherInfoLiveData.value = Pair(null, error ?: "")
+                override fun onFailure(errorModel: HttpErrorModel) {
+                    getPlantInfoLiveData.value = Pair(null, errorModel.errorMsg ?: "")
+                    getPlantWeatherInfoLiveData.value = Pair(null, errorModel.errorMsg ?: "")
                 }
+
             })
         }
     }
@@ -105,10 +106,10 @@ class PlantInfoViewModel : BaseViewModel() {
                     }
                 }
 
-                override fun onFailure(error: String?) {
-                    super.onFailure(error)
-                    getDeviceListLiveData.value = Pair(emptyList(), error ?: "")
+                override fun onFailure(errorModel: HttpErrorModel) {
+                    getDeviceListLiveData.value = Pair(emptyList(), errorModel.errorMsg ?: "")
                 }
+
             })
         }
     }
@@ -157,10 +158,10 @@ class PlantInfoViewModel : BaseViewModel() {
                     }
                 }
 
-                override fun onFailure(error: String?) {
-                    super.onFailure(error)
-                    getPcsHpsSNLiveData.value = Triple(null, false, error ?: "")
+                override fun onFailure(errorModel: HttpErrorModel) {
+                    getPcsHpsSNLiveData.value = Triple(null, false, errorModel.errorMsg ?: "")
                 }
+
             })
         }
     }
@@ -185,10 +186,10 @@ class PlantInfoViewModel : BaseViewModel() {
                     }
                 }
 
-                override fun onFailure(error: String?) {
-                    super.onFailure(error)
-                    getDeviceEnergyInfoLiveData.value = Pair(null, error ?: "")
+                override fun onFailure(errorModel: HttpErrorModel) {
+                    getDeviceEnergyInfoLiveData.value = Pair(null, errorModel.errorMsg ?: "")
                 }
+
             })
         }
     }
@@ -226,10 +227,10 @@ class PlantInfoViewModel : BaseViewModel() {
                     }
                 }
 
-                override fun onFailure(error: String?) {
-                    super.onFailure(error)
-                    getChartLiveData.value = Pair(null, error ?: "")
+                override fun onFailure(errorModel: HttpErrorModel) {
+                    getChartLiveData.value = Pair(null, errorModel.errorMsg ?: "")
                 }
+
             })
         }
     }

@@ -10,6 +10,7 @@ import com.growatt.atess.model.plant.ProvinceModel
 import com.growatt.atess.model.plant.TimeZone
 import com.growatt.atess.service.http.ApiPath
 import com.growatt.lib.service.http.HttpCallback
+import com.growatt.lib.service.http.HttpErrorModel
 import com.growatt.lib.service.http.HttpResult
 import kotlinx.coroutines.launch
 import java.io.File
@@ -50,10 +51,10 @@ class AddPlantViewModel : BaseViewModel() {
                         }
                     }
 
-                    override fun onFailure(error: String?) {
-                        super.onFailure(error)
-                        timeZoneLiveData.value = Pair(null, error ?: "")
+                    override fun onFailure(errorModel: HttpErrorModel) {
+                        timeZoneLiveData.value = Pair(null, errorModel.errorMsg ?: "")
                     }
+
                 })
         }
     }
@@ -80,10 +81,10 @@ class AddPlantViewModel : BaseViewModel() {
                         }
                     }
 
-                    override fun onFailure(error: String?) {
-                        super.onFailure(error)
-                        currencyListLiveData.value = Pair(emptyArray(), error ?: "")
+                    override fun onFailure(errorModel: HttpErrorModel) {
+                        currencyListLiveData.value = Pair(emptyArray(), errorModel.errorMsg ?: "")
                     }
+
                 })
         }
     }
@@ -110,10 +111,10 @@ class AddPlantViewModel : BaseViewModel() {
                         }
                     }
 
-                    override fun onFailure(error: String?) {
-                        super.onFailure(error)
-                        cityListLiveData.value = Pair(emptyArray(), error ?: "")
+                    override fun onFailure(errorModel: HttpErrorModel) {
+                        cityListLiveData.value = Pair(emptyArray(), errorModel.errorMsg ?: "")
                     }
+
                 })
         }
     }
@@ -156,10 +157,10 @@ class AddPlantViewModel : BaseViewModel() {
                         }
                     }
 
-                    override fun onFailure(error: String?) {
-                        super.onFailure(error)
-                        addPlantLiveData.value = Pair(null, error ?: "")
+                    override fun onFailure(errorModel: HttpErrorModel) {
+                        addPlantLiveData.value = Pair(null, errorModel.errorMsg ?: "")
                     }
+
                 })
         }
     }
@@ -202,10 +203,10 @@ class AddPlantViewModel : BaseViewModel() {
                         }
                     }
 
-                    override fun onFailure(error: String?) {
-                        super.onFailure(error)
-                        editPlantLiveData.value = error ?: ""
+                    override fun onFailure(errorModel: HttpErrorModel) {
+                        editPlantLiveData.value = errorModel.errorMsg ?: ""
                     }
+
                 })
         }
     }

@@ -6,6 +6,7 @@ import com.growatt.atess.base.BaseViewModel
 import com.growatt.atess.service.http.ApiPath
 import com.growatt.atess.ui.mine.fragment.RegisterAccountType
 import com.growatt.lib.service.http.HttpCallback
+import com.growatt.lib.service.http.HttpErrorModel
 import com.growatt.lib.service.http.HttpResult
 import com.growatt.lib.util.MD5Util
 import kotlinx.coroutines.launch
@@ -42,10 +43,10 @@ class SettingViewModel : BaseViewModel() {
                         }
                     }
 
-                    override fun onFailure(error: String?) {
-                        super.onFailure(error)
-                        userAvatarLiveData.value = Pair(null, error ?: "")
+                    override fun onFailure(errorModel: HttpErrorModel) {
+                        userAvatarLiveData.value = Pair(null, errorModel.errorMsg ?: "")
                     }
+
                 })
         }
     }
@@ -66,10 +67,10 @@ class SettingViewModel : BaseViewModel() {
                         }
                     }
 
-                    override fun onFailure(error: String?) {
-                        super.onFailure(error)
-                        logoutLiveData.value = error ?: ""
+                    override fun onFailure(errorModel: HttpErrorModel) {
+                        logoutLiveData.value = errorModel.errorMsg ?: ""
                     }
+
                 })
         }
     }
@@ -95,10 +96,10 @@ class SettingViewModel : BaseViewModel() {
                         }
                     }
 
-                    override fun onFailure(error: String?) {
-                        super.onFailure(error)
-                        modifyPasswordLiveData.value = error ?: ""
+                    override fun onFailure(errorModel: HttpErrorModel) {
+                        modifyPasswordLiveData.value = errorModel.errorMsg ?: ""
                     }
+
                 })
         }
     }
@@ -135,10 +136,10 @@ class SettingViewModel : BaseViewModel() {
                         }
                     }
 
-                    override fun onFailure(error: String?) {
-                        super.onFailure(error)
-                        changePhoneOrEmailLiveData.value = error ?: ""
+                    override fun onFailure(errorModel: HttpErrorModel) {
+                        changePhoneOrEmailLiveData.value = errorModel.errorMsg ?: ""
                     }
+
                 })
         }
     }
@@ -162,10 +163,10 @@ class SettingViewModel : BaseViewModel() {
                         }
                     }
 
-                    override fun onFailure(error: String?) {
-                        super.onFailure(error)
-                        modifyInstallerNoLiveData.value = error ?: ""
+                    override fun onFailure(errorModel: HttpErrorModel) {
+                        modifyInstallerNoLiveData.value = errorModel.errorMsg ?: ""
                     }
+
                 })
         }
     }
@@ -186,10 +187,10 @@ class SettingViewModel : BaseViewModel() {
                         }
                     }
 
-                    override fun onFailure(error: String?) {
-                        super.onFailure(error)
-                        cancelAccountLiveData.value = error ?: ""
+                    override fun onFailure(errorModel: HttpErrorModel) {
+                        cancelAccountLiveData.value = errorModel.errorMsg ?: ""
                     }
+
                 })
         }
     }
@@ -210,10 +211,10 @@ class SettingViewModel : BaseViewModel() {
                         }
                     }
 
-                    override fun onFailure(error: String?) {
-                        super.onFailure(error)
-                        uploadUserAvatarLiveData.value = Pair(null, error ?: "")
+                    override fun onFailure(errorModel: HttpErrorModel) {
+                        uploadUserAvatarLiveData.value = Pair(null, errorModel.errorMsg ?: "")
                     }
+
                 })
         }
     }

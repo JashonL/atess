@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.growatt.atess.base.BaseViewModel
 import com.growatt.atess.service.http.ApiPath
 import com.growatt.lib.service.http.HttpCallback
+import com.growatt.lib.service.http.HttpErrorModel
 import com.growatt.lib.service.http.HttpResult
 import kotlinx.coroutines.launch
 
@@ -39,10 +40,10 @@ class AddCollectorViewModel : BaseViewModel() {
                     }
                 }
 
-                override fun onFailure(error: String?) {
-                    super.onFailure(error)
-                    addCollectorLiveData.value = error ?: ""
+                override fun onFailure(errorModel: HttpErrorModel) {
+                    addCollectorLiveData.value = errorModel.errorMsg ?: ""
                 }
+
             })
         }
     }
@@ -65,10 +66,10 @@ class AddCollectorViewModel : BaseViewModel() {
                     }
                 }
 
-                override fun onFailure(error: String?) {
-                    super.onFailure(error)
-                    getCheckCodeLiveData.value = Pair(null, error ?: "")
+                override fun onFailure(errorModel: HttpErrorModel) {
+                    getCheckCodeLiveData.value = Pair(null, errorModel.errorMsg ?: "")
                 }
+
             })
         }
     }
