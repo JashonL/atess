@@ -21,7 +21,6 @@ import com.growatt.lib.service.storage.IStorageService
 import com.growatt.lib.util.Util
 import com.scwang.smart.refresh.header.MaterialHeader
 import com.scwang.smart.refresh.layout.SmartRefreshLayout
-import com.scwang.smart.refresh.layout.listener.DefaultRefreshHeaderCreator
 
 
 class MainApplication : LibApplication() {
@@ -29,13 +28,13 @@ class MainApplication : LibApplication() {
     companion object {
         private lateinit var instance: MainApplication
         fun instance() = instance
-    }
 
-    init {
-        SmartRefreshLayout.setDefaultRefreshHeaderCreator(DefaultRefreshHeaderCreator { context, layout ->
-            layout.setPrimaryColorsId(R.color.colorAccent, android.R.color.white) //全局设置主题颜色
-            MaterialHeader(context)
-        })
+        init {
+            SmartRefreshLayout.setDefaultRefreshHeaderCreator { context, layout ->
+                layout.setPrimaryColorsId(R.color.colorAccent, android.R.color.white) //全局设置主题颜色
+                MaterialHeader(context)
+            }
+        }
     }
 
     override fun onCreate() {
