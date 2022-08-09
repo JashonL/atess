@@ -33,7 +33,7 @@ class DefaultStorageService(context: Context, name: String = "growatt_atess") : 
     }
 
     override fun getString(key: String, defValue: String?): String? {
-        return storage.getString(key, "")
+        return storage.getString(key, defValue)
     }
 
     override fun getBoolean(key: String, defValue: Boolean): Boolean {
