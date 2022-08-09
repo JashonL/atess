@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -8,146 +7,11 @@
     android:orientation="vertical"
     tools:context=".ui.plant.activity.PlantInfoActivity">
 
-    <com.growatt.lib.view.StatusBarHeightView
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/fragment_plant_info"
+        android:name="com.growatt.atess.ui.plant.fragment.PlantInfoFragment"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/color_white" />
+        android:layout_height="match_parent"
+        tools:layout="@layout/fragment_plant_info" />
 
-    <com.growatt.atess.view.TitleBarLayout
-        android:id="@+id/title"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:showRightImage="true"
-        tools:titleText="电站名称" />
-
-    <com.scwang.smart.refresh.layout.SmartRefreshLayout
-        android:id="@+id/srl_refresh"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <androidx.fragment.app.FragmentContainerView
-                    android:id="@+id/fragment_total"
-                    android:name="com.growatt.atess.ui.plant.fragment.info.PlantTotalFragment"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    tools:layout="@layout/fragment_plant_total" />
-
-                <androidx.fragment.app.FragmentContainerView
-                    android:id="@+id/fragment_weather"
-                    android:name="com.growatt.atess.ui.plant.fragment.info.PlantWeatherFragment"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    tools:layout="@layout/fragment_plant_weather" />
-
-                <androidx.fragment.app.FragmentContainerView
-                    android:id="@+id/fragment_empty_device"
-                    android:name="com.growatt.atess.ui.plant.fragment.info.PlantEmptyDeviceFragment"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    tools:layout="@layout/fragment_plant_empty_device" />
-
-                <LinearLayout
-                    android:id="@+id/ll_hps_pcs_info"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="40dp"
-                        android:layout_marginTop="10dp"
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal"
-                        android:paddingStart="16dp"
-                        android:paddingEnd="16dp">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/device_type"
-                            android:textColor="@color/text_gray_99"
-                            android:textSize="@dimen/text_medium" />
-
-                        <TextView
-                            android:id="@+id/tv_device_type"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="6dp"
-                            android:textColor="@color/text_gray_66"
-                            android:textSize="@dimen/text_medium"
-                            android:textStyle="bold"
-                            tools:text="PCS" />
-
-                        <Space
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/device_sn"
-                            android:textColor="@color/text_gray_99"
-                            android:textSize="@dimen/text_medium" />
-
-                        <TextView
-                            android:id="@+id/tv_device_sn"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="6dp"
-                            android:drawablePadding="10dp"
-                            android:textColor="@color/text_gray_66"
-                            android:textSize="@dimen/text_medium"
-                            android:textStyle="bold"
-                            app:drawableRightCompat="@drawable/ic_down_2"
-                            tools:text="PCS2124545" />
-                    </LinearLayout>
-
-                    <androidx.fragment.app.FragmentContainerView
-                        android:id="@+id/fragment_system_operation"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        tools:layout="@layout/fragment_hps_system_operation" />
-
-                    <androidx.fragment.app.FragmentContainerView
-                        android:id="@+id/fragment_energy_info"
-                        android:name="com.growatt.atess.ui.plant.fragment.info.PlantEnergyInfoFragment"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        tools:layout="@layout/fragment_plant_energy_info" />
-
-                    <androidx.fragment.app.FragmentContainerView
-                        android:id="@+id/fragment_device_chart"
-                        android:name="com.growatt.atess.ui.plant.fragment.info.PlantTabChartFragment"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        tools:layout="@layout/fragment_plant_tab_chart" />
-
-                </LinearLayout>
-
-                <androidx.fragment.app.FragmentContainerView
-                    android:id="@+id/fragment_device_list"
-                    android:name="com.growatt.atess.ui.plant.fragment.info.PlantDeviceListFragment"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    tools:layout="@layout/fragment_plant_device_list" />
-            </LinearLayout>
-
-        </ScrollView>
-
-    </com.scwang.smart.refresh.layout.SmartRefreshLayout>
 </LinearLayout>

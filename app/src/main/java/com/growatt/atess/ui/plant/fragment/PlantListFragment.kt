@@ -83,16 +83,8 @@ class PlantListFragment(
             if (it.second == null) {
                 getAdapter()?.refresh(it.first)
                 refreshEmptyView(it.first)
-                if (isFirstRequestData) {
-                    if (plantStatus == PlantModel.PLANT_STATUS_ALL) {
-                        filterViewModel.setNeedAutoGoToPlantInfo(true)
-                    }
-                }
             } else {
                 ToastUtil.show(it.second)
-            }
-            if (isFirstRequestData) {
-                isFirstRequestData = false
             }
         }
         viewModel.getPlantStatusNumLiveData.observe(viewLifecycleOwner) {
@@ -124,21 +116,6 @@ class PlantListFragment(
         }
         if (requireActivity() is SearchActivity) {
             viewModel.getPlantList(plantStatus, searchWord = searchWord)
-        }
-        if (plantStatus == PlantModel.PLANT_STATUS_ALL) {
-            filterViewModel.getIsNeedAutoGoToPlantInfo.observe(viewLifecycleOwner) {
-                checkAutoJumpToPlantInfo(getAdapter()?.currentList)
-            }
-        }
-    }
-
-    //点击底部电站初始化的时候，只有1个电站的时候跳转到电站详情，网络异常则状态失效
-    private fun checkAutoJumpToPlantInfo(plantModels: List<PlantModel>?) {
-        if (plantStatus == PlantModel.PLANT_STATUS_ALL && plantModels?.size ?: 0 == 1) {
-            val plantId = plantModels?.get(0)?.id
-            if (!plantId.isNullOrEmpty()) {
-                PlantInfoActivity.start(requireContext(), plantId)
-            }
         }
     }
 

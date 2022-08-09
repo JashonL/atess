@@ -5,23 +5,26 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.commit
+import androidx.fragment.app.viewModels
+import com.growatt.atess.R
 import com.growatt.atess.databinding.FragmentHomePlantBinding
-import com.growatt.atess.model.plant.PlantFilterModel
-import com.growatt.atess.ui.home.viewmodel.PlantFilterViewModel
-import com.growatt.atess.ui.plant.activity.SearchActivity
-import com.growatt.atess.ui.plant.view.PlantFilterPopup
+import com.growatt.atess.model.plant.PlantModel
+import com.growatt.atess.ui.plant.fragment.PlantInfoFragment
+import com.growatt.atess.ui.plant.viewmodel.PlantInfoViewModel
+import com.growatt.atess.ui.plant.viewmodel.PlantListViewModel
+import com.growatt.lib.util.ToastUtil
 
 /**
  * 首页-电站
  */
-class HomePlantFragment : HomeBaseFragment(), View.OnClickListener {
+class HomePlantFragment : HomeBaseFragment() {
 
     private var _binding: FragmentHomePlantBinding? = null
 
     private val binding get() = _binding!!
-    private var selectedFilterModer: PlantFilterModel =
-        PlantFilterModel.getDefaultFilter()
-    private val filterViewModel: PlantFilterViewModel by activityViewModels()
+    private val viewModel: PlantListViewModel by viewModels()
+    private val plantInfoViewModel: PlantInfoViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -30,44 +33,32 @@ class HomePlantFragment : HomeBaseFragment(), View.OnClickListener {
     ): View {
         _binding = FragmentHomePlantBinding.inflate(inflater, container, false)
         initData()
-        initView()
-        setListener()
         return binding.root
     }
 
     private fun initData() {
-        filterViewModel.setFilterType(PlantFilterModel.getDefaultFilter().filterType)
-    }
-
-    private fun setListener() {
-        binding.tvFilter.setOnClickListener(this)
-        binding.tvSearch.setOnClickListener(this)
-    }
-
-    private fun initView() {
-        binding.tvFilter.text = selectedFilterModer.filterName
-    }
-
-    override fun onClick(v: View?) {
-        when {
-            v === binding.tvFilter -> {
-                val parent = v.parent as View
-                val width = v.width
-                val height = deviceService().getDeviceHeight() - parent.bottom
-                PlantFilterPopup.show(
-                    requireContext(),
-                    parent,
-                    width,
-                    height,
-                    selectedFilterModer
-                ) {
-                    selectedFilterModer = it
-                    filterViewModel.setFilterType(it.filterType)
-                    binding.tvFilter.text = it.filterName
+        viewModel.getPlantListLiveData.observe(viewLifecycleOwner) {
+            dismissDialog()
+            if (it.second == null) {
+                childFragmentManager.commit(true) {
+                    if (it.first?.size ?: 0 == 1) {
+                        plantInfoViewModel.plantId = it.first?.get(0)?.id
+                        replace(R.id.fragment_home_plant, PlantInfoFragment {
+                            childFragmentManager.commit(true) {
+                                replace(R.id.fragment_home_plant, HomePlantListFragment())
+                            }
+                        })
+                    } else {
+                        add(R.id.fragment_home_plant, HomePlantListFragment())
+                    }
                 }
+            } else {
+                ToastUtil.show(it.second)
             }
-            v === binding.tvSearch -> SearchActivity.startPlantSearch(requireContext())
         }
+
+        showDialog()
+        viewModel.getPlantList(PlantModel.PLANT_STATUS_ALL)
     }
 
     override fun onDestroyView() {

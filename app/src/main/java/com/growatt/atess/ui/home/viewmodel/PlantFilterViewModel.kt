@@ -8,8 +8,6 @@ import com.growatt.atess.base.BaseViewModel
  */
 class PlantFilterViewModel : BaseViewModel() {
 
-    var getIsNeedAutoGoToPlantInfo = MutableLiveData(true)
-
     val getPlantFilterLiveData = MutableLiveData<Int>()
 
     /**
@@ -19,10 +17,4 @@ class PlantFilterViewModel : BaseViewModel() {
         getPlantFilterLiveData.value = orderType
     }
 
-    /**
-     * 通知自动跳转到电站列表
-     */
-    fun setNeedAutoGoToPlantInfo(autoGoToPlantInfo: Boolean) {
-        getIsNeedAutoGoToPlantInfo.value = autoGoToPlantInfo
-    }
 }

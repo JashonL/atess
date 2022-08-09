@@ -108,4 +108,5 @@ class PvAndLoadFragment : BaseFragment() {
         super.onDestroyView()
         _binding = null
     }
+
 }
