@@ -3,16 +3,16 @@ package com.growatt.atess.ui.common.activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import com.google.zxing.Result
+import android.view.MotionEvent
 import com.growatt.atess.base.BaseActivity
 import com.growatt.atess.databinding.ActivityScanBinding
-import com.king.zxing.CameraScan
-import com.king.zxing.DefaultCameraScan
+import com.growatt.scan.CaptureHelper
+import com.growatt.scan.OnCaptureCallback
 
 /**
  * 扫码Activity
  */
-class ScanActivity : BaseActivity(), CameraScan.OnScanResultCallback {
+class ScanActivity : BaseActivity(), OnCaptureCallback {
 
     companion object {
 
@@ -29,7 +29,9 @@ class ScanActivity : BaseActivity(), CameraScan.OnScanResultCallback {
     }
 
     private lateinit var binding: ActivityScanBinding
-    private lateinit var cameraScan: CameraScan
+    private val helper by lazy {
+        CaptureHelper(this, binding.surface, binding.viewfinderView, null)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,28 +41,42 @@ class ScanActivity : BaseActivity(), CameraScan.OnScanResultCallback {
     }
 
     private fun initView() {
-        cameraScan = DefaultCameraScan(this, binding.previewView)
-        cameraScan.setOnScanResultCallback(this)
-        //启动相机预览
-        cameraScan.startCamera()
+        helper.also {
+            it.setOnCaptureCallback(this)
+            it.onCreate()
+            it.vibrate(true)
+            it.framingRectRatio(0.625f)
+        }
     }
 
-    private fun releaseCamera() {
-        cameraScan.release()
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        releaseCamera()
-    }
-
-    override fun onScanResultCallback(result: Result?): Boolean {
+    override fun onResultCallback(result: String?): Boolean {
         result?.also {
             val intent = Intent()
-            intent.putExtra(KEY_CODE_TEXT, it.text)
+            intent.putExtra(KEY_CODE_TEXT, result)
             setResult(RESULT_OK, intent)
             finish()
         }
         return true
     }
+
+    override fun onResume() {
+        super.onResume()
+        helper.onResume()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        helper.onPause()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        helper.onDestroy()
+    }
+
+    override fun onTouchEvent(event: MotionEvent?): Boolean {
+        helper.onTouchEvent(event)
+        return super.onTouchEvent(event)
+    }
+
 }

@@ -3,6 +3,7 @@ plugins {
     id 'kotlin-android'
 }
 def versions = rootProject.ext.versions
+def dependency = rootProject.ext.dependency
 
 android {
     compileSdk versions.compileSdkVersion
@@ -30,6 +31,7 @@ android {
 }
 
 dependencies {
-    //开发文档 https://github.com/jenly1314/ZXingLite，缺点是条码识别率太低，同一个条码识别出好多不同结果，优点是易集成，可定制化高
-    api 'com.github.jenly1314:zxing-lite:2.1.1'
+    //开发文档 https://github.com/jenly1314/ZXingLite/tree/1.1.9-androidx，最新版本（2.1.1）条形码识别率很低，所以使用旧版本1.1.9代码，1.1.9代码使用的仓库https://dl.bintray.com/jenly/maven已被关闭，所以直接引入源码
+    api 'com.google.zxing:core:3.3.3'
+    api dependency.androidxAppcompat
 }
