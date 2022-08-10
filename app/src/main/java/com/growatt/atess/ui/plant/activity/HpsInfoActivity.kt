@@ -7,6 +7,7 @@ import android.view.View
 import androidx.activity.viewModels
 import androidx.fragment.app.commit
 import com.growatt.atess.R
+import com.growatt.atess.application.MainApplication
 import com.growatt.atess.base.BaseActivity
 import com.growatt.atess.databinding.ActivityHpsInfoBinding
 import com.growatt.atess.model.plant.DeviceType
@@ -28,9 +29,15 @@ class HpsInfoActivity : BaseActivity(), IBaseDeviceActivity, View.OnClickListene
         private const val KEY_SN = "key_sn"
 
         fun start(context: Context?, deviceSN: String?) {
-            context?.startActivity(Intent(context, HpsInfoActivity::class.java).also {
-                it.putExtra(KEY_SN, deviceSN)
-            })
+            if (MainApplication.instance().accountService().isGuest()) {
+                ToastUtil.show(
+                    MainApplication.instance().getString(R.string.info_space_not_permission)
+                )
+            } else {
+                context?.startActivity(Intent(context, HpsInfoActivity::class.java).also {
+                    it.putExtra(KEY_SN, deviceSN)
+                })
+            }
         }
 
     }

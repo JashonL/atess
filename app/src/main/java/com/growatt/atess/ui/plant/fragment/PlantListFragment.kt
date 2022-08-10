@@ -53,9 +53,6 @@ class PlantListFragment(
     private val filterViewModel: PlantFilterViewModel by activityViewModels()
     private val plantInfoViewModel: PlantInfoViewModel by viewModels()
 
-    //是否是第一次请求数据
-    private var isFirstRequestData = true
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,

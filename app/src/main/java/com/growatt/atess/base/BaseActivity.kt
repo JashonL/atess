@@ -1,11 +1,10 @@
 package com.growatt.atess.base
 
-import android.app.ProgressDialog
 import android.content.Context
 import android.os.Build
+import android.os.Bundle
 import android.os.LocaleList
 import androidx.appcompat.app.AppCompatActivity
-import com.growatt.atess.R
 import com.growatt.lib.LibApplication
 import com.growatt.lib.service.ServiceManager
 import com.growatt.lib.service.account.IAccountService
@@ -15,13 +14,13 @@ import com.growatt.lib.service.http.IHttpService
 import com.growatt.lib.service.location.ILocationService
 import com.growatt.lib.service.storage.IStorageService
 
-abstract class BaseActivity : AppCompatActivity(), ServiceManager.ServiceInterface, ViewHelper {
+abstract class BaseActivity : AppCompatActivity(), ServiceManager.ServiceInterface {
 
-    private val progressDialog by lazy(LazyThreadSafetyMode.NONE) {
-        ProgressDialog(this).apply {
-            setCanceledOnTouchOutside(false)
-            setMessage(getString(R.string.loading))
-        }
+    private lateinit var androidDisplay: AndroidDisplay
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        androidDisplay = AndroidDisplay(this)
     }
 
     /**
@@ -63,16 +62,12 @@ abstract class BaseActivity : AppCompatActivity(), ServiceManager.ServiceInterfa
         return LibApplication.instance().locationService()
     }
 
-    override fun showDialog() {
-        if (!progressDialog.isShowing) {
-            progressDialog.show()
-        }
+    fun showDialog() {
+        androidDisplay.showDialog()
     }
 
-    override fun dismissDialog() {
-        if (progressDialog.isShowing) {
-            progressDialog.dismiss()
-        }
+    fun dismissDialog() {
+        androidDisplay.dismissDialog()
     }
 
 }

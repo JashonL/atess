@@ -109,7 +109,6 @@ class OkhttpService : IHttpService() {
         callServer(request, callback)
     }
 
-
     override fun httpGet(
         urlOrApi: String,
         params: Map<String, String>,

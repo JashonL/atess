@@ -15,14 +15,14 @@ import com.growatt.lib.service.storage.IStorageService
 open class BaseViewHolder(
     itemView: View,
     private val onItemClickListener: OnItemClickListener? = null
-) : RecyclerView.ViewHolder(itemView), ViewHelper,
+) : RecyclerView.ViewHolder(itemView),
     ServiceManager.ServiceInterface, View.OnClickListener, View.OnLongClickListener {
 
-    override fun showDialog() {
+    fun showDialog() {
         (itemView.context as? BaseActivity)?.showDialog()
     }
 
-    override fun dismissDialog() {
+    fun dismissDialog() {
         (itemView.context as? BaseActivity)?.dismissDialog()
     }
 

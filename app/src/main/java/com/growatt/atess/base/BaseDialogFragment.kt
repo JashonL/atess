@@ -16,7 +16,7 @@ import com.growatt.lib.util.ViewUtil
 /**
  * 基础DialogFragment
  */
-open class BaseDialogFragment : DialogFragment(), ServiceManager.ServiceInterface, ViewHelper {
+open class BaseDialogFragment : DialogFragment(), ServiceManager.ServiceInterface {
 
     override fun onStart() {
         super.onStart()
@@ -49,11 +49,11 @@ open class BaseDialogFragment : DialogFragment(), ServiceManager.ServiceInterfac
         return LibApplication.instance().locationService()
     }
 
-    override fun showDialog() {
+    fun showDialog() {
         (activity as? BaseActivity)?.showDialog()
     }
 
-    override fun dismissDialog() {
+    fun dismissDialog() {
         (activity as? BaseActivity)?.dismissDialog()
     }
 }

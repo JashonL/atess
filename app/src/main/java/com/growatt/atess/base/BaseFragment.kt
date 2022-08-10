@@ -10,7 +10,7 @@ import com.growatt.lib.service.http.IHttpService
 import com.growatt.lib.service.location.ILocationService
 import com.growatt.lib.service.storage.IStorageService
 
-abstract class BaseFragment : Fragment(), ViewHelper, ServiceManager.ServiceInterface {
+abstract class BaseFragment : Fragment(), ServiceManager.ServiceInterface {
 
     override fun apiService(): IHttpService {
         return MainApplication.instance().apiService()
@@ -32,11 +32,11 @@ abstract class BaseFragment : Fragment(), ViewHelper, ServiceManager.ServiceInte
         return LibApplication.instance().locationService()
     }
 
-    override fun showDialog() {
+    fun showDialog() {
         (activity as? BaseActivity)?.showDialog()
     }
 
-    override fun dismissDialog() {
+    fun dismissDialog() {
         (activity as? BaseActivity)?.dismissDialog()
     }
 
