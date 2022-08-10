@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.growatt.atess.R
 import com.growatt.atess.base.BaseFragment
 import com.growatt.atess.databinding.FragmentDeviceListBinding
 import com.growatt.atess.model.plant.DeviceModel
@@ -36,7 +35,8 @@ class DeviceListFragment(private val deviceList: Array<DeviceModel>?) : BaseFrag
             DividerItemDecoration(
                 requireContext(),
                 LinearLayoutManager.VERTICAL,
-                resources.getColor(R.color.color_line)
+                resources.getColor(android.R.color.transparent),
+                10f
             )
         )
         binding.rvDeviceList.adapter = DeviceAdapter().also {

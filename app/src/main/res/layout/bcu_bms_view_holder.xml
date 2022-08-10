@@ -65,11 +65,15 @@
 
     <TextView
         android:id="@+id/tv_connect_status"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:ellipsize="end"
+        android:singleLine="true"
         android:textColor="@color/text_gray_99"
         android:textSize="@dimen/text_small"
         app:layout_constraintBottom_toBottomOf="@id/tv_soc"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@id/tv_status"
         app:layout_constraintTop_toTopOf="@id/tv_soc"
         tools:text="累计发电：5.4kWh" />

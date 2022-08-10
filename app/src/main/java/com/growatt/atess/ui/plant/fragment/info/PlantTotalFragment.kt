@@ -55,7 +55,7 @@ class PlantTotalFragment : BaseFragment(), View.OnClickListener {
         plantModel?.also {
             binding.tvCity.text = it.city
             Glide.with(this@PlantTotalFragment).load(plantModel.plantImgName)
-                .placeholder(R.drawable.ic_placeholder_3)
+                .placeholder(R.drawable.ic_placeholder_2)
                 .apply(
                     RequestOptions().transform(
                         CenterCrop(), GranularRoundedCorners(

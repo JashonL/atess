@@ -11,6 +11,7 @@
         android:id="@+id/rv_install_video_list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        tools:listitem="@layout/install_video_view_holder" />
 
 </com.scwang.smart.refresh.layout.SmartRefreshLayout>

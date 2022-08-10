@@ -5,17 +5,14 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
+    android:padding="10dp"
     tools:context="com.growatt.atess.ui.plant.fragment.DeviceListFragment">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_device_list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/color_white"
-        android:paddingStart="10dp"
-        android:paddingTop="10dp"
-        android:paddingEnd="10dp"
-        android:paddingBottom="16dp"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        tools:listitem="@layout/bms_view_holder" />
 
 </LinearLayout>

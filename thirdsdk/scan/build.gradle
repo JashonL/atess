@@ -30,6 +30,6 @@ android {
 }
 
 dependencies {
-    //开发文档 https://github.com/jenly1314/ZXingLite
+    //开发文档 https://github.com/jenly1314/ZXingLite，缺点是条码识别率太低，同一个条码识别出好多不同结果，优点是易集成，可定制化高
     api 'com.github.jenly1314:zxing-lite:2.1.1'
 }

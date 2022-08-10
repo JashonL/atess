@@ -54,22 +54,30 @@
 
     <TextView
         android:id="@+id/tv_today_power"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="6dp"
+        android:layout_marginEnd="10dp"
+        android:ellipsize="end"
+        android:singleLine="true"
         android:textColor="@color/text_gray_99"
         android:textSize="@dimen/text_small"
+        app:layout_constraintEnd_toStartOf="@id/tv_total_power"
         app:layout_constraintStart_toStartOf="@id/tv_device_model"
         app:layout_constraintTop_toBottomOf="@id/tv_device_sn"
         tools:text="今日发电：5.4kWh" />
 
     <TextView
         android:id="@+id/tv_total_power"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="10dp"
+        android:ellipsize="end"
+        android:singleLine="true"
         android:textColor="@color/text_gray_99"
         android:textSize="@dimen/text_small"
         app:layout_constraintBottom_toBottomOf="@id/tv_today_power"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@id/tv_status"
         app:layout_constraintTop_toTopOf="@id/tv_today_power"
         tools:text="累计发电：5.4kWh" />

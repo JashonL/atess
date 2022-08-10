@@ -15,7 +15,8 @@
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:scaleType="centerCrop"
-        app:round="4dp" />
+        app:round="4dp"
+        tools:src="@drawable/ic_placeholder" />
 
     <TextView
         android:id="@+id/tv_title"

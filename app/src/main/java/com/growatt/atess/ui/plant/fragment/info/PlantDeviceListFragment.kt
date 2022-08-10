@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.growatt.atess.R
 import com.growatt.atess.base.BaseFragment
 import com.growatt.atess.databinding.FragmentPlantDeviceListBinding
 import com.growatt.atess.ui.plant.activity.PlantDeviceListActivity
@@ -64,7 +63,8 @@ class PlantDeviceListFragment : BaseFragment(), View.OnClickListener {
             DividerItemDecoration(
                 requireContext(),
                 LinearLayoutManager.VERTICAL,
-                resources.getColor(R.color.color_line)
+                resources.getColor(android.R.color.transparent),
+                10f
             )
         )
         binding.rvDeviceList.adapter = DeviceAdapter()
