@@ -26,7 +26,7 @@ class AddCollectorViewModel : BaseViewModel() {
     fun addCollector(collectorSN: String, checkCode: String) {
         viewModelScope.launch {
             val params = hashMapOf<String, String>().apply {
-                put("deviceSN", collectorSN)
+                put("datalogSN", collectorSN)
                 put("validCode", checkCode)
                 put("plantID", plantId ?: "")
             }
