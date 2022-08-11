@@ -55,7 +55,7 @@ data class DeviceModel(
     }
 
     fun getDeviceSN(): String? {
-        return deviceSn
+        return MainApplication.instance().getString(R.string.sn_format, deviceSn)
     }
 
     fun getSysStatusText(): String {

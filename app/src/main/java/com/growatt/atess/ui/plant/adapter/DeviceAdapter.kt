@@ -14,10 +14,6 @@ import com.growatt.atess.ui.plant.viewholder.BaseDeviceViewHolder
  */
 class DeviceAdapter : RecyclerView.Adapter<BaseDeviceViewHolder>(), OnItemClickListener {
 
-    init {
-        setHasStableIds(true)
-    }
-
     private val deviceList = mutableListOf<DeviceModel>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseDeviceViewHolder {

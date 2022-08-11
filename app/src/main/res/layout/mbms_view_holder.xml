@@ -1,81 +1,86 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="104dp"
+    android:layout_height="wrap_content"
     android:background="@color/color_white"
-    tools:context=".ui.plant.viewholder.MBmsViewHolder">
+    android:padding="10dp">
 
-    <ImageView
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:layout_marginStart="22dp"
-        android:src="@drawable/ic_device_mbms"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/tv_device_model"
-        android:layout_width="wrap_content"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="98dp"
-        android:layout_marginTop="16dp"
-        android:textColor="@color/text_black"
-        android:textSize="@dimen/text_medium"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:text="设备型号" />
+        tools:context=".ui.plant.viewholder.MBmsViewHolder">
 
-    <TextView
-        android:id="@+id/tv_status"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="128dp"
-        android:textColor="@color/text_green"
-        android:textSize="@dimen/text_small"
-        app:layout_constraintBottom_toBottomOf="@id/tv_device_model"
-        app:layout_constraintStart_toStartOf="@id/tv_device_model"
-        app:layout_constraintTop_toTopOf="@id/tv_device_model"
-        tools:text="在线" />
+        <ImageView
+            android:id="@+id/iv_icon"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:src="@drawable/ic_device_mbms"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/tv_device_sn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:textColor="@color/text_gray_99"
-        android:textSize="@dimen/text_small"
-        app:layout_constraintStart_toStartOf="@id/tv_device_model"
-        app:layout_constraintTop_toBottomOf="@id/tv_device_model"
-        tools:text="序列号：123456" />
+        <TextView
+            android:id="@+id/tv_device_model"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="-6dp"
+            android:textColor="@color/text_black"
+            android:textSize="@dimen/text_medium"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@id/iv_icon"
+            app:layout_constraintTop_toTopOf="@id/iv_icon"
+            tools:text="设备型号" />
 
-    <TextView
-        android:id="@+id/tv_soc"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="6dp"
-        android:textColor="@color/text_gray_99"
-        android:textSize="@dimen/text_small"
-        app:layout_constraintStart_toStartOf="@id/tv_device_model"
-        app:layout_constraintTop_toBottomOf="@id/tv_device_sn"
-        tools:text="SOC：80%" />
+        <TextView
+            android:id="@+id/tv_status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="122dp"
+            android:textColor="@color/text_green"
+            android:textSize="@dimen/text_small"
+            app:layout_constraintBottom_toBottomOf="@id/tv_device_model"
+            app:layout_constraintStart_toStartOf="@id/tv_device_model"
+            app:layout_constraintTop_toTopOf="@id/tv_device_model"
+            tools:text="在线" />
 
-    <TextView
-        android:id="@+id/tv_connect_status"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:ellipsize="end"
-        android:singleLine="true"
-        android:textColor="@color/text_gray_99"
-        android:textSize="@dimen/text_small"
-        app:layout_constraintBottom_toBottomOf="@id/tv_soc"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@id/tv_status"
-        app:layout_constraintTop_toTopOf="@id/tv_soc"
-        tools:text="累计发电：5.4kWh" />
+        <TextView
+            android:id="@+id/tv_device_sn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="6dp"
+            android:textColor="@color/text_gray_99"
+            android:textSize="@dimen/text_small"
+            app:layout_constraintBottom_toTopOf="@id/tv_connect_status"
+            app:layout_constraintStart_toStartOf="@id/tv_device_model"
+            tools:text="序列号：123456" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:id="@+id/tv_soc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="-6dp"
+            android:textColor="@color/text_gray_99"
+            android:textSize="@dimen/text_small"
+            app:layout_constraintBottom_toBottomOf="@id/iv_icon"
+            app:layout_constraintStart_toStartOf="@id/tv_device_model"
+            tools:text="SOC：80%" />
+
+        <TextView
+            android:id="@+id/tv_connect_status"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:singleLine="true"
+            android:textColor="@color/text_gray_99"
+            android:textSize="@dimen/text_small"
+            app:layout_constraintBottom_toBottomOf="@id/tv_soc"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/tv_status"
+            app:layout_constraintTop_toTopOf="@id/tv_soc"
+            tools:text="连接状态：已连接" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</FrameLayout>

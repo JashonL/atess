@@ -2,10 +2,12 @@ package com.growatt.atess.ui.plant.viewholder
 
 import android.view.View
 import android.view.ViewGroup
+import com.growatt.atess.R
 import com.growatt.atess.base.BaseViewHolder
 import com.growatt.atess.base.OnItemClickListener
 import com.growatt.atess.model.plant.DeviceModel
 import com.growatt.atess.model.plant.DeviceType
+import com.growatt.lib.util.ViewUtil
 
 /**
  * 设备ViewHolder基类
@@ -29,6 +31,9 @@ abstract class BaseDeviceViewHolder(
                 DeviceType.BCU_BMS -> BcuBmsViewHolder.create(parent, onItemClickListener)
                 DeviceType.COMBINER -> CombinerViewHolder.create(parent, onItemClickListener)
                 else -> CollectorViewHolder.create(parent, onItemClickListener)
+            }.also {
+                it.itemView.background =
+                    ViewUtil.createShape(it.itemView.resources.getColor(R.color.color_white), 6)
             }
         }
     }
