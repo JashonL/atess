@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.commit
 import com.growatt.atess.R
+import com.growatt.atess.application.MainApplication
 import com.growatt.atess.base.BaseFragment
 import com.growatt.atess.databinding.FragmentPlantTabChartBinding
 import com.growatt.atess.model.plant.ChartListDataModel
@@ -65,13 +66,16 @@ class PlantTabChartFragment :
         chartListDataModel?.also {
             val chartFragment = childFragmentManager.findFragmentById(R.id.fragment_chart)
             if (isShowLineChart()) {
+                val unit =
+                    if (viewModel.dataType.type == chartTypes[0].type) MainApplication.instance()
+                        .getString(R.string.kw) else viewModel.dataType.typeUnit
                 if (chartFragment is LineChartFragment) {
-                    chartFragment.refresh(chartListDataModel, viewModel.dataType.typeUnit)
+                    chartFragment.refresh(chartListDataModel, unit)
                 } else {
                     childFragmentManager.commit(true) {
                         replace(
                             R.id.fragment_chart,
-                            LineChartFragment(chartListDataModel, viewModel.dataType.typeUnit)
+                            LineChartFragment(chartListDataModel, unit)
                         )
                     }
                 }

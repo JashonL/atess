@@ -61,8 +61,8 @@ class PowerTrendsChartFragment : BaseFragment() {
         binding.root.visible()
         chartListDataModel?.also {
             val chartFragment = childFragmentManager.findFragmentById(R.id.fragment_chart)
-            val kw = MainApplication.instance().getString(R.string.kw)
             if (isShowLineChart()) {
+                val kw = MainApplication.instance().getString(R.string.kw)
                 if (chartFragment is LineChartFragment) {
                     chartFragment.refresh(chartListDataModel, kw)
                 } else {
@@ -74,13 +74,14 @@ class PowerTrendsChartFragment : BaseFragment() {
                     }
                 }
             } else {
+                val kwh = MainApplication.instance().getString(R.string.kwh)
                 if (chartFragment is BarChartFragment) {
-                    chartFragment.refresh(chartListDataModel, kw)
+                    chartFragment.refresh(chartListDataModel, kwh)
                 } else {
                     childFragmentManager.commit(true) {
                         replace(
                             R.id.fragment_chart,
-                            BarChartFragment(chartListDataModel, kw)
+                            BarChartFragment(chartListDataModel, kwh)
                         )
                     }
                 }
