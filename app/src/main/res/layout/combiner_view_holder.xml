@@ -65,7 +65,7 @@
             android:id="@+id/tv_electricity"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="130dp"
+            android:layout_marginStart="140dp"
             android:textColor="@color/text_gray_99"
             android:textSize="@dimen/text_small"
             app:layout_constraintBottom_toBottomOf="@id/tv_device_sn"

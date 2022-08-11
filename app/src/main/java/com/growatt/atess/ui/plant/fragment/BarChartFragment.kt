@@ -103,20 +103,23 @@ class BarChartFragment(var chartListDataModel: ChartListDataModel? = null, var u
 
         binding.barChart.xAxis.granularity = granularity ?: 1f//根据X轴的数据，设置坐标的间隔尺度
 
+        //设置图例，数据种类颜色标识
         if (chartListDataModel?.dataList?.size ?: 0 > 1) {
             binding.barChart.legend.also {
                 it.isEnabled = true//是否显示类型图标
-                it.form = Legend.LegendForm.LINE//图标样式
-                it.formLineWidth = 2f
+                it.form = Legend.LegendForm.LINE//图例样式
+                it.formLineWidth = 2f//线条宽度
                 it.textSize = 11f
                 it.textColor = resources.getColor(R.color.text_black)
                 it.verticalAlignment = Legend.LegendVerticalAlignment.BOTTOM//位置位于底部
                 it.horizontalAlignment = Legend.LegendHorizontalAlignment.LEFT//位置居左对齐
                 it.orientation = Legend.LegendOrientation.HORIZONTAL//水平分布
                 it.isWordWrapEnabled = true//开启自动换行
+                it.xEntrySpace = 20f//设置左右间距
+                it.yEntrySpace = 5f//设置上下间距
             }
         } else {
-            binding.barChart.legend.isEnabled = false //是否显示类型图标
+            binding.barChart.legend.isEnabled = false //是否显示类型图例
         }
 
 

@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.activityViewModels
 import androidx.viewpager2.adapter.FragmentStateAdapter
+import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.growatt.atess.base.BaseFragment
 import com.growatt.atess.databinding.FragmentDeviceTabBinding
@@ -62,6 +63,11 @@ class DeviceTabFragment(val plantId: String?, private val searchWord: String = "
             TabLayoutMediator(binding.tabLayout, binding.vpDevice) { tab, position ->
                 tab.text = deviceListResultModel.getTabsText()[position]
             }
+        if (deviceListResultModel.getTabsText().size > 3) {
+            binding.tabLayout.tabMode = TabLayout.MODE_SCROLLABLE
+        } else {
+            binding.tabLayout.tabMode = TabLayout.MODE_FIXED
+        }
         val fragments = mutableListOf<BaseFragment>().also {
             if (!deviceListResultModel.hpslist.isNullOrEmpty()) {
                 it.add(DeviceListFragment(deviceListResultModel.hpslist))
