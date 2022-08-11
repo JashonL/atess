@@ -57,10 +57,10 @@ class PvAndLoadFragment : BaseFragment() {
         binding.model = pvAndLoadModel
         pvAndLoadModel?.also {
             binding.progressPvSelf.setViewWidth(getProgressWidth(it.getPVSelfRatio()))
-            binding.progressPvGrid.setViewWidth(getProgressWidth(100 - it.getPVSelfRatio()))
+            binding.progressPvGrid.setViewWidth(getProgressWidth(it.getPVToGridRatio()))
 
             binding.progressLoadSelf.setViewWidth(getProgressWidth(it.getLoadSelfRatio()))
-            binding.progressLoadTakeElectricityGrid.setViewWidth(getProgressWidth(100 - it.getPVSelfRatio() - it.getLoadFromOilEngineRatio()))
+            binding.progressLoadTakeElectricityGrid.setViewWidth(getProgressWidth(it.getLoadFromGridPercentRadio()))
             binding.progressLoadOilEngineOutput.setViewWidth(getProgressWidth(it.getLoadFromOilEngineRatio()))
 
         }

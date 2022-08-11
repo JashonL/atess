@@ -9,6 +9,9 @@ import com.growatt.atess.R
 import com.growatt.atess.databinding.DefaultActivityErrorPageBinding
 import java.lang.ref.WeakReference
 
+/**
+ * 加载与错误状态封装
+ */
 class AndroidDisplay(activity: BaseActivity) : IDisplay {
 
     private var progressDialog: ProgressDialog? = null

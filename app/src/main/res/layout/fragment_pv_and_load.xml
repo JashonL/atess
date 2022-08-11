@@ -369,7 +369,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="bottom"
                         android:layout_marginStart="1dp"
-                        android:text='@{model.PVOutWithUnit.second}'
+                        android:text='@{model.loadFromGridWithUnit.second}'
                         android:textColor="@color/text_orange_99"
                         android:textSize="@dimen/text_10"
                         tools:text="@string/kwh" />
