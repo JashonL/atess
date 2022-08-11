@@ -2,8 +2,8 @@ package com.growatt.atess.base
 
 import android.content.Context
 import android.os.Build
-import android.os.Bundle
 import android.os.LocaleList
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.growatt.lib.LibApplication
 import com.growatt.lib.service.ServiceManager
@@ -14,13 +14,10 @@ import com.growatt.lib.service.http.IHttpService
 import com.growatt.lib.service.location.ILocationService
 import com.growatt.lib.service.storage.IStorageService
 
-abstract class BaseActivity : AppCompatActivity(), ServiceManager.ServiceInterface {
+abstract class BaseActivity : AppCompatActivity(), ServiceManager.ServiceInterface, IDisplay {
 
-    private lateinit var androidDisplay: AndroidDisplay
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        androidDisplay = AndroidDisplay(this)
+    private val display: IDisplay by lazy(LazyThreadSafetyMode.NONE) {
+        AndroidDisplay(this)
     }
 
     /**
@@ -62,12 +59,28 @@ abstract class BaseActivity : AppCompatActivity(), ServiceManager.ServiceInterfa
         return LibApplication.instance().locationService()
     }
 
-    fun showDialog() {
-        androidDisplay.showDialog()
+    override fun showDialog() {
+        display.showDialog()
     }
 
-    fun dismissDialog() {
-        androidDisplay.dismissDialog()
+    override fun dismissDialog() {
+        display.dismissDialog()
+    }
+
+    override fun showPageErrorView(onRetry: ((view: View) -> Unit)) {
+        display.showPageErrorView(onRetry)
+    }
+
+    override fun hidePageErrorView() {
+        display.hidePageErrorView()
+    }
+
+    override fun showPageLoadingView() {
+        display.showPageLoadingView()
+    }
+
+    override fun hidePageLoadingView() {
+        display.hidePageLoadingView()
     }
 
 }

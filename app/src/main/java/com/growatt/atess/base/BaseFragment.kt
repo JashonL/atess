@@ -1,5 +1,6 @@
 package com.growatt.atess.base
 
+import android.view.View
 import androidx.fragment.app.Fragment
 import com.growatt.atess.application.MainApplication
 import com.growatt.lib.LibApplication
@@ -10,7 +11,7 @@ import com.growatt.lib.service.http.IHttpService
 import com.growatt.lib.service.location.ILocationService
 import com.growatt.lib.service.storage.IStorageService
 
-abstract class BaseFragment : Fragment(), ServiceManager.ServiceInterface {
+abstract class BaseFragment : Fragment(), ServiceManager.ServiceInterface, IDisplay {
 
     override fun apiService(): IHttpService {
         return MainApplication.instance().apiService()
@@ -32,12 +33,27 @@ abstract class BaseFragment : Fragment(), ServiceManager.ServiceInterface {
         return LibApplication.instance().locationService()
     }
 
-    fun showDialog() {
+    override fun showDialog() {
         (activity as? BaseActivity)?.showDialog()
     }
 
-    fun dismissDialog() {
+    override fun dismissDialog() {
         (activity as? BaseActivity)?.dismissDialog()
     }
 
+    override fun showPageErrorView(onRetry: ((view: View) -> Unit)) {
+        (activity as? BaseActivity)?.showPageErrorView(onRetry)
+    }
+
+    override fun hidePageErrorView() {
+        (activity as? BaseActivity)?.hidePageErrorView()
+    }
+
+    override fun showPageLoadingView() {
+        (activity as? BaseActivity)?.showPageLoadingView()
+    }
+
+    override fun hidePageLoadingView() {
+        (activity as? BaseActivity)?.hidePageLoadingView()
+    }
 }

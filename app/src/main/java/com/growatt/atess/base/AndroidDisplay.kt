@@ -1,18 +1,23 @@
 package com.growatt.atess.base
 
 import android.app.ProgressDialog
+import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import android.view.Window
 import com.growatt.atess.R
+import com.growatt.atess.databinding.DefaultActivityErrorPageBinding
 import java.lang.ref.WeakReference
 
-class AndroidDisplay(activity: BaseActivity) {
+class AndroidDisplay(activity: BaseActivity) : IDisplay {
 
     private var progressDialog: ProgressDialog? = null
 
     private val wrActivity = WeakReference(activity)
 
-    fun showDialog() {
+    private var pageErrorView: View? = null
+
+    override fun showDialog() {
         val activity = wrActivity.get() ?: return
         if (progressDialog == null) {
             progressDialog = ProgressDialog(activity).apply {
@@ -25,32 +30,50 @@ class AndroidDisplay(activity: BaseActivity) {
         }
     }
 
-    fun dismissDialog() {
+    override fun dismissDialog() {
         if (progressDialog?.isShowing == true) {
             progressDialog?.dismiss()
         }
     }
 
-    fun showPageLoadingView() {
+    override fun showPageLoadingView() {
         val activity = wrActivity.get() ?: return
     }
 
-    fun hidePageLoadingView() {
+    override fun hidePageLoadingView() {
 
     }
 
-    fun showPageErrorView() {
+    override fun showPageErrorView(onRetry: ((view: View) -> Unit)) {
         val activity = wrActivity.get() ?: return
-
+        if (!isPageErrorViewShow()) {
+            val parent = findPlaceholderContainerView(activity)
+            pageErrorView = generateErrorView(activity)
+            parent.addView(pageErrorView)
+            pageErrorView?.setOnClickListener {
+                onRetry.invoke(it)
+            }
+        }
     }
 
-    fun hidePageErrorView() {
-
+    private fun isPageErrorViewShow(): Boolean {
+        return pageErrorView != null
     }
 
-    fun findPlaceholderContainerView(activity: BaseActivity): ViewGroup {
+    override fun hidePageErrorView() {
+        val activity = wrActivity.get() ?: return
+        findPlaceholderContainerView(activity).removeView(pageErrorView)
+        pageErrorView = null
+    }
+
+    private fun findPlaceholderContainerView(activity: BaseActivity): ViewGroup {
         val viewGroup = activity.findViewById<ViewGroup>(R.id.activity_placeholder_page)
         return viewGroup ?: return activity.findViewById(Window.ID_ANDROID_CONTENT)
+    }
+
+    private fun generateErrorView(activity: BaseActivity): View {
+        val binding = DefaultActivityErrorPageBinding.inflate(LayoutInflater.from(activity))
+        return binding.root
     }
 
 }
