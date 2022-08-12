@@ -21,7 +21,8 @@ import com.growatt.atess.model.plant.ServiceModel
 import com.growatt.atess.ui.service.viewmodel.ServiceViewModel
 import com.growatt.atess.view.itemdecoration.DividerItemDecoration
 import com.growatt.lib.util.LogUtil
-import com.growatt.lib.util.ToastUtil
+import com.growatt.lib.util.gone
+import com.growatt.lib.util.visible
 
 /**
  * 安装视频
@@ -62,17 +63,21 @@ class InstallVideoFragment : BaseFragment() {
         binding.srlRefresh.setOnRefreshListener {
             viewModel.getInstallVideo()
         }
+        binding.errorPage.root.setOnClickListener {
+            binding.srlRefresh.autoRefresh()
+        }
     }
 
     private fun initData() {
         viewModel.getInstallVideoLiveData.observe(viewLifecycleOwner) {
             binding.srlRefresh.finishRefresh()
             if (it.second == null) {
+                binding.errorPage.root.gone()
                 (binding.rvInstallVideoList.adapter as Adapter).refresh(
                     it.first?.toMutableList() ?: emptyList()
                 )
             } else {
-                ToastUtil.show(it.second)
+                binding.errorPage.root.visible()
             }
         }
         binding.srlRefresh.autoRefresh()

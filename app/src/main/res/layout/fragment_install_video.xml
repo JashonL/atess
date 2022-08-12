@@ -7,11 +7,22 @@
     android:layout_height="match_parent"
     tools:context=".ui.service.fragment.InstallVideoFragment">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_install_video_list"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        tools:listitem="@layout/install_video_view_holder" />
+        android:layout_height="match_parent">
 
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_install_video_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:listitem="@layout/install_video_view_holder" />
+
+        <include
+            android:id="@+id/error_page"
+            layout="@layout/default_activity_error_page"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone" />
+    </FrameLayout>
 </com.scwang.smart.refresh.layout.SmartRefreshLayout>

@@ -18,6 +18,11 @@ data class HttpErrorModel(val errorCode: String, val errorMsg: String?) {
          */
         const val ERROR_CODE_NETWORK = "-400"
 
+        /**
+         * 服务异常
+         */
+        const val ERROR_CODE_SERVER = "-500"
+
     }
 
 }

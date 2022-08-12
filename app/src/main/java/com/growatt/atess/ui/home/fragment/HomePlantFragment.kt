@@ -13,7 +13,8 @@ import com.growatt.atess.model.plant.PlantModel
 import com.growatt.atess.ui.plant.fragment.PlantInfoFragment
 import com.growatt.atess.ui.plant.viewmodel.PlantInfoViewModel
 import com.growatt.atess.ui.plant.viewmodel.PlantListViewModel
-import com.growatt.lib.util.ToastUtil
+import com.growatt.lib.util.gone
+import com.growatt.lib.util.visible
 
 /**
  * 首页-电站
@@ -33,6 +34,7 @@ class HomePlantFragment : HomeBaseFragment() {
     ): View {
         _binding = FragmentHomePlantBinding.inflate(inflater, container, false)
         initData()
+        setListener()
         return binding.root
     }
 
@@ -40,6 +42,7 @@ class HomePlantFragment : HomeBaseFragment() {
         viewModel.getPlantListLiveData.observe(viewLifecycleOwner) {
             dismissDialog()
             if (it.second == null) {
+                binding.errorPage.root.gone()
                 childFragmentManager.commit(true) {
                     if (it.first?.size ?: 0 == 1) {
                         plantInfoViewModel.plantId = it.first?.get(0)?.id
@@ -53,10 +56,20 @@ class HomePlantFragment : HomeBaseFragment() {
                     }
                 }
             } else {
-                ToastUtil.show(it.second)
+                binding.errorPage.root.visible()
             }
         }
 
+        fetchPlantList()
+    }
+
+    fun setListener() {
+        binding.errorPage.root.setOnClickListener {
+            fetchPlantList()
+        }
+    }
+
+    private fun fetchPlantList() {
         showDialog()
         viewModel.getPlantList(PlantModel.PLANT_STATUS_ALL)
     }
@@ -65,4 +78,5 @@ class HomePlantFragment : HomeBaseFragment() {
         super.onDestroyView()
         _binding = null
     }
+
 }

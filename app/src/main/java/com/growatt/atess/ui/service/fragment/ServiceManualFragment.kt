@@ -19,7 +19,8 @@ import com.growatt.atess.model.plant.ServiceModel
 import com.growatt.atess.ui.common.activity.WebActivity
 import com.growatt.atess.ui.service.viewmodel.ServiceViewModel
 import com.growatt.atess.view.itemdecoration.DividerItemDecoration
-import com.growatt.lib.util.ToastUtil
+import com.growatt.lib.util.gone
+import com.growatt.lib.util.visible
 
 /**
  * 使用手册
@@ -61,17 +62,21 @@ class ServiceManualFragment : BaseFragment() {
         binding.srlRefresh.setOnRefreshListener {
             viewModel.getServiceManual()
         }
+        binding.errorPage.root.setOnClickListener {
+            binding.srlRefresh.autoRefresh()
+        }
     }
 
     private fun initData() {
         viewModel.getServiceManualLiveData.observe(viewLifecycleOwner) {
             binding.srlRefresh.finishRefresh()
             if (it.second == null) {
+                binding.errorPage.root.gone()
                 (binding.rvServiceManualList.adapter as Adapter).refresh(
                     it.first?.toMutableList() ?: emptyList()
                 )
             } else {
-                ToastUtil.show(it.second)
+                binding.errorPage.root.visible()
             }
         }
         binding.srlRefresh.autoRefresh()

@@ -14,6 +14,7 @@ import com.growatt.atess.R
 
 /**
  * 权限请求工具
+ * 1.shouldShowRequestPermissionRationale方法返回值（1.用户禁止权限，并勾选不再提醒，返回false；2.用户禁止权限，不勾选不再提醒，返回true；3.用户同意权限，返回false）
  */
 class RequestPermissionHub : Fragment() {
 
