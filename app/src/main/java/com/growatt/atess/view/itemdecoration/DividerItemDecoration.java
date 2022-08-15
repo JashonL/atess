@@ -29,6 +29,7 @@ import androidx.annotation.ColorInt;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.growatt.atess.base.BasePageListAdapter;
 import com.growatt.lib.util.ViewUtil;
 
 /**
@@ -103,6 +104,9 @@ public class DividerItemDecoration extends RecyclerView.ItemDecoration {
         if (childCount > 1) {
             for (int i = 0; i < childCount - 1; i++) {
                 final View child = parent.getChildAt(i);
+                if (!isBusinessType(parent, child)) {
+                    continue;
+                }
                 parent.getDecoratedBoundsWithMargins(child, mBounds);
                 final int bottom = mBounds.bottom + Math.round(child.getTranslationY());
                 final int top = bottom - mDivider.getIntrinsicHeight();
@@ -131,7 +135,10 @@ public class DividerItemDecoration extends RecyclerView.ItemDecoration {
         if (childCount > 1) {
             for (int i = 0; i < childCount - 1; i++) {
                 final View child = parent.getChildAt(i);
-                parent.getLayoutManager().getDecoratedBoundsWithMargins(child, mBounds);
+                if (!isBusinessType(parent, child)) {
+                    continue;
+                }
+                parent.getDecoratedBoundsWithMargins(child, mBounds);
                 final int right = mBounds.right + Math.round(child.getTranslationX());
                 final int left = right - mDivider.getIntrinsicWidth();
                 mDivider.setBounds(left, top, right, bottom);
@@ -144,7 +151,7 @@ public class DividerItemDecoration extends RecyclerView.ItemDecoration {
     @Override
     public void getItemOffsets(Rect outRect, View view, RecyclerView parent,
                                RecyclerView.State state) {
-        if (mDivider == null) {
+        if (mDivider == null || !isBusinessType(parent, view)) {
             outRect.set(0, 0, 0, 0);
             return;
         }
@@ -153,5 +160,15 @@ public class DividerItemDecoration extends RecyclerView.ItemDecoration {
         } else {
             outRect.set(0, 0, mDivider.getIntrinsicWidth(), 0);
         }
+    }
+
+    /**
+     * 是否是支持的业务Item
+     *
+     * @return true-是，false-否
+     */
+    private boolean isBusinessType(RecyclerView parent, View itemView) {
+        int itemViewType = parent.getChildViewHolder(itemView).getItemViewType();
+        return itemViewType != BasePageListAdapter.ITEM_PAGE_LOADING_ID && itemViewType != BasePageListAdapter.ITEM_PAGING_END_ID && itemViewType != BasePageListAdapter.ITEM_PAGING_LOADING_ERROR_ID;
     }
 }

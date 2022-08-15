@@ -18,6 +18,7 @@ abstract class IHttpService : Service {
             put("deviceType", "Android")
             put("token", LibApplication.instance().accountService().token().orEmpty())
             put("lang", LibApplication.instance().deviceService().getAppLang())
+            put("appVersion", LibApplication.instance().deviceService().getAppVersionName())
         }
     }
 
