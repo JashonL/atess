@@ -26,6 +26,7 @@ class GRWebView @JvmOverloads constructor(
         settings.domStorageEnabled = true
         settings.savePassword = false
         settings.saveFormData = false
+        settings.javaScriptEnabled = true
     }
 
 }
