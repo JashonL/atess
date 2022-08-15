@@ -38,14 +38,13 @@
                 android:id="@+id/fragment_chart"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
                 tools:layout="@layout/fragment_device_chart" />
 
             <androidx.fragment.app.FragmentContainerView
                 android:id="@+id/fragment_battery"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:name="com.growatt.atess.ui.plant.fragment.device.BmsBatteryFragment"
                 tools:layout="@layout/fragment_bms_battery" />
         </LinearLayout>
 

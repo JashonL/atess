@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
+    android:layout_marginTop="10dp"
     tools:context="com.growatt.atess.ui.plant.fragment.info.PlantDeviceInfoFragment">
 
     <LinearLayout
@@ -63,7 +64,6 @@
         android:id="@+id/fragment_system_operation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
         tools:layout="@layout/fragment_hps_system_operation" />
 
     <androidx.fragment.app.FragmentContainerView
@@ -71,7 +71,6 @@
         android:name="com.growatt.atess.ui.plant.fragment.info.PlantEnergyInfoFragment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
         tools:layout="@layout/fragment_plant_energy_info" />
 
     <androidx.fragment.app.FragmentContainerView
@@ -79,7 +78,6 @@
         android:name="com.growatt.atess.ui.plant.fragment.info.PlantTabChartFragment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
         tools:layout="@layout/fragment_plant_tab_chart" />
 
 </LinearLayout>

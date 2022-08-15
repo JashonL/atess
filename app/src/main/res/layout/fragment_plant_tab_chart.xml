@@ -7,6 +7,7 @@
     android:background="@color/color_white"
     android:gravity="center_horizontal"
     android:orientation="vertical"
+    android:layout_marginTop="10dp"
     android:paddingTop="10dp"
     android:paddingBottom="10dp"
     tools:context="com.growatt.atess.ui.plant.fragment.info.PlantTabChartFragment">

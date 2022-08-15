@@ -6,6 +6,7 @@
     android:background="@color/color_white"
     android:gravity="center_horizontal"
     android:orientation="vertical"
+    android:layout_marginTop="10dp"
     tools:context=".ui.plant.fragment.device.DeviceChartFragment">
 
     <TextView

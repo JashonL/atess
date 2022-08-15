@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/color_white"
+    android:layout_marginTop="10dp"
     android:orientation="vertical"
     tools:context="com.growatt.atess.ui.plant.fragment.device.BmsBatteryFragment">
 

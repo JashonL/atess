@@ -154,7 +154,6 @@
                 android:id="@+id/fragment_chart"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
                 tools:layout="@layout/fragment_device_chart" />
         </LinearLayout>
 

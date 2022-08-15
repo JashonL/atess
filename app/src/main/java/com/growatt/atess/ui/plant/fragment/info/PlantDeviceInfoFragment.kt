@@ -1,5 +1,6 @@
 package com.growatt.atess.ui.plant.fragment.info
 
+import android.graphics.Paint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -40,6 +41,10 @@ class PlantDeviceInfoFragment : BaseFragment(),
 
     private fun initView() {
         binding.root.gone()
+        binding.tvDeviceSn.paint.also {
+            it.flags = Paint.UNDERLINE_TEXT_FLAG
+            it.isAntiAlias = true
+        }
     }
 
     private fun initData() {

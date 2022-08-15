@@ -46,7 +46,6 @@
                     android:name="com.growatt.atess.ui.plant.fragment.info.PlantWeatherFragment"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
                     tools:layout="@layout/fragment_plant_weather" />
 
                 <androidx.fragment.app.FragmentContainerView
@@ -54,7 +53,6 @@
                     android:name="com.growatt.atess.ui.plant.fragment.info.PlantDeviceInfoFragment"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
                     tools:layout="@layout/fragment_plant_device_info" />
 
                 <androidx.fragment.app.FragmentContainerView
@@ -62,7 +60,6 @@
                     android:name="com.growatt.atess.ui.plant.fragment.info.PlantDeviceListFragment"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
                     tools:layout="@layout/fragment_plant_device_list" />
 
                 <androidx.fragment.app.FragmentContainerView
@@ -70,7 +67,6 @@
                     android:name="com.growatt.atess.ui.plant.fragment.info.PlantEmptyDeviceFragment"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
                     tools:layout="@layout/fragment_plant_empty_device" />
 
             </LinearLayout>
