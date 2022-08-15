@@ -30,7 +30,7 @@ class AddPlantViewModel : BaseViewModel() {
 
     val editPlantLiveData = MutableLiveData<String?>()
 
-    val cityListLiveData = MutableLiveData<Pair<Array<ProvinceModel>, String?>>()
+    val cityListLiveData = MutableLiveData<Pair<Array<ProvinceModel>?, String?>>()
 
     val currencyListLiveData = MutableLiveData<Pair<Array<GeneralItemModel>, String?>>()
 

@@ -5,7 +5,7 @@ import com.growatt.atess.view.dialog.ItemName
 /**
  * 省份
  */
-data class ProvinceModel(val name: String, val citys: Array<CityModel>) : ItemName {
+data class ProvinceModel(val name: String, val citys: Array<CityModel>?) : ItemName {
 
     override fun itemName(): String {
         return name

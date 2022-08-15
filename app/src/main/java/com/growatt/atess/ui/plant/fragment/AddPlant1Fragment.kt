@@ -66,22 +66,32 @@ class AddPlant1Fragment : BaseFragment(), View.OnClickListener, OnLocationListen
         }
     }
 
-    private fun showProvinceList(provinceList: Array<ProvinceModel>) {
+    private fun showProvinceList(provinceList: Array<ProvinceModel>?) {
+        if (provinceList.isNullOrEmpty()) {
+            return
+        }
         if (provinceList.size == 1) {
             val cityList = provinceList[0].citys
-            PickerDialog.show(childFragmentManager, cityList) {
-                viewModel.addPlantModel.city = cityList[it].city
-                refreshSelectCityView()
+            if (!cityList.isNullOrEmpty()) {
+                PickerDialog.show(childFragmentManager, cityList) {
+                    viewModel.addPlantModel.city = cityList[it].city
+                    refreshSelectCityView()
+                }
             }
         } else {
             PickerDialog.show(childFragmentManager, provinceList) { provinceIndex ->
                 val cityList = provinceList[provinceIndex].citys
-                PickerDialog.show(
-                    childFragmentManager,
-                    cityList
-                ) { cityIndex ->
-                    viewModel.addPlantModel.city = cityList[cityIndex].city
+                if (cityList.isNullOrEmpty()) {
+                    viewModel.addPlantModel.city = provinceList[provinceIndex].name
                     refreshSelectCityView()
+                } else {
+                    PickerDialog.show(
+                        childFragmentManager,
+                        cityList
+                    ) { cityIndex ->
+                        viewModel.addPlantModel.city = cityList[cityIndex].city
+                        refreshSelectCityView()
+                    }
                 }
             }
         }
@@ -187,6 +197,9 @@ class AddPlant1Fragment : BaseFragment(), View.OnClickListener, OnLocationListen
                         viewModel.addPlantModel.country =
                             data.getStringExtra(SelectAreaActivity.KEY_AREA) ?: ""
                         refreshSelectAreaView()
+                        viewModel.addPlantModel.city = ""
+                        refreshSelectCityView()
+                        viewModel.cityListLiveData.value = Pair(emptyArray(), null)
                         showDialog()
                         viewModel.fetchTimeZoneList(viewModel.addPlantModel.country ?: "")
                     }
