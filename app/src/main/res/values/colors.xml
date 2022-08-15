@@ -17,7 +17,7 @@
     <color name="text_red">@color/colorAccent</color>
     <color name="text_red_99">@color/color_99E2001A</color>
     <color name="text_green">@color/color_green</color>
-    <color name="text_green_99">@color/color_993FAE29</color>
+    <color name="text_green_99">@color/color_green_99</color>
     <color name="text_blue">@color/color_0087FD</color>
     <color name="text_0F4006">#FF0F4006</color>
     <color name="text_orange">@color/color_FF6434</color>
@@ -44,5 +44,6 @@
     <color name="color_1A3FAE29">#1A3FAE29</color>
     <color name="color_F6F6F8">#FFF6F6F8</color>
     <color name="color_99E2001A">#99E2001A</color>
-    <color name="color_993FAE29">#993FAE29</color>
+    <color name="color_green_99">#993FAE29</color>
+    <color name="color_green_0d">#0D3FAE29</color>
 </resources>

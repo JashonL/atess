@@ -14,10 +14,7 @@ import com.growatt.atess.model.plant.DirectionType
 import com.growatt.atess.model.plant.ui.PcsSystemOperationModel
 import com.growatt.atess.ui.plant.activity.PlantDeviceListActivity
 import com.growatt.atess.ui.plant.viewmodel.PcsViewModel
-import com.growatt.lib.util.ToastUtil
-import com.growatt.lib.util.gone
-import com.growatt.lib.util.invisible
-import com.growatt.lib.util.visible
+import com.growatt.lib.util.*
 
 /**
  * PCS设备系统运行图
@@ -45,6 +42,8 @@ class PcsSystemOperationFragment(val plantId: String?, val deviceSn: String?) : 
 
     private fun initView() {
         binding.root.gone()
+        binding.tvSystemStatus.background =
+            ViewUtil.createShape(resources.getColor(R.color.color_green_0d), 4)
     }
 
     private fun initData() {
@@ -67,6 +66,8 @@ class PcsSystemOperationFragment(val plantId: String?, val deviceSn: String?) : 
             binding.root.gone()
         } else {
             binding.root.visible()
+            binding.tvRunMode.text = pcsSystemOperationModel.runModel
+            binding.tvSystemStatus.text = pcsSystemOperationModel.status
             pcsSystemOperationModel.also {
                 //处理图标的展示
                 if (it.isShowPbd()) {

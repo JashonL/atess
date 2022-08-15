@@ -9,7 +9,7 @@ import com.growatt.lib.util.Util
  */
 object ValueUtil {
     /**
-     * 数值转换，基础单位是kWh
+     * 电量单位：数值转换，基础单位是kWh
      */
     fun valueFromKWh(kwhValue: Double?): Pair<String, String> {
         return when {
@@ -32,7 +32,7 @@ object ValueUtil {
     }
 
     /**
-     * 数值转换，基础单位是w
+     * 功率单位(平均)：数值转换，基础单位是w
      */
     fun valueFromW(wValue: Double?): Pair<String, String> {
         return when {
@@ -55,7 +55,8 @@ object ValueUtil {
     }
 
     /**
-     * 数值转换，基础单位是w
+     * 功率单位（峰值）：数值转换，基础单位是w
+     * 目前只有组件总功率使用到
      */
     fun valueFromWp(wValue: Double?): Pair<String, String> {
         return when {
@@ -78,7 +79,7 @@ object ValueUtil {
     }
 
     /**
-     * 数值转换，基础单位是kg
+     * 重量单位：数值转换，基础单位是kg
      */
     fun valueFromKG(kgValue: Double?): Pair<String, String> {
         return when {

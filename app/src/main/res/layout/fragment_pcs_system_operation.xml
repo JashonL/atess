@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/color_white"
     android:layout_marginTop="10dp"
+    android:background="@color/color_white"
     tools:context=".ui.plant.fragment.info.PcsSystemOperationFragment">
 
     <TextView
@@ -25,12 +25,16 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="20dp"
         android:layout_marginEnd="16dp"
+        android:paddingStart="10dp"
+        android:paddingTop="4dp"
+        android:paddingEnd="10dp"
+        android:paddingBottom="4dp"
         android:textColor="@color/text_green"
         android:textSize="@dimen/text_small"
+        app:layout_constraintBottom_toBottomOf="@id/tv_run_mode"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toTopOf="@id/tv_run_mode"
         tools:text="并机转并网" />
 
     <ImageView

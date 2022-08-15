@@ -14,10 +14,7 @@ import com.growatt.atess.model.plant.DirectionType
 import com.growatt.atess.model.plant.HpsSystemOperationModel
 import com.growatt.atess.ui.plant.activity.PlantDeviceListActivity
 import com.growatt.atess.ui.plant.viewmodel.HpsViewModel
-import com.growatt.lib.util.ToastUtil
-import com.growatt.lib.util.gone
-import com.growatt.lib.util.invisible
-import com.growatt.lib.util.visible
+import com.growatt.lib.util.*
 
 /**
  * HPS设备系统运行图
@@ -45,6 +42,8 @@ class HpsSystemOperationFragment(val plantId: String?, val deviceSn: String?) : 
 
     private fun initView() {
         binding.root.gone()
+        binding.tvSystemStatus.background =
+            ViewUtil.createShape(resources.getColor(R.color.color_green_0d), 4)
     }
 
     private fun setListener() {
@@ -71,6 +70,8 @@ class HpsSystemOperationFragment(val plantId: String?, val deviceSn: String?) : 
             binding.root.gone()
         } else {
             binding.root.visible()
+            binding.tvRunMode.text = hpsSystemOperationModel.runModel
+            binding.tvSystemStatus.text = hpsSystemOperationModel.status
             hpsSystemOperationModel.also {
                 //处理图标的显示隐藏和数值的显示
                 if (it.isShowATS()) {

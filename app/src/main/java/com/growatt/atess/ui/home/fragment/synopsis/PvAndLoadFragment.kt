@@ -81,9 +81,9 @@ class PvAndLoadFragment : BaseFragment() {
         binding.root.gone()
 
         binding.progressPvSelf.background =
-            ViewUtil.createShape(resources.getColor(R.color.color_993FAE29), 6)
+            ViewUtil.createShape(resources.getColor(R.color.color_green_99), 6)
         binding.progressPvGrid.background =
-            ViewUtil.createShape(resources.getColor(R.color.color_993FAE29), 6)
+            ViewUtil.createShape(resources.getColor(R.color.color_green_99), 6)
         binding.progressLoadSelf.background =
             ViewUtil.createShape(resources.getColor(R.color.color_99FF6434), 6)
         binding.progressLoadTakeElectricityGrid.background =
