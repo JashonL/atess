@@ -184,7 +184,8 @@ class SettingActivity : BaseActivity(), View.OnClickListener,
     }
 
     /**
-     * Intent(MediaStore.ACTION_IMAGE_CAPTURE) 调用系统相机拍照，不需要申请Camera权限
+     * Android官方说明：Intent(MediaStore.ACTION_IMAGE_CAPTURE) 调用系统相机拍照，不需要申请Camera权限
+     * 1.小米手机不申请权限会崩溃，所以都申请权限进行适配
      */
     private fun takeAPicture() {
         RequestPermissionHub.requestPermission(

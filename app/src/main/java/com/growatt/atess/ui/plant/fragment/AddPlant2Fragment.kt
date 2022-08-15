@@ -260,36 +260,47 @@ class AddPlant2Fragment : BaseFragment(), View.OnClickListener {
         binding.tvUploadPlantImage.gone()
     }
 
+    /**
+     * Android官方说明：Intent(MediaStore.ACTION_IMAGE_CAPTURE) 调用系统相机拍照，不需要申请Camera权限
+     * 1.小米手机不申请权限会崩溃，所以都申请权限进行适配
+     */
     private fun takeAPicture() {
-        ActivityBridge.startActivity(
-            requireActivity(),
-            Intent(MediaStore.ACTION_IMAGE_CAPTURE).apply {
-                takePictureFile = AppUtil.createImageFile()?.apply {
-                    putExtra(
-                        MediaStore.EXTRA_OUTPUT,
-                        FileProvider.getUriForFile(
-                            requireContext(),
-                            BuildConfig.APPLICATION_ID + ".fileProvider",
-                            this
-                        )
-                    )
-                }
-            },
-            object :
-                ActivityBridge.OnActivityForResult {
-                override fun onActivityForResult(
-                    context: Context?,
-                    resultCode: Int,
-                    data: Intent?
-                ) {
-                    if (resultCode == AppCompatActivity.RESULT_OK) {
-                        takePictureFile?.also {
-                            Util.galleryAddPic(it.absolutePath)
-                            setPlantImage(AppUtil.fileToUri(requireActivity(), it))
+        RequestPermissionHub.requestPermission(
+            childFragmentManager,
+            arrayOf(Manifest.permission.CAMERA)
+        ) { isGranted ->
+            if (isGranted) {
+                ActivityBridge.startActivity(
+                    requireActivity(),
+                    Intent(MediaStore.ACTION_IMAGE_CAPTURE).apply {
+                        takePictureFile = AppUtil.createImageFile()?.apply {
+                            putExtra(
+                                MediaStore.EXTRA_OUTPUT,
+                                FileProvider.getUriForFile(
+                                    requireContext(),
+                                    BuildConfig.APPLICATION_ID + ".fileProvider",
+                                    this
+                                )
+                            )
                         }
-                    }
-                }
-            })
+                    },
+                    object :
+                        ActivityBridge.OnActivityForResult {
+                        override fun onActivityForResult(
+                            context: Context?,
+                            resultCode: Int,
+                            data: Intent?
+                        ) {
+                            if (resultCode == AppCompatActivity.RESULT_OK) {
+                                takePictureFile?.also {
+                                    Util.galleryAddPic(it.absolutePath)
+                                    setPlantImage(AppUtil.fileToUri(requireActivity(), it))
+                                }
+                            }
+                        }
+                    })
+            }
+        }
     }
 
     /**
