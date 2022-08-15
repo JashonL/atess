@@ -39,12 +39,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="122dp"
-            android:textColor="@color/text_green"
+            android:textColor="@color/color_82DCDC"
             android:textSize="@dimen/text_small"
             app:layout_constraintBottom_toBottomOf="@id/tv_device_model"
             app:layout_constraintStart_toStartOf="@id/tv_device_model"
             app:layout_constraintTop_toTopOf="@id/tv_device_model"
-            tools:text="在线" />
+            tools:text="充电中" />
 
         <TextView
             android:id="@+id/tv_device_sn"
