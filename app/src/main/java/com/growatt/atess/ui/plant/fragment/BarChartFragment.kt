@@ -29,7 +29,11 @@ import kotlin.math.floor
 /**
  * 柱状图表
  */
-class BarChartFragment(var chartListDataModel: ChartListDataModel? = null, var unit: String) :
+class BarChartFragment(
+    var chartListDataModel: ChartListDataModel? = null,
+    var unit: String,
+    var typeName: String? = null
+) :
     BaseFragment(), IChartRefreshListener {
 
     private var _binding: FragmentBarChartBinding? = null
@@ -55,11 +59,12 @@ class BarChartFragment(var chartListDataModel: ChartListDataModel? = null, var u
         showChartData()
     }
 
-    override fun refresh(chartListDataModel: ChartListDataModel?, unit: String) {
+    override fun refresh(chartListDataModel: ChartListDataModel?, unit: String, typeName: String?) {
         this.chartListDataModel = chartListDataModel
-        showChartData()
         this.unit = unit
         binding.tvUnit.text = unit
+        this.typeName = typeName
+        showChartData()
     }
 
     private fun showChartData() {
@@ -89,7 +94,10 @@ class BarChartFragment(var chartListDataModel: ChartListDataModel? = null, var u
             }
 
             val color = colors[i % colors.size]
-            val barDataSet = BarDataSet(barDataValues, chartYData.getTypeName()).also {
+            val barDataSet = BarDataSet(
+                barDataValues,
+                if (chartYDataList.size == 1) typeName else chartYData.getTypeName()
+            ).also {
                 it.setDrawValues(false)//是否显示点的值
                 it.color = color.color//设置曲线的颜色
                 it.valueFormatter = object : ValueFormatter() {

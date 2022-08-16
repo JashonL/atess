@@ -65,28 +65,33 @@ class PlantTabChartFragment :
         binding.root.visible()
         chartListDataModel?.also {
             val chartFragment = childFragmentManager.findFragmentById(R.id.fragment_chart)
+            val typeName = binding.tabLayout.getTabText(binding.tabLayout.getSelectTabPosition())
             if (isShowLineChart()) {
                 val unit =
                     if (viewModel.dataType.type == chartTypes[0].type) MainApplication.instance()
                         .getString(R.string.kw) else viewModel.dataType.typeUnit
                 if (chartFragment is LineChartFragment) {
-                    chartFragment.refresh(chartListDataModel, unit)
+                    chartFragment.refresh(chartListDataModel, unit, typeName)
                 } else {
                     childFragmentManager.commit(true) {
                         replace(
                             R.id.fragment_chart,
-                            LineChartFragment(chartListDataModel, unit)
+                            LineChartFragment(chartListDataModel, unit, typeName)
                         )
                     }
                 }
             } else {
                 if (chartFragment is BarChartFragment) {
-                    chartFragment.refresh(chartListDataModel, viewModel.dataType.typeUnit)
+                    chartFragment.refresh(chartListDataModel, viewModel.dataType.typeUnit, typeName)
                 } else {
                     childFragmentManager.commit(true) {
                         replace(
                             R.id.fragment_chart,
-                            BarChartFragment(chartListDataModel, viewModel.dataType.typeUnit)
+                            BarChartFragment(
+                                chartListDataModel,
+                                viewModel.dataType.typeUnit,
+                                typeName
+                            )
                         )
                     }
                 }

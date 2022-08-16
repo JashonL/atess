@@ -28,8 +28,13 @@ import java.util.*
 
 /**
  * 折线图表
+ * @param typeName-大类别（只有一种图标数据使用这个展示）
  */
-class LineChartFragment(var chartListDataModel: ChartListDataModel? = null, var unit: String) :
+class LineChartFragment(
+    private var chartListDataModel: ChartListDataModel? = null,
+    var unit: String,
+    var typeName: String? = null
+) :
     BaseFragment(), IChartRefreshListener {
 
     companion object {
@@ -59,11 +64,16 @@ class LineChartFragment(var chartListDataModel: ChartListDataModel? = null, var 
         showChartData()
     }
 
-    override fun refresh(chartListDataModel: ChartListDataModel?, unit: String) {
+    override fun refresh(
+        chartListDataModel: ChartListDataModel?,
+        unit: String,
+        typeName: String?
+    ) {
         this.chartListDataModel = chartListDataModel
-        showChartData()
+        this.typeName = typeName
         this.unit = unit
         binding.tvUnit.text = unit
+        showChartData()
     }
 
     private fun showChartData() {
@@ -99,8 +109,10 @@ class LineChartFragment(var chartListDataModel: ChartListDataModel? = null, var 
                 it.axisMaximum = lineDataValues[lineDataValues.size - 1].x//设置坐标的最大值
                 it.axisMinimum = lineDataValues[0].x//设置坐标的最小值
             }
-
-            val lineDataSet = LineDataSet(lineDataValues, chartYData.getTypeName()).also {
+            val lineDataSet = LineDataSet(
+                lineDataValues,
+                if (chartYDataList.size == 1) typeName else chartYData.getTypeName()
+            ).also {
                 val color = colors[i % colors.size]
                 it.mode = LineDataSet.Mode.CUBIC_BEZIER
                 it.setDrawCircles(false)//画原点
@@ -238,5 +250,5 @@ class LineChartFragment(var chartListDataModel: ChartListDataModel? = null, var 
 }
 
 interface IChartRefreshListener {
-    fun refresh(chartListDataModel: ChartListDataModel?, unit: String)
+    fun refresh(chartListDataModel: ChartListDataModel?, unit: String, typeName: String? = null)
 }

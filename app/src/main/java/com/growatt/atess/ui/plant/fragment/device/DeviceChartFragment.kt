@@ -86,13 +86,18 @@ class DeviceChartFragment(
             return
         }
         val chartFragment = childFragmentManager.findFragmentById(R.id.fragment_line_chart)
+        val typeName = binding.tvDataType.text.toString().trim()
         if (chartFragment is LineChartFragment) {
-            chartFragment.refresh(chartListDataModel, viewModel.chartType?.typeUnit ?: "")
+            chartFragment.refresh(chartListDataModel, viewModel.chartType?.typeUnit ?: "", typeName)
         } else {
             childFragmentManager.commit(true) {
                 add(
                     R.id.fragment_line_chart,
-                    LineChartFragment(chartListDataModel, viewModel.chartType?.typeUnit ?: "")
+                    LineChartFragment(
+                        chartListDataModel,
+                        viewModel.chartType?.typeUnit ?: "",
+                        typeName
+                    )
                 )
             }
         }

@@ -51,6 +51,10 @@ class Tab @JvmOverloads constructor(
         binding.tvTab.text = tabText ?: ""
     }
 
+    fun getTabText(): String {
+        return tabText ?: ""
+    }
+
     fun setSelect(isSelect: Boolean) {
         if (this.isSelect == isSelect) {
             return
