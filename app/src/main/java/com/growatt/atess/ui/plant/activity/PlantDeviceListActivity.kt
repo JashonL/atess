@@ -9,6 +9,7 @@ import com.growatt.atess.R
 import com.growatt.atess.application.MainApplication
 import com.growatt.atess.base.BaseActivity
 import com.growatt.atess.databinding.ActivityPlantDeviceListBinding
+import com.growatt.atess.model.plant.DeviceType
 import com.growatt.atess.ui.plant.fragment.DeviceTabFragment
 import com.growatt.lib.util.ToastUtil
 
@@ -52,11 +53,16 @@ class PlantDeviceListActivity : BaseActivity(), View.OnClickListener {
 
     private fun setListener() {
         binding.tvSearch.setOnClickListener(this)
+        binding.title.setOnRightImageClickListener {
+            AddCollectorActivity.start(this, plantId)
+        }
     }
 
     private fun initView() {
         supportFragmentManager.commit(true) {
-            add(R.id.fragment_device_tab, DeviceTabFragment(plantId))
+            add(R.id.fragment_device_tab, DeviceTabFragment(plantId) {
+                binding.title.setRightImageVisible(it == DeviceType.COLLECTOR)
+            })
         }
     }
 

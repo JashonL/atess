@@ -71,6 +71,9 @@ class LineChartFragment(var chartListDataModel: ChartListDataModel? = null, var 
             return
         }
 
+        //设置highlight为空，刷新后不显示MarkerView
+        binding.lineChart.highlightValue(null)
+
         val timeList = chartListDataModel!!.getXTimeList()
         val chartYDataList = chartListDataModel!!.getYDataList()
         val lineData = LineData().also {

@@ -9,7 +9,7 @@ import com.growatt.atess.application.MainApplication
  * 2 —— 油机产出
  * 3 —— 电池充电
  * 4 —— 电池放电
- * 5 —— 负载消耗
+ * 5 —— 负载用电
  * 6 —— 馈入电网
  * 7 —— 电网取电
  * 8 —— 逆变器产出
@@ -26,7 +26,7 @@ data class DeviceEnergyInfoModel(
             2 -> MainApplication.instance().getString(R.string.oil_machine_output)
             3 -> MainApplication.instance().getString(R.string.battery_charge)
             4 -> MainApplication.instance().getString(R.string.battery_discharge)
-            5 -> MainApplication.instance().getString(R.string.load_consumption)
+            5 -> MainApplication.instance().getString(R.string.load_electricity)
             6 -> MainApplication.instance().getString(R.string.feed_into_the_grid)
             7 -> MainApplication.instance().getString(R.string.take_electricity_grid)
             8 -> MainApplication.instance().getString(R.string.grid_connected_inverter_output)
@@ -41,7 +41,7 @@ data class DeviceEnergyInfoModel(
             2 -> R.drawable.ic_oil_engine_output
             3 -> R.drawable.ic_battery_charge
             4 -> R.drawable.ic_battery_discharge
-            5 -> R.drawable.ic_load_consumption
+            5 -> R.drawable.ic_load_electricity
             6 -> R.drawable.ic_feed_into_the_grid
             7 -> R.drawable.ic_take_electricity_grid
             8 -> R.drawable.ic_grid_connected_inverter_output

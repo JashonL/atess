@@ -3,6 +3,7 @@ package com.growatt.atess.ui.plant.activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.text.TextUtils
 import android.view.Gravity
 import android.view.View
 import android.view.inputmethod.EditorInfo
@@ -17,6 +18,7 @@ import com.growatt.atess.model.plant.SearchType
 import com.growatt.atess.ui.plant.fragment.DeviceTabFragment
 import com.growatt.atess.ui.plant.fragment.PlantTabFragment
 import com.growatt.atess.ui.plant.viewmodel.SearchViewModel
+import com.growatt.lib.util.KeyBoardUtil
 import com.growatt.lib.util.ViewUtil
 import com.growatt.lib.util.gone
 import com.growatt.lib.util.visible
@@ -82,10 +84,13 @@ class SearchActivity : BaseActivity(), View.OnClickListener {
         }
         binding.etSearch.setOnEditorActionListener { v, actionId, event ->
             if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-                binding.etSearch.clearFocus()
                 val searchWord = binding.etSearch.text.toString().trim()
-                refreshRecentWordView(viewModel.addRecentWord(searchType, searchWord))
-                search(searchWord)
+                if (TextUtils.isEmpty(searchWord)) {
+
+                } else {
+                    refreshRecentWordView(viewModel.addRecentWord(searchType, searchWord))
+                    search(searchWord)
+                }
                 true
             }
             false
@@ -93,6 +98,8 @@ class SearchActivity : BaseActivity(), View.OnClickListener {
     }
 
     private fun search(searchWord: String) {
+        binding.etSearch.clearFocus()
+        KeyBoardUtil.hideInput(this)
         binding.clContainer.gone()
         supportFragmentManager.commit(true) {
             when (searchType) {

@@ -86,17 +86,21 @@ class TitleBarLayout @JvmOverloads constructor(
         } else {
             binding.tvRightText.gone()
         }
-        if (showRightImage) {
-            binding.ivRight.visible()
-        } else {
-            binding.ivRight.gone()
-        }
+        showRightImage()
         showFilterIconView()
         binding.ivBack.setOnClickListener(this)
         binding.btRight.setOnClickListener(this)
         binding.tvRightText.setOnClickListener(this)
         binding.ivRight.setOnClickListener(this)
         binding.tvTitle.setOnClickListener(this)
+    }
+
+    private fun showRightImage() {
+        if (showRightImage) {
+            binding.ivRight.visible()
+        } else {
+            binding.ivRight.gone()
+        }
     }
 
     private fun showFilterIconView() {
@@ -110,6 +114,11 @@ class TitleBarLayout @JvmOverloads constructor(
     fun setFilterIconVisible(isVisible: Boolean) {
         showFilterIcon = isVisible
         showFilterIconView()
+    }
+
+    fun setRightImageVisible(isVisible: Boolean) {
+        showRightImage = isVisible
+        showRightImage()
     }
 
     override fun onClick(v: View?) {

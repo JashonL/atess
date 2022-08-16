@@ -9,18 +9,24 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.activityViewModels
 import androidx.viewpager2.adapter.FragmentStateAdapter
+import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.growatt.atess.base.BaseFragment
 import com.growatt.atess.databinding.FragmentDeviceTabBinding
 import com.growatt.atess.model.plant.DeviceListResultModel
+import com.growatt.atess.model.plant.DeviceType
 import com.growatt.atess.ui.plant.viewmodel.DeviceListViewModel
 import com.growatt.lib.util.ToastUtil
 
 /**
  * 设备列表TAB
  */
-class DeviceTabFragment(val plantId: String?, private val searchWord: String = "") :
+class DeviceTabFragment(
+    val plantId: String?,
+    private val searchWord: String = "",
+    private val selectDeviceTypeChange: ((selectDeviceType: Int) -> Unit)? = null
+) :
     BaseFragment() {
     private var _binding: FragmentDeviceTabBinding? = null
 
@@ -61,9 +67,10 @@ class DeviceTabFragment(val plantId: String?, private val searchWord: String = "
         tabLayoutMediator?.detach()
         tabLayoutMediator =
             TabLayoutMediator(binding.tabLayout, binding.vpDevice) { tab, position ->
-                tab.text = deviceListResultModel.getTabsText()[position]
+                tab.text =
+                    DeviceType.getDeviceTypeName(deviceListResultModel.getDeviceTypesHasData()[position])
             }
-        if (deviceListResultModel.getTabsText().size > 3) {
+        if (deviceListResultModel.getDeviceTypesHasData().size > 3) {
             binding.tabLayout.tabMode = TabLayout.MODE_SCROLLABLE
         } else {
             binding.tabLayout.tabMode = TabLayout.MODE_FIXED
@@ -94,6 +101,12 @@ class DeviceTabFragment(val plantId: String?, private val searchWord: String = "
 
     private fun initView() {
         binding.vpDevice.adapter = Adapter(requireActivity())
+        binding.vpDevice.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+            override fun onPageSelected(position: Int) {
+                viewModel.getDeviceListLiveData.value?.first?.getDeviceTypesHasData()
+                    ?.get(position)?.also { selectDeviceTypeChange?.invoke(it) }
+            }
+        })
     }
 
     override fun onDestroyView() {

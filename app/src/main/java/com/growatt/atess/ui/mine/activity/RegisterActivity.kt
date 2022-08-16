@@ -194,11 +194,11 @@ class RegisterActivity : BaseActivity(), View.OnClickListener {
      */
     private fun checkInputInfo() {
 
-        val username = binding.etUsername.text.trim()
-        val password = binding.etPassword.text.trim()
-        val confirmPassword = binding.etConfirmPassword.text.trim()
-        val phone = binding.etPhone.text.trim()
-        val email = binding.etEmail.text.trim()
+        val username = binding.etUsername.text.toString().trim()
+        val password = binding.etPassword.text.toString().trim()
+        val confirmPassword = binding.etConfirmPassword.text.toString().trim()
+        val phone = binding.etPhone.text.toString().trim()
+        val email = binding.etEmail.text.toString().trim()
 
         if (!viewModel.isAgree) {
             ToastUtil.show(getString(R.string.please_check_agree_agreement))

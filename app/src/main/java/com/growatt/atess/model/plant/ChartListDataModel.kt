@@ -72,7 +72,7 @@ data class ChartYDataList(val chartDataList: Array<Float>?, val type: String?) {
             "oilout" -> MainApplication.instance().getString(R.string.oil_machine_output)
             "batCharge" -> MainApplication.instance().getString(R.string.battery_charge)
             "batDischarge" -> MainApplication.instance().getString(R.string.battery_discharge)
-            "load" -> MainApplication.instance().getString(R.string.load_consumption)
+            "load" -> MainApplication.instance().getString(R.string.load_electricity)
             "toGrid" -> MainApplication.instance().getString(R.string.feed_into_the_grid)
             "fromGrid" -> MainApplication.instance().getString(R.string.take_electricity_grid)
             "ppv" -> MainApplication.instance().getString(R.string.pv_power)

@@ -1,8 +1,5 @@
 package com.growatt.atess.model.plant
 
-import com.growatt.atess.R
-import com.growatt.atess.application.MainApplication
-
 /**
  * 设备列表后端返回来数据模型
  */
@@ -14,26 +11,29 @@ class DeviceListResultModel(
     val pcslist: Array<DeviceModel>?,//PCS设备列表
     val bmslist: Array<DeviceModel>?//BMS设备列表
 ) {
-    fun getTabsText(): MutableList<String> {
-        val tabsText = mutableListOf<String>()
+    /**
+     * 获取有设备的设备类型列表
+     */
+    fun getDeviceTypesHasData(): MutableList<Int> {
+        val deviceTypes = mutableListOf<Int>()
         if (!hpslist.isNullOrEmpty()) {
-            tabsText.add(MainApplication.instance().getString(R.string.hps))
+            deviceTypes.add(DeviceType.HPS)
         }
         if (!pcslist.isNullOrEmpty()) {
-            tabsText.add(MainApplication.instance().getString(R.string.pcs))
+            deviceTypes.add(DeviceType.PCS)
         }
         if (!pbdlist.isNullOrEmpty()) {
-            tabsText.add(MainApplication.instance().getString(R.string.pbd))
+            deviceTypes.add(DeviceType.PBD)
         }
         if (!bmslist.isNullOrEmpty()) {
-            tabsText.add(MainApplication.instance().getString(R.string.bms))
+            deviceTypes.add(DeviceType.BMS)
         }
         if (!combinerList.isNullOrEmpty()) {
-            tabsText.add(MainApplication.instance().getString(R.string.combiner))
+            deviceTypes.add(DeviceType.COMBINER)
         }
         if (!datalogList.isNullOrEmpty()) {
-            tabsText.add(MainApplication.instance().getString(R.string.collector))
+            deviceTypes.add(DeviceType.COLLECTOR)
         }
-        return tabsText
+        return deviceTypes
     }
 }

@@ -66,6 +66,9 @@ class BarChartFragment(var chartListDataModel: ChartListDataModel? = null, var u
         if (chartListDataModel == null) {
             return
         }
+        //设置highlight为空，刷新后不显示MarkerView
+        binding.barChart.highlightValue(null)
+
         val timeList = chartListDataModel!!.getXTimeList()
         val chartYDataList = chartListDataModel!!.getYDataList()
         val barData = BarData().also {

@@ -33,9 +33,13 @@ class AddCollectorActivity : BaseActivity(), View.OnClickListener {
                     MainApplication.instance().getString(R.string.info_space_not_permission)
                 )
             } else {
-                context?.startActivity(Intent(context, AddCollectorActivity::class.java).also {
-                    it.putExtra(KEY_PLANT_ID, plantId)
-                })
+                context?.startActivity(getIntent(context, plantId))
+            }
+        }
+
+        fun getIntent(context: Context?, plantId: String?): Intent {
+            return Intent(context, AddCollectorActivity::class.java).also {
+                it.putExtra(KEY_PLANT_ID, plantId)
             }
         }
 
@@ -91,8 +95,8 @@ class AddCollectorActivity : BaseActivity(), View.OnClickListener {
                 }
             }
             v === binding.btFinish -> {
-                val collectorSN = binding.etCollectorSn.text.trim().toString()
-                val checkCode = binding.etCheckCode.text.trim().toString()
+                val collectorSN = binding.etCollectorSn.text.toString().trim()
+                val checkCode = binding.etCheckCode.text.toString().trim()
                 when {
                     collectorSN.isEmpty() -> {
                         ToastUtil.show(getString(R.string.serial_number_not_null))
