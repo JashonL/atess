@@ -136,6 +136,7 @@
     <string name="add_collector">添加采集器</string>
     <string name="serial_number">序列号</string>
     <string name="serial_number_format">序列号:%s</string>
+    <string name="signal_format">信号:%s</string>
     <string name="check_code">校验码</string>
     <string name="serial_number_sn">序列号(SN)</string>
     <string name="check_code_sn">校验码(SN)</string>

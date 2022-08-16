@@ -410,7 +410,7 @@
                         android:layout_width="30dp"
                         android:layout_height="30dp"
                         android:gravity="center"
-                        android:text="@{model.loadFromOilenginePercentText}"
+                        android:text="@{model.loadFromOilEnginePercentText}"
                         android:textColor="@color/text_white"
                         android:textSize="8sp"
                         tools:text="30%" />

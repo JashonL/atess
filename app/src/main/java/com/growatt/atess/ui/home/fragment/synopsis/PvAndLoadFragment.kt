@@ -18,7 +18,15 @@ import com.growatt.lib.util.*
 class PvAndLoadFragment : BaseFragment() {
 
     companion object {
+        /**
+         * 进度条最大长度
+         */
         const val MAX_PROGRESS_WIDTH_DP = 150f
+
+        /**
+         * 进度条默认长度
+         */
+        const val DEFAULT_PROGRESS_WIDTH_DP = 10f
     }
 
     private var _binding: FragmentPvAndLoadBinding? = null
@@ -67,14 +75,14 @@ class PvAndLoadFragment : BaseFragment() {
     }
 
     /**
-     * 取5的倍数为长度,例如4得出来的值是5,5得出来的值是5,7得出来的值是10
-     * @return dp值
+     * 百分比值为0的时候返回0，不为0时加上默认长度值
+     * @return 长度-dp值
      */
     private fun getProgressWidth(realRatio: Int): Float {
-        if (realRatio % 5 == 0) {
-            return realRatio / 100f * MAX_PROGRESS_WIDTH_DP
+        if (realRatio == 0) {
+            return 0f
         }
-        return (realRatio / 5 + 1) * 5f / 100f * MAX_PROGRESS_WIDTH_DP
+        return realRatio / 100f * MAX_PROGRESS_WIDTH_DP + DEFAULT_PROGRESS_WIDTH_DP
     }
 
     private fun initView() {

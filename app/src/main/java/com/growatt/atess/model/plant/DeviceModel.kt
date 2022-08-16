@@ -22,6 +22,7 @@ data class DeviceModel(
     val power: Double?,//Combiner汇流箱-功率1.0
     val vol: Double?,//Combiner汇流箱-电压1.0
     val cur: Double?,//Combiner汇流箱-电流2.0
+    val signal: String?,//采集器-良
 ) {
     fun getETodayText(): String {
         val valueFromKWh = ValueUtil.valueFromKWh(eToday)
@@ -126,5 +127,9 @@ data class DeviceModel(
                 R.string.voltage_format,
                 Util.getDoubleText(vol) + MainApplication.instance().getString(R.string.v)
             )
+    }
+
+    fun getSignalText(): String {
+        return MainApplication.instance().getString(R.string.signal_format, signal)
     }
 }

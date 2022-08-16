@@ -103,7 +103,7 @@ class PlantTabChartFragment :
         if (viewModel.dataType.type == chartTypes[0].type && viewModel.dateType == DateType.HOUR) {
             return true
         }
-        if (viewModel.dataType.type == chartTypes[1].type || viewModel.dataType.type == chartTypes[2].type) {
+        if (viewModel.dataType.type == chartTypes[1].type) {
             return true
         }
         return false

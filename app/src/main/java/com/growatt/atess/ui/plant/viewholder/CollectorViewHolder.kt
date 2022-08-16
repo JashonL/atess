@@ -42,5 +42,6 @@ class CollectorViewHolder(
         binding.tvStatus.setTextColor(getColor(if (deviceModel.lost == true) R.color.text_green else R.color.text_gray_99))
         binding.tvUpdateInterval.text = deviceModel.getUpdateIntervalText()
         binding.tvLastUpdateTime.text = deviceModel.getLastUpdateTimeText()
+        binding.tvSignal.text = deviceModel.getSignalText()
     }
 }

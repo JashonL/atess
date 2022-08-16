@@ -39,7 +39,7 @@ data class PVAndLoadModel(
     }
 
     fun getPVToGridRatio(): Int {
-        return 100 - getPVSelfRatio()
+        return if (toGrid == 0.0) 0 else 100 - getPVSelfRatio()
     }
 
     fun getLoadWithUnit(): Pair<String, String> {
@@ -66,7 +66,7 @@ data class PVAndLoadModel(
         return ValueUtil.valueFromKWh(fromDg)
     }
 
-    fun getLoadFromOilenginePercentText(): String {
+    fun getLoadFromOilEnginePercentText(): String {
         return getLoadFromOilEngineRatio().toString() + "%"
     }
 
@@ -79,6 +79,6 @@ data class PVAndLoadModel(
     }
 
     fun getLoadFromGridPercentRadio(): Int {
-        return 100 - getLoadSelfRatio() - getLoadFromOilEngineRatio()
+        return if (fromGrid == 0.0) 0 else 100 - getLoadSelfRatio() - getLoadFromOilEngineRatio()
     }
 }
