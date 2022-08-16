@@ -153,6 +153,7 @@ class SearchActivity : BaseActivity(), View.OnClickListener {
             it.setOnClickListener {
                 refreshRecentWordView(viewModel.addRecentWord(searchType, word))
                 search(word)
+                binding.etSearch.setText(word)
             }
         }
 
