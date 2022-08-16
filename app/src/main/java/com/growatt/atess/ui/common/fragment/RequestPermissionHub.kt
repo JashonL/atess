@@ -11,6 +11,7 @@ import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import com.growatt.atess.R
+import com.growatt.atess.application.MainApplication
 
 /**
  * 权限请求工具
@@ -79,6 +80,8 @@ class RequestPermissionHub : Fragment() {
         permissions: Array<out String>,
         grantResults: IntArray
     ) {
+        //解决授权弹框导致通过Application获取string的多语言适配失效
+        MainApplication.instance().initLanguage(requireActivity().applicationContext)
         if (requestCode == PERMISSION_REQUEST_CODE) {
             for (index in grantResults.indices) {
                 if (grantResults[index] == PackageManager.PERMISSION_DENIED) {

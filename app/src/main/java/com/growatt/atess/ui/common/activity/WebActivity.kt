@@ -8,6 +8,7 @@ import android.text.TextUtils
 import android.webkit.WebChromeClient
 import android.webkit.WebView
 import android.webkit.WebViewClient
+import com.growatt.atess.application.MainApplication
 import com.growatt.atess.base.BaseActivity
 import com.growatt.atess.databinding.ActivityWebBinding
 import com.growatt.lib.util.gone
@@ -43,6 +44,8 @@ class WebActivity : BaseActivity() {
         initData()
         initView()
         setListener()
+        //解决第一次打开WebView导致通过Application获取string的多语言适配失效
+        MainApplication.instance().initLanguage(applicationContext)
     }
 
     private fun initData() {

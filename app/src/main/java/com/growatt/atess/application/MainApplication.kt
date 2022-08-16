@@ -1,5 +1,8 @@
 package com.growatt.atess.application
 
+import android.content.Context
+import android.os.Build
+import android.os.LocaleList
 import android.os.Process
 import com.amap.api.location.AMapLocationClient
 import com.growatt.atess.R
@@ -14,6 +17,7 @@ import com.growatt.lib.service.ServiceType
 import com.growatt.lib.service.account.IAccountService
 import com.growatt.lib.service.device.DefaultDeviceService
 import com.growatt.lib.service.device.IDeviceService
+import com.growatt.lib.service.device.Language
 import com.growatt.lib.service.http.IHttpService
 import com.growatt.lib.service.location.ILocationService
 import com.growatt.lib.service.storage.DefaultStorageService
@@ -61,6 +65,25 @@ class MainApplication : LibApplication() {
                 }
                 monitor.unWatch()
             }
+        }
+
+        initLanguage(this)
+    }
+
+    fun initLanguage(context: Context) {
+        val appLanguage = deviceService().getAppLanguage()
+        if (appLanguage == Language.FOLLOW_SYSTEM) {
+            return
+        }
+
+        context.resources?.configuration?.apply {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                LocaleList.setDefault(LocaleList(appLanguage.locale))
+                setLocales(LocaleList(appLanguage.locale))
+            } else {
+                setLocale(appLanguage.locale)
+            }
+            context.resources.updateConfiguration(this, context.resources.displayMetrics)
         }
     }
 

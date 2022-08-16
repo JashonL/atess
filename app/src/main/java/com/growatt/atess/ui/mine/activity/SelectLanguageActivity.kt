@@ -22,6 +22,10 @@ import kotlinx.coroutines.launch
 
 /**
  * 选择语言页面
+ * 支持语言列表：
+ * 1.中文简体
+ * 2.中文繁体
+ * 3.英文（默认）
  */
 class SelectLanguageActivity : BaseActivity() {
 
